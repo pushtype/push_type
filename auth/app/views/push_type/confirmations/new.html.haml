@@ -1,0 +1,14 @@
+- title 'Resend confirmation instructions'
+
+= form_for @user, url: push_type.user_confirmation_path, html: { method: :post } do |f|
+  .row.text
+    .columns
+      = f.label :email
+      = f.email_field :email, autofocus: true
+  .row.submit
+    .columns
+      %button.button.success.expand.radius{ data: { disable_with: 'Please wait' } }
+        = ficon :mail, 'Resend confirmation instructions'
+
+- content_for :auth_links do
+  = render 'devise/shared/links'

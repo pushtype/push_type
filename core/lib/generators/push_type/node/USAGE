@@ -1,0 +1,8 @@
+Description:
+    Generates a model that inherits from PushType::Node
+
+Example:
+    rails generate push_type:node page
+
+    This will create:
+        app/models/page.rb

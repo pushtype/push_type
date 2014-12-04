@@ -1,0 +1,50 @@
+%div{ ng: { controller: 'AssetUploadCtrl', init: "asset=#{ @asset.to_json }; createUrl='#{ push_type.assets_path }'; updateUrl='#{ push_type.asset_path('~id') }'" } }
+  = form_for @asset, url: '{{ saveUrl() }}', method: 'post' do |f|
+    = hidden_field_tag :_method, '{{ method() }}'
+    .large-8.columns
+      .container
+        .head
+          .left.btn= link_to ficon(:previous), push_type.assets_path
+          .title= yield :title
+        .body.padded
+          .row.asset-upload
+            %div{ ng: { show: "asset['new_record?']" } }
+              .columns
+                .dropzone{ asset: { upload: push_type.upload_assets_path, fallback: 'asset_file' } }
+                  .prompt Drag a file to quickly upload it&hellip; (or click)
+                  .icon= ficon(:upload_cloud)
+              .columns{ ng: { hide: "hideFileField && #{ !@asset.errors.include?(:file) }" } }
+                = f.label :file
+                = f.file_field :file
+            %div{ ng: { show: "!asset['new_record?']" } }
+              .small-4.medium-3.columns
+                %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ previewthumbUrl() }}' } }
+              .small-8.medium-9.columns
+                %table
+                  %tr
+                    %th File name
+                    %td {{ asset.file_name }}
+                  %tr
+                    %th File size
+                    %td {{ asset.file_size }} kb
+                  %tr
+                    %th Content type
+                    %td {{ asset.mime_type }}
+                  %tr
+                    %th Uploaded
+                    %td {{ uploadedDate() }}
+          .row.string
+            .columns
+              = f.label :description
+              = f.text_field :description
+
+    .large-4.columns
+      .side-panel{ :'side-panel' => true }
+        .padded
+          .meta-table
+        .submit.text-center
+          %button.button.radius{ ng: { class: 'saveButtonClass()' } }
+            = ficon :check, '{{ saveButtonText() }}'
+          - unless @asset.new_record?
+            .delete-link= link_to 'Delete media', push_type.asset_path(@asset), method: 'delete', data: { confirm: { body: 'Deleted media will be moved to the trash. You can restore trashed media later.' } }
+              

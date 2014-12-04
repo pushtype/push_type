@@ -1,0 +1,11 @@
+- title "New #{ @node.type }"
+
+- if @parent
+  - for node in @parent.self_and_ancestors.reverse
+    - breadcrumbs.add node.title, push_type.node_nodes_path(node)
+  - breadcrumbs.add yield(:title), push_type.new_node_node_path(@parent)
+- else
+  - breadcrumbs.add yield(:title), push_type.new_node_path
+
+= form_for @node, url: (@parent ? push_type.node_nodes_path(@parent, kind: @node.type.underscore) : push_type.nodes_path(kind: @node.type.underscore)), builder: PushType::FormBuilder do |f|
+  = render 'form_fields', f: f

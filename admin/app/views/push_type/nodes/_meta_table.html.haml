@@ -1,0 +1,8 @@
+- if @node.creator
+  .meta-row
+    .key= ficon :torso, 'Author'
+    .value= @node.creator.name
+- if @node.updater && @node.updater != @node.creator
+  .meta-row
+    .key= ficon :torso, 'Updated by'
+    .value= @node.updater

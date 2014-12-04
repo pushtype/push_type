@@ -1,0 +1,23 @@
+- title 'Sign in'
+
+= form_for @user, url: push_type.user_session_path do |f|
+  .row.text
+    .columns
+      = f.label :email
+      = f.email_field :email, autofocus: true
+  .row.text
+    .columns
+      = f.label :password
+      = f.password_field :password, autocomplete: "off"
+  - if devise_mapping.rememberable?
+    .row.text
+      .columns
+        = f.check_box :remember_me
+        = f.label :remember_me
+  .row.submit
+    .columns
+      %button.button.success.expand.radius{ data: { disable_with: 'Please wait...' } }
+        = ficon :check, 'Sign in'
+
+- content_for :auth_links do
+  = render 'devise/shared/links'

@@ -1,0 +1,61 @@
+%div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ @node.to_json(only: [:type, :title, :slug, :status, :published_at, :published_to], methods: [:new_record?, :published?]) }" } }
+  .large-8.columns
+    .container
+      .head
+        .left.btn= link_to ficon(:previous), @node.parent ? push_type.node_nodes_path(@node.parent) : push_type.nodes_path
+        .title= yield :title
+      .body.padded
+        .row.title
+          .columns
+            = f.label :title
+            = f.text_field :title, :'ng-model' => 'node.title', :'ng-keyup' => 'setSlug()'
+        .row.permalink
+          .columns{ ng: { class: 'permalinkVisibility()' } }
+            %span.key Permalink
+            %span.value
+              %span.show-for-medium-up http://#{ request.host_with_port }/
+              = content_tag :span, @node.parent.permalink+'/' if @node.parent
+              %span {{ node.slug }}
+            %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' }} Edit
+            #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
+              = f.label :slug
+              = f.text_field :slug, :'ng-model' => 'node.slug'
+            - if @node.errors.include? :slug
+              .error-icon= ficon :info, 'Error'
+        - @node.fields.each do |key, field|
+          = f.custom_field_row field
+
+  .large-4.columns
+    .side-panel{ :'side-panel' => true }
+      .padded
+        .meta-table
+          .meta-row{ ng: { class: 'publishDatesVisibility()' } }
+            .key= ficon :calendar, 'Publish'
+            .value.editable{ data: { dropdown: 'publish-date-fields' }} {{ publishedDates() }}
+            #publish-date-fields.f-dropdown.content{ data: { dropdown: { content: true } } }
+              .row.publish-date
+                .columns
+                  = f.label :published_at
+                  = f.datetime_select :published_at, {}, :'node-datetime' => 'published_at'
+              .row.publish-date
+                .columns
+                  = f.label :published_to
+                  = f.datetime_select :published_to, include_blank: true, default: nil
+          = render 'meta_table'
+          
+      .submit.text-center
+        = f.hidden_field :status, value: '{{ node.status }}'
+        %button.button.radius.split{ ng: { class: 'saveButtonClass()' } }
+          = ficon :check, "{{ saveButtonText() }}"
+          %span{ data: { dropdown: 'publish-toggle', options: 'align:bottom' } }
+        %ul#publish-toggle.f-dropdown.tiny{ data: { dropdown: { content: true } } }
+          %li
+            %a{ href: '#', node: { status: 'draft' } } Save as draft
+          %li
+            %a{ href: '#', node: { status: 'published' } } Save and publish
+
+        - unless @node.new_record?
+          .delete-link
+            = link_to "Delete #{@node.type.downcase}", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content will be moved to the trash. You can restore trashed content later.' } }
+
+      

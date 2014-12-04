@@ -1,0 +1,19 @@
+- title 'Create a password'
+
+= form_for @user, url: push_type.user_confirm_path do |f|
+  = f.hidden_field :confirmation_token, value: @original_token
+  .row.text
+    .columns
+      = f.label :password
+      = f.password_field :password, autofocus: true
+  .row.text
+    .columns
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+  .row.submit
+    .columns
+      %button.button.success.expand.radius{ data: { disable_with: 'Please wait' } }
+        = ficon :check, 'Confirm account and sign in'
+
+- content_for :auth_links do
+  = render 'devise/shared/links'

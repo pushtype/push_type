@@ -1,0 +1,17 @@
+<%
+namespace = 'push_type'
+imgs      = {}
+
+Dir.chdir PushType::Admin::Engine.root.join('app', 'assets', 'images', namespace) do
+  imgs = Dir["**"].inject({}) do |h,f|
+    asset = File.join(namespace, f)
+    h.merge! asset => image_path(asset)
+  end
+end
+%>
+
+@rails_assets = <%= imgs.to_json %>
+
+@asset_path = (name) -> window.rails_assets[name]
+
+@kaminari_per_page = <%= Kaminari.config.default_per_page %>

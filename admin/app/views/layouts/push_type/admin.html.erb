@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PushType :: <%= yield :title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= javascript_include_tag 'vendor/modernizr' %>
+  <%= javascript_include_tag 'push_type/admin' %>
+  <%= stylesheet_link_tag    'push_type/admin', '//fonts.googleapis.com/css?family=Lato:300,300italic,400,700', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <header class="header" role="banner">
+    <div class="row">
+      <div class="small-4 medium-3 large-2 columns">
+        <%= link_to image_tag('push_type/pushtype-logo.png', alt: 'PushType'), push_type.root_path %>
+      </div>
+      <nav class="small-4 medium-6 large-8 columns">
+        <ul class="inline-list">
+          <%= content_tag :li, link_to('Content', push_type.nodes_path), class: 'active' %>
+          <%= content_tag :li, link_to('Media', push_type.assets_path) %>
+          <%= content_tag :li, link_to('Users', push_type.users_path) %>
+        </ul>
+      </nav>
+      <nav class="small-4 medium-3 large-2 columns">
+        <ul class="inline-list right">
+          <%= content_tag :li, link_to(ficon(:info), '#') %>
+          <%= content_tag :li, link_to(ficon(:widget), '#') %>
+          <%= content_tag :li, link_to(ficon(:power), push_type.destroy_user_session_path, method: 'delete') rescue nil %>
+        </ul>
+      </nav>
+    </div>
+  </header>  
+
+  <section class="main" role="main">
+    <div class="row">
+      <div class="columns">
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, class: "alert-box radius #{key}", data: { alert: '' } do %>
+            <%= value %>
+            <a href="#" class="close">&times;</a>
+          <% end %>
+        <% end %>
+        <%= breadcrumbs.render format: :foundation %>
+      </div>
+    </div>
+
+    <div class="row">
+      <%= yield %>
+    </div>
+  </section>
+
+</body>
+</html>

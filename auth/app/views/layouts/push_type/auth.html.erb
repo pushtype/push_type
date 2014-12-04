@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PushType</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= javascript_include_tag 'vendor/modernizr' %>
+  <%= javascript_include_tag 'push_type/admin' %>
+  <%= stylesheet_link_tag    'push_type/admin', '//fonts.googleapis.com/css?family=Lato:300,300italic,400,700', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="row">
+      <div class="small-6 columns">
+        <%= image_tag('push_type/pushtype-logo.png', alt: 'PushType') %>
+      </div>
+      <nav class="small-6 columns">
+        <ul class="inline-list right">
+          <%= content_tag :li, link_to(ficon(:home, 'Back to site'), main_app.root_path), :'data-no-turbolink' => true %>
+        </ul>
+      </nav>
+    </div>
+  </header>  
+
+  <section class="main" role="main">
+    <div class="row">
+      <div class="small-12 medium-6 large-4 medium-offset-3 large-offset-4 columns">
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, class: "alert-box radius #{key}", data: { alert: '' } do %>
+            <%= value %>
+            <a href="#" class="close">&times;</a>
+          <% end %>
+        <% end %>
+        <div class="container">
+          <div class="head">
+            <div class="title"><%= yield :title %></div>
+          </div>
+          <div class="body padded">
+            <%= yield %>
+          </div>
+        </div>
+        <%= yield :auth_links %>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

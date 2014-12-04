@@ -1,0 +1,515 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require froala_editor.min
+ *= require froala_style.min
+ *= require font-awesome
+ */
+
+@import "foundation_and_overrides";
+
+html.turbolinks-progress-bar::before {
+  background-color: $primary-color !important;
+  height: 3px !important;
+  z-index: 9;
+}
+
+/* Overrides and extensions to Foundation */
+
+[class^="fi-"], [class~=" fi-"] {
+  &:before {
+    font-size: 1.25em;
+  }
+}
+
+.inline-list .active {
+  font-weight:          400;
+}
+
+.button i {
+  margin-right:         rem-calc(5);
+}
+
+/* Custom styles */
+
+%block-link-bg {
+  display:              block;
+  @include single-transition(background-color, 200ms);
+
+  &:hover {
+    background-color:   scale-color($primary-color, $lightness: 95%);
+  }
+}
+
+.header {
+  position:             fixed;
+  top:                  0;
+  left:                 0;
+  z-index:              5;
+  width:                100%;
+  height:               rem-calc(60);
+  padding-top:          rem-calc(16);
+  background-color:     $white;
+  border-bottom:        1px solid $silver;
+}
+
+.main {
+  padding-top:          rem-calc(80);
+}
+
+.container {
+  position:             relative;
+  margin-bottom:        rem-calc(20);
+  background-color:     $white;
+  border:               1px solid $crumb-border-color;
+  @include radius($global-radius);
+
+  .head {
+    position:           absolute;
+    top:                0;
+    left:               0;
+    width:              100%;
+    height:             rem-calc(40);
+    background-color:   $white;
+    border-bottom:      1px solid $crumb-border-color;
+    @include radius($global-radius $global-radius 0 0);
+    overflow:           hidden;
+
+    .btn {
+      height:           100%;
+      width:            rem-calc(40);
+      line-height:      rem-calc(40);
+      text-align:       center;
+      border-right:     1px solid $crumb-border-color;
+      a {
+        @extend %block-link-bg;
+      }
+    }
+    .title {
+      display:          inline;
+      padding:          rem-calc(0 15);
+      font-size:        rem-calc(14);
+      line-height:      rem-calc(40);
+      color:            $oil;
+    }
+    .right .button {
+      margin:           rem-calc(6 10 0 0)
+    }
+  }
+  .body {
+    height:             calc(100% - 40px);
+    margin-top:         rem-calc(40);
+  }
+  .padded {
+    padding:            rem-calc(20 15);
+  }
+  .headless {
+    margin-top:         0;
+  }
+}
+
+.node-list {
+  @extend .no-bullet;
+  margin:               0;
+}
+
+.node-list-item {
+  position:             relative;
+  padding-right:        rem-calc(40);
+  border-bottom:        1px solid $crumb-border-color;
+
+  &:last-child {
+    border-bottom:      none;
+  }
+  > a {
+    display:            block;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: scale-color($primary-color, $lightness: 97.5%);
+      .title {
+        color:          scale-color($primary-color, $lightness: -12%);
+      }
+    }
+  }
+  .title {
+    height:             rem-calc(40);
+    padding:            rem-calc(10 15 6);
+    line-height:        rem-calc(24);
+    font-size:          rem-calc(18);
+    color:              $tuatara;
+    overflow:           hidden;
+    white-space:        nowrap;
+  }
+  .meta {
+    height:             rem-calc(40);
+    padding:            rem-calc(0 15 0);
+    line-height:        rem-calc(40);
+    font-size:          rem-calc(13);
+    color:              $aluminum;
+    .label {
+      margin-right:     rem-calc(10);
+    }
+  }
+  .buttons {
+    position:           absolute;
+    top:                0;
+    right:              0;
+    width:              rem-calc(40);
+    height:             100%;
+    line-height:        rem-calc(40);
+    text-align:         center;
+    border-left:        1px solid $crumb-border-color;
+    a {
+      @extend %block-link-bg;
+      width:            100%;
+      height:           rem-calc(40);
+      &:first-child {
+        border-bottom:  1px solid $crumb-border-color;
+      }
+    }
+  }
+  .handle {
+    position:           absolute;
+    top:                6px;
+    left:               6px;
+    bottom:             6px;
+    width:              rem-calc(19);
+    background-color:   $white-smoke;
+    cursor:             move;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: $gainsboro;
+    }
+  }
+  .sortable & {
+    .title, .meta {
+      padding-left:     rem-calc(40);
+    }
+    &.sortable-dragging {
+      background-color: $white;
+      border:           1px solid $primary-color;
+      box-shadow:       10px 10px 10px #000 !important;
+      .handle {
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+
+.user-list-item {
+  position:             relative;
+  background-color:     $white;
+  border:               1px solid $crumb-border-color;
+
+  > a {
+    display:            block;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: scale-color($primary-color, $lightness: 97.5%);
+      .title {
+        color:          scale-color($primary-color, $lightness: -12%);
+      }
+    }
+  }
+  .avatar {
+    position:           absolute;
+    top:                rem-calc(10);
+    left:               rem-calc(10);
+    width:              48px;
+    height:             48px;
+    font-size:          rem-calc(22);
+    line-height:        46px;
+    text-align:         center;
+    color:              $success-color;
+    background-color:   $white;
+    border:             1px solid $info-color;
+    @include radius(24px);
+  }
+  .title {
+    height:             rem-calc(60);
+    padding:            rem-calc(20 15 0 70);
+    line-height:        rem-calc(28);
+    font-size:          rem-calc(18);
+    color:              $tuatara;
+    overflow:           hidden;
+    white-space:        nowrap;
+  }
+  .meta {
+    height:             rem-calc(40);
+    padding:            rem-calc(0 15 0);
+    line-height:        rem-calc(40);
+    font-size:          rem-calc(13);
+    color:              $aluminum;
+    .label {
+      margin-right:     rem-calc(10);
+    }
+  }
+}
+
+.asset-list-item {
+  background-color:     $white;
+  border:               1px solid $crumb-border-color;
+
+  > a {
+    display:            block;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: scale-color($primary-color, $lightness: 97.5%);
+      .title {
+        color:          scale-color($primary-color, $lightness: -12%);
+      }
+    }
+  }
+  .preview img {
+    border-bottom:      1px solid $crumb-border-color;
+  }
+  .title {
+    height:             rem-calc(64);
+    padding:            rem-calc(8 15);
+    font-size:          rem-calc(16);
+    line-height:        rem-calc(24);
+    color:              $tuatara;
+    overflow:           hidden;
+  }
+}
+
+.panel {
+  @include radius($global-radius);
+  .submit, .cta {
+    .button:last-of-type {
+      margin:           0;
+    }
+  }
+}
+
+.side-panel {
+  background-color:     $panel-bg;
+  border:               1px solid $crumb-border-color;
+  @include radius($global-radius);
+
+  .padded, .cta, .submit {
+    padding:            $panel-padding;
+  }
+  .cta, .submit {
+    background-color:   $white;
+    @include radius(0 0 $global-radius $global-radius);
+    .button {
+      margin:           0;
+    }
+  }
+  .delete-link {
+    text-align:         center;
+    margin-top:         rem-calc(20);
+    a {
+      color:            $alert-color;
+    }
+  }
+  .asset-upload {
+    margin-top:         rem-calc(20);
+    .dropzone {
+      height:           300px;
+      .icon {
+        margin-top:     rem-calc(48);
+      }
+    }
+  }
+}
+
+.meta-table {
+  display:              table;
+  width:                100%;
+  font-size:            rem-calc(14);
+  border-spacing:       0 3px;
+  color:                $oil;
+
+  .meta-row {
+    display:            table-row;
+  }
+  .key, .value {
+    display:            table-cell;
+  }
+  .key {
+    width:              22%;
+    padding-right:      rem-calc(10);
+  }
+  .value {
+    padding:            rem-calc(3 9);
+    background:         $vapor;
+    color:              $jumbo;
+    border:             1px dotted $gainsboro;
+    @include radius($global-radius);
+    .button {
+      margin:           0;
+    }
+  }
+  .editable {
+    color:              $oil;
+    cursor:             pointer;
+    &:hover {
+      color:            $primary-color;
+      background:       $ghost;
+    }
+  }
+}
+
+.pagination-stats {
+  margin-bottom:        rem-calc(9);
+  font-size:            rem-calc(12);
+  text-transform:       uppercase;
+  color:                $oil;
+}
+
+.dashboard {
+  margin-top:           rem-calc(40);
+  padding:              rem-calc(80 0);
+  border:               6px dashed $gainsboro;
+
+  h1 {
+    font-family:        $code-font-family;
+    text-align:         center;
+    color:              $gainsboro;
+  }
+}
+
+.empty-default {
+  padding:              rem-calc(38 50);
+  border:               1px solid $crumb-border-color;
+  color:                $oil;
+  background-color:     $white;
+
+  .container & {
+    padding:            rem-calc(14 50 10);
+    border:             none;
+  }
+}
+
+/* Form stuff */
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+  font-weight:          300;
+  line-height:          1.5em;
+}
+
+textarea {
+  min-height:           7.5em;
+}
+
+form .title {
+  input[type="text"] {
+    margin-bottom:      rem-calc(8);
+    font-size:          rem-calc(23);
+    font-weight:        700;
+  }
+  .error input[type="text"] {
+    margin-bottom:      0;
+  }
+}
+
+form .permalink {
+  .columns {
+    opacity:            0;  
+  }
+  .visible {
+    opacity:            1 !important;
+    @include single-transition(opacity, 500ms);
+  }
+
+  .key, .value {
+    margin-right:       8px;
+    color:              $form-label-font-color;
+  }
+  .key {
+    font-size:          $form-label-font-size;
+    line-height:        rem-calc(30);
+    font-weight:        $font-weight-bold;
+  }
+  .value {
+    display:            inline-block;
+    min-width:          50%;
+    padding:            rem-calc(0 8);
+    font-size:          0;
+    line-height:        0;
+    background-color:   $ghost;
+    border:             1px dashed $silver;
+    @include radius($global-radius);
+    span {
+      font-size:        rem-calc(14);
+      line-height:      rem-calc(30);
+    }
+  }
+}
+
+.error-icon {
+  display:              inline;
+  font-size:            $form-label-font-size;
+  color:                $alert-color;
+  i {
+    font-size:          rem-calc(18);
+    vertical-align:     middle;
+  }
+}
+
+#publish-date-fields {
+  max-width:            360px;
+}
+
+form .publish-date {
+  font-size:            rem-calc(12);
+  select {
+    display:            inline;
+    width:              auto;
+    padding-right:      rem-calc(20);
+  }
+}
+
+form .asset-upload {
+  margin-bottom:        rem-calc(20) !important;
+}
+
+.asset-upload {
+  .dropzone {
+    height:             175px;
+    padding:            $panel-padding;
+    border:             4px dashed $crumb-border-color;
+    @include single-transition(border-color, 200ms);
+
+    .prompt, .icon {
+      text-align:       center;
+    }
+    .prompt {
+      color:            $aluminum;
+      font-style:       italic;
+    }
+    .icon {
+      margin-top:       rem-calc(24px);
+      font-size:        rem-calc(48px);
+      color:            $gainsboro;
+      @include single-transition(color, 200ms);
+    }
+
+    &.hover {
+      background-color: scale-color($primary-color, $lightness: 97.5%);
+      border-color:     $primary-color;
+      .icon {
+        color:          $primary-color;
+      }
+    }
+  }
+  .preview {
+    border:             1px solid $table-border-color;
+  }
+}
+
+
+@import "foundation-icons";
+@import "froala_theme";

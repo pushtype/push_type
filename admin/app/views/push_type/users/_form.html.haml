@@ -1,0 +1,30 @@
+= form_for @user, builder: PushType::FormBuilder do |f|
+  .large-8.columns
+    .container
+      .head
+        .left.btn= link_to ficon(:previous), push_type.users_path
+        .title= yield :title
+      .body.padded
+        .row.title
+          .columns
+            = f.label :name
+            = f.text_field :name
+        .row.email
+          .columns
+            = f.label :email
+            = f.email_field :email
+        - @user.fields.each do |key, field|
+          = f.custom_field_row field
+
+  .large-4.columns
+    .side-panel{ :'side-panel' => true }
+      .padded
+        .meta-table= render 'meta_table'
+      .submit.text-center
+        - if @user.new_record?
+          %button.button.success.radius= ficon :check, 'Create user'
+        - else
+          %button.button.radius= ficon :check, 'Update user'
+          .delete-link= link_to 'Delete user', push_type.user_path(@user), method: 'delete', data: { confirm: true }
+            
+            

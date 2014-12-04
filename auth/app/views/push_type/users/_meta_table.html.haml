@@ -1,0 +1,15 @@
+.meta-row
+  .key Status
+  .value
+    - if @user.new_record?
+      New user
+    - elsif @user.confirmed?
+      Confirmed
+    - else
+      Invited #{ time_ago_in_words @user.confirmation_sent_at } ago
+      = link_to ficon(:mail, 'Resend'), push_type.invite_user_path(@user), method: 'patch', class: 'right'
+- unless @user.new_record?
+  .meta-row
+    .key Logged in
+    .value
+      %time= last_logged_in @user
