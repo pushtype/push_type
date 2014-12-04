@@ -1,0 +1,16 @@
+\#*
+
+.DS_Store
+.bundle
+.ruby-*
+.rvmrc
+
+Gemfile.lock
+pkg
+rdoc
+
+*/.sass-cache
+*/test/dummy
+*/tmp
+**/*.log
+
