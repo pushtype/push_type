@@ -24,17 +24,17 @@ FactoryGirl.define do
   end
 
   factory :asset, class: 'PushType::Asset' do
-    file    { Rack::Test::UploadedFile.new(PushType::Engine.root.join('test', 'files/image.png')) }
+    file    { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/image.png')) }
     factory :image_asset do
     end
     factory :audio_asset do
-      file  { Rack::Test::UploadedFile.new(PushType::Engine.root.join('test', 'files/audio.m3u')) }
+      file  { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/audio.m3u')) }
     end
     factory :video_asset do
-      file  { Rack::Test::UploadedFile.new(PushType::Engine.root.join('test', 'files/video.mp4')) }
+      file  { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/video.mp4')) }
     end
     factory :document_asset do
-      file  { Rack::Test::UploadedFile.new(PushType::Engine.root.join('test', 'files/document.pdf')) }
+      file  { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/document.pdf')) }
     end
   end
   

@@ -21,6 +21,6 @@ end
 
 class ActionController::TestCase
   before :each do
-    @routes = PushType::Engine.routes
+    @routes = PushType::Core::Engine.routes
   end
 end

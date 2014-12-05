@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary       = %q{The admin user interface for the PushType content management system.}
   s.description   = %q{The admin user interface for the PushType content management system.}
 
-  s.files         = Dir['{app,config,db,lib}/**/*', 'README.md', 'LICENSE.md']
+  s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
   s.test_files    = Dir['test/**/*']
 
