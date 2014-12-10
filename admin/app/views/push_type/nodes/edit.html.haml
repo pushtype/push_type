@@ -1,4 +1,4 @@
-- title "Edit #{ @node.type }"
+- title "Edit #{ @node.type.underscore.humanize.downcase }"
 - for node in @node.ancestors.reverse
   - breadcrumbs.add node.title, push_type.node_nodes_path(node)
 - breadcrumbs.add @node.title, push_type.edit_node_path(@node)

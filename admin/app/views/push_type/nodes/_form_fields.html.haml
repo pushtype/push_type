@@ -56,6 +56,6 @@
 
         - unless @node.new_record?
           .delete-link
-            = link_to "Delete #{@node.type.downcase}", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content will be moved to the trash. You can restore trashed content later.' } }
+            = link_to "Delete #{@node.type.underscore.humanize.downcase}", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content will be moved to the trash. You can restore trashed content later.' } }
 
       

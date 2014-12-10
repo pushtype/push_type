@@ -70,7 +70,7 @@ module PushType
 
     def node_params
       fields = [:title, :slug, :status, :published_at, :published_to] + @node.fields.keys
-      params.fetch(@node.type.downcase.to_sym, {}).permit(*fields)
+      params.fetch(@node.type.underscore.to_sym, {}).permit(*fields)
     end
 
     def redirect_path
