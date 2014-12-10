@@ -1,7 +1,7 @@
 module PushType
   class User < ActiveRecord::Base
 
-    include PushType::FieldStore
+    include PushType::Customizable
 
     validates :name, presence: true
     validates :email, presence: true, uniqueness: true

@@ -1,9 +1,10 @@
 module PushType
   class Node < ActiveRecord::Base
 
-    include PushType::FieldStore
+    include PushType::Customizable
     include PushType::Nestable
     include PushType::Templatable
+    #include PushType::Publishable
     include PushType::Trashable
 
     belongs_to :creator, class_name: 'PushType::User'

@@ -1,5 +1,5 @@
 module PushType
-  module FieldStore
+  module Customizable
     extend ActiveSupport::Concern
 
     def fields
