@@ -3,7 +3,8 @@ require 'database_cleaner'
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.clean_with :truncation
 Dragonfly.app.use_datastore :memory
 
 class ActiveSupport::TestCase

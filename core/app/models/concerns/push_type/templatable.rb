@@ -3,28 +3,30 @@ module PushType
     extend ActiveSupport::Concern
 
     def template
-      self.class.template_name
+      self.class.template_path
     end
 
     def template_args
-      [template, self.class.template_opts.except!(:path, :template)]
+      [template, self.class.template_opts.except!(:path)]
     end
 
     module ClassMethods
 
       def template(name, opts = {})
-        @template_opts = opts.merge(template: name)
+        @template_name = name
+        @template_opts = opts
       end
 
       def template_name
-        File.join template_opts[:path], template_opts[:template]
+        @template_name || self.name.underscore
+      end
+
+      def template_path
+        File.join template_opts[:path], template_name
       end
 
       def template_opts
-        {
-          path:     'nodes',
-          template: self.name.underscore
-        }.merge(@template_opts || {})
+        { path: 'nodes' }.merge(@template_opts || {})
       end
 
     end

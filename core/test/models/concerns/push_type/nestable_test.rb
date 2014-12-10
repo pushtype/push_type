@@ -7,6 +7,12 @@ module PushType
     let(:roots) { PushType.root_node_types }
 
     describe '.has_child_nodes' do
+      describe 'defaults' do
+        before { TestPage.instance_variable_set '@child_node_types', nil }
+        it { TestPage.child_node_types.must_equal roots }
+        it { page.child_node_types.must_equal roots }
+      end
+
       describe 'when none' do
         before { TestPage.has_child_nodes false }
         it { TestPage.child_node_types.must_equal [] }
