@@ -15,12 +15,14 @@ module PushType
     end
 
     def install_migrations
-      rake 'railties:install:migrations'
+      say_status :copying, 'migrations'
+      quietly { rake 'railties:install:migrations' }
     end
 
     def run_migrations
       if options[:migrate]
-        rake 'db:migrate'
+        say_status :running, 'migrations'
+        quietly { rake 'db:migrate' }
       end
     end
 

@@ -33,7 +33,6 @@ module PushType
     def test_dummy_config
       template  'application.rb', "#{ dummy_path }/config/application.rb",  force: true
       copy_file 'boot.rb',        "#{ dummy_path }/config/boot.rb",         force: true
-      #copy_file 'page.rb',        "#{ dummy_path }/app/models/page.rb",     force: true
     end
 
     def clean_test_dummy
