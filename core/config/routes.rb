@@ -1,2 +1,2 @@
-PushType::Engine.routes.draw do
+PushType::Core::Engine.routes.draw do
 end

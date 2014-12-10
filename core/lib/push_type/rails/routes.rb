@@ -10,7 +10,7 @@ module ActionDispatch::Routing
         }
       }.deep_merge!(options)
 
-      mount PushType::Engine => opts[:path]
+      mount PushType::Core::Engine => opts[:path]
       get '*permalink' => opts[:actions][:node], as: 'node'
       root to: opts[:actions][:node], permalink: opts[:home]
     end

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary       = %q{The core engine for the PushType content management system.}
   s.description   = %q{The core engine for the PushType content management system. Required by all other PushType engines.}
 
-  s.files         = Dir['{app,config,db,lib}/**/*', 'README.md', 'LICENSE.md']
+  s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
   s.test_files    = Dir['test/**/*']
 

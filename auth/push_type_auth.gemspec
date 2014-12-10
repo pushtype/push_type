@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary       = %q{Provides authentication to the PushType content management system using Devise.}
   s.description   = %q{Provides authentication to the PushType content management system using Devise. Requires push_type_admin.}
 
-  s.files         = Dir['{app,config,db,lib}/**/*', 'README.md', 'LICENSE.md']
+  s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
   s.test_files    = Dir['test/**/*']
 

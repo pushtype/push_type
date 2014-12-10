@@ -1,4 +1,4 @@
-PushType::Engine.routes.draw do
+PushType::Core::Engine.routes.draw do
 
   resources :nodes, except: :show do
     resources :nodes, only: [:index, :new, :create]
