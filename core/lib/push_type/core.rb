@@ -30,7 +30,7 @@ module PushType
             false
           end
         end
-      end
+      end.sort
     end
   end
 

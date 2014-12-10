@@ -1,23 +1,21 @@
 require "test_helper"
 
-class TestPage < PushType::Node
-end
-
 module PushType
   describe Customizable do
 
     let(:page) { TestPage.new }
     let(:fields) { page.fields }
 
-    it { TestPage.fields.must_be :==, {} }
-    it { fields.must_be :==, {} }
+    it { TestPage.fields.must_be_instance_of ActiveSupport::OrderedHash }
+    it { fields.must_be_instance_of ActiveSupport::OrderedHash }
 
     describe '.field' do
       before :all do
-        TestPage.send :field, :foo
-        TestPage.send :field, :bar, :text
-        TestPage.send :field, :baz, validates: { presence: true }
-        TestPage.send :field, :qux, :rich_text, validates: { presence: true }
+        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.field :foo
+        TestPage.field :bar, :text
+        TestPage.field :baz, validates: { presence: true }
+        TestPage.field :qux, :rich_text, validates: { presence: true }
       end
 
       it { fields[:foo].must_be_instance_of StringField }
