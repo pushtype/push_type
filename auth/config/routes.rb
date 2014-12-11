@@ -6,4 +6,6 @@ PushType::Core::Engine.routes.draw do
   resources :users, only: [] do
     patch :invite, on: :member
   end
+
+  resource :profile, only: [:edit, :update]
 end

@@ -337,6 +337,12 @@ table {
       }
     }
   }
+  .side-nav {
+    padding:            rem-calc(24 0);
+    .heading {
+      padding:          rem-calc(0 14);
+    }
+  }
 }
 
 .meta-table {

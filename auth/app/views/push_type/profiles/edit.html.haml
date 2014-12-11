@@ -1,0 +1,46 @@
+- title 'Profile'
+
+.medium-4.columns
+  .side-panel{ :'side-panel' => true }
+    %ul.side-nav
+      %li.heading Settings
+      %li= link_to 'Profile', push_type.edit_profile_path
+
+
+.medium-8.columns
+  = form_for @user, url: push_type.profile_path do |f|
+    .container
+      .head
+        .title= yield :title
+      .body.padded
+        .row.title
+          .columns
+            = f.label :name
+            = f.text_field :name
+        .row.email
+          .columns
+            = f.label :email
+            = f.email_field :email
+
+        %div{ ng: { init: "showPasswordFields=#{ !@user.errors.select { |a, e| !e.empty? }.empty? }" } }
+          .row{ ng: { hide: 'showPasswordFields' } }
+            .columns
+              %a.button.secondary.tiny.radius{ ng: { click: 'showPasswordFields=true' } }= ficon :lock, 'Change password'
+          .row.password{ ng: { show: 'showPasswordFields' } }
+            .small-4.columns
+              = f.label :current_password
+              = f.password_field :current_password
+            .small-4.columns
+              = f.label :password, 'New password'
+              = f.password_field :password
+            .small-4.columns
+              = f.label :password_confirmation, 'Confirm new password'
+              = f.password_field :password_confirmation
+
+        .row.custom-fields
+          - @user.fields.each do |key, field|
+            = render_custom_field field, f
+
+        .row.submit.text-center
+          %button.button.radius= ficon :check, 'Update profile'
+            
