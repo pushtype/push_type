@@ -11,6 +11,8 @@ PushType::Core::Engine.routes.draw do
 
   resources :users, except: :show
 
+  get 'info' => 'admin#info', as: 'info'
+
   root to: redirect('nodes')
     
 end

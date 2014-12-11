@@ -40,6 +40,20 @@ html.turbolinks-progress-bar::before {
   margin-right:         rem-calc(5);
 }
 
+.reveal-modal-bg {
+  z-index:              1005;
+}
+.reveal-modal, dialog {
+  z-index:              1006;
+}
+
+table {
+  width:                100%;
+  td p:last-child {
+    margin-bottom:      0;
+  }
+}
+
 /* Custom styles */
 
 %block-link-bg {
@@ -509,6 +523,7 @@ form .asset-upload {
     border:             1px solid $table-border-color;
   }
 }
+
 
 
 @import "foundation-icons";

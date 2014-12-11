@@ -25,7 +25,7 @@
       </nav>
       <nav class="small-4 medium-3 large-2 columns">
         <ul class="inline-list right">
-          <%= content_tag :li, link_to(ficon(:info), '#') %>
+          <%= content_tag :li, link_to(ficon(:info), push_type.info_path, data: { :'reveal-id' => 'reveal-ajax', :'reveal-ajax' => true }) %>
           <%= content_tag :li, link_to(ficon(:widget), '#') %>
           <%= content_tag :li, link_to(ficon(:power), push_type.destroy_user_session_path, method: 'delete') rescue nil %>
         </ul>
@@ -50,6 +50,8 @@
       <%= yield %>
     </div>
   </section>
+
+  <div id="reveal-ajax" class="reveal-modal" data-reveal></div>
 
 </body>
 </html>
