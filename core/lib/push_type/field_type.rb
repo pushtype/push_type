@@ -3,13 +3,13 @@ module PushType
 
     attr_reader :name
 
-    def initialize(name, opts)
-      @name = name
+    def initialize(name, opts = {})
+      @name = name.to_s
       @opts = opts
     end
 
     def kind
-      self.class.name.demodulize.underscore.gsub(/_field$/, '')
+      self.class.name.demodulize.underscore.gsub(/_(field|type)$/, '')
     end
 
     def template
@@ -17,7 +17,7 @@ module PushType
     end
 
     def label
-      @opts[:label] || name.to_s.humanize
+      @opts[:label] || name.humanize
     end
 
     def html_options

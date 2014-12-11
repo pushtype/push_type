@@ -3,6 +3,9 @@ require "test_helper"
 module PushType
   describe Nestable do
 
+    # Reset to default
+    before(:all) { PushType.config.root_node_types = :all }
+
     let(:page) { TestPage.new }
     let(:roots) { PushType.root_node_types }
 
