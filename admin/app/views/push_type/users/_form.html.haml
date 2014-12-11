@@ -1,4 +1,4 @@
-= form_for @user, builder: PushType::FormBuilder do |f|
+= form_for @user do |f|
   .large-8.columns
     .container
       .head
@@ -13,8 +13,10 @@
           .columns
             = f.label :email
             = f.email_field :email
-        - @user.fields.each do |key, field|
-          = f.custom_field_row field
+
+        .row.custom-fields
+          - @user.fields.each do |key, field|
+            = render_custom_field field, f
 
   .large-4.columns
     .side-panel{ :'side-panel' => true }

@@ -7,5 +7,5 @@
 - else
   - breadcrumbs.add yield(:title), push_type.new_node_path
 
-= form_for @node, url: (@parent ? push_type.node_nodes_path(@parent, kind: @node.type.underscore) : push_type.nodes_path(kind: @node.type.underscore)), builder: PushType::FormBuilder do |f|
+= form_for @node, url: (@parent ? push_type.node_nodes_path(@parent, kind: @node.type.underscore) : push_type.nodes_path(kind: @node.type.underscore)) do |f|
   = render 'form_fields', f: f

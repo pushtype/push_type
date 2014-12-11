@@ -11,5 +11,12 @@ module PushType
       [el, label].compact.join(' ').html_safe
     end
 
+    def render_custom_field(field, form_builder)
+      classes = [ field.kind, field.column_class, 'columns end' ]
+      content_tag :div, class: classes.compact do
+        render "push_type/fields/#{ field.template }", f: form_builder, field: field
+      end
+    end
+
   end
 end

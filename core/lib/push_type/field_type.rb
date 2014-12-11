@@ -28,6 +28,15 @@ module PushType
       @opts[:form_helper] || :text_field
     end
 
+    def column_class
+      case @opts[:colspan]
+        when 2 then 'medium-6'
+        when 3 then 'medium-4'
+        when 3 then 'medium-3'
+        else nil
+      end
+    end
+
     def to_json(val)
       val.to_s
     end

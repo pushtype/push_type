@@ -23,5 +23,4 @@ end
 
 require 'push_type/admin/engine'
 
-require 'push_type/rails/form_builder'
 require 'push_type/breadcrumbs/foundation'
