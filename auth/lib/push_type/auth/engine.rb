@@ -15,7 +15,6 @@ module PushType
         PushType::AdminController.send :include, PushType::AuthenticationMethods
         PushType::UsersController.send :include, PushType::InvitationMethods
         DeviseController.helper PushType::AdminHelper
-        DeviseController.helper PushType::AuthHelper
       end
     end
   end
