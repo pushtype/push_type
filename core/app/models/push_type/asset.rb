@@ -33,7 +33,7 @@ module PushType
     end
 
     def media(style = nil)
-      if image? && !style.nil? && style.to_sym != :original
+      if image? && !style.blank? && style.to_sym != :original
         size = PushType.config.media_styles[style.to_sym] || style
       end
       size ? file.thumb(size) : file
