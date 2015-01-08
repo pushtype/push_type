@@ -23,5 +23,5 @@ require 'push_type/testing/common_rake'
 desc "Generates a dummy app for testing"
 task :test_app do
   ENV['RAILS_ENV'] = 'test'
-  Rake::Task['common:test_app'].invoke 'push_type_core', File.dirname(__FILE__)
+  Rake::Task['common:test_app'].invoke 'push_type_core', File.dirname(__FILE__), 'test/dummy', true
 end
