@@ -46,6 +46,31 @@ module PushType
       end
     end
 
+    describe '#media' do
+      let(:image) { FactoryGirl.create :image_asset }
+      let(:doc)   { FactoryGirl.create :document_asset }
+
+      describe 'with no args' do
+        it { image.media.must_equal image.file }
+        it { doc.media.must_equal doc.file }
+      end
+      describe 'with original style' do
+        it { image.media(:original).must_equal image.file }
+        it { doc.media(:original).must_equal doc.file }
+      end
+      describe 'with a non existing style' do
+        it { image.media(:foo_bar).wont_equal image.file }
+        it { proc { image.media(:foo_bar).width }.must_raise ArgumentError }
+        it { doc.media(:foo_bar).must_equal doc.file }
+      end
+      describe 'with a geometry string' do
+        it { image.media('48x56#').wont_equal image.file }
+        it { image.media('48x56#').width.must_equal 48 }
+        it { image.media('48x56#').height.must_equal 56 }
+        it { doc.media('48x56#').must_equal doc.file }
+      end
+    end
+
     describe '#preview_thumb_url' do
       let(:image) { FactoryGirl.create :image_asset }
       let(:doc)   { FactoryGirl.create :document_asset }

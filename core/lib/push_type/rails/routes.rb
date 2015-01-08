@@ -15,9 +15,8 @@ module ActionDispatch::Routing
 
       # Use a Dragonfly endpoint to provide better URLs for accessing assets
       get 'media/*file_uid' => Dragonfly.app.endpoint { |params, app|
-        params.reverse_merge! style: 'original'
         asset = PushType::Asset.find_by_file_uid( [params[:file_uid], params[:format]].join('.') )
-        params[:style] == 'original' ? asset.file : asset.file.thumb(params[:style])
+        asset.media params[:style]
       }, as: 'media'
 
       # A catch-all root for the nodes

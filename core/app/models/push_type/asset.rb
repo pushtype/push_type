@@ -32,10 +32,17 @@ module PushType
       description? ? description : file_name
     end
 
-    def preview_thumb_url(args = ['300x300#'])
+    def media(style = nil)
+      if image? && !style.nil? && style.to_sym != :original
+        size = PushType.config.media_styles[style.to_sym] || style
+      end
+      size ? file.thumb(size) : file
+    end
+
+    def preview_thumb_url(size = '300x300#')
       return nil unless file_stored?
       if image?
-        file.thumb(*args).url
+        media(size).url
       else
         "push_type/icon-file-#{ kind }.png"
       end
