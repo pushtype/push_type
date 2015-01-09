@@ -23,7 +23,7 @@ module PushType
       opts[:skip_gemfile]   = true
       opts[:skip_bundle]    = true
 
-      puts "Generating dummy Rails application... (#{options[:lib_name]})"
+      say "Generating dummy Rails application... (#{options[:lib_name]})"
       invoke Rails::Generators::AppGenerator, [ File.expand_path(dummy_path, destination_root) ], opts
     end
 

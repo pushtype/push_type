@@ -13,9 +13,9 @@ namespace :common do
     PushType::DummyGenerator.start opts
 
     Dir.chdir File.join(args[:base_path], args[:dummy_path]) do
-      PushType::InstallGenerator.start ['--migrate=false', '--quiet']
+      system 'bundle exec rake db:drop db:create'
+      PushType::InstallGenerator.start ['--quiet']
       PushType::NodeGenerator.start ['page', '--quiet']
-      system 'bundle exec rake db:drop db:create db:migrate'
     end
   end
 
