@@ -26,7 +26,7 @@
             %h3 No content
             %p There is no content in this section yet.
         - else
-          %ul.node-list.sortable  
+          %ul.node-list{ class: ('sortable' if !@parent || @parent.sortable?) }
             - for node in @nodes.all
               %li.node-list-item{ data: { id: node.id } }
                 = link_to push_type.edit_node_path(node) do
@@ -41,7 +41,8 @@
                   = link_to ficon(:magnifying_glass), '#'
                   - unless node.child_node_types.empty?
                     = link_to ficon(:folder), push_type.node_nodes_path(node)
-                .handle
+                - if !@parent || @parent.sortable?
+                  .handle
 
   .large-4.columns
     .side-panel{ :'side-panel' => true }
