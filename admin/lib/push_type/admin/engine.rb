@@ -4,6 +4,8 @@ module PushType
       isolate_namespace PushType
       engine_name 'push_type_admin'
 
+      config.admin_assets = PushType::Admin::Assets.new
+
       config.generators do |g|
         g.assets false
         g.helper false

@@ -19,6 +19,7 @@ module PushType
   end
 end
 
+require 'push_type/admin/assets'
 require 'push_type/admin/engine'
 
 require 'push_type/breadcrumbs/foundation'

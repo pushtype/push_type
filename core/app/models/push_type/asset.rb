@@ -11,6 +11,9 @@ module PushType
 
     default_scope { order(created_at: :desc) }
 
+    scope :image,     -> { where(['mime_type LIKE ?', 'image/%']) }
+    scope :not_image, -> { where(['mime_type NOT LIKE ?', 'image/%']) }
+
     before_create :set_mime_type
     after_destroy :destroy_file!
 
