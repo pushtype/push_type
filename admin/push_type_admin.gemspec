@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'angularjs-rails',             '~> 1.3.4'
   s.add_dependency 'foundation-rails',            '~> 5.4.5'
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'
-  s.add_dependency 'wysiwyg-rails',               '~> 1.2.4'
   s.add_dependency 'momentjs-rails',              '~> 2.8.3'
   s.add_dependency 'turbolinks',                  '~> 2.5.2'
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'

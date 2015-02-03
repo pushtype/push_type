@@ -11,9 +11,6 @@
  * file per style scope.
  *
  *= require_self
- *= require froala_editor.min
- *= require froala_style.min
- *= require font-awesome
  */
 
 @import "foundation_and_overrides";
@@ -533,4 +530,3 @@ form .asset-upload {
 
 
 @import "foundation-icons";
-@import "froala_theme";

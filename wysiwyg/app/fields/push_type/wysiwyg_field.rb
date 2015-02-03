@@ -1,5 +1,5 @@
 module PushType
-  class RichTextField < PushType::FieldType
+  class WysiwygField < PushType::FieldType
     def form_helper
       :text_area
     end

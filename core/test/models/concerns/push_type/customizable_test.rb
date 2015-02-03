@@ -15,7 +15,7 @@ module PushType
         TestPage.field :foo
         TestPage.field :bar, :text
         TestPage.field :baz, validates: { presence: true }
-        TestPage.field :qux, :rich_text, validates: { presence: true }
+        TestPage.field :qux, :number, validates: { presence: true }
       end
 
       after do
@@ -27,7 +27,7 @@ module PushType
       it { fields[:bar].must_be_instance_of TextField }
       it { fields[:baz].must_be_instance_of StringField }
       it { TestPage.validators_on(:baz).map(&:class).must_include ActiveRecord::Validations::PresenceValidator }
-      it { fields[:qux].must_be_instance_of RichTextField }
+      it { fields[:qux].must_be_instance_of NumberField }
       it { TestPage.validators_on(:qux).map(&:class).must_include ActiveRecord::Validations::PresenceValidator }
     end
 

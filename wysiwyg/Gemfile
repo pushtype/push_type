@@ -10,5 +10,8 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem 'push_type_core',   path: '../core'
+gem 'push_type_admin',  path: '../admin'
+
 # To use debugger
 # gem 'debugger'

@@ -16,10 +16,6 @@
 #= require foundation
 #= require confirm_with_reveal
 #= require angular
-#= require froala_editor.min
-#= require plugins/lists.min
-#= require plugins/file_upload.min
-#= require plugins/video.min
 #= require jquery.sticky
 #= require jquery.sortable
 #= require jquery.filedrop
@@ -53,22 +49,6 @@ $(document).on 'ready page:load', ->
   .on 'sortupdate', (e, ui) ->
     obj = { prev: ui.item.prev().data('id'), next: ui.item.next().data('id') }
     $.post "/push_type/nodes/#{ ui.item.data('id') }/position", obj, 'json'
-
-  $('textarea.froala', '.rich_text').editable
-    inlineMode:   false
-    height:       400
-    buttons:      ['bold', 'italic', 'underline', 'sep', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'sep', 'createLink', 'insertImage', 'uploadFile', 'insertVideo', 'table', 'sep', 'removeFormat', 'undo', 'redo', 'sep' ,'html']
-    blockTags:
-      n:  'Normal'
-      h1: 'Heading 1'
-      h2: 'Heading 2'
-    theme:        'pt'
-
-  $('textarea.froala', '.rich_text').on 'editable.focus', (e, editor) ->
-    editor.$box.addClass 'focus'
-
-  $('textarea.froala', '.rich_text').on 'editable.blur', (e, editor) ->
-    editor.$box.removeClass 'focus'
 
   $(document).confirmWithReveal()
 

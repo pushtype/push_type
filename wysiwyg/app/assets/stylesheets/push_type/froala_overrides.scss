@@ -1,0 +1,77 @@
+.froala-editor .froala-popup div.f-popup-line[class*="f-image-"] label {
+  width: 35px;
+}
+
+.froala-editor .froala-popup div.f-popup-line select {
+  font-family: inherit;
+  font-size: 12px;
+  width: 160px;
+  border: solid 1px $input-border-color;
+  margin: 0 5px !important;
+  height: 25px;
+  line-height: 21px;
+  display: block;
+  padding: 2px;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 0;
+}
+
+.froala-editor .froala-popup div.f-popup-line select:focus {
+  border: solid 1px #54acd2;
+}
+
+.froala-modal .f-modal-wrapper h4 {
+  background: $silver;
+  margin: 0;
+  padding: 1rem;
+}
+
+.froala-modal .f-modal-wrapper div.f-image-list {
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  padding: 1.25rem 0.5rem 1rem;
+  column-count: 1;
+  -moz-column-count: 1;
+  -webkit-column-count: 1;
+  column-gap: 0;
+  -moz-column-gap: 0;
+  -webkit-column-gap: 0;
+  width: 640px;
+}
+.froala-modal .f-modal-wrapper div.f-image-list div {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 25%;
+  display: inline;
+  float: left;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.froala-modal .f-modal-wrapper div.f-image-list img {
+  border: 1px solid $silver;
+}
+.froala-modal .f-modal-wrapper div.f-image-list span.f-media-title {
+  display: block;
+  text-align: center;
+  height: 40px;
+  margin-bottom: 0;
+  padding: 3px 0;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 20px;
+}

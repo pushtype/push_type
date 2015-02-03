@@ -7,8 +7,6 @@ require 'foundation-rails'
 require 'foundation-icons-sass-rails'
 require 'jquery-rails'
 require 'angularjs-rails'
-require 'wysiwyg-rails'
-require 'font-awesome-rails'
 require 'momentjs-rails'
 require 'turbolinks'
 
