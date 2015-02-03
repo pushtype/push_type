@@ -1,17 +1,17 @@
 - if @parent
-  - if @parent.child_node_types.size == 1
-    = link_to ficon(:page_add, "New #{ @parent.child_node_types.first.humanize.downcase }"), push_type.new_node_node_path(kind: @parent.child_node_types.first), class: 'button radius success'
-  - elsif @parent.child_node_types.size > 1
-    = link_to ficon(:page_add, 'New content'), push_type.new_node_node_path(kind: @parent.child_node_types.first), class: 'button radius success dropdown', data: { dropdown: 'new-node' }
+  - if @parent.child_nodes.size == 1
+    = link_to ficon(:page_add, "New #{ @parent.child_nodes.first.humanize.downcase }"), push_type.new_node_node_path(kind: @parent.child_nodes.first), class: 'button radius success'
+  - elsif @parent.child_nodes.size > 1
+    = link_to ficon(:page_add, 'New content'), push_type.new_node_node_path(kind: @parent.child_nodes.first), class: 'button radius success dropdown', data: { dropdown: 'new-node' }
     %ul#new-node.f-dropdown
-      - for kind in @parent.child_node_types
+      - for kind in @parent.child_nodes
         %li= link_to "New #{ kind.humanize.downcase }", push_type.new_node_node_path(kind: kind)
 
 - else
-  - if PushType.root_node_types.size == 1
-    = link_to ficon(:page_add, "New #{ PushType.root_node_types.first.humanize.downcase }"), push_type.new_node_path(kind: PushType.root_node_types.first), class: 'button radius success'
-  - elsif PushType.root_node_types.size > 1
-    = link_to ficon(:page_add, 'New content'), push_type.new_node_path(kind: PushType.root_node_types.first), class: 'button radius success dropdown', data: { dropdown: 'new-node' }
+  - if PushType.root_nodes.size == 1
+    = link_to ficon(:page_add, "New #{ PushType.root_nodes.first.humanize.downcase }"), push_type.new_node_path(kind: PushType.root_nodes.first), class: 'button radius success'
+  - elsif PushType.root_nodes.size > 1
+    = link_to ficon(:page_add, 'New content'), push_type.new_node_path(kind: PushType.root_nodes.first), class: 'button radius success dropdown', data: { dropdown: 'new-node' }
     %ul#new-node.f-dropdown
-      - for kind in PushType.root_node_types
+      - for kind in PushType.root_nodes
         %li= link_to "New #{ kind.humanize.downcase }", push_type.new_node_path(kind: kind)

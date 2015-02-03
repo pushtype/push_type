@@ -4,7 +4,7 @@ module ActionDispatch::Routing
     def mount_push_type(options = {})
       opts = {
         path:   '/push_type',
-        home:   PushType.config.home_node,
+        home:   PushType.config.home_slug,
         actions: {
           node: 'front_end#node'
         }

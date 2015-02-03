@@ -13,8 +13,12 @@ module PushType
       yield config if block
     end
 
-    def root_node_types
-      node_types_from_list(config.root_node_types)
+    def root_nodes
+      node_types_from_list(config.root_nodes)
+    end
+
+    def unexposed_nodes
+      node_types_from_list(config.unexposed_nodes).map(&:camelcase)
     end
 
     def node_types_from_list(types = nil)

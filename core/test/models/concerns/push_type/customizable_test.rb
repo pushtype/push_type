@@ -18,6 +18,11 @@ module PushType
         TestPage.field :qux, :rich_text, validates: { presence: true }
       end
 
+      after do
+        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.clear_validators!
+      end
+
       it { fields[:foo].must_be_instance_of StringField }
       it { fields[:bar].must_be_instance_of TextField }
       it { fields[:baz].must_be_instance_of StringField }

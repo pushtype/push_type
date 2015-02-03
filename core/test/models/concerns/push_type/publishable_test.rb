@@ -8,7 +8,6 @@ module PushType
     describe '.published' do
       let(:nodes)     { PushType::Node.published }
       let(:new_node!) { FactoryGirl.create :published_node, attributes }
-      before { @count = nodes.count }
       describe 'without published status' do
         it { proc { FactoryGirl.create :node }.wont_change 'nodes.count' }
       end
@@ -27,6 +26,32 @@ module PushType
       describe 'with published_to dates in the past' do
         let(:attributes)  { { published_at: 2.days.ago, published_to: 1.day.ago } }
         it { proc { new_node! }.wont_change 'nodes.count' }
+      end
+    end
+
+    describe '.exposed' do
+      let(:new_node!) { TestPage.create! FactoryGirl.attributes_for(:node) }
+      it 'it should scope all exposed nodes' do
+        PushType.stub :unexposed_nodes, [] do
+          proc { new_node! }.must_change 'PushType::Node.exposed.count', 1
+        end
+      end
+      it 'it should omit any unexposed nodes' do
+        PushType.stub :unexposed_nodes, ['TestPage'] do
+          proc { new_node! }.wont_change 'PushType::Node.exposed.count', 1 
+        end
+      end
+    end
+
+    describe 'exposed?' do
+      describe 'when exposed' do
+        it { TestPage.must_be :exposed? }
+        it { TestPage.new.must_be :exposed? }
+      end
+      describe 'when unexposed' do
+        before { TestPage.unexpose! }
+        it { TestPage.wont_be :exposed? }
+        it { TestPage.new.wont_be :exposed? }
       end
     end
 

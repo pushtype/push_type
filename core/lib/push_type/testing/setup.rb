@@ -12,6 +12,8 @@ class ActiveSupport::TestCase
 
   before :each do
     DatabaseCleaner.start
+    PushType.config.root_nodes = :all
+    PushType.config.unexposed_nodes = []
   end
 
   after :each do

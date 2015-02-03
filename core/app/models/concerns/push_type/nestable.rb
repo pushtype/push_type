@@ -2,12 +2,12 @@ module PushType
   module Nestable
     extend ActiveSupport::Concern
 
-    def child_node_types
-      self.class.child_node_types
+    def child_nodes
+      self.class.child_nodes
     end
 
     def custom_child_order?
-      self.class.child_node_order.present?
+      self.class.child_order.present?
     end
 
     def sortable?
@@ -16,29 +16,29 @@ module PushType
 
     def children
       return super() unless custom_child_order?
-      super.reorder(self.class.child_node_order)
+      super.reorder(self.class.child_order)
     end
 
     module ClassMethods
 
-      attr_reader :child_node_order
+      attr_reader :child_order
 
-      def child_node_types
-        types = @child_node_types || PushType.config.root_node_types
+      def child_nodes
+        types = @child_nodes || PushType.config.root_nodes
         PushType.node_types_from_list(types)
       end
 
       def has_child_nodes(*args)
         if args.last.is_a? Hash
           opts = args.pop
-          @child_node_order = case opts[:order]
+          @child_order = case opts[:order]
             when :blog then ['published_at DESC', 'created_at DESC']
             else opts[:order]
           end
         else
-          @child_node_order = nil
+          @child_order = nil
         end
-        @child_node_types = args
+        @child_nodes = args
       end
 
     end

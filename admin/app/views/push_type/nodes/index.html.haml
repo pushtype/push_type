@@ -39,7 +39,7 @@
                     %span= pluralize node.child_ids.size, 'child'
                 .buttons
                   = link_to ficon(:magnifying_glass), '#'
-                  - unless node.child_node_types.empty?
+                  - unless node.child_nodes.empty?
                     = link_to ficon(:folder), push_type.node_nodes_path(node)
                 - if !@parent || @parent.sortable?
                   .handle

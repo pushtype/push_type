@@ -4,9 +4,11 @@ module PushType
       isolate_namespace PushType
       engine_name 'push_type'
 
-      config.root_node_types = :all
+      config.root_nodes = :all
 
-      config.home_node = 'home'
+      config.home_slug = 'home'
+
+      config.unexposed_nodes = []
 
       config.media_styles = {
         large:    '1024x1024>',

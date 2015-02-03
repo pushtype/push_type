@@ -6,24 +6,41 @@ module PushType
     describe '.config' do
       subject { PushType.config }
       it { subject.must_be_instance_of Rails::Engine::Configuration }
-      it { subject.root_node_types.wont_be_nil }
-      it { subject.home_node.wont_be_nil }
+      it { subject.root_nodes.wont_be_nil }
+      it { subject.home_slug.wont_be_nil }
     end
 
-    describe '.root_node_types' do
-      subject { PushType.root_node_types }
+    describe '.root_nodes' do
+      subject { PushType.root_nodes }
       describe 'defaults' do
-        before { PushType.config.root_node_types = :all }
+        before { PushType.config.root_nodes = :all }
         it { subject.must_be_instance_of Array }
         it { subject.must_equal ['page', 'test_page'] }
       end
       describe 'specified single value' do
-        before { PushType.config.root_node_types = :page }
+        before { PushType.config.root_nodes = :page }
         it { subject.must_equal ['page'] }
       end
       describe 'specified array with nonsense values' do
-        before { PushType.config.root_node_types = [:page, :test_page, :foo, :bar] }
+        before { PushType.config.root_nodes = [:page, :test_page, :foo, :bar] }
         it { subject.must_equal ['page', 'test_page'] }
+      end
+    end
+
+    describe '.unexposed_nodes' do
+      subject { PushType.unexposed_nodes }
+      describe 'defaults' do
+        before { PushType.config.unexposed_nodes = [] }
+        it { subject.must_be_instance_of Array }
+        it { subject.must_be_empty }
+      end
+      describe 'specified single value' do
+        before { PushType.config.unexposed_nodes = [:page] }
+        it { subject.must_equal ['Page'] }
+      end
+      describe 'specified array with nonsense values' do
+        before { PushType.config.unexposed_nodes = [:page, :test_page, :foo, :bar] }
+        it { subject.must_equal ['Page', 'TestPage'] }
       end
     end
 
