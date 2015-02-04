@@ -4,7 +4,7 @@ module PushType
       isolate_namespace PushType
       engine_name 'push_type_rich_text'
 
-      config.admin_assets.register 'push_type/wysiwyg' rescue nil
+      config.admin_assets.register 'push_type/wysiwyg' if defined?(PushType::Admin::Assets)
 
       config.generators do |g|
         g.assets false
