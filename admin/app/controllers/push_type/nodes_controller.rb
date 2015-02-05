@@ -69,7 +69,7 @@ module PushType
     end
 
     def node_params
-      fields = [:title, :slug, :status, :published_at, :published_to] + @node.fields.keys
+      fields = [:title, :slug, :status, :published_at, :published_to] + @node.field_params
       params.fetch(@node.type.underscore.to_sym, {}).permit(*fields)
     end
 

@@ -21,6 +21,7 @@
 #= require jquery.filedrop
 #= require moment
 #= require_self
+#= require bootstrap-tagsinput
 #= require_tree .
 
 Turbolinks.enableProgressBar()
@@ -51,4 +52,8 @@ $(document).on 'ready page:load', ->
     $.post "/push_type/nodes/#{ ui.item.data('id') }/position", obj, 'json'
 
   $(document).confirmWithReveal()
+
+  $('.tagsinput', '.tags').tagsinput
+    tagClass: 'label secondary radius'
+    
 

@@ -2,6 +2,14 @@ module PushType
   class FieldType
 
     attr_reader :name
+    alias_attribute :param, :name
+
+    class << self
+      attr_reader :node_hook_blk
+      def node_hook(&block)
+        @node_hook_blk = block
+      end
+    end
 
     def initialize(name, opts = {})
       @name = name.to_s
@@ -38,11 +46,11 @@ module PushType
     end
 
     def to_json(val)
-      val.to_s
+      val
     end
 
     def from_json(val)
-      val.to_s
+      val
     end
 
   end

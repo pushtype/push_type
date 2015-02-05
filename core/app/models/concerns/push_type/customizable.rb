@@ -6,6 +6,10 @@ module PushType
       self.class.fields
     end
 
+    def field_params
+      fields.map { |k, field| field.param }
+    end
+
     module ClassMethods
 
       attr_reader :fields
@@ -26,8 +30,10 @@ module PushType
         store_accessor :field_store, name
 
         validates name, opts[:validates] if opts[:validates]
-        
+
         override_accessor fields[name]
+
+        hook_to_self fields[name]
       end
 
       protected
@@ -42,12 +48,16 @@ module PushType
 
       def override_accessor(f)
         define_method "#{f.name}=".to_sym do |val|
-          return unless val
           super f.to_json(val)
         end
         define_method f.name do
-          return unless val = super()
-          f.from_json val
+          f.from_json super()
+        end
+      end
+
+      def hook_to_self(f)
+        if block = f.class.node_hook_blk
+          block.call(self, f)
         end
       end
 
