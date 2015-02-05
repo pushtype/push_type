@@ -6,8 +6,6 @@ module PushType
     before_filter :build_asset, only: [:new, :create]
     before_filter :load_asset,  only: [:edit, :update, :destroy]
 
-    respond_to :json, only: :upload
-
     def index
       @assets = PushType::Asset.not_trash.page(params[:page])
     end
@@ -25,7 +23,9 @@ module PushType
     end
 
     def upload
-      respond_with PushType::Asset.create(asset_params).to_json, location: false
+      respond_to do |format|
+        format.json { render :json, PushType::Asset.create(asset_params) }
+      end
     end
 
     def edit

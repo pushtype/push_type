@@ -10,9 +10,10 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'push_type_core',   path: 'core',   require: false
-gem 'push_type_admin',  path: 'admin',  require: false
-gem 'push_type_auth',   path: 'auth',   require: false
+gem 'push_type_core',     path: 'core',     require: false
+gem 'push_type_admin',    path: 'admin',    require: false
+gem 'push_type_wysiwyg',  path: 'wysiwyg',  require: false
+gem 'push_type_auth',     path: 'auth',     require: false
 
 # To use debugger
 # gem 'debugger'

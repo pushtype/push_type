@@ -6,14 +6,16 @@ module PushType
     before_filter :load_assets, only: :index
     before_filter :build_asset, only: :create
 
-    respond_to :json
-
     def index
-      respond_with assets_to_hash
+      respond_to do |format|
+        format.json { render json: assets_to_hash }
+      end
     end
 
     def create
-      respond_with save_asset, location: false
+      respond_to do |format|
+        format.json { render json: save_asset }
+      end
     end
 
     private
@@ -45,7 +47,6 @@ module PushType
         current_page: @assets.current_page,
         total_pages: @assets.total_pages
       }
-      
     end
 
     def asset_to_hash(a)

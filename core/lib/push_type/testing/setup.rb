@@ -1,5 +1,9 @@
 require 'database_cleaner'
 
+# Filter out Minitest backtrace while allowing backtrace from other libraries
+# to be shown.
+Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
@@ -8,8 +12,6 @@ DatabaseCleaner.clean_with :truncation
 Dragonfly.app.use_datastore :memory
 
 class ActiveSupport::TestCase
-  ActiveRecord::Migration.check_pending!
-
   before :each do
     DatabaseCleaner.start
     PushType.config.root_nodes = :all

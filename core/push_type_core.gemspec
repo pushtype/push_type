@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://type.pushcode.com'
   s.license       = 'MIT'
 
-  s.add_dependency 'rails',         '~> 4.1.8'
-  s.add_dependency 'pg',            '~> 0.17.1'
+  s.add_dependency 'rails',         '~> 4.2.0'
+  s.add_dependency 'pg',            '~> 0.18.1'
   s.add_dependency 'closure_tree',  '~> 5.1.1'
   s.add_dependency 'dragonfly',     '~> 1.0.7'
 
