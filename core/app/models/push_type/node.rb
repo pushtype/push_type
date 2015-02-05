@@ -4,6 +4,7 @@ module PushType
     include PushType::Customizable
     include PushType::Nestable
     include PushType::Templatable
+    include PushType::Unexposable
     include PushType::Publishable
     include PushType::Trashable
 

@@ -2,9 +2,10 @@ language: ruby
 rvm:
   - 2.1.2
 addons:
-  postgresql: '9.3'
+  postgresql: '9.4'
 before_script:
   - cp database.yml.travis core/config/database.yml
   - cp database.yml.travis admin/config/database.yml
+  - cp database.yml.travis wysiwyg/config/database.yml
   - cp database.yml.travis auth/config/database.yml
 script: bundle exec rake test

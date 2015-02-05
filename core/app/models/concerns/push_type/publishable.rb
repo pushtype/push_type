@@ -5,11 +5,6 @@ module PushType
     included do
       enum status: [ :draft, :published ]
 
-      scope :exposed, -> {
-        node_types = PushType.unexposed_nodes
-        node_types.present? ? where(['push_type_nodes.type NOT IN (?)', node_types]) : all
-      }
-
       scope :published, -> {
         not_trash.exposed.
           where(['push_type_nodes.status = ? AND push_type_nodes.published_at <= ?', self.statuses[:published], Time.zone.now]).
@@ -32,10 +27,6 @@ module PushType
       published_to? and published_to < Time.zone.now
     end
 
-    def exposed?
-      self.class.exposed?
-    end
-
     private
 
     def set_published_at
@@ -47,18 +38,6 @@ module PushType
 
     def set_default_status
       self.status     ||= self.class.statuses[:draft]
-    end
-
-    module ClassMethods
-
-      def unexpose!
-        PushType.config.unexposed_nodes.push(self.name.underscore.to_sym).uniq!
-      end
-
-      def exposed?
-        !PushType.unexposed_nodes.include?(self.name)
-      end
-
     end
 
   end  
