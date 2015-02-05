@@ -5,9 +5,9 @@ module PushType
     alias_attribute :param, :name
 
     class << self
-      attr_reader :node_hook_blk
-      def node_hook(&block)
-        @node_hook_blk = block
+      attr_reader :node_hook
+      def node_context(&block)
+        @node_hook = block
       end
     end
 

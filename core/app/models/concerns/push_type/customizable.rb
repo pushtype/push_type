@@ -56,7 +56,7 @@ module PushType
       end
 
       def hook_to_self(f)
-        if block = f.class.node_hook_blk
+        if block = f.class.node_hook
           block.call(self, f)
         end
       end

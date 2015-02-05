@@ -1,8 +1,8 @@
 module PushType
-  class TagsField < ArrayField
+  class TagListField < ArrayField
 
     def template
-      @opts[:template] || 'tags'
+      @opts[:template] || 'tag_list'
     end
 
     def html_options
@@ -17,9 +17,9 @@ module PushType
       super.reject(&:blank?)
     end
 
-    node_hook do |object, field|
-      object.define_singleton_method :all_tags do
-        sql = <<-SQL.gsub(/^ */, '').gsub(/\n/, ' ')
+    node_context do |object, field|
+      object.define_singleton_method "all_#{ field.name }".to_sym do
+        sql = <<-SQL
           SELECT DISTINCT
             jsonb_array_elements_text(field_store->'#{ field.name }') AS _tag
           FROM
