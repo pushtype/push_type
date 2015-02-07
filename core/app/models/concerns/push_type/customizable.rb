@@ -33,7 +33,9 @@ module PushType
 
         override_accessor fields[name]
 
-        hook_to_self fields[name]
+        if block = field_factory(kind).initialized_blk
+          block.call(self, fields[name])
+        end
       end
 
       protected
@@ -52,12 +54,6 @@ module PushType
         end
         define_method f.name do
           f.from_json super()
-        end
-      end
-
-      def hook_to_self(f)
-        if block = f.class.node_hook
-          block.call(self, f)
         end
       end
 

@@ -10,7 +10,7 @@ module PushType
     it { fields.must_be_instance_of ActiveSupport::OrderedHash }
 
     describe '.field' do
-      before :all do
+      before do
         TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
         TestPage.field :foo
         TestPage.field :bar, :text
@@ -29,6 +29,18 @@ module PushType
       it { TestPage.validators_on(:baz).map(&:class).must_include ActiveRecord::Validations::PresenceValidator }
       it { fields[:qux].must_be_instance_of NumberField }
       it { TestPage.validators_on(:qux).map(&:class).must_include ActiveRecord::Validations::PresenceValidator }
+    end
+
+    describe '#field_params' do
+      before do
+        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.field :foo
+        TestPage.field :bar, :text
+        TestPage.field :baz, :array
+      end
+      after { TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
+
+      it { page.field_params.must_equal [:foo, :bar, { baz: [] }] }
     end
 
   end

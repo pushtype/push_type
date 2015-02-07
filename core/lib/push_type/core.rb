@@ -45,5 +45,3 @@ end
 require 'push_type/core/engine'
 require 'push_type/rails/routes'
 require 'push_type/field_type'
-
-

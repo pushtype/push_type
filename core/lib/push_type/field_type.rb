@@ -2,18 +2,21 @@ module PushType
   class FieldType
 
     attr_reader :name
-    alias_attribute :param, :name
 
     class << self
-      attr_reader :node_hook
-      def node_context(&block)
-        @node_hook = block
+      attr_reader :initialized_blk
+      def initialized_on_node(&block)
+        @initialized_blk = block
       end
     end
 
     def initialize(name, opts = {})
       @name = name.to_s
       @opts = opts
+    end
+
+    def param
+      name.to_sym
     end
 
     def kind
