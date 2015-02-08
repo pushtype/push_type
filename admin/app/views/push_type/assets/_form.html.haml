@@ -1,4 +1,4 @@
-%div{ ng: { controller: 'AssetUploadCtrl', init: "asset=#{ @asset.to_json }; createUrl='#{ push_type.assets_path }'; updateUrl='#{ push_type.asset_path('~id') }'" } }
+%div{ ng: { controller: 'AssetUploadCtrl', init: "asset=#{ asset_hash(@asset).to_json }; createUrl='#{ push_type.assets_path }'; updateUrl='#{ push_type.asset_path('~id') }'" } }
   = form_for @asset, url: '{{ saveUrl() }}', method: 'post' do |f|
     = hidden_field_tag :_method, '{{ method() }}'
     .large-8.columns
@@ -18,7 +18,7 @@
                 = f.file_field :file
             %div{ ng: { show: "!asset['new_record?']" } }
               .small-4.medium-3.columns
-                %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ previewthumbUrl() }}' } }
+                %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
               .small-8.medium-9.columns
                 %table
                   %tr

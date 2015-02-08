@@ -101,8 +101,8 @@ $.Editable.prototype.buildMediaManager = function () {
 $.Editable.prototype.initPagination = function(data) {
   var mm = this;
   this.$image_modal.find('#f-pagination-' + this._id).pagination({
-    pages: data.total_pages,
-    currentPage: data.current_page,
+    pages: data.meta.total_pages,
+    currentPage: data.meta.current_page,
     hrefTextPrefix: '#/media/page-',
     onPageClick: function(page, e) {
       e.preventDefault();
@@ -139,7 +139,7 @@ $.Editable.prototype.loadImages = function (page) {
       // data
       this.triggerEvent('imagesLoaded', [data], false);
       this.processLoadedImages(data.assets);
-      if (!isPaginated && data.total_pages > 1) {
+      if (!isPaginated && data.meta.total_pages > 1) {
         this.initPagination(data);
       }
       this.$preloader.hide();

@@ -36,24 +36,27 @@ module PushType
     end
 
     def media(style = nil)
-      if image? && !style.blank? && style.to_sym != :original
-        size = PushType.config.media_styles[style.to_sym] || style
+      return file if !image? || style.blank?
+
+      case style.to_sym
+        when :original        then file
+        when :push_type_thumb then preview_thumb
+        else
+          size = PushType.config.media_styles[style.to_sym] || style
+          file.thumb(size)
       end
-      size ? file.thumb(size) : file
     end
 
-    def preview_thumb_url(size = '300x300#')
-      return nil unless file_stored?
-      if image?
-        media(size).url
+    def preview_thumb(size = '300x300')
+      return unless image?
+
+      width, height = size.split('x').map(&:to_i)
+
+      if file.width >= width && file.height >= height
+        file.thumb("#{ size }#")
       else
-        "push_type/icon-file-#{ kind }.png"
+        file.convert("-background white -gravity center -extent #{ size }")
       end
-    end
-
-    def as_json(options = nil)
-      options = { only: [:id, :file_name, :file_size, :mime_type, :created_at], methods: [:new_record?, :image?, :description_or_file_name, :preview_thumb_url] } if options.empty?
-      super(options)
     end
 
     private

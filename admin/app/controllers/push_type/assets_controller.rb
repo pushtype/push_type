@@ -3,11 +3,11 @@ require_dependency "push_type/admin_controller"
 module PushType
   class AssetsController < AdminController
 
-    before_filter :build_asset, only: [:new, :create]
+    before_filter :build_asset, only: [:new, :create, :upload]
     before_filter :load_asset,  only: [:edit, :update, :destroy]
 
     def index
-      @assets = PushType::Asset.not_trash.page(params[:page])
+      @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
     end
 
     def new
@@ -24,7 +24,13 @@ module PushType
 
     def upload
       respond_to do |format|
-        format.json { render :json, PushType::Asset.create(asset_params) }
+        format.json do
+          if @asset.save
+            render json: { asset: view_context.asset_hash(@asset).as_json }, status: :created
+          else
+            render json: { errors: @asset.errors.as_json }, status: :unprocessable_entity
+          end
+        end
       end
     end
 

@@ -1,3 +1,5 @@
+require 'push_type/admin/assets'
+
 module PushType
   module Admin
     class Engine < ::Rails::Engine
@@ -12,7 +14,12 @@ module PushType
         g.test_framework  :minitest, spec: true, fixture: false
       end
 
-      config.assets.precompile += %w(push_type/admin.css push_type/admin.js)
+      config.assets.precompile += %w(
+        push_type/admin.css
+        push_type/admin.js
+        push_type/admin_assets.css 
+        push_type/admin_assets.js
+      )
     end
   end
 end

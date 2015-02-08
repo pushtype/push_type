@@ -1,4 +1,4 @@
-%div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ @node.to_json(only: [:type, :title, :slug, :status, :published_at, :published_to], methods: [:new_record?, :published?]) }" } }
+%div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ node_hash(@node).to_json }" } }
   .large-8.columns
     .container
       .head

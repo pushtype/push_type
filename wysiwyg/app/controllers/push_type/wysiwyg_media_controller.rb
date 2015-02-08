@@ -8,13 +8,19 @@ module PushType
 
     def index
       respond_to do |format|
-        format.json { render json: assets_to_hash }
+        format.json { render json: view_context.wysiwyg_assets_hash(@assets) }
       end
     end
 
     def create
       respond_to do |format|
-        format.json { render json: save_asset }
+        format.json do
+          if @asset.save 
+            render json: { link: main_app.media_url(@asset.file_uid) }
+          else
+            render json: { error: @asset.errors.full_messages.first }
+          end
+        end
       end
     end
 
@@ -31,34 +37,6 @@ module PushType
 
     def asset_params
       params.fetch(:asset, {}).permit(:file)
-    end
-
-    def save_asset
-      if @asset.save
-        { link: main_app.media_url(@asset.file_uid) }
-      else
-        { error: @asset.errors.full_messages.first }
-      end
-    end
-
-    def assets_to_hash
-      {
-        assets: @assets.map { |a| asset_to_hash(a) },
-        current_page: @assets.current_page,
-        total_pages: @assets.total_pages
-      }
-    end
-
-    def asset_to_hash(a)
-      {
-        src: a.image? ? main_app.media_url(a.file_uid, style: '300x300#') : ActionController::Base.helpers.image_url("push_type/icon-file-#{ a.kind }.png"),
-        info: {
-          id:    a.id,
-          kind:  a.kind,
-          src:   main_app.media_url(a.file_uid),
-          title: a.description_or_file_name
-        }
-      }
     end
 
   end

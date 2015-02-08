@@ -6,13 +6,9 @@
   $scope.editUrl = (asset) ->
     $scope.assetUrl.replace(/~id/, asset.id)
 
-  $scope.previewthumbUrl = (asset) ->
-    url = asset.preview_thumb_url
-    if asset['image?'] then url else asset_path(url)
-
   $scope.afterUpload = (asset) ->
     $scope.assets.unshift(asset)
-    $scope.assets = $scope.assets.slice(0, kaminari_per_page)
+    $scope.assets = $scope.assets.slice(0, 20)
 
 ]
 
@@ -33,10 +29,6 @@
   $scope.uploadedDate = ->
     moment($scope.asset.created_at).format('Do MMM YYYY, h:mma')
 
-  $scope.previewthumbUrl = ->
-    url = $scope.asset.preview_thumb_url
-    if $scope.asset['image?'] then url else asset_path(url)
-
   $scope.afterUpload = (asset) ->
     $scope.asset = asset
 
@@ -55,7 +47,7 @@
       dragLeave:  -> $(this).removeClass('hover')
       drop:       -> $(this).removeClass('hover')
       uploadFinished: (i, file, response, time) ->
-        scope.afterUpload(response)
+        scope.afterUpload(response.asset)
         scope.$apply() unless scope.$$phase
 
 

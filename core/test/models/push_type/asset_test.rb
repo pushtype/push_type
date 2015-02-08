@@ -7,7 +7,7 @@ module PushType
     it { asset.wont_be :valid? }
     it { asset.kind.must_equal nil }
     it { asset.description_or_file_name.must_equal nil }
-    it { asset.preview_thumb_url.must_equal nil }
+    it { asset.preview_thumb.must_equal nil }
 
     it 'should be valid with required attributes' do
       asset.attributes = FactoryGirl.attributes_for :asset
@@ -67,15 +67,16 @@ module PushType
         it { image.media('48x56#').wont_equal image.file }
         it { image.media('48x56#').width.must_equal 48 }
         it { image.media('48x56#').height.must_equal 56 }
+        it { image.media('48x56#').must_be_kind_of Dragonfly::Job }
         it { doc.media('48x56#').must_equal doc.file }
       end
     end
 
-    describe '#preview_thumb_url' do
+    describe '#preview_thumb' do
       let(:image) { FactoryGirl.create :image_asset }
       let(:doc)   { FactoryGirl.create :document_asset }
-      it { image.preview_thumb_url.must_match %r{^/media/.*/image.png} }
-      it { doc.preview_thumb_url.must_equal 'push_type/icon-file-document.png' }
+      it { image.preview_thumb.must_be_kind_of Dragonfly::Job }
+      it { doc.preview_thumb.must_be_nil }
     end
 
     describe '#set_mime_type' do

@@ -7,7 +7,7 @@ module PushType
     before_filter :load_node,   only: [:edit, :update, :destroy, :position]
 
     def index
-      @nodes = node_scope.not_trash.page(params[:page])
+      @nodes = node_scope.not_trash.page(params[:page]).per(30)
     end
 
     def new

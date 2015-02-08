@@ -12,6 +12,7 @@ require 'turbolinks'
 
 require 'breadcrumbs'
 require 'kaminari'
+require 'jbuilder'
 
 module PushType
 
@@ -19,7 +20,6 @@ module PushType
   end
 end
 
-require 'push_type/admin/assets'
 require 'push_type/admin/engine'
 
 require 'push_type/breadcrumbs/foundation'

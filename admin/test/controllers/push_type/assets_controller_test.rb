@@ -40,6 +40,27 @@ module PushType
       end
     end
 
+    describe 'POST #upload' do
+      let(:json_response) { JSON.parse(response.body) }
+      let(:action!) { post :upload, format: :json, asset: asset_attrs }
+      describe 'with valid asset' do
+        before { action! }
+        it { response.must_respond_with :success }
+        it { json_response['asset'].must_be :present? }
+        it { json_response['errors'].wont_be :present? }
+      end
+      describe 'asset count' do
+        it { proc { action! }.must_change 'Asset.count', 1 }
+      end
+      describe 'with in-valid asset' do
+        let(:asset_attrs) { {} }
+        before { action! }
+        it { response.must_respond_with :unprocessable_entity }
+        it { json_response['asset'].wont_be :present? }
+        it { json_response['errors'].must_be :present? }
+      end
+    end
+
     describe 'GET #edit' do
       before { get :edit, id: asset.id }
       it { response.must_render_template 'edit' }

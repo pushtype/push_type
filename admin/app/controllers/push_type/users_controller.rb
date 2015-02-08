@@ -7,7 +7,7 @@ module PushType
     before_filter :load_user,   only: [:edit, :update, :destroy]
 
     def index
-      @users = user_scope.page(params[:page])
+      @users = user_scope.page(params[:page]).per(30)
     end
 
     def new

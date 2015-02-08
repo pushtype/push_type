@@ -22,6 +22,7 @@
 #= require moment
 #= require_self
 #= require bootstrap-tagsinput
+#= stub push_type/admin_assets
 #= require_tree .
 
 Turbolinks.enableProgressBar()

@@ -8,7 +8,7 @@
       = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
 
 - else
-  %div{ ng: { controller: 'AssetListCtrl', init: "assets=#{ @assets.all.to_json }; assetUrl='#{ push_type.edit_asset_path('~id') }'" } }
+  %div{ ng: { controller: 'AssetListCtrl', init: "assets=#{ assets_array(@assets).to_json }; assetUrl='#{ push_type.edit_asset_path('~id') }'" } }
     .large-8.columns
       %section
         %ul.asset-list.small-block-grid-2.medium-block-grid-4
@@ -16,7 +16,7 @@
             %article.asset-list-item
               %a{ ng: { href: '{{ editUrl(asset) }}' } }
                 .preview
-                  %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ previewthumbUrl(asset) }}' } }
+                  %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
                 .title {{ asset.description_or_file_name }}
 
     .large-4.columns
