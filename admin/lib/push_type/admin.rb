@@ -18,8 +18,13 @@ module PushType
 
   module Admin
   end
+
+  def self.admin_assets
+    @@admin_assets ||= PushType::Admin::Assets.new
+  end
 end
 
+require 'push_type/admin/assets'
 require 'push_type/admin/engine'
 
 require 'push_type/breadcrumbs/foundation'

@@ -6,7 +6,7 @@ module PushType
   class << self
 
     def config
-      PushType::Core::Engine.config
+      PushType::Config
     end
 
     def setup(&block)
@@ -36,12 +36,23 @@ module PushType
         end
       end.sort
     end
+
+    def dragonfly_app_setup!
+      Dragonfly.app.configure do
+        plugin      :imagemagick
+        url_format  "/media/:job/:name"
+        secret      PushType.config.dragonfly_secret
+        datastore   PushType.config.dragonfly_datastore, PushType.config.dragonfly_datastore_options
+      end
+    end
+
   end
 
   module Core
   end
 end
 
+require 'push_type/config'
 require 'push_type/core/engine'
 require 'push_type/rails/routes'
 require 'push_type/field_type'

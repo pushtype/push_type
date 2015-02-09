@@ -4,18 +4,6 @@ module PushType
       isolate_namespace PushType
       engine_name 'push_type'
 
-      config.root_nodes = :all
-
-      config.home_slug = 'home'
-
-      config.unexposed_nodes = []
-
-      config.media_styles = {
-        large:    '1024x1024>',
-        medium:   '512x512>',
-        small:    '256x256>'
-      }
-
       config.generators do |g|
           g.assets false
           g.helper false
@@ -26,6 +14,11 @@ module PushType
 
       config.to_prepare do
         Rails.application.eager_load! unless Rails.application.config.cache_classes
+      end
+
+      initializer 'push_type.dragonfly_config' do
+        PushType.config.dragonfly_secret ||= Rails.application.secrets.secret_key_base
+        PushType.dragonfly_app_setup!
       end
     end
   end

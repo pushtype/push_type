@@ -7,7 +7,7 @@ module PushType
     class_option :migrate, type: :boolean, default: true
 
     def create_push_type_initializer
-      copy_file 'push_type.rb', 'config/initializers/push_type.rb'
+      template 'push_type.rb', 'config/initializers/push_type.rb'
     end
 
     def inject_push_type_routes

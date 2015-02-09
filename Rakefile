@@ -12,7 +12,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.title    = 'PushType'
   rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.md')
-  rdoc.rdoc_files.include('{core,admin.auth}/lib/**/*.rb')
+  rdoc.rdoc_files.include('{core,admin,auth,wysiwyg}/{app,lib}/**/*.rb')
 end
 
 Bundler::GemHelper.install_tasks

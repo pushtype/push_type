@@ -13,6 +13,7 @@ module PushType
     end
 
     def asset_preview_thumb_url(asset)
+      return nil unless asset.persisted?
       if asset.image?
         main_app.media_path(file_uid: asset.file_uid, style: :push_type_thumb)
       else

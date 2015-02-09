@@ -5,7 +5,6 @@ module PushType
 
     describe '.config' do
       subject { PushType.config }
-      it { subject.must_be_instance_of Rails::Engine::Configuration }
       it { subject.root_nodes.wont_be_nil }
       it { subject.home_slug.wont_be_nil }
     end
