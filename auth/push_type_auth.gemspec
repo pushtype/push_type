@@ -23,9 +23,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'push_type_core',  PushType::VERSION
   s.add_dependency 'push_type_admin', PushType::VERSION
   s.add_dependency 'devise',          '~> 3.4.1'
-  s.add_dependency 'highline'
+  s.add_dependency 'highline',        '~> 1.6.21'
 
   s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
-  s.add_development_dependency 'database_cleaner',    '~> 1.3.0'
+  s.add_development_dependency 'database_cleaner',    '~> 1.f.0'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end

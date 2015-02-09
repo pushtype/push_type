@@ -22,18 +22,17 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'push_type_core', PushType::VERSION
 
-  s.add_dependency 'haml-rails',                  '~> 0.5.3'
+  s.add_dependency 'haml-rails',                  '~> 0.8.2'
   s.add_dependency 'jquery-rails',                '~> 4.0.3'
-  s.add_dependency 'angularjs-rails',             '~> 1.3.4'
-  s.add_dependency 'foundation-rails',            '~> 5.4.5'
+  s.add_dependency 'angularjs-rails',             '~> 1.3.10'
+  s.add_dependency 'foundation-rails',            '~> 5.5.1.0'
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'
-  s.add_dependency 'momentjs-rails',              '~> 2.8.3'
-  s.add_dependency 'turbolinks',                  '~> 2.5.2'
+  s.add_dependency 'momentjs-rails',              '~> 2.9.0'
+  s.add_dependency 'turbolinks',                  '~> 2.5.3'
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'
-  s.add_dependency 'kaminari',                    '~> 0.16.1'
-  s.add_dependency 'jbuilder',                    '~> 2.2.6'
+  s.add_dependency 'kaminari',                    '~> 0.16.2'
 
   s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
-  s.add_development_dependency 'database_cleaner',    '~> 1.3.0'
+  s.add_development_dependency 'database_cleaner',    '~> 1.4.0'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end

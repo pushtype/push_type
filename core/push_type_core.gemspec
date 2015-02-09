@@ -22,10 +22,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails',         '~> 4.2.0'
   s.add_dependency 'pg',            '~> 0.18.1'
-  s.add_dependency 'closure_tree',  '~> 5.1.1'
+  s.add_dependency 'closure_tree',  '~> 5.2.0'
   s.add_dependency 'dragonfly',     '~> 1.0.7'
 
   s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
-  s.add_development_dependency 'database_cleaner',    '~> 1.3.0'
+  s.add_development_dependency 'database_cleaner',    '~> 1.4.0'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end

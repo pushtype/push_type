@@ -12,7 +12,6 @@ require 'turbolinks'
 
 require 'breadcrumbs'
 require 'kaminari'
-require 'jbuilder'
 
 module PushType
 
