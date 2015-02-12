@@ -5,6 +5,10 @@ module PushType
 
   class << self
 
+    def version
+      PushType::VERSION
+    end
+
     def config
       PushType::Config
     end
@@ -56,3 +60,4 @@ require 'push_type/config'
 require 'push_type/core/engine'
 require 'push_type/rails/routes'
 require 'push_type/field_type'
+require 'push_type/version'

@@ -3,6 +3,11 @@ require "test_helper"
 module PushType
   describe ::PushType do
 
+    describe '.version' do
+      subject { PushType.version }
+      it { subject.must_equal PushType::VERSION }
+    end
+
     describe '.config' do
       subject { PushType.config }
       it { subject.root_nodes.wont_be_nil }

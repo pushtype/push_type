@@ -1,7 +1,5 @@
-$:.push File.expand_path('../lib', __FILE__)
-
 # Maintain your gem's version:
-require File.expand_path('../../lib/push_type/version', __FILE__)
+require File.expand_path('../../core/lib/push_type/version', __FILE__)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
