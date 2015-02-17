@@ -54,7 +54,7 @@ $(document).on 'ready page:load', ->
 
   $(document).confirmWithReveal()
 
-  $('.tagsinput', '.tags').tagsinput
+  $('.tagsinput', '.tag_list').tagsinput
     tagClass: 'label secondary radius'
     
 
