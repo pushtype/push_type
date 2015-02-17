@@ -19,3 +19,4 @@ require 'push_type/testing/factories'
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+DatabaseCleaner.strategy = :deletion

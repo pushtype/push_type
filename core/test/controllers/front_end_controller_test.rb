@@ -26,4 +26,23 @@ describe FrontEndController do
     end
   end
 
+  describe 'node filters' do
+    ApplicationController.module_eval do
+      def before_node_load
+        @foo = {}
+      end
+      def before_node_action
+        @foo[:node_action] = true
+      end
+      def before_page_action
+        @foo[:page_action] = true
+      end
+    end
+    let(:page) { FactoryGirl.create :published_node, type: 'Page' }
+    before { get :node, permalink: page.permalink }
+    it { assigns[:foo].must_be_instance_of Hash }
+    it { assigns[:foo][:node_action].must_equal true }
+    it { assigns[:foo][:page_action].must_equal true }
+  end
+
 end

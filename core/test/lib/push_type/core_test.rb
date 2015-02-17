@@ -39,7 +39,7 @@ module PushType
         it { subject.must_be_empty }
       end
       describe 'specified single value' do
-        before { PushType.config.unexposed_nodes = [:page] }
+        before { PushType.config.unexposed_nodes = :page }
         it { subject.must_equal ['Page'] }
       end
       describe 'specified array with nonsense values' do
