@@ -14,13 +14,9 @@ module PushType
 
     def create
       respond_to do |format|
-        format.json do
-          if @asset.save 
-            render json: { link: main_app.media_url(@asset.file_uid) }
-          else
-            render json: { error: @asset.errors.full_messages.first }
-          end
-        end
+        format.json { render json: create_asset }
+        # For IE9
+        format.html { render text: create_asset.to_json }
       end
     end
 
@@ -33,6 +29,14 @@ module PushType
 
     def build_asset
       @asset = PushType::Asset.new asset_params.merge(uploader: push_type_user)
+    end
+
+    def create_asset
+      if @asset.save
+        { link: main_app.media_url(@asset.file_uid) }
+      else
+        { error: @asset.errors.full_messages.first }
+      end
     end
 
     def asset_params

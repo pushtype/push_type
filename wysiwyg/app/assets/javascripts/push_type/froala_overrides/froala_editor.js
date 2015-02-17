@@ -32,3 +32,23 @@ $.Editable.prototype.showByCoordinates = function (x, y) {
 
   this.$popup_editor.show();
 };
+
+$.Editable.prototype.parseImageResponse = function (response) {
+    try {
+      var resp = $.parseJSON(response);
+      if (!resp) {
+        // Is this IE9 being a wugger?
+        return;
+      } else if (resp.link) {
+        this.writeImage(resp.link);
+      } else if (resp.error) {
+        this.throwImageErrorWithMessage(resp.error);
+      } else {
+        // No link in upload request.
+        this.throwImageError(2);
+      }
+    } catch (ex) {
+      // Bad response.
+      this.throwImageError(4);
+    }
+  };
