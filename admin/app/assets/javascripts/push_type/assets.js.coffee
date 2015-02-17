@@ -36,6 +36,9 @@
 
 @app.directive 'assetUpload', ->
   (scope, $el, attrs) ->
+    unless window.FileReader && Modernizr.draganddrop
+      $el.hide()
+      return
     if attrs.assetFallback
       scope.hideFileField = true
     $el.filedrop
