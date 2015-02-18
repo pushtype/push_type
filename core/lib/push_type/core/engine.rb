@@ -21,7 +21,6 @@ module PushType
         PushType.config.dragonfly_secret ||= Rails.application.secrets.secret_key_base
         PushType.dragonfly_app_setup!
       end
-      
     end
   end
 end

@@ -16,6 +16,21 @@ module PushType
         PushType::UsersController.send :include, PushType::InvitationMethods
         DeviseController.helper PushType::AdminHelper
       end
+
+      initializer 'push_type_auth.menus' do
+        PushType.menu :utility do
+          item :settings do
+            text  { ficon(:widget) }
+            link  { push_type.edit_profile_path }
+          end
+          item :sign_out do
+            text  { ficon(:power) }
+            link  { push_type.destroy_user_session_path }
+            link_options method: 'delete'
+          end
+        end
+      end
+
     end
   end
 end
