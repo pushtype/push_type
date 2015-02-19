@@ -30,8 +30,8 @@ module PushType
         css_class = [
           item.item_options[:class],
           ( get_item_value(:active, item) ? item.active_class || @menu.active_class : nil )
-        ]
-        options = item.item_options.merge class: css_class.compact.join(' ')
+        ].compact.join(' ')
+        options = item.item_options.merge class: ( css_class if css_class.present? )
 
         @view.content_tag item.element, @view.link_to(text, link, item.link_options), options
       end

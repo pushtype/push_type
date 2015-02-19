@@ -30,6 +30,7 @@ module PushType
         [:text, :link].each do |field|
           raise "Missing '#{ field }' in MenuItem '#{ @key }'" unless send(field).present?
         end
+        true
       end
       
     end
