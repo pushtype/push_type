@@ -10,14 +10,8 @@ module PushType
       @nodes = node_scope.not_trash.page(params[:page]).per(30)
     end
 
-    def trash
-      @nodes = PushType::Node.all.trashed.page(params[:page]).per(30).reorder(:parent_id, :sort_order)
-    end
-
-    def empty
-      PushType::Node.trashed.destroy_all
-      flash[:notice] = "Trash successfully emptied."
-      redirect_to push_type.nodes_path
+    def trashed
+      @nodes = PushType::Node.all.trashed.page(params[:page]).per(30).reorder(deleted_at: :desc)
     end
 
     def new
@@ -56,18 +50,24 @@ module PushType
       end
     end
 
-    def restore
-      @node.restore!
-      flash[:notice] = "#{ @node.type } successfully restored."
-      redirect_to redirect_path
-    end
-
     def position
       if reorder_node
         head :ok
       else
         render json: @node.errors, status: :unprocessable_entity
       end
+    end
+
+    def restore
+      @node.restore!
+      flash[:notice] = "#{ @node.type } successfully restored."
+      redirect_to redirect_path
+    end
+
+    def empty
+      PushType::Node.trashed.destroy_all
+      flash[:notice] = "Trash successfully emptied."
+      redirect_to push_type.nodes_path
     end
 
     private
@@ -97,7 +97,7 @@ module PushType
 
     def redirect_path(skip_trash = false)
       if @node.trashed? && !skip_trash
-        push_type.trash_nodes_path
+        push_type.trashed_nodes_path
       elsif @node.root?
         push_type.nodes_path
       else

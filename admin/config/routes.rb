@@ -3,12 +3,12 @@ PushType::Core::Engine.routes.draw do
   resources :nodes, except: :show do
     resources :nodes, only: [:index, :new, :create]
     collection do
-      get 'trash'
-      delete 'trash' => 'nodes#empty'
+      get 'trashed'
+      delete 'empty'
     end
     member do
-      put 'restore'
       post 'position'
+      put 'restore'
     end
   end
 
