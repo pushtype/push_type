@@ -11,8 +11,23 @@ class FrontEndController < ApplicationController
 
   def load_node
     @node = PushType::Node.published.find_by_path permalink_path
-    raise ActiveRecord::RecordNotFound unless @node
-    instance_variable_set "@#{ @node.type.underscore }", @node
+    if @node
+      instance_variable_set "@#{ @node.type.underscore }", @node
+    else
+      raise_404
+    end
+  end
+
+  def root_path?
+    request.fullpath == '/'
+  end
+
+  def raise_404
+    if root_path?
+      render template: 'push_type/setup', layout: false, status: 404
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def before_load
