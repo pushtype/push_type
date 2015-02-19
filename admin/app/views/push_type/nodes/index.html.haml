@@ -4,54 +4,54 @@
   - for node in @parent.self_and_ancestors.reverse
     - breadcrumbs.add node.title, push_type.node_nodes_path(node)
 
-- if !@parent && @nodes.empty?
-  .columns
-    .empty-default
-      %h2 No content
-      %p A website without any content makes for a pretty poor user experience. Better sort this one out now and create your first page.
-      = render 'new_node_button'
-
-- else
-  .large-8.columns
-    %section.container
-      .head
-        - if @parent
-          .left.btn= link_to ficon(:previous), @parent.root? ? push_type.nodes_path : push_type.node_nodes_path(@parent.parent)
-          .title= @parent.title
-        - else
-          .title Content
-      .body
-        - if @nodes.empty?
-          .empty-default
-            %h3 No content
+.large-8.columns
+  %section.container
+    .head
+      - if @parent
+        .left.btn= link_to ficon(:previous), @parent.root? ? push_type.nodes_path : push_type.node_nodes_path(@parent.parent)
+        .title= @parent.title
+      - else
+        .title Content
+        .right.btn= link_to ficon(:trash), push_type.trash_nodes_path
+        
+    .body
+      - if @nodes.empty?
+        .empty-default
+          %h3 No content
+          - if !@parent
+            %p A website without any content makes for a pretty poor user experience. Better sort this one out now and create your first page.
+            = render 'new_node_button'
+          - else
             %p There is no content in this section yet.
-        - else
-          %ul.node-list{ class: ('sortable' if !@parent || @parent.sortable?) }
-            - for node in @nodes.all
-              %li.node-list-item{ data: { id: node.id } }
-                = link_to push_type.edit_node_path(node) do
-                  .title= node.title
-                  .meta
-                    %span.label.secondary.radius= node.type.to_s.underscore.humanize
-                    %span.label.radius{ class: node.published? ? 'success' : 'warning' }= node.status.titlecase
-                    %time Updated #{ time_ago_in_words node.updated_at } ago
+      - else
+        %ul.node-list{ class: ('sortable' if !@parent || @parent.sortable?) }
+          - for node in @nodes.all
+            %li.node-list-item{ data: { id: node.id } }
+              = link_to push_type.edit_node_path(node) do
+                .title= node.title
+                .meta
+                  %span.label.secondary.radius= node.type.to_s.underscore.humanize
+                  %span.label.radius{ class: node.published? ? 'success' : 'warning' }= node.status.titlecase
+                  - if node.published?
+                    %time Updated #{ node.published_at.to_s(:short) }
                     \-
-                    %span= pluralize node.child_ids.size, 'child'
-                .buttons
-                  = link_to ficon(:magnifying_glass), '#'
-                  - unless node.child_nodes.empty?
-                    = link_to ficon(:folder), push_type.node_nodes_path(node)
-                - if !@parent || @parent.sortable?
-                  .handle
+                  %time Updated #{ time_ago_in_words node.updated_at } ago
+                  \-
+                  %span= pluralize node.children.not_trash.count, 'child'
+              .buttons
+                %span= ficon(:magnifying_glass)
+                = link_to ficon(:folder), push_type.node_nodes_path(node) unless node.child_nodes.empty?
+              - if !@parent || @parent.sortable?
+                .handle
 
-  .large-4.columns
-    .side-panel{ :'side-panel' => true }
-      .padded
-        .pagination-centered
-          .pagination-stats
-            = pluralize @nodes.total_count, 'item'
-            - unless @nodes.total_count == 0
-              \- Page #{ @nodes.current_page } of #{ @nodes.total_pages }
-          = paginate @nodes
-      .cta.text-center
-        = render 'new_node_button'
+.large-4.columns
+  .side-panel{ :'side-panel' => true }
+    .padded
+      .pagination-centered
+        .pagination-stats
+          = pluralize @nodes.total_count, 'item'
+          - unless @nodes.total_count == 0
+            \- Page #{ @nodes.current_page } of #{ @nodes.total_pages }
+        = paginate @nodes
+    .cta.text-center
+      = render 'new_node_button'

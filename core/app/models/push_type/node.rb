@@ -16,9 +16,26 @@ module PushType
     validates :title, presence: true
     validates :slug,  presence: true, uniqueness: { scope: :parent_id }
 
+    after_destroy :destroy_children
+
     def permalink
       @permalink ||= self_and_ancestors.map(&:slug).reverse.join('/')
-    end    
+    end
+
+    def orphan?
+      parent && parent.trashed?
+    end
+
+    def trash!  
+      super
+      self.children.update_all deleted_at: Time.zone.now
+    end
+
+    private
+
+    def destroy_children
+      self.children.destroy_all
+    end
     
   end
 end

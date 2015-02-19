@@ -2,7 +2,14 @@ PushType::Core::Engine.routes.draw do
 
   resources :nodes, except: :show do
     resources :nodes, only: [:index, :new, :create]
-    post 'position', on: :member
+    collection do
+      get 'trash'
+      delete 'trash' => 'nodes#empty'
+    end
+    member do
+      put 'restore'
+      post 'position'
+    end
   end
 
   resources :assets, except: :show, path: 'media' do

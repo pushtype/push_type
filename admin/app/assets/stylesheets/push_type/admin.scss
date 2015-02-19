@@ -101,9 +101,15 @@ table {
       width:            rem-calc(40);
       line-height:      rem-calc(40);
       text-align:       center;
-      border-right:     1px solid $crumb-border-color;
+      
       a {
         @extend %block-link-bg;
+      }
+      &.left {
+        border-right:   1px solid $crumb-border-color;
+      }
+      &.right {
+        border-left:    1px solid $crumb-border-color;
       }
     }
     .title {
@@ -180,12 +186,23 @@ table {
     line-height:        rem-calc(40);
     text-align:         center;
     border-left:        1px solid $crumb-border-color;
-    a {
-      @extend %block-link-bg;
+    a, span {
+      display:          block;
       width:            100%;
       height:           rem-calc(40);
+      color:            $gainsboro;
       &:first-child {
         border-bottom:  1px solid $crumb-border-color;
+      }
+    }
+    a {
+      @extend %block-link-bg;
+      color:            $primary-color;
+      &.alert {
+        color:          $alert-color;
+      }
+      &.success {
+        color:          $success-color;
       }
     }
   }
@@ -318,11 +335,19 @@ table {
       margin:           0;
     }
   }
-  .delete-link {
+  .delete-link, .restore-link {
     text-align:         center;
     margin-top:         rem-calc(20);
+    color:              $aluminum;
+  }
+  .delete-link {
     a {
       color:            $alert-color;
+    }
+  }
+  .restore-link {
+    a {
+      color:            $success-color;
     }
   }
   .asset-upload {

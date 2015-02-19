@@ -11,5 +11,15 @@ module PushType
       end
     end
 
+    def node_back_link(node)
+      if node.trashed?
+        push_type.trash_nodes_path
+      elsif node.root?
+        push_type.nodes_path
+      else
+        push_type.node_nodes_path(node.parent)
+      end
+    end
+
   end
 end
