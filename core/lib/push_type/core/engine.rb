@@ -21,6 +21,10 @@ module PushType
         PushType.config.dragonfly_secret ||= Rails.application.secrets.secret_key_base
         PushType.dragonfly_app_setup!
       end
+
+      initializer 'push_type.menu_helpers' do
+        ActionView::Base.send :include, PushType::MenuBuilder::Helpers
+      end
     end
   end
 end

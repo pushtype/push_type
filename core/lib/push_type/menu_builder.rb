@@ -1,6 +1,7 @@
 require 'push_type/menu_builder/menu'
 require 'push_type/menu_builder/menu_item'
 require 'push_type/menu_builder/menu_renderer'
+require 'push_type/menu_builder/helpers'
 
 module PushType
   module MenuBuilder

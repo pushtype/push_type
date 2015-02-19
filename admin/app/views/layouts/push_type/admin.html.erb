@@ -17,10 +17,10 @@
         <%= link_to image_tag('push_type/pushtype-logo.png', alt: 'PushType'), push_type.root_path %>
       </div>
       <nav class="small-4 medium-6 large-8 columns">
-        <%= PushType::MenuBuilder::MenuRenderer.new(self).render_menu(:main) %>
+        <%= render_menu(:main) %>
       </nav>
       <nav class="small-4 medium-3 large-2 columns">
-        <%= PushType::MenuBuilder::MenuRenderer.new(self).render_menu(:utility) %>
+        <%= render_menu(:utility) %>
       </nav>
     </div>
   </header>  
