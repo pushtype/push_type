@@ -1,0 +1,10 @@
+.meta-table
+  - unless @asset.new_record?
+    .meta-row
+      .key= ficon :calendar, 'Uploaded'
+      .value= @asset.created_at.to_s(:long)
+
+  - if @asset.uploader
+    .meta-row
+      .key= ficon :torso, 'Uploader'
+      .value= @asset.uploader.name

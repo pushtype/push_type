@@ -335,19 +335,18 @@ table {
       margin:           0;
     }
   }
-  .delete-link, .restore-link {
+  .text-button {
     text-align:         center;
     margin-top:         rem-calc(20);
     color:              $aluminum;
-  }
-  .delete-link {
     a {
-      color:            $alert-color;
+      color:            $primary-color;
     }
-  }
-  .restore-link {
-    a {
+    &.success a {
       color:            $success-color;
+    }
+    &.alert a {
+      color:            $alert-color;
     }
   }
   .asset-upload {
@@ -381,7 +380,7 @@ table {
     display:            table-cell;
   }
   .key {
-    width:              22%;
+    width:              25%;
     padding-right:      rem-calc(10);
   }
   .value {

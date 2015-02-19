@@ -25,5 +25,13 @@ module PushType
       "push_type/icon-file-#{ asset.kind }.png"
     end
 
+    def asset_back_link(asset)
+      if asset.trashed?
+        push_type.trashed_assets_path
+      else
+        push_type.assets_path
+      end
+    end
+
   end
 end

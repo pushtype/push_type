@@ -1,7 +1,6 @@
 PushType::Core::Engine.routes.draw do
 
   resources :nodes, except: :show do
-    resources :nodes, only: [:index, :new, :create]
     collection do
       get 'trashed'
       delete 'empty'
@@ -10,10 +9,18 @@ PushType::Core::Engine.routes.draw do
       post 'position'
       put 'restore'
     end
+    resources :nodes, only: [:index, :new, :create]
   end
 
   resources :assets, except: :show, path: 'media' do
-    post 'upload', on: :collection
+    collection do
+      post 'upload'
+      get 'trashed'
+      delete 'empty'
+    end
+    member do
+      put 'restore'
+    end
   end
 
   resources :users, except: :show

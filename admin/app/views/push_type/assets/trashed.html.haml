@@ -1,0 +1,35 @@
+- title 'Trash'
+
+- breadcrumbs.add 'Trash', push_type.trashed_assets_path
+
+- if @assets.empty?
+  .columns
+    .empty-default
+      %h2 No trash
+      = link_to ficon(:arrow_left, 'Back to media'), push_type.assets_path, class: 'button radius secondary'
+
+- else
+  %div
+    .large-8.columns
+      %section
+        %ul.asset-list.small-block-grid-2.medium-block-grid-4
+          - for asset in @assets
+            %li
+              %article.asset-list-item
+                = link_to push_type.edit_asset_path(asset) do
+                  .preview
+                    = image_tag asset_preview_thumb_url(asset), alt: asset.file_name
+                  .title= asset.description_or_file_name
+
+    .large-4.columns
+      .side-panel{ :'side-panel' => true }
+        .padded
+          .pagination-centered
+            .pagination-stats
+            = pluralize @assets.total_count, 'item'
+            - unless @assets.total_count == 0
+              \- Page #{ @assets.current_page } of #{ @assets.total_pages }
+            = paginate @assets
+        .cta.text-center
+          = link_to ficon(:trash, 'Empty trash'), push_type.empty_assets_path, method: 'delete', class: 'button radius alert', data: { confirm: true }
+          

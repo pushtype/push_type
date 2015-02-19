@@ -66,7 +66,7 @@ module PushType
 
     def empty
       PushType::Node.trashed.destroy_all
-      flash[:notice] = "Trash successfully emptied."
+      flash[:notice] = 'Trash successfully emptied.'
       redirect_to push_type.nodes_path
     end
 

@@ -27,6 +27,7 @@
           %button.button.success.radius= ficon :check, 'Create user'
         - else
           %button.button.radius= ficon :check, 'Update user'
-          .delete-link= link_to 'Delete user', push_type.user_path(@user), method: 'delete', data: { confirm: true }
+          .text-button.alert
+            = link_to 'Delete user', push_type.user_path(@user), method: 'delete', data: { confirm: true }
             
             
