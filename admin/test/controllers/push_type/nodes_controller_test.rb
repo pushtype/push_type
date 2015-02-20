@@ -15,13 +15,13 @@ module PushType
       it { assigns[:nodes].size.must_equal 5 }
     end
 
-    describe 'GET #trashed' do
+    describe 'GET #trash' do
       before do
         2.times { FactoryGirl.create :node }
         3.times { FactoryGirl.create :node, deleted_at: Time.zone.now }
-        get :trashed
+        get :trash
       end
-      it { response.must_render_template 'trashed' }
+      it { response.must_render_template 'trash' }
       it { assigns[:nodes].size.must_equal 3 }
     end
 

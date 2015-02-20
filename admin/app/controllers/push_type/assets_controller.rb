@@ -10,7 +10,7 @@ module PushType
       @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
     end
 
-    def trashed
+    def trash
       @assets = PushType::Asset.trashed.page(params[:page]).per(20)
     end
 
@@ -54,7 +54,7 @@ module PushType
       if @asset.trashed?
         @asset.destroy
         flash[:notice] = 'Media permanently deleted.'
-        redirect_to push_type.trashed_assets_path
+        redirect_to push_type.trash_assets_path
       else
         @asset.trash!
         flash[:notice] = 'Media trashed.'

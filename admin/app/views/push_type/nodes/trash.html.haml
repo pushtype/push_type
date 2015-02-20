@@ -1,6 +1,6 @@
 - title 'Trash'
 
-- breadcrumbs.add 'Trash', push_type.trashed_nodes_path
+- breadcrumbs.add 'Trash', push_type.trash_nodes_path
 
 - if @nodes.empty?
   .columns
@@ -45,4 +45,4 @@
               \- Page #{ @nodes.current_page } of #{ @nodes.total_pages }
           = paginate @nodes
       .cta.text-center
-        = link_to ficon(:trash, 'Empty trash'), push_type.empty_nodes_path, method: 'delete', class: 'button radius alert', data: { confirm: true }
+        = link_to ficon(:trash, 'Empty trash'), push_type.trash_nodes_path, method: 'delete', class: 'button radius alert', data: { confirm: true }

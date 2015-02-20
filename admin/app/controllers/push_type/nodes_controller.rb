@@ -10,7 +10,7 @@ module PushType
       @nodes = node_scope.not_trash.page(params[:page]).per(30)
     end
 
-    def trashed
+    def trash
       @nodes = PushType::Node.all.trashed.page(params[:page]).per(30).reorder(deleted_at: :desc)
     end
 
@@ -97,7 +97,7 @@ module PushType
 
     def redirect_path(skip_trash = false)
       if @node.trashed? && !skip_trash
-        push_type.trashed_nodes_path
+        push_type.trash_nodes_path
       elsif @node.root?
         push_type.nodes_path
       else

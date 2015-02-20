@@ -1,7 +1,7 @@
 - title "Edit #{ @node.type.underscore.humanize.downcase }"
 
 - if @node.trashed?
-  - breadcrumbs.add 'Trash', push_type.trashed_nodes_path
+  - breadcrumbs.add 'Trash', push_type.trash_nodes_path
 -else
   - for node in @node.ancestors.reverse
     - breadcrumbs.add node.title, push_type.node_nodes_path(node)
