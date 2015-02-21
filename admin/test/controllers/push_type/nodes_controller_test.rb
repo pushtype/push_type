@@ -15,6 +15,16 @@ module PushType
       it { assigns[:nodes].size.must_equal 5 }
     end
 
+    describe 'GET #trash' do
+      before do
+        2.times { FactoryGirl.create :node }
+        3.times { FactoryGirl.create :node, deleted_at: Time.zone.now }
+        get :trash
+      end
+      it { response.must_render_template 'trash' }
+      it { assigns[:nodes].size.must_equal 3 }
+    end
+
     describe 'GET #new' do
       before { get :new, kind: 'page' }
       it { response.must_render_template 'new' }
@@ -62,10 +72,21 @@ module PushType
     end
 
     describe 'DELETE #destroy' do
-      before { delete :destroy, id: node.id }
-      it { response.must_respond_with :redirect }
-      it { flash[:notice].must_be :present? }
-      it { node.reload.must_be :trashed? }
+      describe 'with untrashed node' do
+        before { delete :destroy, id: node.id }
+        it { response.must_respond_with :redirect }
+        it { flash[:notice].must_be :present? }
+        it { node.reload.must_be :trashed? }
+      end
+      describe 'with trashed node' do
+        before do
+          node.trash!
+          delete :destroy, id: node.id
+        end
+        it { response.must_respond_with :redirect }
+        it { flash[:notice].must_be :present? }
+        it { proc { node.reload }.must_raise ActiveRecord::RecordNotFound }
+      end
     end
 
     describe 'POST #position' do
@@ -95,6 +116,26 @@ module PushType
         it { assigns[:nodes][1].must_equal @first_node }
         it { assigns[:nodes].first.must_equal @last_node }
       end
+    end
+
+    describe 'PUT #restore' do
+      before do
+        node.trash!
+        put :restore, id: node.id
+      end
+      it { response.must_respond_with :redirect }
+      it { flash[:notice].must_be :present? }
+      it { node.reload.wont_be :trashed? }
+    end
+
+    describe 'DELETE #empty' do
+      before do
+        3.times { FactoryGirl.create :node, deleted_at: Time.zone.now }
+        delete :empty
+      end
+      it { response.must_respond_with :redirect }
+      it { flash[:notice].must_be :present? }
+      it { PushType::Node.trashed.must_be :empty? }
     end
 
   end

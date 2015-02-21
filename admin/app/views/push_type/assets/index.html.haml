@@ -1,34 +1,34 @@
 - title 'Media'
 
-- if @assets.empty?
-  .columns
-    .empty-default{ ng: { hide: 'assetCount() > 0' } }
-      %h2 No uploads
-      %p Upload images, documents, videos. Get started by uploading your first file.
-      = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
+%div{ ng: { controller: 'AssetListCtrl', init: "assets=#{ assets_array(@assets).to_json }; assetUrl='#{ push_type.edit_asset_path('~id') }'" } }
+  .large-8.columns
+    - if @assets.empty?
+      .empty-default{ ng: { hide: 'assetCount() > 0' } }
+        %h2 No uploads
+        %p Upload images, documents, videos. Get started by uploading your first file.
+        = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
 
-- else
-  %div{ ng: { controller: 'AssetListCtrl', init: "assets=#{ assets_array(@assets).to_json }; assetUrl='#{ push_type.edit_asset_path('~id') }'" } }
-    .large-8.columns
-      %section
-        %ul.asset-list.small-block-grid-2.medium-block-grid-4
-          %li{ ng: { repeat: 'asset in assets' } }
-            %article.asset-list-item
-              %a{ ng: { href: '{{ editUrl(asset) }}' } }
-                .preview
-                  %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
-                .title {{ asset.description_or_file_name }}
+    %section
+      %ul.asset-list.small-block-grid-2.medium-block-grid-4
+        %li{ ng: { repeat: 'asset in assets' } }
+          %article.asset-list-item
+            %a{ ng: { href: '{{ editUrl(asset) }}' } }
+              .preview
+                %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
+              .title {{ asset.description_or_file_name }}
 
-    .large-4.columns
-      .side-panel{ :'side-panel' => true }
-        .padded
-          .pagination-centered
-            .pagination-stats {{ assetCount() }} items - Page #{ @assets.current_page } of #{ @assets.total_pages }
-            = paginate @assets
-        .cta.text-center
-          = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
-          - if @assets.current_page == 1
-            .asset-upload
-              .dropzone{ asset: { upload: push_type.upload_assets_path, maxfiles: 10 } }
-                .prompt Drag files to quickly upload them&hellip;
-                .icon= ficon(:upload_cloud)
+  .large-4.columns
+    .side-panel{ :'side-panel' => true }
+      .padded
+        .pagination-centered
+          .pagination-stats {{ assetCount() }} items - Page #{ @assets.current_page } of #{ @assets.total_pages }
+          = paginate @assets
+      .cta.text-center
+        = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
+        - if @assets.current_page == 1
+          .asset-upload
+            .dropzone{ asset: { upload: push_type.upload_assets_path, maxfiles: 10 } }
+              .prompt Drag files to quickly upload them&hellip;
+              .icon= ficon(:upload_cloud)
+          .text-button
+            = link_to ficon(:trash, 'Trash bin'), push_type.trash_assets_path

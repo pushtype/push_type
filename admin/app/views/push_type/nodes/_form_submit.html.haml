@@ -1,0 +1,24 @@
+- unless @node.trashed?
+  = f.hidden_field :status, value: '{{ node.status }}'
+  %button.button.radius.split{ ng: { class: 'saveButtonClass()' } }
+    = ficon :check, "{{ saveButtonText() }}"
+    %span{ data: { dropdown: 'publish-toggle', options: 'align:bottom' } }
+  %ul#publish-toggle.f-dropdown.tiny{ data: { dropdown: { content: true } } }
+    %li
+      %a{ href: '#', node: { status: 'draft' } } Save as draft
+    %li
+      %a{ href: '#', node: { status: 'published' } } Save and publish
+
+  - unless @node.new_record?
+    .text-button.alert
+      = link_to "Delete #{@node.type.underscore.humanize.downcase}", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content, and all its child content, will be moved to the trash. You can restore trashed content later.' } }
+
+- else
+  %button.button.radius.secondary= ficon :check, 'Save as trash'
+  .text-button.success
+    - if @node.orphan?
+      %span Orphan. Cannot be restored.
+    - else
+      = link_to "Restore #{ @node.type.underscore.humanize.downcase }", push_type.restore_node_path(@node), method: 'put'
+  .text-button.alert
+    = link_to "Permanently delete #{ @node.type.underscore.humanize.downcase }", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'This action cannot be undone. All child content will also be permanently deleted.' } }

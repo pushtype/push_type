@@ -15,6 +15,16 @@ module PushType
       it { assigns[:assets].size.must_equal 5 }
     end
 
+    describe 'GET #trash' do
+      before do
+        2.times { FactoryGirl.create :asset }
+        3.times { FactoryGirl.create :asset, deleted_at: Time.zone.now }
+        get :trash
+      end
+      it { response.must_render_template 'trash' }
+      it { assigns[:assets].size.must_equal 3 }
+    end
+
     describe 'GET #new' do
       before { get :new }
       it { response.must_render_template 'new' }
@@ -82,6 +92,26 @@ module PushType
       it { response.must_respond_with :redirect }
       it { flash[:notice].must_be :present? }
       it { asset.reload.must_be :trashed? }
+    end
+
+    describe 'PUT #restore' do
+      before do
+        asset.trash!
+        put :restore, id: asset.id
+      end
+      it { response.must_respond_with :redirect }
+      it { flash[:notice].must_be :present? }
+      it { asset.reload.wont_be :trashed? }
+    end
+
+    describe 'DELETE #empty' do
+      before do
+        3.times { FactoryGirl.create :asset, deleted_at: Time.zone.now }
+        delete :empty
+      end
+      it { response.must_respond_with :redirect }
+      it { flash[:notice].must_be :present? }
+      it { PushType::Asset.trashed.must_be :empty? }
     end
 
   end

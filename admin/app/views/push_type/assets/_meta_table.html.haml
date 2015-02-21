@@ -1,0 +1,15 @@
+.meta-table
+  - unless @asset.new_record?
+    .meta-row
+      .key= ficon :calendar, 'Uploaded'
+      .value= l @asset.created_at, format: :short
+
+  - if @asset.uploader
+    .meta-row
+      .key= ficon :torso, 'Uploader'
+      .value= @asset.uploader.name
+
+  - if @asset.trashed?
+    .meta-row
+      .key= ficon :calendar, 'Deleted'
+      .value= l @asset.deleted_at, format: :short

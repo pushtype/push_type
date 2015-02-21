@@ -18,5 +18,21 @@ module PushType
       it { @node.permalink.must_equal 'one/two/three' }
     end
 
+    describe '#orphan?' do
+      let(:parent)  { FactoryGirl.create :node }
+      let(:child)   { FactoryGirl.create :node, parent: parent }
+      before { child && parent.trash! }
+      it { parent.wont_be :orphan? }
+      it { child.must_be :orphan? }
+    end
+
+    describe '#trash!' do
+      let(:parent)  { FactoryGirl.create :node }
+      let(:child)   { FactoryGirl.create :node, parent: parent }
+      before { child && parent.trash! }
+      it { parent.must_be :trashed? }
+      it { parent.reload.must_be :trashed? }
+    end
+
   end
 end

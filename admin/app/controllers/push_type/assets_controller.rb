@@ -4,10 +4,14 @@ module PushType
   class AssetsController < AdminController
 
     before_filter :build_asset, only: [:new, :create, :upload]
-    before_filter :load_asset,  only: [:edit, :update, :destroy]
+    before_filter :load_asset,  only: [:edit, :update, :destroy, :restore]
 
     def index
       @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
+    end
+
+    def trash
+      @assets = PushType::Asset.trashed.page(params[:page]).per(20)
     end
 
     def new
@@ -47,8 +51,26 @@ module PushType
     end
 
     def destroy
-      @asset.trash!
-      flash[:notice] = 'Media trashed.'
+      if @asset.trashed?
+        @asset.destroy
+        flash[:notice] = 'Media permanently deleted.'
+        redirect_to push_type.trash_assets_path
+      else
+        @asset.trash!
+        flash[:notice] = 'Media trashed.'
+        redirect_to push_type.assets_path
+      end
+    end
+
+    def restore
+      @asset.restore!
+      flash[:notice] = 'Media successfully restored.'
+      redirect_to push_type.assets_path
+    end
+
+    def empty
+      PushType::Asset.trashed.destroy_all
+      flash[:notice] = 'Trash successfully emptied.'
       redirect_to push_type.assets_path
     end
 

@@ -3,6 +3,7 @@ module PushType
 
     layout 'push_type/admin'
     before_filter :initial_breadcrumb
+    helper_method :push_type_user
 
     def info
       render layout: false

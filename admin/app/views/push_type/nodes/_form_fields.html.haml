@@ -2,7 +2,7 @@
   .large-8.columns
     .container
       .head
-        .left.btn= link_to ficon(:previous), @node.parent ? push_type.node_nodes_path(@node.parent) : push_type.nodes_path
+        .left.btn= link_to ficon(:previous), node_back_link(@node)
         .title= yield :title
       .body.padded
         .row.title
@@ -30,34 +30,8 @@
   .large-4.columns
     .side-panel{ :'side-panel' => true }
       .padded
-        .meta-table
-          .meta-row{ ng: { class: 'publishDatesVisibility()' } }
-            .key= ficon :calendar, 'Publish'
-            .value.editable{ data: { dropdown: 'publish-date-fields' }} {{ publishedDates() }}
-            #publish-date-fields.f-dropdown.content{ data: { dropdown: { content: true } } }
-              .row.publish-date
-                .columns
-                  = f.label :published_at
-                  = f.datetime_select :published_at, {}, :'node-datetime' => 'published_at'
-              .row.publish-date
-                .columns
-                  = f.label :published_to
-                  = f.datetime_select :published_to, include_blank: true, default: nil
-          = render 'meta_table'
-          
+        = render 'meta_table', f: f
       .submit.text-center
-        = f.hidden_field :status, value: '{{ node.status }}'
-        %button.button.radius.split{ ng: { class: 'saveButtonClass()' } }
-          = ficon :check, "{{ saveButtonText() }}"
-          %span{ data: { dropdown: 'publish-toggle', options: 'align:bottom' } }
-        %ul#publish-toggle.f-dropdown.tiny{ data: { dropdown: { content: true } } }
-          %li
-            %a{ href: '#', node: { status: 'draft' } } Save as draft
-          %li
-            %a{ href: '#', node: { status: 'published' } } Save and publish
-
-        - unless @node.new_record?
-          .delete-link
-            = link_to "Delete #{@node.type.underscore.humanize.downcase}", push_type.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content will be moved to the trash. You can restore trashed content later.' } }
+        = render 'form_submit', f: f
 
       

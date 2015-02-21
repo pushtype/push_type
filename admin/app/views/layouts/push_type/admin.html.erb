@@ -17,18 +17,10 @@
         <%= link_to image_tag('push_type/pushtype-logo.png', alt: 'PushType'), push_type.root_path %>
       </div>
       <nav class="small-4 medium-6 large-8 columns">
-        <ul class="inline-list">
-          <%= content_tag :li, link_to('Content', push_type.nodes_path), class: 'active' %>
-          <%= content_tag :li, link_to('Media', push_type.assets_path) %>
-          <%= content_tag :li, link_to('Users', push_type.users_path) %>
-        </ul>
+        <%= render_menu(:main) %>
       </nav>
       <nav class="small-4 medium-3 large-2 columns">
-        <ul class="inline-list right">
-          <%= content_tag :li, link_to(ficon(:info), push_type.info_path, data: { :'reveal-id' => 'reveal-ajax', :'reveal-ajax' => true }) %>
-          <%= content_tag :li, link_to(ficon(:widget), push_type.edit_profile_path) rescue nil %>
-          <%= content_tag :li, link_to(ficon(:power), push_type.destroy_user_session_path, method: 'delete') rescue nil %>
-        </ul>
+        <%= render_menu(:utility) %>
       </nav>
     </div>
   </header>  

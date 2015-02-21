@@ -4,10 +4,14 @@ module PushType
   class NodesController < AdminController
 
     before_filter :build_node,  only: [:new, :create]
-    before_filter :load_node,   only: [:edit, :update, :destroy, :position]
+    before_filter :load_node,   only: [:edit, :update, :destroy, :restore, :position]
 
     def index
       @nodes = node_scope.not_trash.page(params[:page]).per(30)
+    end
+
+    def trash
+      @nodes = PushType::Node.all.trashed.page(params[:page]).per(30).reorder(deleted_at: :desc)
     end
 
     def new
@@ -35,9 +39,15 @@ module PushType
     end
 
     def destroy
-      @node.trash!
-      flash[:notice] = "#{ @node.type } trashed."
-      redirect_to redirect_path
+      if @node.trashed?
+        @node.destroy
+        flash[:notice] = "#{ @node.type } permanently deleted."
+        redirect_to redirect_path
+      else
+        @node.trash!
+        flash[:notice] = "#{ @node.type } trashed."
+        redirect_to redirect_path(true)
+      end
     end
 
     def position
@@ -46,6 +56,18 @@ module PushType
       else
         render json: @node.errors, status: :unprocessable_entity
       end
+    end
+
+    def restore
+      @node.restore!
+      flash[:notice] = "#{ @node.type } successfully restored."
+      redirect_to redirect_path
+    end
+
+    def empty
+      PushType::Node.trashed.destroy_all
+      flash[:notice] = 'Trash successfully emptied.'
+      redirect_to push_type.nodes_path
     end
 
     private
@@ -73,8 +95,14 @@ module PushType
       params.fetch(@node.type.underscore.to_sym, {}).permit(*fields)
     end
 
-    def redirect_path
-      @node.root? ? push_type.nodes_path : push_type.node_nodes_path(@node.parent_id)
+    def redirect_path(skip_trash = false)
+      if @node.trashed? && !skip_trash
+        push_type.trash_nodes_path
+      elsif @node.root?
+        push_type.nodes_path
+      else
+        push_type.node_nodes_path(@node.parent_id)
+      end
     end
 
     def initial_breadcrumb

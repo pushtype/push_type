@@ -4,7 +4,7 @@
     .large-8.columns
       .container
         .head
-          .left.btn= link_to ficon(:previous), push_type.assets_path
+          .left.btn= link_to ficon(:previous), asset_back_link(@asset)
           .title= yield :title
         .body.padded
           .row.asset-upload
@@ -30,9 +30,6 @@
                   %tr
                     %th Content type
                     %td {{ asset.mime_type }}
-                  %tr
-                    %th Uploaded
-                    %td {{ uploadedDate() }}
           .row.string
             .columns
               = f.label :description
@@ -41,10 +38,7 @@
     .large-4.columns
       .side-panel{ :'side-panel' => true }
         .padded
-          .meta-table
+          = render 'meta_table'
         .submit.text-center
-          %button.button.radius{ ng: { class: 'saveButtonClass()' } }
-            = ficon :check, '{{ saveButtonText() }}'
-          - unless @asset.new_record?
-            .delete-link= link_to 'Delete media', push_type.asset_path(@asset), method: 'delete', data: { confirm: { body: 'Deleted media will be moved to the trash. You can restore trashed media later.' } }
+          = render 'form_submit'
               
