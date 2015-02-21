@@ -25,8 +25,8 @@
     
   - if @node.trashed?
     .meta-row
-      .key= ficon :trash, 'Deleted'
-      .value= @node.deleted_at.to_s(:long)
+      .key= ficon :calendar, 'Deleted'
+      .value= l @node.deleted_at, format: :short
 
 
 

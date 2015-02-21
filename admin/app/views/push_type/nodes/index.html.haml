@@ -32,7 +32,7 @@
                   %span.label.secondary.radius= node.type.to_s.underscore.humanize
                   %span.label.radius{ class: node.published? ? 'success' : 'warning' }= node.status.titlecase
                   - if node.published?
-                    %time Updated #{ node.published_at.to_s(:short) }
+                    %time Published #{ l node.published_at.to_date, format: :short }
                     \-
                   %time Updated #{ time_ago_in_words node.updated_at } ago
                   \-

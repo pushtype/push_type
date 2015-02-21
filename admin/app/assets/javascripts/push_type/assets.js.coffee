@@ -26,9 +26,6 @@
   $scope.saveButtonText = ->
     if $scope.asset['new_record?'] then 'Upload file' else 'Update media'
 
-  $scope.uploadedDate = ->
-    moment($scope.asset.created_at).format('Do MMM YYYY, h:mma')
-
   $scope.afterUpload = (asset) ->
     $scope.asset = asset
 
