@@ -7,6 +7,7 @@
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag 'push_type/admin', 'push_type/admin_assets' %>
   <%= stylesheet_link_tag    'push_type/admin', 'push_type/admin_assets', '//fonts.googleapis.com/css?family=Lato:300,300italic,400,700', media: 'all' %>
+  <%= favicon_link_tag 'push_type/pushtype-favicon.png' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,7 +15,7 @@
   <header class="header" role="banner">
     <div class="row">
       <div class="small-4 medium-3 large-2 columns">
-        <%= link_to image_tag('push_type/pushtype-logo.png', alt: 'PushType'), push_type.root_path %>
+        <%= link_to image_tag('push_type/pushtype-logo.svg', size: '140x26', alt: 'PushType'), push_type.root_path %>
       </div>
       <nav class="small-4 medium-6 large-8 columns">
         <%= render_menu(:main) %>

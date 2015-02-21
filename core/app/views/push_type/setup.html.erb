@@ -1,1 +1,129 @@
-<p>Custom setup page.</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PushType :: Setup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Lato:300,400', '//fonts.googleapis.com/css?family=Inconsolata', media: 'all' %>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #FAFAFA;
+      font-family: 'Lato', sans-serif;
+      font-size: 62.5%;
+      font-weight: 300;
+      color: #222;
+      text-rendering: optimizeLegibility;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 2.8em;
+      font-weight: 300;
+      text-align: center;
+    }
+    p, ol {
+      margin-bottom: 1.5em;
+      font-size: 1.6em;
+      line-height: 1.5em;
+    }
+    p {
+      text-align: center;
+    }
+    ol {
+      margin-left: 24px;
+      font-weight: 400;
+      color: #999;
+    }
+    li {
+      margin-bottom: 1em;
+    }
+    pre {
+      padding: 0 15px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 1em;
+      line-height: 2em;
+      font-weight: normal;
+      background-color: #323232;
+      color: #fff;
+      border-radius: 4px;
+    }
+    pre:before {
+      content: '> ';
+      color: #d76e2d;
+    }
+    a {
+      color: #3BB5EF;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #3D78A3;
+      text-decoration: underline;
+    }
+    .wrap {
+      max-width: 520px;
+      margin: 6rem auto 2rem;
+      padding: 0 20px;
+    }
+    .logo {
+      max-width: 240px;
+      margin: 0 auto 2rem;
+    }
+    .logo img {
+      display: block;
+      width: 100%;
+    }
+    .panel {
+      background-color: #fff;
+      padding: 3rem 2rem 1.5rem;
+      border: 1px solid #EFEFEF;
+    }
+    .label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 300;
+      color: #222;
+    }
+    .label.text {
+      margin-bottom:0;
+    }
+    
+  </style>
+  <%= favicon_link_tag 'push_type/pushtype-favicon.png' %>
+</head>
+<body>
+
+  <div class="wrap">
+    <div class="logo">
+      <%= image_tag('push_type/pushtype-logo.svg', alt: 'PushType') %>
+    </div>
+    <div class="panel">
+      <h1>You've installed PushType. Hurrah!</h1>
+      <p>Get started in a few very easy steps&hellip;</p>
+
+      <ol>
+        <li>
+          <span class="label">Create your first Node type:</span>
+          <pre>rails g push_type:node page body:wysiwyg</pre>
+        </li>
+        <% if PushType.const_defined?(:Auth) %>
+          <li>
+            <span class="label">Create a user to log in with:</span>
+            <pre>rake push_type:create_user</pre>
+          </li>
+        <% end %>
+        <li>
+          <span class="label text">And log in:</span>
+          <div><%= link_to push_type.root_url, push_type.root_path %></div>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+
+  
+  
+</body>
+</html>
