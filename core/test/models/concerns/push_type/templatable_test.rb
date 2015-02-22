@@ -4,14 +4,18 @@ module PushType
   describe Templatable do
 
     let(:page) { TestPage.new }
+
+    before do
+      TestPage.instance_variable_set '@template_name', nil
+      TestPage.instance_variable_set '@template_opts', nil
+    end
+    after do
+      TestPage.instance_variable_set '@template_name', nil
+      TestPage.instance_variable_set '@template_opts', nil
+    end
     
     describe '.template' do
       describe 'defaults' do
-        before do
-          # Set class instance variables to nil
-          TestPage.instance_variable_set '@template_name', nil
-          TestPage.instance_variable_set '@template_opts', nil
-        end
         before { page.template.must_equal 'nodes/test_page' }
         before { page.template_args.must_equal ['nodes/test_page', {}] }
       end

@@ -6,12 +6,17 @@ module PushType
     let(:page) { TestPage.new }
     let(:roots) { PushType.root_nodes }
 
+    before do
+      TestPage.instance_variable_set '@child_nodes', nil
+      TestPage.instance_variable_set '@child_order', nil
+    end
+    after do
+      TestPage.instance_variable_set '@child_nodes', nil
+      TestPage.instance_variable_set '@child_order', nil
+    end
+
     describe '.has_child_nodes' do
       describe 'defaults' do
-        before do
-          TestPage.instance_variable_set '@child_nodes', nil
-          TestPage.instance_variable_set '@child_order', nil
-        end
         it { TestPage.child_nodes.must_equal roots }
         it { page.child_nodes.must_equal roots }
         it { page.must_be :sortable? }
