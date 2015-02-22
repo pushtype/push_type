@@ -69,11 +69,11 @@ module PushType
       describe 'dynamic methods' do
         before do
           DatabaseCleaner.clean_with :truncation
-          Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+          Page.fields = ActiveSupport::OrderedHash.new
           Page.field :tags, :tag_list
           Page.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar'])
         end
-        after { Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
+        after { Page.fields = ActiveSupport::OrderedHash.new }
         it { Page.all_tags.must_equal ['bar', 'foo'] }
       end
     end

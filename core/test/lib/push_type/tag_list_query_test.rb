@@ -4,8 +4,8 @@ module PushType
   describe TagListQuery do
 
     before do
-      Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
-      TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+      Page.fields = ActiveSupport::OrderedHash.new
+      TestPage.fields = ActiveSupport::OrderedHash.new
       Page.field :tags, :tag_list
       TestPage.field :tags, :tag_list
       Page.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar'])
@@ -14,8 +14,8 @@ module PushType
     end
 
     after do
-      Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
-      TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+      Page.fields = ActiveSupport::OrderedHash.new
+      TestPage.fields = ActiveSupport::OrderedHash.new
     end
 
     let(:query) { TagListQuery.new('tags', 'page') }

@@ -2,6 +2,11 @@ module PushType
   module Customizable
     extend ActiveSupport::Concern
 
+    included do
+      class_attribute :fields
+      self.fields ||= ActiveSupport::OrderedHash.new
+    end
+
     def fields
       self.class.fields
     end
@@ -12,12 +17,6 @@ module PushType
 
     module ClassMethods
 
-      attr_reader :fields
-
-      def fields
-        @fields ||= ActiveSupport::OrderedHash.new
-      end
-
       def field(name, *args)
         raise ArgumentError if args.size > 2
         kind, opts = case args.size
@@ -26,15 +25,14 @@ module PushType
           else        [ :string, {} ]
         end
 
-        fields[name] = field_factory(kind).new(name, opts)
+        _field = self.fields[name] = field_factory(kind).new(name, opts)
+
         store_accessor :field_store, name
-
         validates name, opts[:validates] if opts[:validates]
-
-        override_accessor fields[name]
+        override_accessor _field
 
         if block = field_factory(kind).initialized_blk
-          block.call(self, fields[name])
+          block.call(self, _field)
         end
       end
 

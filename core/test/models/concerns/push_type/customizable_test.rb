@@ -11,7 +11,7 @@ module PushType
 
     describe '.field' do
       before do
-        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.fields = ActiveSupport::OrderedHash.new
         TestPage.field :foo
         TestPage.field :bar, :text
         TestPage.field :baz, validates: { presence: true }
@@ -19,7 +19,7 @@ module PushType
       end
 
       after do
-        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.fields = ActiveSupport::OrderedHash.new
         TestPage.clear_validators!
       end
 
@@ -33,12 +33,12 @@ module PushType
 
     describe '#field_params' do
       before do
-        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+        TestPage.fields = ActiveSupport::OrderedHash.new
         TestPage.field :foo
         TestPage.field :bar, :text
         TestPage.field :baz, :array
       end
-      after { TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
+      after { TestPage.fields = ActiveSupport::OrderedHash.new }
 
       it { page.field_params.must_equal [:foo, :bar, { baz: [] }] }
     end
