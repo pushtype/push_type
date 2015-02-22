@@ -81,10 +81,12 @@
   color: '#444';
 }
 .pt-theme.froala-box .froala-element.f-basic a {
-  color: inherit;
+  color: $primary-color;
+  text-decoration: underline;
 }
 .pt-theme.froala-box .froala-element table td {
   border: solid 1px $input-border-color;
+  background: #fff;
 }
 .pt-theme.froala-box.f-html .froala-element {
   background: #202020;

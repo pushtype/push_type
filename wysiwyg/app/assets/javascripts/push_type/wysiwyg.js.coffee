@@ -12,9 +12,11 @@
 #
 #= require froala_editor.min
 #= require plugins/lists.min
+#= require plugins/tables.min
 #= require plugins/file_upload.min
 #= require plugins/media_manager.min
 #= require plugins/video.min
+#= require plugins/fullscreen.min
 #= require jquery.simplePagination
 #= require_self
 #= require_tree .
@@ -24,11 +26,14 @@ $(document).on 'ready page:load', ->
 
   $('textarea.froala', '.wysiwyg').editable
     inlineMode:       false
-    buttons:          ['bold', 'italic', 'underline', 'sep', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'sep', 'createLink', 'insertImage', 'uploadFile', 'insertVideo', 'table', 'sep', 'removeFormat', 'undo', 'redo', 'sep' ,'html']
+    buttons:          ['bold', 'italic', 'underline', 'sep', 'formatBlock', 'align', 'insertOrderedList', 'insertUnorderedList', 'table', 'sep', 'createLink', 'insertImage', 'uploadFile', 'insertVideo', 'sep', 'undo', 'redo', 'removeFormat', 'fullscreen', 'sep', 'html']
     blockTags:
       n:  'Normal'
-      h1: 'Heading 1'
       h2: 'Heading 2'
+      h3: 'Heading 3'
+      h4: 'Heading 4'
+      blockquote: 'Quote'
+      pre: 'Code'
     height:             400
     filesLoadURL:       '/push_type/wysiwyg_media'
     filesLoadParams:    { filter: 'file' }

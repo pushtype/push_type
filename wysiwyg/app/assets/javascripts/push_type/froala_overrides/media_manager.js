@@ -1,12 +1,21 @@
+/**
+ * Override to accept kind param which sets title of media manager
+ */
+  // PT BEGIN
 $.Editable.prototype.showMediaManager = function (kind) {
   this.$image_modal.data('context', kind);
   this.$image_modal.find('h4 span').text('Manage '+ kind +'s');
+  // PT END
   this.$image_modal.show();
   this.$overlay.show();
   this.loadImages();
-  $('body').css('overflow','hidden');
+  this.$document.find('body').css('overflow','hidden');
 }
 
+
+/**
+ * Override to add pagination UI
+ */
 $.Editable.prototype.mediaModalHTML = function () {
   var html = '<div class="froala-modal"><div class="f-modal-wrapper"><h4><span data-text="true">Manage images</span><i title="Cancel" class="fa fa-times" id="f-modal-close-' + this._id + '"></i></h4>'
 
@@ -18,13 +27,19 @@ $.Editable.prototype.mediaModalHTML = function () {
     html += '<div class="f-image-list" id="f-image-list-' + this._id + '"></div>';
   }
 
+  // PT BEGIN
   html += '<div class="pagination-centered" id="f-pagination-' + this._id + '"></div>';
+  // PT END
 
   html += '</div></div>';
 
   return html;
 }
 
+
+/**
+ * Override so media manage can be used for images and files
+ */
 $.Editable.prototype.buildMediaManager = function () {
   this.$image_modal = $(this.mediaModalHTML()).appendTo('body');
   this.$preloader = this.$image_modal.find('#f-preloader-' + this._id);
@@ -56,11 +71,13 @@ $.Editable.prototype.buildMediaManager = function () {
   this.$media_images.on(this.mouseup, 'img', $.proxy(function (e) {
     e.stopPropagation();
     var img = e.currentTarget;
+    // PT BEGIN
     if ( $(img).data('kind') == 'image' ) {
       this.writeImage($(img).data('src'));
     } else {
       this.writeFile($(img).data('src'), $(img).data('title'));
     }
+    // PT END
     this.hideMediaManager();
   }, this));
 
@@ -84,6 +101,7 @@ $.Editable.prototype.buildMediaManager = function () {
 
   // Add button for media manager to image.
   if (this.options.mediaManager) {
+    // PT BEGIN
     this.$image_wrapper
       .on('click', '#f-browser-' + this._id, $.proxy(function () {
         this.showMediaManager('image');
@@ -91,6 +109,7 @@ $.Editable.prototype.buildMediaManager = function () {
       .on('click', '#f-browser-' + this._id + ' i', $.proxy(function () {
         this.showMediaManager('image');
       }, this));
+    // PT END
 
     this.$image_wrapper.find('#f-browser-' + this._id).show();
   }
@@ -98,6 +117,10 @@ $.Editable.prototype.buildMediaManager = function () {
   this.hideMediaManager();
 };
 
+
+/**
+ * Initilizes pagination control (new code)
+ */
 $.Editable.prototype.initPagination = function(data) {
   var mm = this;
   this.$image_modal.find('#f-pagination-' + this._id).pagination({
@@ -111,13 +134,19 @@ $.Editable.prototype.initPagination = function(data) {
   });
 }
 
-// Load images from server.
+
+/**
+ * Override so loads images and files
+ */
+  // PT BEGIN
 $.Editable.prototype.loadImages = function (page) {
   var isPaginated = (typeof page !== 'undefined');
+  // PT END
 
   this.$preloader.show();
   this.$media_images.empty();
 
+  // PT BEGIN
   if (this.$image_modal.data('context') == 'file') {
     ajax = {
       url: this.options.filesLoadURL,
@@ -132,16 +161,19 @@ $.Editable.prototype.loadImages = function (page) {
   if (isPaginated) {
     ajax.opts.page = page;
   }
+  // PT END
 
-  if (ajax.url) {
+  if (ajax.url) { // PT EDIT
     $.support.cors = true;
-    $.getJSON(ajax.url, ajax.opts, $.proxy(function (data) {
+    $.getJSON(ajax.url, ajax.opts, $.proxy(function (data) { // PT EDIT
       // data
       this.triggerEvent('imagesLoaded', [data], false);
+      // PT BEGIN
       this.processLoadedImages(data.assets);
       if (!isPaginated && data.meta.total_pages > 1) {
         this.initPagination(data);
       }
+      // PT END
       this.$preloader.hide();
     }, this))
       .fail($.proxy(function () {
@@ -153,6 +185,10 @@ $.Editable.prototype.loadImages = function (page) {
   }
 };
 
+
+/**
+ * Override to replace delete button with title element
+ */
 $.Editable.prototype.loadImage = function (src, info) {
   var img = new Image();
   var $li = $('<div>').addClass('f-empty');
@@ -167,7 +203,9 @@ $.Editable.prototype.loadImage = function (src, info) {
       $img.attr('data-' + k, info[k]);
     }
 
+    // PT BEGIN
     $li.append($img).append('<span class="f-media-title">'+ info.title +'</span>');
+    // PT END
     $li.removeClass('f-empty');
     this.$media_images.hide();
     this.$media_images.show();
