@@ -28,14 +28,18 @@ describe FrontEndController do
 
   describe 'node filters' do
     ApplicationController.module_eval do
-      def before_node_load
-        @foo = {}
+      before_node_load { @foo = {} }
+      before_node_action { @foo[:node_action] = true }
+      before_node_action(only: :page) { @foo[:page_action] = true }
+      before_node_action(except: :page) { @foo[:except_page_action] = true }
+      before_node_action(except: :foo) { @foo[:except_foo_action] = true }
+      before_node_action :test_1, :test_2
+      private
+      def test_1
+        @foo[:test_1] = true
       end
-      def before_node_action
-        @foo[:node_action] = true
-      end
-      def before_page_action
-        @foo[:page_action] = true
+      def test_2
+        @foo[:test_2] = true
       end
     end
     let(:page) { FactoryGirl.create :published_node, type: 'Page' }
@@ -43,6 +47,11 @@ describe FrontEndController do
     it { assigns[:foo].must_be_instance_of Hash }
     it { assigns[:foo][:node_action].must_equal true }
     it { assigns[:foo][:page_action].must_equal true }
+    it { assigns[:foo][:foo_action].wont_be :present? }
+    it { assigns[:foo][:except_page_action].wont_be :present? }
+    it { assigns[:foo][:except_foo_action].must_equal true }
+    it { assigns[:foo][:test_1].must_equal true }
+    it { assigns[:foo][:test_2].must_equal true }
   end
 
 end

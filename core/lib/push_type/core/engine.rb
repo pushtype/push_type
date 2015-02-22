@@ -14,7 +14,6 @@ module PushType
 
       config.to_prepare do
         Rails.application.eager_load! unless Rails.application.config.cache_classes
-        ApplicationController.send :include, PushType::ApplicationControllerMethods
       end
 
       initializer 'push_type.dragonfly_config' do
@@ -22,8 +21,16 @@ module PushType
         PushType.dragonfly_app_setup!
       end
 
+      initializer 'push_type.application_controller' do
+        ActiveSupport.on_load(:action_controller) do
+          include PushType::ApplicationControllerMethods
+        end
+      end
+
       initializer 'push_type.menu_helpers' do
-        ActionView::Base.send :include, PushType::MenuBuilder::Helpers
+        ActiveSupport.on_load(:action_view) do
+          include PushType::MenuBuilder::Helpers
+        end
       end
     end
   end

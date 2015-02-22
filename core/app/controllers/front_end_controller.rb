@@ -31,19 +31,21 @@ class FrontEndController < ApplicationController
   end
 
   def before_load
-    node_hook(:before_node_load)
-  end
-
-  def node_types_array
-    ['node', @node.type.underscore]
+    unless before_load_filters.blank?
+      before_load_filters.each { |f| run_node_hook(*f) }
+    end
   end
 
   def before_node
-    node_types_array.each { |kind| node_hook(:"before_#{ kind }_action") }
+    unless before_node_filters.blank?
+      before_node_filters.each { |f| run_node_hook(*f) }
+    end
   end
 
   def after_node
-    node_types_array.each { |kind| node_hook(:"after_#{ kind }_action") }
+    unless after_node_filters.blank?
+      after_node_filters.each { |f| run_node_hook(*f) }
+    end
   end
   
 end
