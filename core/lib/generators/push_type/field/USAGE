@@ -1,0 +1,9 @@
+Description:
+    Generates a class that inherits from PushType::FieldType
+    Allows for complex custom field types.
+
+Example:
+    rails generate push_type:field rich_text
+
+    This will create:
+        app/fields/rich_text.rb
