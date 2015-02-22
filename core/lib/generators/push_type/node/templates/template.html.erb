@@ -1,3 +1,10 @@
 <h1><%%= @node.title %></h1>
 <p>This is a generated <%= class_name %> template.</p>
 <p>Find me at: app/views/nodes/<%= file_name %>.html.erb</p>
+
+<% attributes.each do |att| -%>
+<div>
+  <div><%= att.name.humanize %>:</div>
+  <div><%%= @node.<%= att.name %> %></div>
+</div>
+<% end -%>  
