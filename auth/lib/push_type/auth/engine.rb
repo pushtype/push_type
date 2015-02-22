@@ -10,10 +10,16 @@ module PushType
         g.test_framework  :minitest, spec: true, fixture: false
       end
 
-      config.to_prepare do
+      initializer 'push_type_auth.extend_models' do
         PushType::User.send :include, PushType::Authenticatable
+      end
+
+      initializer 'push_type_auth.extend_controllers' do
         PushType::AdminController.send :include, PushType::AuthenticationMethods
         PushType::UsersController.send :include, PushType::InvitationMethods
+      end
+
+      initializer 'push_type_auth.extend_helpers' do
         DeviseController.helper PushType::AdminHelper
       end
 
