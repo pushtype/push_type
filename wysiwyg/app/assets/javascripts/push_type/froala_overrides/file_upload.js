@@ -1,3 +1,6 @@
+/**
+ * Override to add file upload UI
+ */
 $.Editable.prototype.fileUploadHTML = function () {
   var html = '<div class="froala-popup froala-file-popup" style="display: none;"><h4><span data-text="true">Upload file</span><i title="Cancel" class="fa fa-times" id="f-file-close-' + this._id + '"></i></h4>';
 
@@ -12,9 +15,11 @@ $.Editable.prototype.fileUploadHTML = function () {
 
   html += '</div>';
 
+  // PT BEGIN
   if (this.options.fileLink) {
     html += '<div class="f-popup-line"><label><span data-text="true">Enter URL</span>: </label><input id="f-file-url-' + this._id + '" type="text" placeholder="http://example.com"><button class="f-browse fr-p-bttn" id="f-browser-' + this._id + '"><i class="fa fa-search"></i></button><button data-text="true" class="f-ok fr-p-bttn" id="f-file-ok-' + this._id + '">OK</button></div>';
   }
+  // PT END
 
   html += '</div>';
   html += '<p class="f-progress" id="f-file-progress-' + this._id + '"><span></span></p>';
@@ -25,7 +30,7 @@ $.Editable.prototype.fileUploadHTML = function () {
 
 
 /**
- * Build file upload.
+ * Override to integrate with media manager
  */
 $.Editable.prototype.buildFileUpload = function () {
   // Add file wrapper to editor.
@@ -89,6 +94,7 @@ $.Editable.prototype.buildFileUpload = function () {
     $(this).val('');
   });
 
+  // PT BEGIN
   // Create a list with all the items from the popup.
   this.$file_wrapper.on('click', '#f-file-ok-' + this._id, $.proxy(function () {
     var file = this.$file_wrapper.find('#f-file-url-' + this._id).val();
@@ -96,9 +102,10 @@ $.Editable.prototype.buildFileUpload = function () {
       this.writeFile(file, file);
     }
   }, this));
+  // PT END
 
   // Wrap things in file wrapper.
-  this.$file_wrapper.on(this.mouseup, '#f-file-close-' + this._id, $.proxy(function () {
+  this.$file_wrapper.on(this.mouseup, '#f-file-close-' + this._id, $.proxy(function (e) {
     e.stopPropagation();
     e.preventDefault();
 
@@ -111,6 +118,7 @@ $.Editable.prototype.buildFileUpload = function () {
     this.hide();
   }, this))
 
+  // PT BEGIN
   this.$file_wrapper
     .on('click', '#f-browser-' + this._id, $.proxy(function () {
       this.showMediaManager('file');
@@ -120,6 +128,7 @@ $.Editable.prototype.buildFileUpload = function () {
     }, this));
 
   this.$file_wrapper.find('#f-browser-' + this._id).show();
+  // PT END
 
   this.$file_wrapper.on('click', function (e) {
     e.stopPropagation();
