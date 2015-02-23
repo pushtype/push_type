@@ -5,6 +5,7 @@ module PushType
     end
 
     def from_json(val)
+      return unless val
       val.to_date
     end
   end
