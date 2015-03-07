@@ -23,9 +23,9 @@
           - else
             %p There is no content in this section yet.
       - else
-        %ul.node-list{ class: ('sortable' if !@parent || @parent.sortable?) }
+        %ul.node-list{ class: ('sortable' if sortable?(@parent)) }
           - for node in @nodes.all
-            %li.node-list-item{ data: { id: node.id } }
+            %li.node-list-item{ class: ('descendable' if node.descendable?), data: { id: node.id } }
               = link_to push_type.edit_node_path(node) do
                 .title= node.title
                 .meta
@@ -35,12 +35,12 @@
                     %time Published #{ l node.published_at.to_date, format: :short }
                     \-
                   %time Updated #{ time_ago_in_words node.updated_at } ago
-                  \-
-                  %span= pluralize node.children.not_trash.count, 'child'
-              .buttons
-                %span= ficon(:magnifying_glass)
-                = link_to ficon(:folder), push_type.node_nodes_path(node) unless node.child_nodes.empty?
-              - if !@parent || @parent.sortable?
+              - if node.descendable?
+                .descendants
+                  = link_to push_type.node_nodes_path(node) do
+                    .icon= ficon(:folder)
+                    .meta= pluralize node.children.not_trash.count, 'child'
+              - if sortable? @parent
                 .handle
 
 .large-4.columns

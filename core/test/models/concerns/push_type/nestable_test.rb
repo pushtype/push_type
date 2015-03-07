@@ -26,24 +26,28 @@ module PushType
         before { TestPage.has_child_nodes false }
         it { TestPage.child_nodes.must_equal [] }
         it { page.child_nodes.must_equal [] }
+        it { page.wont_be :descendable? }
       end
 
       describe 'when all' do
         before { TestPage.has_child_nodes :all }
         it { TestPage.child_nodes.must_equal roots }
         it { page.child_nodes.must_equal roots }
+        it { page.must_be :descendable? }
       end
 
       describe 'when specific' do
         before { TestPage.has_child_nodes :page }
         it { TestPage.child_nodes.must_equal ['page'] }
         it { page.child_nodes.must_equal ['page'] }
+        it { page.must_be :descendable? }
       end
 
       describe 'when nonsense' do
         before { TestPage.has_child_nodes :foo, :bar }
         it { TestPage.child_nodes.must_equal [] }
         it { page.child_nodes.must_equal [] }
+        it { page.wont_be :descendable? }
       end
 
       describe 'without options' do

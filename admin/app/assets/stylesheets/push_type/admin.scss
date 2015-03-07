@@ -142,7 +142,6 @@ table {
 
 .node-list-item {
   position:             relative;
-  padding-right:        rem-calc(40);
   border-bottom:        1px solid $crumb-border-color;
 
   &:last-child {
@@ -177,15 +176,21 @@ table {
       margin-right:     rem-calc(10);
     }
   }
-  .buttons {
+  .buttons, .descendants {
     position:           absolute;
     top:                0;
     right:              0;
-    width:              rem-calc(40);
-    height:             100%;
+    bottom:             0;
     line-height:        rem-calc(40);
     text-align:         center;
     border-left:        1px solid $crumb-border-color;
+    a {
+      @extend %block-link-bg;
+      color:            $primary-color;
+    }
+  }
+  .buttons {
+    width:              rem-calc(40);
     a, span {
       display:          block;
       width:            100%;
@@ -195,16 +200,29 @@ table {
         border-bottom:  1px solid $crumb-border-color;
       }
     }
-    a {
-      @extend %block-link-bg;
-      color:            $primary-color;
-      &.alert {
-        color:          $alert-color;
-      }
-      &.success {
-        color:          $success-color;
-      }
+    a.alert {
+      color:            $alert-color;
     }
+    a.success {
+      color:            $success-color;
+    }
+  }
+  .descendants {
+    width:              rem-calc(90);
+    .icon {
+      height:           rem-calc(40);
+      padding-top:      rem-calc(10);
+      font-size:        rem-calc(24);
+    }
+    .meta {
+      padding:          0 !important;
+    }
+  }
+  &.actionable {
+    padding-right:      rem-calc(40);
+  }
+  &.descendable {
+    padding-right:      rem-calc(90);
   }
   .handle {
     position:           absolute;

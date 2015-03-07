@@ -17,7 +17,7 @@
       .body
         %ul.node-list
           - for node in @nodes.all
-            %li.node-list-item{ data: { id: node.id } }
+            %li.node-list-item.actionable{ data: { id: node.id } }
               = link_to push_type.edit_node_path(node) do
                 .title= node.title
                 .meta

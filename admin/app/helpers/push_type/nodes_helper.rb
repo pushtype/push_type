@@ -21,5 +21,9 @@ module PushType
       end
     end
 
+    def sortable?(node)
+      !node || node.sortable?
+    end
+
   end
 end

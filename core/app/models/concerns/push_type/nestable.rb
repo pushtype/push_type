@@ -14,6 +14,10 @@ module PushType
       !custom_child_order?
     end
 
+    def descendable?
+      !child_nodes.empty?
+    end
+
     def children
       return super() unless custom_child_order?
       super.reorder(self.class.child_order)
