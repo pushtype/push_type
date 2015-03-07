@@ -17,7 +17,7 @@ module PushType
       end
       it { response.must_redirect_to referer }
       it { last_email.to.must_include user.email }
-      it { last_email.subject.must_equal 'Confirmation instructions' }
+      it { last_email.subject.must_include 'Confirm your account' }
     end
 
   end
