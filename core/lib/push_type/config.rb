@@ -17,6 +17,8 @@ module PushType
       small:    '256x256>'
     }
 
+    mattr_accessor :mailer_sender
+    @@mailer_sender = 'pushtype@example.com'
 
     mattr_accessor :dragonfly_datastore
     @@dragonfly_datastore = nil

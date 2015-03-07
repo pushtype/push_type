@@ -12,6 +12,7 @@ require 'turbolinks'
 
 require 'breadcrumbs'
 require 'kaminari'
+require 'premailer/rails'
 
 module PushType
 

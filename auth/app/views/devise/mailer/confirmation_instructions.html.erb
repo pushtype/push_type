@@ -1,5 +1,14 @@
-<p>Welcome <%= @email %>!</p>
+<p>Hello <%= @user.name %></p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>You're receiving this email because a PushType account has been created for you.</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>To get started, confirm your account and set your own password by clicking the link below:</p>
+
+<table>
+  <tr>
+    <td class="padding">
+      <p><%= link_to 'Confirm my account', confirmation_url(@user, confirmation_token: @token), class: 'btn-primary' %></p>
+    </td>
+  </tr>
+</table>
+

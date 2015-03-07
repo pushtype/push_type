@@ -12,6 +12,7 @@ module PushType
 
       config.to_prepare do
         PushType::User.send :include, PushType::Authenticatable
+        Devise::Mailer.layout 'push_type/email'
       end
 
       initializer 'push_type_auth.extend_controllers' do
@@ -21,6 +22,11 @@ module PushType
 
       initializer 'push_type_auth.extend_helpers' do
         DeviseController.helper PushType::AdminHelper
+      end
+
+      initializer 'push_type_auth.devise_config' do
+        Devise.mailer_sender = PushType.config.mailer_sender
+        Devise.router_name = :push_type
       end
 
       initializer 'push_type_auth.menus' do

@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks',                  '~> 2.5.3'
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'
   s.add_dependency 'kaminari',                    '~> 0.16.2'
+  s.add_dependency 'premailer-rails',             '~> 1.8.0'
 
   s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
   s.add_development_dependency 'database_cleaner',    '~> 1.4.0'

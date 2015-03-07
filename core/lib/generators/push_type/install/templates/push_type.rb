@@ -12,6 +12,9 @@ PushType.setup do |config|
     small:    '256x256>'
   }
 
+  # Configure the default mailer "from" address
+  config.mailer_sender = 'pushtype@example.com'
+
   # Dragonfly datastore configuration
   config.dragonfly_datastore = :file
   config.dragonfly_datastore_options = {
