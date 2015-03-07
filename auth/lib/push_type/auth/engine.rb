@@ -10,7 +10,7 @@ module PushType
         g.test_framework  :minitest, spec: true, fixture: false
       end
 
-      initializer 'push_type_auth.extend_models' do
+      config.to_prepare do
         PushType::User.send :include, PushType::Authenticatable
       end
 
