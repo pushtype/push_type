@@ -4,7 +4,7 @@ class CreatePushTypeUsers < ActiveRecord::Migration
     create_table :push_type_users, id: :uuid, default: 'uuid_generate_v4()' do |t|
       t.string    :name
       t.string    :email
-      t.jsonb     :field_store
+      t.jsonb     :field_data
       
       t.timestamps
     end

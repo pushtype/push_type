@@ -27,7 +27,7 @@ module PushType
         end
 
         fields[name] = field_factory(kind).new(name, opts)
-        store_accessor :field_store, name
+        store_accessor :field_data, name
 
         validates name, opts[:validates] if opts[:validates]
 
