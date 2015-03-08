@@ -1,0 +1,24 @@
+require "test_helper"
+
+module PushType
+  describe Presenter do
+
+    let(:page) { Page.create FactoryGirl.attributes_for(:node) }
+
+    describe 'without view context' do
+      let(:presenter) { PushType::Presenter.new page }
+      it { presenter.must_be_instance_of Page }
+      it { presenter.class.ancestors.must_include PushType::Presenter }
+      it { presenter.model.must_equal page }
+      it { presenter.title.must_equal page.title }
+      it { proc { presenter.helpers }.must_raise RuntimeError }
+    end
+
+    describe 'with view context' do
+      let(:view_context) { ApplicationController.new.view_context }
+      let(:presenter) { PushType::Presenter.new page, view_context }
+      it { presenter.helpers.must_respond_to :content_tag }
+    end
+
+  end
+end

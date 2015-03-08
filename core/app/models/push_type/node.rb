@@ -7,6 +7,7 @@ module PushType
     include PushType::Unexposable
     include PushType::Publishable
     include PushType::Trashable
+    include PushType::Presentable
 
     belongs_to :creator, class_name: 'PushType::User'
     belongs_to :updater, class_name: 'PushType::User'
