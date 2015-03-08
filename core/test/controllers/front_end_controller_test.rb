@@ -23,6 +23,7 @@ describe FrontEndController do
       it { response.must_render_template 'nodes/page' }
       it { assigns[:node].must_equal page }
       it { assigns[:page].must_equal page }
+      it { assigns[:page].class.ancestors.must_include PushType::Presenter }
     end
   end
 

@@ -11,6 +11,7 @@ module PushType
         end
 
       config.autoload_paths << config.root.join('app', 'fields')
+      config.autoload_paths << config.root.join('app', 'presenters')
 
       config.to_prepare do
         Rails.application.eager_load! unless Rails.application.config.cache_classes
