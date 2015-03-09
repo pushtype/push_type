@@ -36,19 +36,19 @@ module PushType
     describe '#asset_icon' do
       describe 'with image asset' do
         let(:asset) { FactoryGirl.create :image_asset }
-        it { asset_icon(asset).must_equal 'push_type/icon-file-image.png'}
+        it { asset_icon(asset).must_equal 'push_type/icons-assets.svg#image'}
       end
       describe 'with audio asset' do
         let(:asset) { FactoryGirl.create :audio_asset }
-        it { asset_icon(asset).must_equal 'push_type/icon-file-audio.png'}
+        it { asset_icon(asset).must_equal 'push_type/icons-assets.svg#audio'}
       end
       describe 'with video asset' do
         let(:asset) { FactoryGirl.create :video_asset }
-        it { asset_icon(asset).must_equal 'push_type/icon-file-video.png'}
+        it { asset_icon(asset).must_equal 'push_type/icons-assets.svg#video'}
       end
       describe 'with document asset' do
         let(:asset) { FactoryGirl.create :document_asset }
-        it { asset_icon(asset).must_equal 'push_type/icon-file-document.png'}
+        it { asset_icon(asset).must_equal 'push_type/icons-assets.svg#pdf'}
       end
     end
 
