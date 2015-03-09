@@ -1,0 +1,8 @@
+Description:
+    Generates a presenter that inherits from PushType::Presenter
+
+Example:
+    rails generate push_type:presenter page
+
+    This will create:
+        app/presenters/page_presenter.rb
