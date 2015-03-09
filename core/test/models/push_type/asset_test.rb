@@ -31,10 +31,70 @@ module PushType
       it { video.wont_be :image? }
       it { video.wont_be :audio? }
       it { video.must_be :video? }
-      it { doc.kind.must_equal :document }
+      it { doc.kind.must_equal :pdf }
       it { doc.wont_be :image? }
       it { doc.wont_be :audio? }
       it { doc.wont_be :video? }
+
+      describe 'documents' do
+        let(:asset) { PushType::Asset.new }
+        it 'should detect modern word docs' do
+          asset.mime_type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :doc }
+        end
+        it 'should detect modern legacy word docs' do
+          asset.mime_type = 'application/vnd.msword'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :doc }
+        end
+        it 'should detect plain text files' do
+          asset.mime_type = 'text/plain'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :doc }
+        end
+        it 'should detect rich text files' do
+          asset.mime_type = 'text/rtf'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :doc }
+        end
+      end
+
+      describe 'spreadsheets' do
+        let(:asset) { PushType::Asset.new }
+        it 'should detect modern excel docs' do
+          asset.mime_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :sheet }
+        end
+        it 'should detect modern legacy excel docs' do
+          asset.mime_type = 'application/vnd.ms-excel'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :sheet }
+        end
+      end
+
+      describe 'presentations' do
+        let(:asset) { PushType::Asset.new }
+        it 'should detect modern excel docs' do
+          asset.mime_type = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :slides }
+        end
+        it 'should detect modern legacy excel docs' do
+          asset.mime_type = 'application/vnd.ms-powerpoint'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :slides }
+        end
+      end
+
+      describe 'code' do
+        let(:asset) { PushType::Asset.new }
+        it 'should detect html' do
+          asset.mime_type = 'text/html'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :code }
+        end
+        it 'should detect javascript' do
+          asset.mime_type = 'text/javascript'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :code }
+        end
+        it 'should detect xml' do
+          asset.mime_type = 'application/xml'
+          asset.stub(:file_stored?, true) { asset.kind.must_equal :code }
+        end
+      end
     end
 
     describe '#description_or_file_name' do

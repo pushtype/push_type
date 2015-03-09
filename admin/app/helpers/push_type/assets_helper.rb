@@ -22,7 +22,7 @@ module PushType
     end
 
     def asset_icon(asset)
-      "push_type/icon-file-#{ asset.kind }.png"
+      "push_type/icons-assets.svg##{ asset.kind }"
     end
 
     def asset_back_link(asset)
