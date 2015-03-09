@@ -6,4 +6,4 @@ Example:
     rails generate push_type:field rich_text
 
     This will create:
-        app/fields/rich_text.rb
+        app/fields/rich_text_field.rb
