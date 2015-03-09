@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'pg',            '~> 0.18.1'
   s.add_dependency 'closure_tree',  '~> 5.2.0'
   s.add_dependency 'dragonfly',     '~> 1.0.7'
+  s.add_dependency 'redcarpet',     '~> 3.2.2'
 
   s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
   s.add_development_dependency 'database_cleaner',    '~> 1.4.0'

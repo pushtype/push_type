@@ -52,6 +52,23 @@ module PushType
       it { field.form_helper.must_equal :text_area }
     end
 
+    describe MarkdownField do
+      let(:field) { PushType::MarkdownField.new :foo }
+      it { field.form_helper.must_equal :text_area }
+      it { field.markdown.must_be_instance_of Redcarpet::Markdown }
+
+      describe 'dynamic methods' do
+        before do
+          DatabaseCleaner.clean_with :truncation
+          Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
+          Page.field :body, :markdown
+        end
+        after { Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
+        let(:page) { Page.create FactoryGirl.attributes_for(:node, body: '**foo** *bar*') }
+        it { page.present!.body.strip.must_equal '<p><strong>foo</strong> <em>bar</em></p>' }
+      end
+    end
+
     describe ArrayField do
       let(:field) { PushType::ArrayField.new :foo }
       it { field.param.must_equal foo: [] }
