@@ -21,6 +21,8 @@
 #= require_self
 #= require_tree .
 
+$.Editable.DEFAULTS.key = 'Tb3QXIa1QZh1UOXATEX==';
+
 # jQuery init
 $(document).on 'ready page:load', ->
 
