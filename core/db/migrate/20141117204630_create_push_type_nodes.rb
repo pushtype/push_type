@@ -17,7 +17,7 @@ class CreatePushTypeNodes < ActiveRecord::Migration
       t.uuid      :creator_id
       t.uuid      :updater_id
 
-      t.timestamps
+      t.timestamps null: false
       t.datetime  :deleted_at
     end
   end

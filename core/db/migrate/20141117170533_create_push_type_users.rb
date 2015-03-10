@@ -6,7 +6,7 @@ class CreatePushTypeUsers < ActiveRecord::Migration
       t.string    :email
       t.jsonb     :field_data
       
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

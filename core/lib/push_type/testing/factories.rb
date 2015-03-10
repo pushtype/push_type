@@ -1,6 +1,11 @@
 require 'factory_girl_rails'
 
 FactoryGirl.define do
+
+  sequence :title do |n|
+    "Foo Bar #{n}"
+  end
+
   sequence :slug do |n|
     "foo-bar-#{n}"
   end
@@ -36,6 +41,11 @@ FactoryGirl.define do
     factory :document_asset do
       file  { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/document.pdf')) }
     end
+  end
+
+  factory :taxonomy, class: 'PushType::Taxonomy' do
+    title   { generate :title }
+    slug    { generate :slug }
   end
   
 end

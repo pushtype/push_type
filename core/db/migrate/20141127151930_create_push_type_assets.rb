@@ -11,7 +11,7 @@ class CreatePushTypeAssets < ActiveRecord::Migration
 
       t.uuid      :uploader_id
 
-      t.timestamps
+      t.timestamps null: false
       t.datetime  :deleted_at
     end
   end
