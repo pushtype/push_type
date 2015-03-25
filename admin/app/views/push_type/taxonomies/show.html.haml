@@ -1,0 +1,59 @@
+- title "Manage #{ @taxonomy.title.downcase }"
+- breadcrumbs.add @taxonomy.title, push_type.taxonomy_path(@taxonomy.name.underscore)
+
+
+= content_tag :script, type: 'text/ng-template', id: 'taxonomy.html' do
+  %div{ :'data-id' => '{{ item.id }}', ng: { controller: 'TaxonomyItemCtrl' } }
+    %div.show{ ng: { hide: 'isEditing()' } }
+      .title {{ item.title }}
+      .meta
+        %span {{ itemPermalink() }}
+      .edit
+        %a{ ng: { click: 'edit()' } }
+          .icon= ficon(:pencil)
+          .meta Edit
+      .handle{ :'ui-tree-handle' => true }
+    %form{ name: 'itemForm', ng: { show: 'isEditing()' } }
+      .columns
+        .row.collapse
+          .small-1.columns{ ng: { class: 'errorClass("title")' } }
+            %label.prefix Title
+          .small-11.columns{ ng: { class: 'errorClass("title")' } }
+            %input{ type: 'text', name: 'title', ng: { model: 'item.title', keyup: 'setSlug()' } }
+            %small.error{ ng: { show: 'errors.title' } } {{ errors.title }}
+        .row.collapse
+          .small-1.columns{ ng: { class: 'errorClass("slug")' } }
+            %label.prefix Slug
+          .small-5.columns{ ng: { class: 'errorClass("slug")' } }
+            %input{ type: 'text', name: 'slug', ng: { model: 'item.slug' } }
+            %small.error{ ng: { show: 'errors.slug' } } {{ errors.slug }}
+          .small-6.columns.text-right
+            %button.tiny.radius.success{ ng: { click: 'save()' } } Save
+            %button.tiny.radius.alert{ ng: { click: 'delete()', hide: 'isNewItem()' } } Delete
+            %button.tiny.radius.secondary{ ng: { click: 'reset()' } } Cancel
+      %input{ type: 'hidden', value: '{{ item.id }}', ng: { if: 'item.id' } }
+    %ul.nested-taxonomy-list{ :'ui-tree-nodes' => true, ng: { init: "slugBase=itemPermalink(); items=item.children", model: 'item.children' } }<
+      %li.taxonomy-item{ :'ui-tree-node' => true, ng: { repeat: 'item in items', include: "'taxonomy.html'" } }
+
+
+%div{ ng: { controller: 'TaxonomyItemsCtrl', init: "param='#{ @taxonomy.name.underscore }'; slugBase='/#{ @taxonomy.term }'; items=#{ @items.to_json }" } }
+  .large-8.columns
+    .container
+      .head
+        .left.btn= link_to ficon(:previous), push_type.taxonomies_path
+        .title= yield :title
+      .body{ :'ui-tree' => 'treeFuncs' }
+        - if @items.empty?
+          .empty-default{ ng: { hide: 'itemCount() > 0' } }
+            %h2 No #{ @taxonomy.title.downcase }
+            %p Organise content through taxonomies. Get started by creating your first #{ @taxonomy.title.downcase.singularize }.
+            %a.button.success.radius{ ng: { click: 'newItem()' } }
+              = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
+        %ul.taxonomy-list{ :'ui-tree-nodes' => true, ng: { model: 'items' } }
+          %li.taxonomy-item{ :'ui-tree-node' => true, ng: { repeat: 'item in items', include: "'taxonomy.html'" } }
+
+  .large-4.columns
+    .side-panel{ :'side-panel' => true }
+      .cta.text-center
+        %a.button.success.radius{ ng: { click: 'newItem()' } }
+          = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"

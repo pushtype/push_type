@@ -4,7 +4,7 @@ module PushType
 
     included do
       scope :exposed, -> {
-        node_types = PushType.unexposed_nodes
+        node_types = PushType.unexposed_nodes.map(&:camelcase)
         node_types.present? ? where(['push_type_nodes.type NOT IN (?)', node_types]) : all
       }
     end
@@ -20,7 +20,7 @@ module PushType
       end
 
       def exposed?
-        !PushType.unexposed_nodes.include?(self.name)
+        !PushType.unexposed_nodes.include?(self.name.underscore)
       end
 
     end

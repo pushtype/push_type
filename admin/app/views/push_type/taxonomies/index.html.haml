@@ -1,0 +1,16 @@
+- title 'Taxonomies'
+
+.columns
+  %section
+    %ul.taxonomies-list.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+      - for taxonomy in @taxonomies
+        %li
+          %article.taxonomies-list-item
+            = link_to push_type.taxonomy_path(taxonomy.name.underscore) do
+              .title= taxonomy.title
+              .meta
+                - if taxonomy.exposed?
+                  %span.label.success.radius Exposed
+                - else
+                  %span.label.secondary.radius Unexposed
+                %span= pluralize taxonomy.all.count, 'item'

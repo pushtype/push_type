@@ -20,6 +20,11 @@ module ActionDispatch::Routing
         asset.media params[:style]
       }, as: 'media'
 
+      # Taxonomies
+      PushType.taxonomy_classes.each do |tax|
+        get "#{ tax.term }/*permalink" => 'font_end#taxonomy', as: 'taxonomy', taxonomy: tax.term if tax.exposed?
+      end
+
       # A catch-all root for the nodes
       get '*permalink' => opts[:actions][:node], as: 'node'
       root to: opts[:actions][:node], permalink: opts[:home]

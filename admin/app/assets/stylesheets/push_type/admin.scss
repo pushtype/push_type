@@ -138,6 +138,13 @@ table {
 .node-list {
   @extend .no-bullet;
   margin:               0;
+  .sortable-placeholder {
+    background-color: scale-color($warning-color, $lightness: 95%);
+    border-bottom:    1px solid $crumb-border-color;
+    &:last-child {
+      border-bottom:  none;
+    }
+  }
 }
 
 .node-list-item {
@@ -252,10 +259,203 @@ table {
   }
 }
 
+.taxonomies-list-item {
+  position:             relative;
+  background-color:     $white;
+  border:               1px solid $crumb-border-color;
+  @include radius($global-radius);
+
+  > a {
+    display:            block;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: scale-color($primary-color, $lightness: 97.5%);
+      .title {
+        color:          scale-color($primary-color, $lightness: -12%);
+      }
+    }
+  }
+  .title {
+    padding:            rem-calc(20 15);
+    line-height:        rem-calc(28);
+    font-size:          rem-calc(18);
+    color:              $tuatara;
+    overflow:           hidden;
+    white-space:        nowrap;
+  }
+  .meta {
+    height:             rem-calc(40);
+    padding:            rem-calc(0 15 0);
+    line-height:        rem-calc(40);
+    font-size:          rem-calc(13);
+    color:              $aluminum;
+    border-top:         1px solid $crumb-border-color;
+    .label {
+      margin-right:     rem-calc(10);
+    }
+  }
+}
+
+.taxonomy-list, .nested-taxonomy-list {
+  margin:               0;
+  list-style:           none;
+}
+
+.nested-taxonomy-list {
+  border-top:           1px solid $crumb-border-color;
+  padding-left:         rem-calc(40);
+  &:empty {
+    border-top:         none;
+  }
+  .taxonomy-item {
+    .show, form {
+      border-left:      1px solid $crumb-border-color;
+    }
+  }
+  .taxonomy-item, .angular-ui-tree-placeholder {
+    &:before, &:after {
+      position:         absolute;
+      right:            100%;
+      top:              0;
+      content:          ' ';
+      display:          block;
+      width:            rem-calc(23);
+      border-left:      6px solid $crumb-border-color;
+    }
+    &:before {
+      height:           rem-calc(43);
+      border-bottom:    6px solid $crumb-border-color;
+    }
+    &:after {
+      bottom:           -1px;
+    }
+    &:last-child:after {
+      display:          none;
+    }
+  }
+}
+
+.taxonomy-item {
+  position:             relative;
+  border-bottom:        1px solid $crumb-border-color;
+
+  &:last-child {
+    border-bottom:      none;
+  }
+  .show {
+    position:           relative;
+  }
+  .title {
+    height:             rem-calc(40);
+    padding:            rem-calc(10 15 6 40);
+    line-height:        rem-calc(24);
+    font-size:          rem-calc(18);
+    color:              $tuatara;
+    overflow:           hidden;
+    white-space:        nowrap;
+  }
+  .meta {
+    height:             rem-calc(40);
+    padding:            rem-calc(0 15 0 40);
+    line-height:        rem-calc(40);
+    font-size:          rem-calc(13);
+    color:              $aluminum;
+    .label {
+      margin-right:     rem-calc(10);
+    }
+  }
+  .buttons, .edit {
+    position:           absolute;
+    top:                0;
+    right:              0;
+    bottom:             0;
+    line-height:        rem-calc(40);
+    text-align:         center;
+    border-left:        1px solid $crumb-border-color;
+    a {
+      @extend %block-link-bg;
+      color:            $primary-color;
+    }
+  }
+  .buttons {
+    width:              rem-calc(40);
+    a, span {
+      display:          block;
+      width:            100%;
+      height:           rem-calc(40);
+      color:            $gainsboro;
+      &:first-child {
+        border-bottom:  1px solid $crumb-border-color;
+      }
+    }
+    a.alert {
+      color:            $alert-color;
+    }
+    a.success {
+      color:            $success-color;
+    }
+  }
+  .edit {
+    width:              rem-calc(90);
+    .icon {
+      height:           rem-calc(40);
+      padding-top:      rem-calc(10);
+      font-size:        rem-calc(24);
+    }
+    .meta {
+      padding:          0 !important;
+    }
+  }
+  .handle {
+    position:           absolute;
+    top:                6px;
+    left:               6px;
+    height:             rem-calc(68);
+    width:              rem-calc(19);
+    background-color:   $white-smoke;
+    cursor:             move;
+    @include single-transition(background-color, 200ms);
+    &:hover {
+      background-color: $gainsboro;
+    }
+  }
+  form {
+    overflow:           auto;
+    padding-top:        rem-calc(16);
+  }
+}
+
+.angular-ui-tree-empty, .angular-ui-tree-hidden {
+  display:              none;
+}
+
+.angular-ui-tree-placeholder {
+  position:             relative;
+  width:                auto !important;
+  border-bottom:        1px solid $crumb-border-color;
+  background-color:     scale-color($warning-color, $lightness: 95%);
+  &:last-child {
+    border-bottom:      none;
+  }
+}
+
+.angular-ui-tree-drag {
+  position:             absolute;
+  background-color:     $white;
+  border:               1px solid $primary-color;
+  box-shadow:           10px 10px 10px #000 !important;
+  pointer-events:       none;
+  opacity:              .9;
+  > li > div > .show .handle {
+    background-color:   $primary-color;
+  }
+}
+
 .user-list-item {
   position:             relative;
   background-color:     $white;
   border:               1px solid $crumb-border-color;
+  @include radius($global-radius);
 
   > a {
     display:            block;
@@ -476,7 +676,7 @@ form .title {
 
 form .permalink {
   .columns {
-    opacity:            0;  
+    opacity:            0;
   }
   .visible {
     opacity:            1 !important;
@@ -576,3 +776,63 @@ form .asset-upload {
 
 @import "foundation-icons";
 @import "tagsinput";
+
+
+
+
+
+
+
+//.angular-ui-tree {
+//
+//}
+//
+//.angular-ui-tree-empty {
+//    border: 1px dashed #bbb;
+//    min-height: 100px;
+//    background-color: #e5e5e5;
+//    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+//    background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+//    background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+//    background-size: 60px 60px;
+//    background-position: 0 0, 30px 30px;
+//}
+//
+//.angular-ui-tree-nodes {
+//  display: block;
+//  position: relative;
+//  margin: 0px;
+//  padding: 0px;
+//  list-style: none;
+//}
+//
+//.angular-ui-tree-nodes .angular-ui-tree-nodes {
+//    padding-left: 20px;
+//}
+//.angular-ui-tree-node, .angular-ui-tree-placeholder {
+//  display: block;
+//  position: relative;
+//  margin: 0px;
+//  padding: 0px;
+//  min-height: 20px;
+//  line-height: 20px;
+//}
+//
+
+//
+//.angular-ui-tree-placeholder {
+//    margin: 5px 0;
+//    padding: 0;
+//    min-height: 30px;
+//}
+//
+//.angular-ui-tree-handle {
+//    cursor: move;
+//    text-decoration: none;
+//    font-weight: bold;
+//    -webkit-box-sizing: border-box;
+//    -moz-box-sizing: border-box;
+//    box-sizing: border-box;
+//    min-height: 20px;
+//    line-height: 20px;
+//}
