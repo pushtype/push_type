@@ -43,12 +43,11 @@
         .left.btn= link_to ficon(:previous), push_type.taxonomies_path
         .title= yield :title
       .body{ :'ui-tree' => 'treeFuncs' }
-        - if @items.empty?
-          .empty-default{ ng: { hide: 'itemCount() > 0' } }
-            %h2 No #{ @taxonomy.title.downcase }
-            %p Organise content through taxonomies. Get started by creating your first #{ @taxonomy.title.downcase.singularize }.
-            %a.button.success.radius{ ng: { click: 'newItem()' } }
-              = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
+        .empty-default{ ng: { hide: 'itemCount() > 0' } }
+          %h2 No #{ @taxonomy.title.downcase }
+          %p Organise content through taxonomies. Get started by creating your first #{ @taxonomy.title.downcase.singularize }.
+          %a.button.success.radius{ ng: { click: 'newItem()' } }
+            = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
         %ul.taxonomy-list{ :'ui-tree-nodes' => true, ng: { model: 'items' } }
           %li.taxonomy-item{ :'ui-tree-node' => true, ng: { repeat: 'item in items', include: "'taxonomy.html'" } }
 

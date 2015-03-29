@@ -6,7 +6,7 @@
     $scope.items.length
 
   $scope.newItem = ->
-    $scope.items.push { }
+    $scope.items.push { children: [] }
 
   $scope.treeFuncs = {
     accept: (sourceNodeScope, destNodesScope) ->
