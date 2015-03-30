@@ -20,12 +20,12 @@ module PushType
         @title ||= name.underscore.humanize.pluralize
       end
 
-      def termed(term)
-        @term = term
-      end
-
-      def term
-        ( @term || name ).to_s.underscore
+      def base_slug(*args)
+        if args.present?
+          @base_slug = args.first
+        else
+          ( @base_slug || name ).to_s.underscore
+        end
       end
 
       def unexpose!
@@ -37,12 +37,12 @@ module PushType
       end
     end
 
-    def term
-      self.class.term
+    def base_slug
+      self.class.base_slug
     end
 
     def permalink
-      @permalink ||= self_and_ancestors.map(&:slug).push(term).reverse.join('/')
+      @permalink ||= self_and_ancestors.map(&:slug).push(base_slug).reverse.join('/')
     end
 
     def exposed?

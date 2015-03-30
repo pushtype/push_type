@@ -12,9 +12,10 @@ DatabaseCleaner.clean_with :truncation
 Dragonfly.app.use_datastore :memory
 
 class ActiveSupport::TestCase
+  # Due to test weirdness / dodgy code need to call Category
+  Category
+
   before :each do
-    # Due to test weirdness / dodgy code need to call Category
-    Category
     DatabaseCleaner.start
     PushType.config.root_nodes = :all
     PushType.config.unexposed_nodes = []

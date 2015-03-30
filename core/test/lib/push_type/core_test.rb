@@ -16,34 +16,38 @@ module PushType
 
     describe '.root_nodes' do
       subject { PushType.root_nodes }
+      before  { PushType.config.root_nodes = root_nodes }
+      after   { PushType.config.root_nodes = :all }
       describe 'defaults' do
-        before { PushType.config.root_nodes = :all }
+        let(:root_nodes) { :all }
         it { subject.must_be_instance_of Array }
         it { subject.must_equal ['page', 'test_page'] }
       end
       describe 'specified single value' do
-        before { PushType.config.root_nodes = :page }
+        let(:root_nodes) { :page }
         it { subject.must_equal ['page'] }
       end
       describe 'specified array with nonsense values' do
-        before { PushType.config.root_nodes = [:page, :test_page, :foo, :bar] }
+        let(:root_nodes) { [:page, :test_page, :foo, :bar] }
         it { subject.must_equal ['page', 'test_page'] }
       end
     end
 
     describe '.unexposed_nodes' do
       subject { PushType.unexposed_nodes }
+      before  { PushType.config.unexposed_nodes = unexposed_nodes }
+      after   { PushType.config.unexposed_nodes = [] }
       describe 'defaults' do
-        before { PushType.config.unexposed_nodes = [] }
+        let(:unexposed_nodes) { [] }
         it { subject.must_be_instance_of Array }
         it { subject.must_be_empty }
       end
       describe 'specified single value' do
-        before { PushType.config.unexposed_nodes = :page }
+        let(:unexposed_nodes) { :page }
         it { subject.must_equal ['page'] }
       end
       describe 'specified array with nonsense values' do
-        before { PushType.config.unexposed_nodes = [:page, :test_page, :foo, :bar] }
+        let(:unexposed_nodes) { [:page, :test_page, :foo, :bar] }
         it { subject.must_equal ['page', 'test_page'] }
       end
     end
@@ -74,17 +78,19 @@ module PushType
 
     describe '.unexposed_taxonomies' do
       subject { PushType.unexposed_taxonomies }
+      before  { PushType.config.unexposed_taxonomies = unexposed_taxonomies }
+      after   { PushType.config.unexposed_taxonomies = [] }
       describe 'defaults' do
-        before { PushType.config.unexposed_taxonomies = [] }
+        let(:unexposed_taxonomies) { [] }
         it { subject.must_be_instance_of Array }
         it { subject.must_be_empty }
       end
       describe 'specified single value' do
-        before { PushType.config.unexposed_taxonomies = :category }
+        let(:unexposed_taxonomies) { :category }
         it { subject.must_equal ['category'] }
       end
       describe 'specified array with nonsense values' do
-        before { PushType.config.unexposed_taxonomies = [:category, :foo, :bar] }
+        let(:unexposed_taxonomies) { [:category, :foo, :bar] }
         it { subject.must_equal ['category'] }
       end
     end

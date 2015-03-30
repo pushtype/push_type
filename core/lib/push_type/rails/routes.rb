@@ -22,7 +22,7 @@ module ActionDispatch::Routing
 
       # Taxonomies
       PushType.taxonomy_classes.each do |tax|
-        get "#{ tax.term }/*permalink" => 'font_end#taxonomy', as: 'taxonomy', taxonomy: tax.term if tax.exposed?
+        get "#{ tax.base_slug }/*permalink" => 'font_end#taxonomy', as: 'taxonomy', taxonomy: tax.base_slug if tax.exposed?
       end
 
       # A catch-all root for the nodes

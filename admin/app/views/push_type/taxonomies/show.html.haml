@@ -36,7 +36,7 @@
       %li.taxonomy-item{ :'ui-tree-node' => true, ng: { repeat: 'item in items', include: "'taxonomy.html'" } }
 
 
-%div{ ng: { controller: 'TaxonomyItemsCtrl', init: "param='#{ @taxonomy.name.underscore }'; slugBase='/#{ @taxonomy.term }'; items=#{ @items.to_json }" } }
+%div{ ng: { controller: 'TaxonomyItemsCtrl', init: "param='#{ @taxonomy.name.underscore }'; slugBase='/#{ @taxonomy.base_slug }'; items=#{ @items.to_json }" } }
   .large-8.columns
     .container
       .head
