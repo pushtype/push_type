@@ -45,6 +45,9 @@
     $scope.itemForm.$setDirty()
 
   $scope.reset = ->
+    # We need to reset the slug to force child nodes to
+    # update permalink
+    $scope.item.slug = $scope.master.slug
     $scope.item = angular.copy($scope.master)
     $scope.itemForm.$setPristine()
     if $scope.isNewItem()
@@ -89,7 +92,13 @@
     angular.isUndefined($scope.item.id)
 
   $scope.itemPermalink = ->
-    $scope.slugBase + '/' + $scope.item.slug
+    path = [$scope.slugBase]
+    addParents = (scope) ->
+      if scope.$parentNodeScope?
+        addParents(scope.$parentNodeScope)
+        path.push scope.$parentNodeScope.item.slug
+    addParents($scope)
+    path.push $scope.item.slug
+    path.join('/')
 
 ]
-
