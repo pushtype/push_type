@@ -296,23 +296,23 @@ table {
   }
 }
 
-.taxonomy-list, .nested-taxonomy-list {
+.taxonomy-term-list, .nested-taxonomy-term-list {
   margin:               0;
   list-style:           none;
 }
 
-.nested-taxonomy-list {
+.nested-taxonomy-term-list {
   border-top:           1px solid $crumb-border-color;
   padding-left:         rem-calc(40);
   &:empty {
     border-top:         none;
   }
-  .taxonomy-item {
+  .taxonomy-term-item {
     .show, form {
       border-left:      1px solid $crumb-border-color;
     }
   }
-  .taxonomy-item, .angular-ui-tree-placeholder {
+  .taxonomy-term-item, .angular-ui-tree-placeholder {
     &:before, &:after {
       position:         absolute;
       right:            100%;
@@ -335,7 +335,7 @@ table {
   }
 }
 
-.taxonomy-item {
+.taxonomy-term-item {
   position:             relative;
   border-bottom:        1px solid $crumb-border-color;
 

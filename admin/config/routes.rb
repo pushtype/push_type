@@ -13,7 +13,7 @@ PushType::Core::Engine.routes.draw do
   end
 
   resources :taxonomies, only: [:index, :show] do
-    resources :items, only: [:create, :update, :destroy], controller: 'taxonomy_items' do
+    resources :terms, only: [:create, :update, :destroy], controller: 'taxonomy_terms' do
       post 'position', on: :member
     end
   end

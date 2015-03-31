@@ -1,104 +1,103 @@
-@app.controller 'TaxonomyItemsCtrl', ['$scope', '$http', ($scope, $http) ->
+@app.controller 'TaxonomyTermsCtrl', ['$scope', '$http', ($scope, $http) ->
 
-  $scope.basePath = location.pathname + '/items'
+  $scope.basePath = location.pathname + '/terms'
 
-  $scope.itemCount = ->
-    $scope.items.length
+  $scope.termCount = ->
+    $scope.terms.length
 
-  $scope.newItem = ->
-    $scope.items.push { children: [] }
+  $scope.newTerm = ->
+    $scope.terms.push { children: [] }
 
   $scope.treeFuncs = {
     accept: (sourceNodeScope, destNodesScope) ->
-      item = sourceNodeScope.item
-      matches = $.grep destNodesScope.items, (i) ->
-        i.id != item.id && ( i.title == item.title || i.slug == item.slug )
+      term = sourceNodeScope.term
+      matches = $.grep destNodesScope.terms, (i) ->
+        i.id != term.id && ( i.title == term.title || i.slug == term.slug )
       if matches.length then false else true
     dropped: (e) ->
       # Unless node is dropped in exactly the same position
       unless e.source.index == e.dest.index && e.source.nodesScope == e.dest.nodesScope
-        item   = e.source.nodeScope.item
-        parent = e.dest.nodesScope.item
+        term   = e.source.nodeScope.term
+        parent = e.dest.nodesScope.term
         index  = e.dest.index
-        family = if parent? then parent.children else e.dest.nodesScope.items or e.source.nodeScope.items
+        family = if parent? then parent.children else e.dest.nodesScope.terms or e.source.nodeScope.terms
         obj =
           prev:   if family[index-1]? then family[index-1].id else null
           next:   if family[index+1]? then family[index+1].id else null
           parent: if parent? then parent.id else null
-        url = "#{ $scope.basePath }/#{ item.id }/position"
+        url = "#{ $scope.basePath }/#{ term.id }/position"
         req = $http.post url, obj
   }
 
 ]
 
-@app.controller 'TaxonomyItemCtrl', ['$scope', '$http', ($scope, $http) ->
+@app.controller 'TaxonomyTermCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.master = {}
 
   $scope.errors = {}
 
   $scope.isEditing = ->
-    $scope.isNewItem() || $scope.itemForm.$dirty
+    $scope.isNewTerm() || $scope.termForm.$dirty
 
   $scope.edit = ->
-    $scope.master = angular.copy($scope.item)
-    $scope.itemForm.$setDirty()
+    $scope.master = angular.copy($scope.term)
+    $scope.termForm.$setDirty()
 
   $scope.reset = ->
     # We need to reset the slug to force child nodes to
     # update permalink
-    $scope.item.slug = $scope.master.slug
-    $scope.item = angular.copy($scope.master)
-    $scope.itemForm.$setPristine()
-    if $scope.isNewItem()
-      $scope.popItem($scope.item)
+    $scope.term.slug = $scope.master.slug
+    $scope.term = angular.copy($scope.master)
+    $scope.termForm.$setPristine()
+    if $scope.isNewTerm()
+      $scope.popTerm($scope.term)
 
-  $scope.popItem = (item) ->
-    idx = $.inArray(item, $scope.items)
-    $scope.items.splice(idx, 1);
+  $scope.popTerm = (term) ->
+    idx = $.inArray(term, $scope.terms)
+    $scope.terms.splice(idx, 1);
 
   $scope.save = ->
     params = {}
-    params[$scope.param] = $scope.item
+    params[$scope.param] = $scope.term
 
-    req = if $scope.isNewItem()
+    req = if $scope.isNewTerm()
       $http.post $scope.basePath, params
     else
-      url = $scope.basePath + '/' + $scope.item.id
+      url = $scope.basePath + '/' + $scope.term.id
       $http.put url, params
 
     req.success (data) ->
-      $scope.item.id = data.id if $scope.isNewItem()
-      $scope.itemForm.$setPristine()
+      $scope.term.id = data.term.id if $scope.isNewTerm()
+      $scope.termForm.$setPristine()
     req.error (data, status) ->
-      for field, error of data
+      for field, error of data.errors
         $scope.errors[field] = error[0]
-        $scope.itemForm[field].$valid = false
-      console.log $scope.errors
+        $scope.termForm[field].$valid = false
 
   $scope.delete = ->
-    url = $scope.basePath + '/' + $scope.item.id
+    url = $scope.basePath + '/' + $scope.term.id
     $http.delete url
-    $scope.popItem($scope.item)
+    $scope.popTerm($scope.term)
 
   $scope.setSlug = ->
-    if $scope.isNewItem()
-      $scope.item.slug = $scope.item.title.toLowerCase().replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '')
+    if $scope.isNewTerm()
+      $scope.term.slug = $scope.term.title.toLowerCase().replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '')
 
   $scope.errorClass = (field) ->
     if $scope.errors[field] then 'error' else null
 
-  $scope.isNewItem = ->
-    angular.isUndefined($scope.item.id)
+  $scope.isNewTerm = ->
+    angular.isUndefined($scope.term.id)
 
-  $scope.itemPermalink = ->
-    path = [$scope.slugBase]
+  $scope.termPermalink = ->
+    path = [$scope.baseSlug]
     addParents = (scope) ->
       if scope.$parentNodeScope?
         addParents(scope.$parentNodeScope)
-        path.push scope.$parentNodeScope.item.slug
+        path.push scope.$parentNodeScope.term.slug
     addParents($scope)
-    path.push $scope.item.slug
-    path.join('/')
+    path.push $scope.term.slug
+    '/' + path.join('/')
 
 ]

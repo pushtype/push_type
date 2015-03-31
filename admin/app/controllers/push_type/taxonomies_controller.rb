@@ -8,7 +8,7 @@ module PushType
     end
 
     def show
-      @items = taxonomy.hash_tree.map { |parent, children| json_map(parent, children) }
+      @terms = taxonomy.hash_tree.map { |parent, children| json_map(parent, children) }
     end
 
     private

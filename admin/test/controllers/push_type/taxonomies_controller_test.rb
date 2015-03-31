@@ -17,8 +17,8 @@ module PushType
         get :show, id: 'category'
       end
       it { response.must_render_template 'show' }
-      it { assigns[:items].size.must_equal 3 }
-      it { assigns[:items].map { |h| h[:children] }.flatten.size.must_equal 1 }
+      it { assigns[:terms].size.must_equal 3 }
+      it { assigns[:terms].map { |h| h[:children] }.flatten.size.must_equal 1 }
     end
 
   end
