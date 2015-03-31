@@ -6,7 +6,7 @@ module ActionDispatch::Routing
         path:   '/push_type',
         home:   PushType.config.home_slug,
         actions: {
-          node: 'front_end#node'
+          node: 'push_type/nodes_front_end#show'
         }
       }.deep_merge!(options)
 
