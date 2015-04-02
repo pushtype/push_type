@@ -51,7 +51,7 @@ module PushType
     private
 
     def taxonomy
-      @taxonomy ||= PushType.taxonomy_classes.find { |t| t.name.underscore == params[:taxonomy_id] }
+      @taxonomy ||= PushType::Taxonomy.descendants.find { |t| t.name.underscore == params[:taxonomy_id] }
     end
 
     def build_term

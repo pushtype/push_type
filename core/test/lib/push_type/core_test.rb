@@ -52,30 +52,6 @@ module PushType
       end
     end
 
-    describe '.node_types_from_list' do
-      subject { PushType.node_types_from_list list }
-      describe ':all' do
-        let(:list) { :all }
-        it { subject.must_equal ['page', 'test_page'] }
-      end
-      describe 'false' do
-        let(:list) { false }
-        it { subject.must_equal [] }
-      end
-      describe 'specified array with nonsense values' do
-        let(:list) { [:page, :foo] }
-        it { subject.must_equal ['page'] }
-      end
-    end
-
-    describe '.taxonomy_classes' do
-      subject { PushType.taxonomy_classes }
-      describe 'defaults' do
-        it { subject.must_be_instance_of Array }
-        it { subject.must_equal [Category] }
-      end
-    end
-
     describe '.unexposed_taxonomies' do
       subject { PushType.unexposed_taxonomies }
       before  { PushType.config.unexposed_taxonomies = unexposed_taxonomies }
@@ -91,22 +67,6 @@ module PushType
       end
       describe 'specified array with nonsense values' do
         let(:unexposed_taxonomies) { [:category, :foo, :bar] }
-        it { subject.must_equal ['category'] }
-      end
-    end
-
-    describe '.taxonomy_types_from_list' do
-      subject { PushType.taxonomy_types_from_list list }
-      describe ':all' do
-        let(:list) { :all }
-        it { subject.must_equal ['category'] }
-      end
-      describe 'false' do
-        let(:list) { false }
-        it { subject.must_equal [] }
-      end
-      describe 'specified array with nonsense values' do
-        let(:list) { [:category, :foo] }
         it { subject.must_equal ['category'] }
       end
     end

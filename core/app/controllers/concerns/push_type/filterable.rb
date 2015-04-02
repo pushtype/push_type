@@ -57,10 +57,10 @@ module PushType
 
       attr_reader :filter_scope
 
-      def hooks_for(sym)
+      def hooks_for(sym, opts)
         @filter_scope = sym
-        prepend_before_action :before_load_filters,   only: :show
-        around_action :around_action_filters, only: :show
+        prepend_before_action :before_load_filters, opts
+        around_action :around_action_filters, opts
       end
 
     end

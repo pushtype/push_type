@@ -26,7 +26,7 @@ module PushType
       end
 
       def template_opts
-        { path: 'nodes' }.merge(@template_opts || {})
+        { path: _ct.base_class.name.demodulize.pluralize.underscore }.merge(@template_opts || {})
       end
 
     end

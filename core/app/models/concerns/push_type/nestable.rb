@@ -29,7 +29,7 @@ module PushType
 
       def child_nodes
         types = @child_nodes || PushType.config.root_nodes
-        PushType.node_types_from_list(types)
+        PushType.subclasses_from_list(:node, types)
       end
 
       def has_child_nodes(*args)

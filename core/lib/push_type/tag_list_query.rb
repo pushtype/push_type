@@ -12,7 +12,7 @@ module PushType
     end
 
     def node_types
-      PushType.node_types_from_list(@opts[:type]).map { |n| "'#{ n.camelcase }'" }
+      PushType.subclasses_from_list(:node, @opts[:type]).map { |n| "'#{ n.camelcase }'" }
     end
 
     private

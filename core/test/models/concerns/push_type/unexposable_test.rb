@@ -11,7 +11,7 @@ module PushType
         end
       end
       it 'it should omit any unexposed nodes' do
-        PushType.stub :unexposed_nodes, ['TestPage'] do
+        PushType.stub :unexposed_nodes, ['test_page'] do
           proc { new_node! }.wont_change 'PushType::Node.exposed.count', 1 
         end
       end

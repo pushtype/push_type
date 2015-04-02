@@ -6,7 +6,8 @@ module ActionDispatch::Routing
         path:   '/push_type',
         home:   PushType.config.home_slug,
         actions: {
-          node: 'push_type/nodes_front_end#show'
+          node:     'push_type/nodes_front_end#show',
+          taxonomy: 'push_type/taxonomies_front_end#show',
         }
       }.deep_merge!(options)
 
@@ -21,8 +22,8 @@ module ActionDispatch::Routing
       }, as: 'media'
 
       # Taxonomies
-      PushType.taxonomy_classes.each do |tax|
-        get "#{ tax.base_slug }/*permalink" => 'font_end#taxonomy', as: 'taxonomy', taxonomy: tax.base_slug if tax.exposed?
+      PushType::Taxonomy.subclasses.each do |tax|
+        get "#{ tax.base_slug }/*permalink" => opts[:actions][:taxonomy], as: 'taxonomy', taxonomy: tax.base_slug if tax.exposed?
       end
 
       # A catch-all root for the nodes

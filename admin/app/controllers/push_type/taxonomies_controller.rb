@@ -4,7 +4,7 @@ module PushType
   class TaxonomiesController < AdminController
     
     def index
-      @taxonomies = PushType.taxonomy_classes
+      @taxonomies = PushType::Taxonomy.descendants
     end
 
     def show
@@ -18,7 +18,7 @@ module PushType
     end
 
     def taxonomy
-      @taxonomy ||= PushType.taxonomy_classes.find { |t| t.name.underscore == params[:id] }
+      @taxonomy ||= PushType::Taxonomy.descendants.find { |t| t.name.underscore == params[:id] }
     end
 
     def json_map(parent, children)

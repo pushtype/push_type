@@ -49,7 +49,7 @@ module PushType
       end
 
       config.after_initialize do
-        if PushType.taxonomy_classes.present?
+        if PushType::Taxonomy.descendants.present?
           PushType.menu(:main).insert_after :content, :taxonomies do
             link    { push_type.taxonomies_path }
             active  { request.fullpath.match %r{^#{ push_type.taxonomies_path }} }
