@@ -22,9 +22,9 @@ module ActionDispatch::Routing
       }, as: 'media'
 
       # Taxonomies
-      PushType::Taxonomy.subclasses.each do |tax|
-        get "#{ tax.base_slug }/*permalink" => opts[:actions][:taxonomy], as: 'taxonomy', taxonomy: tax.base_slug if tax.exposed?
-      end
+      get ":taxonomy/*permalink" => opts[:actions][:taxonomy], as: 'taxonomy', constraints: ->(params, req) {
+        PushType::Taxonomy.descendants(exposed: true).map(&:base_slug).include? params[:taxonomy]
+      }
 
       # A catch-all root for the nodes
       get '*permalink' => opts[:actions][:node], as: 'node'

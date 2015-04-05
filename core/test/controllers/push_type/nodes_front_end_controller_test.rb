@@ -5,7 +5,7 @@ module PushType
     
     before { @routes = Rails.application.routes }
     
-    describe 'GET #node' do
+    describe 'GET #show' do
       let(:page)      { Page.create attributes }
       let(:permalink) { page.permalink }
       let(:action!)   { get :show, permalink: permalink }
@@ -33,6 +33,7 @@ module PushType
         before_node_load { @foo = {} }
         before_node_action { @foo[:node_action] = true }
         before_node_action(only: :page) { @foo[:page_action] = true }
+        before_node_action(only: :foo) { @foo[:foo_action] = true }
         before_node_action(except: :page) { @foo[:except_page_action] = true }
         before_node_action(except: :foo) { @foo[:except_foo_action] = true }
         before_node_action :test_1, :test_2

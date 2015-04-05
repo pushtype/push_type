@@ -12,5 +12,6 @@ module PushType
     end
 
     it { assert_file 'app/models/category.rb', %r{class Category < PushType::Taxonomy} }
+    it { assert_file 'app/views/taxonomies/category.html.erb', %r{<h1><%= @taxonomy.title %></h1>} }
   end
 end
