@@ -56,3 +56,10 @@
       dateArray[1]--
       scope[attrs.nodeDatetime] = moment(dateArray)
       scope.$apply() unless scope.$$phase
+
+@app.directive 'nodeSubmit', ->
+  (scope, $el, attrs) ->
+    $el.on 'click', (e) ->
+      return if $(e.target).is('span')
+      $el.parents('form').submit()
+      

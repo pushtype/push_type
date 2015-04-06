@@ -1,37 +1,38 @@
-%div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ node_hash(@node).to_json }" } }
-  .large-8.columns
-    .container
-      .head
-        .left.btn= link_to ficon(:previous), node_back_link(@node)
-        .title= yield :title
-      .body.padded
-        .row.title
-          .columns
-            = f.label :title
-            = f.text_field :title, :'ng-model' => 'node.title', :'ng-keyup' => 'setSlug()'
-        .row.permalink
-          .columns{ ng: { class: 'permalinkVisibility()' } }
-            %span.key Permalink
-            %span.value
-              %span.show-for-medium-up http://#{ request.host_with_port }/
-              = content_tag :span, @node.parent.permalink+'/' if @node.parent
-              %span {{ node.slug }}
-            %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' }} Edit
-            #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
-              = f.label :slug
-              = f.text_field :slug, :'ng-model' => 'node.slug'
-            - if @node.errors.include? :slug
-              .error-icon= ficon :info, 'Error'
+= form_for @node, url: url do |f|
+  %div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ node_hash(@node).to_json }" } }
+    .large-8.columns
+      .container
+        .head
+          .left.btn= link_to ficon(:previous), node_back_link(@node)
+          .title= yield :title
+        .body.padded
+          .row.title
+            .columns
+              = f.label :title
+              = f.text_field :title, :'ng-model' => 'node.title', :'ng-keyup' => 'setSlug()'
+          .row.permalink
+            .columns{ ng: { class: 'permalinkVisibility()' } }
+              %span.key Permalink
+              %span.value
+                %span.show-for-medium-up http://#{ request.host_with_port }/
+                = content_tag :span, @node.parent.permalink+'/' if @node.parent
+                %span {{ node.slug }}
+              %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' } } Edit
+              #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
+                = f.label :slug
+                = f.text_field :slug, :'ng-model' => 'node.slug'
+              - if @node.errors.include? :slug
+                .error-icon= ficon :info, 'Error'
 
-        .row.custom-fields
-          - @node.fields.each do |key, field|
-            = render_custom_field field, f
+          .row.custom-fields
+            - @node.fields.each do |key, field|
+              = render_custom_field field, f
 
-  .large-4.columns
-    .side-panel{ :'side-panel' => true }
-      .padded
-        = render 'meta_table', f: f
-      .submit.text-center
-        = render 'form_submit', f: f
+    .large-4.columns
+      .side-panel{ :'side-panel' => true }
+        .padded
+          = render 'meta_table', f: f
+        .submit.text-center
+          = render 'form_submit', f: f
 
       

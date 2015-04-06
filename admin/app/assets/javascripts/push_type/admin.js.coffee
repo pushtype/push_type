@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require foundation/foundation
 #= require foundation
 #= require confirm_with_reveal
 #= require angular

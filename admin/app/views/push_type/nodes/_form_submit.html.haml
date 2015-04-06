@@ -1,6 +1,6 @@
 - unless @node.trashed?
   = f.hidden_field :status, value: '{{ node.status }}'
-  %button.button.radius.split{ ng: { class: 'saveButtonClass()' } }
+  %a.button.radius.split{ ng: { class: 'saveButtonClass()' }, node: { submit: true } }
     = ficon :check, "{{ saveButtonText() }}"
     %span{ data: { dropdown: 'publish-toggle', options: 'align:bottom' } }
   %ul#publish-toggle.f-dropdown.tiny{ data: { dropdown: { content: true } } }
