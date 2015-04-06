@@ -12,8 +12,8 @@ DatabaseCleaner.clean_with :truncation
 Dragonfly.app.use_datastore :memory
 
 class ActiveSupport::TestCase
-  # Due to test weirdness / dodgy code need to call Category
-  Category
+  # Due to test weirdness / dodgy code need to reference some classes
+  Page && Category
 
   before :each do
     DatabaseCleaner.start
