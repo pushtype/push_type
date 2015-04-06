@@ -21,7 +21,7 @@
   - if @node.updater && @node.updater != @node.creator
     .meta-row
       .key= ficon :torso, 'Updated by'
-    .value= @node.updater.name
+      .value= @node.updater.name
     
   - if @node.trashed?
     .meta-row
