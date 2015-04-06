@@ -10,64 +10,82 @@ module PushType
 
     describe '.config' do
       subject { PushType.config }
-      it { subject.root_nodes.wont_be_nil }
-      it { subject.home_slug.wont_be_nil }
+      it { subject.must_respond_to :root_nodes }
+      it { subject.must_respond_to :home_slug }
+      it { subject.must_respond_to :unexposed_nodes }
+      it { subject.must_respond_to :unexposed_taxonomies }
+      it { subject.must_respond_to :media_styles }
+      it { subject.must_respond_to :mailer_sender }
+      it { subject.must_respond_to :home_slug }
+      it { subject.must_respond_to :dragonfly_datastore }
+      it { subject.must_respond_to :dragonfly_datastore_options }
+      it { subject.must_respond_to :dragonfly_secret }
     end
 
     describe '.root_nodes' do
-      subject { PushType.root_nodes }
-      before  { PushType.config.root_nodes = root_nodes }
-      after   { PushType.config.root_nodes = :all }
-      describe 'defaults' do
-        let(:root_nodes) { :all }
-        it { subject.must_be_instance_of Array }
-        it { subject.must_equal ['page', 'test_page'] }
-      end
-      describe 'specified single value' do
-        let(:root_nodes) { :page }
-        it { subject.must_equal ['page'] }
-      end
-      describe 'specified array with nonsense values' do
-        let(:root_nodes) { [:page, :test_page, :foo, :bar] }
-        it { subject.must_equal ['page', 'test_page'] }
+      let(:config) { MiniTest::Mock.new }
+      it 'should return all nodes by default' do
+        config.expect :root_nodes, :all
+        PushType.stub :config, config do
+          PushType.root_nodes.must_equal ['page', 'test_page']
+        end
+        assert config.verify
       end
     end
 
     describe '.unexposed_nodes' do
-      subject { PushType.unexposed_nodes }
-      before  { PushType.config.unexposed_nodes = unexposed_nodes }
-      after   { PushType.config.unexposed_nodes = [] }
-      describe 'defaults' do
-        let(:unexposed_nodes) { [] }
-        it { subject.must_be_instance_of Array }
-        it { subject.must_be_empty }
-      end
-      describe 'specified single value' do
-        let(:unexposed_nodes) { :page }
-        it { subject.must_equal ['page'] }
-      end
-      describe 'specified array with nonsense values' do
-        let(:unexposed_nodes) { [:page, :test_page, :foo, :bar] }
-        it { subject.must_equal ['page', 'test_page'] }
+      let(:config) { MiniTest::Mock.new }
+      it 'should return empty array by default' do
+        config.expect :unexposed_nodes, []
+        PushType.stub :config, config do
+          PushType.unexposed_nodes.must_be_empty
+        end
+        assert config.verify
       end
     end
 
     describe '.unexposed_taxonomies' do
-      subject { PushType.unexposed_taxonomies }
-      before  { PushType.config.unexposed_taxonomies = unexposed_taxonomies }
-      after   { PushType.config.unexposed_taxonomies = [] }
-      describe 'defaults' do
-        let(:unexposed_taxonomies) { [] }
-        it { subject.must_be_instance_of Array }
-        it { subject.must_be_empty }
+      let(:config) { MiniTest::Mock.new }
+      it 'should return empty array by default' do
+        config.expect :unexposed_taxonomies, []
+        PushType.stub :config, config do
+          PushType.unexposed_taxonomies.must_be_empty
+        end
+        assert config.verify
       end
-      describe 'specified single value' do
-        let(:unexposed_taxonomies) { :category }
-        it { subject.must_equal ['category'] }
+    end
+
+    describe '.subclasses_from_list' do
+      subject { PushType.subclasses_from_list scope, list }
+      describe 'scoped by :node' do
+        let(:scope) { :node }
+        describe 'searching for :all' do
+          let(:list) { :all }
+          it { subject.must_equal ['page', 'test_page'] }
+        end
+        describe 'searching for single type' do
+          let(:list) { :page }
+          it { subject.must_equal ['page'] }
+        end
+        describe 'searching for array with nonexisting types' do
+          let(:list) { [:page, :test_page, :foo, :bar] }
+          it { subject.must_equal ['page', 'test_page'] }
+        end
       end
-      describe 'specified array with nonsense values' do
-        let(:unexposed_taxonomies) { [:category, :foo, :bar] }
-        it { subject.must_equal ['category'] }
+      describe 'scoped by :taxonomy' do
+        let(:scope) { :taxonomy }
+        describe 'searching for :all' do
+          let(:list) { :all }
+          it { subject.must_equal ['category'] }
+        end
+        describe 'searching for single type' do
+          let(:list) { :category }
+          it { subject.must_equal ['category'] }
+        end
+        describe 'searching for array with nonexisting types' do
+          let(:list) { [:category, :foo, :bar] }
+          it { subject.must_equal ['category'] }
+        end
       end
     end
 
