@@ -5,7 +5,7 @@ class CreatePushTypeNodes < ActiveRecord::Migration
       t.string    :type
       t.string    :title
       t.string    :slug
-      t.jsonb     :field_data
+      t.jsonb     :field_store
 
       t.uuid      :parent_id
       t.integer   :sort_order

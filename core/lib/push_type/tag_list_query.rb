@@ -23,7 +23,7 @@ module PushType
 
     def query
       [
-        "SELECT DISTINCT jsonb_array_elements_text(field_data->'#{ @name }') AS _tag",
+        "SELECT DISTINCT jsonb_array_elements_text(field_store->'#{ @name }') AS _tag",
         "FROM push_type_nodes",
         where_sql,
         "ORDER BY _tag"
