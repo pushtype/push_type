@@ -6,6 +6,8 @@ PushType.setup do |config|
 
   config.home_slug = 'home'
 
+  config.unexposed_taxonomies = []
+
   config.media_styles = {
     large:    '1024x1024>',
     medium:   '512x512>',

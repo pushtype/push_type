@@ -624,7 +624,7 @@ $form-label-font-color: $aluminum;
 $form-label-bottom-margin: rem-calc(5);
 $input-font-family: inherit;
 $input-font-color: $jet;
-$input-font-size: inherit;
+$input-font-size: rem-calc(16);
 // $input-bg-color: $white;
 // $input-focus-bg-color: scale-color($white, $lightness: -2%);
 // $input-border-color: scale-color($white, $lightness: -20%);

@@ -8,9 +8,9 @@ class CreatePushTypeNodeHierarchies < ActiveRecord::Migration
 
     add_index :push_type_node_hierarchies, [:ancestor_id, :descendant_id, :generations],
       unique: true,
-      name: "anc_desc_idx"
+      name: "node_anc_desc_idx"
 
     add_index :push_type_node_hierarchies, [:descendant_id],
-      name: "desc_idx"
+      name: "node_desc_idx"
   end
 end

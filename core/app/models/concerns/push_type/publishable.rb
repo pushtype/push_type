@@ -6,9 +6,9 @@ module PushType
       enum status: [ :draft, :published ]
 
       scope :published, -> {
-        not_trash.exposed.
-          where(['push_type_nodes.status = ? AND push_type_nodes.published_at <= ?', self.statuses[:published], Time.zone.now]).
-          where(['push_type_nodes.published_to IS NULL OR push_type_nodes.published_to > ?', Time.zone.now])
+        not_trash
+          .where(['push_type_nodes.status = ? AND push_type_nodes.published_at <= ?', self.statuses[:published], Time.zone.now])
+          .where(['push_type_nodes.published_to IS NULL OR push_type_nodes.published_to > ?', Time.zone.now])
       }
 
       after_initialize :set_default_status

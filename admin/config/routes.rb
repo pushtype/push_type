@@ -12,6 +12,12 @@ PushType::Core::Engine.routes.draw do
     resources :nodes, only: [:index, :new, :create]
   end
 
+  resources :taxonomies, only: [:index, :show] do
+    resources :terms, only: [:create, :update, :destroy], controller: 'taxonomy_terms' do
+      post 'position', on: :member
+    end
+  end
+
   resources :assets, except: :show, path: 'media' do
     collection do
       post 'upload'

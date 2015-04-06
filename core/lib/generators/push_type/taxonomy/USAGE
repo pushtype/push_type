@@ -1,0 +1,8 @@
+Description:
+    Generates a model that inherits from PushType::Taxonomy
+
+Example:
+    rails generate push_type:taxonomy category
+
+    This will create:
+        app/models/category.rb

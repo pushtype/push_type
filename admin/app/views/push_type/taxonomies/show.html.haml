@@ -1,0 +1,57 @@
+- title "Manage #{ @taxonomy.title.downcase }"
+- breadcrumbs.add @taxonomy.title, push_type.taxonomy_path(@taxonomy.name.underscore)
+
+%div{ ng: { controller: 'TaxonomyTermsCtrl', init: "param='#{ @taxonomy.name.underscore }'; baseSlug='#{ @taxonomy.base_slug }'; terms=#{ @terms.to_json }" } }
+  .large-8.columns
+    .container
+      .head
+        .left.btn= link_to ficon(:previous), push_type.taxonomies_path
+        .title= yield :title
+      .body{ :'ui-tree' => 'treeFuncs' }
+        .empty-default{ ng: { hide: 'termCount() > 0' } }
+          %h2 No #{ @taxonomy.title.downcase }
+          %p Organise content through taxonomies. Get started by creating your first #{ @taxonomy.title.downcase.singularize }.
+          %a.button.success.radius{ ng: { click: 'newTerm()' } }
+            = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
+        %ul.taxonomy-term-list{ :'ui-tree-nodes' => true, ng: { model: 'terms' } }
+          %li.taxonomy-term-item{ :'ui-tree-node' => true, ng: { repeat: 'term in terms', include: "'taxonomy.html'" } }
+
+  .large-4.columns
+    .side-panel{ :'side-panel' => true }
+      .cta.text-center
+        %a.button.success.radius{ ng: { click: 'newTerm()' } }
+          = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
+
+
+= content_tag :script, type: 'text/ng-template', id: 'taxonomy.html' do
+  %div{ ng: { controller: 'TaxonomyTermCtrl' } }
+    %div.show{ ng: { hide: 'isEditing()' } }
+      .title {{ term.title }}
+      .meta
+        %span {{ termPermalink() }}
+      .edit
+        %a{ ng: { click: 'edit()' } }
+          .icon= ficon(:pencil)
+          .meta Edit
+      .handle{ :'ui-tree-handle' => true }
+    %form{ name: 'termForm', ng: { show: 'isEditing()' } }
+      .columns
+        .row.collapse
+          .small-1.columns{ ng: { class: 'errorClass("title")' } }
+            %label.prefix Title
+          .small-11.columns{ ng: { class: 'errorClass("title")' } }
+            %input{ type: 'text', name: 'title', ng: { model: 'term.title', keyup: 'setSlug()' } }
+            %small.error{ ng: { show: 'errors.title' } } {{ errors.title }}
+        .row.collapse
+          .small-1.columns{ ng: { class: 'errorClass("slug")' } }
+            %label.prefix Slug
+          .small-5.columns{ ng: { class: 'errorClass("slug")' } }
+            %input{ type: 'text', name: 'slug', ng: { model: 'term.slug' } }
+            %small.error{ ng: { show: 'errors.slug' } } {{ errors.slug }}
+          .small-6.columns.text-right
+            %button.tiny.radius.success{ ng: { click: 'save()' } } Save
+            %button.tiny.radius.alert{ :'pt-confirm-reveal' => 'delete()', ng: { hide: 'isNewTerm()' }, data: { body: "This action cannot be undone. All child #{ @taxonomy.title.downcase } will also be permanently deleted."} } Delete
+            %button.tiny.radius.secondary{ ng: { click: 'reset()' } } Cancel
+      %input{ type: 'hidden', value: '{{ term.id }}', ng: { if: 'term.id' } }
+    %ul.nested-taxonomy-term-list{ :'ui-tree-nodes' => true, ng: { init: 'terms = term.children', model: 'terms' } }<
+      %li.taxonomy-term-item{ :'ui-tree-node' => true, ng: { repeat: 'term in terms', include: "'taxonomy.html'" } }

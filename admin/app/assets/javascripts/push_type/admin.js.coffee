@@ -16,6 +16,7 @@
 #= require foundation
 #= require confirm_with_reveal
 #= require angular
+#= require angular-ui-tree
 #= require jquery.sticky
 #= require jquery.sortable
 #= require jquery.filedrop
@@ -27,7 +28,12 @@
 
 Turbolinks.enableProgressBar()
 
-@app = angular.module 'push_type', []
+@app = angular.module 'push_type', ['ui.tree']
+
+@app.run ['$http', ($http) ->
+  $http.defaults.headers.common['Accept'] = 'application/json'
+  $http.defaults.headers.common['Content-Type'] = 'application/json'
+]
 
 @app.directive 'sidePanel', ->
   (scope, $el, attrs) ->
@@ -45,7 +51,7 @@ $(document).on 'ready page:load', ->
   # Bootstrap Angular
   angular.bootstrap $('[role="main"]'), ['push_type']
 
-  $('.sortable').sortable
+  $('.node-list.sortable').sortable
     handle: '.handle'
     forcePlaceholderSize: true
   .on 'sortupdate', (e, ui) ->

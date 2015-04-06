@@ -4,8 +4,7 @@ module PushType
 
     included do
       scope :exposed, -> {
-        node_types = PushType.unexposed_nodes
-        node_types.present? ? where(['push_type_nodes.type NOT IN (?)', node_types]) : all
+        unexposed_classes.present? ? where.not(type: unexposed_classes) : all
       }
     end
 
@@ -15,12 +14,31 @@ module PushType
 
     module ClassMethods
 
+      def descendants(opts = {})
+        if opts.has_key? :exposed
+          super().select { |d| !opts[:exposed] == PushType.send(unexposure_method).include?(d.name.underscore) }
+        else
+          super()
+        end
+      end
+
+      def unexposed_classes
+        _ct.base_class.descendants(exposed: false)
+      end
+
+      def unexposure_method
+        case _ct.base_class.name.demodulize
+          when 'Node'     then :unexposed_nodes
+          when 'Taxonomy' then :unexposed_taxonomies
+        end
+      end
+
       def unexpose!
-        PushType.config.unexposed_nodes.push(self.name.underscore.to_sym).uniq!
+        PushType.config.send(unexposure_method).push(self.name.underscore.to_sym).uniq!
       end
 
       def exposed?
-        !PushType.unexposed_nodes.include?(self.name)
+        !unexposed_classes.include?(self)
       end
 
     end

@@ -26,9 +26,9 @@ module PushType
       end
 
       describe 'set template with args' do
-        before { TestPage.template :foo, layout: 'my_layout' }
-        before { page.template.must_equal 'nodes/foo' }
-        before { page.template_args.must_equal ['nodes/foo', { layout: 'my_layout' }] }
+        before { TestPage.template :foo, path: 'bar', layout: 'my_layout' }
+        before { page.template.must_equal 'bar/foo' }
+        before { page.template_args.must_equal ['bar/foo', { layout: 'my_layout' }] }
       end
       
     end

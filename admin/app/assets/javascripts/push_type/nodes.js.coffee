@@ -26,7 +26,6 @@
         else
           "Save #{ $scope.typeToString() }"
           
-
   $scope.publishedDates = ->
     switch $scope.node.status
       when 'draft'
@@ -37,7 +36,6 @@
         else
           $scope.publishedAtMoment().format('Do MMM YYYY, h:mma')
           
-
   $scope.publishedAtMoment = ->
     $scope.published_at ||= if $scope.node.published_at then moment($scope.node.published_at) else moment()
 

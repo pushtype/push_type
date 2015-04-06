@@ -10,6 +10,9 @@ module PushType
     mattr_accessor :home_slug
     @@home_slug = 'home'
 
+    mattr_accessor :unexposed_taxonomies
+    @@unexposed_taxonomies = []
+
     mattr_accessor :media_styles
     @@media_styles = {
       large:    '1024x1024>',

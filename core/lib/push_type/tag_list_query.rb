@@ -12,7 +12,7 @@ module PushType
     end
 
     def node_types
-      PushType.node_types_from_list(@opts[:type]).map { |n| "'#{ n.camelcase }'" }
+      PushType.subclasses_from_list(:node, @opts[:type]).map { |n| "'#{ n.camelcase }'" }
     end
 
     private
@@ -23,7 +23,7 @@ module PushType
 
     def query
       [
-        "SELECT DISTINCT jsonb_array_elements_text(field_store->'#{ @name }') AS _tag",
+        "SELECT DISTINCT jsonb_array_elements_text(field_data->'#{ @name }') AS _tag",
         "FROM push_type_nodes",
         where_sql,
         "ORDER BY _tag"

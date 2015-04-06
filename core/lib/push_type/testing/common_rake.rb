@@ -1,6 +1,7 @@
 require 'generators/push_type/dummy/dummy_generator'
 require 'generators/push_type/install/install_generator'
 require 'generators/push_type/node/node_generator'
+require 'generators/push_type/taxonomy/taxonomy_generator'
 
 namespace :common do
 
@@ -16,6 +17,7 @@ namespace :common do
       system 'bundle exec rake db:drop db:create'
       PushType::InstallGenerator.start ['--quiet']
       PushType::NodeGenerator.start ['page', '--quiet']
+      PushType::TaxonomyGenerator.start ['category', '--quiet']
     end
   end
 
