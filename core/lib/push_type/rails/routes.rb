@@ -6,8 +6,8 @@ module ActionDispatch::Routing
         path:   '/push_type',
         home:   PushType.config.home_slug,
         actions: {
-          node:     'push_type/nodes_front_end#show',
-          taxonomy: 'push_type/taxonomies_front_end#show',
+          node:     'nodes_front_end#show',
+          taxonomy: 'taxonomies_front_end#show',
         }
       }.deep_merge!(options)
 
