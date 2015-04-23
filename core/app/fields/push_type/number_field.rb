@@ -5,10 +5,12 @@ module PushType
     end
 
     def to_json(val)
+      return unless val
       val.to_i
     end
 
     def from_json(val)
+      return unless val
       val.to_i
     end
   end
