@@ -27,8 +27,13 @@ module PushType
       self.class.base_slug
     end
 
-    def permalink
-      @permalink ||= self_and_ancestors.map(&:slug).push(base_slug).reverse.join('/')
+    def permalink(with_base_sug = false)
+      @permalink ||= self_and_ancestors.map(&:slug).reverse
+      (with_base_sug ? @permalink.unshift(base_slug) : @permalink).join('/')
+    end
+
+    def full_permalink
+      permalink(true)
     end
 
     def exposed?

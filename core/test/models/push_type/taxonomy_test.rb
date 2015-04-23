@@ -28,7 +28,9 @@ module PushType
         %w(one two three).each { |slug| @tax = FactoryGirl.create :taxonomy, slug: slug, parent: @tax }
       end
       after   { Taxonomy.base_slug nil }
-      it { @tax.permalink.must_equal 'cat/one/two/three' }
+      it { @tax.permalink.must_equal 'one/two/three' }
+      it { @tax.permalink(true).must_equal 'cat/one/two/three' }
+      it { @tax.full_permalink.must_equal 'cat/one/two/three' }
     end
 
   end
