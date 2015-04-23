@@ -16,10 +16,9 @@
     .body
       - if @nodes.empty?
         .empty-default
-          %h3 No content
+          %h2 No content
           - if !@parent
-            %p A website without any content makes for a pretty poor user experience. Better sort this one out now and create your first page.
-            = render 'new_node_button'
+            %p A website without any content makes for a pretty poor user experience. Better sort this one out now and create your first piece of content.
           - else
             %p There is no content in this section yet.
       - else

@@ -11,8 +11,6 @@
         .empty-default{ ng: { hide: 'termCount() > 0' } }
           %h2 No #{ @taxonomy.title.downcase }
           %p Organise content through taxonomies. Get started by creating your first #{ @taxonomy.title.downcase.singularize }.
-          %a.button.success.radius{ ng: { click: 'newTerm()' } }
-            = ficon :plus, "Add #{ @taxonomy.title.downcase.singularize }"
         %ul.taxonomy-term-list{ :'ui-tree-nodes' => true, ng: { model: 'terms' } }
           %li.taxonomy-term-item{ :'ui-tree-node' => true, ng: { repeat: 'term in terms', include: "'taxonomy.html'" } }
 

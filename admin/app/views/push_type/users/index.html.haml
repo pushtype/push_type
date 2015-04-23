@@ -1,24 +1,21 @@
 - title 'Users'
 
-- if @users.empty?
-  .columns
+.large-8.columns
+  - if @users.empty?
     .empty-default
       %h2 No users
       %p This is weird. How are you even seeing this?
-      = link_to ficon(:plus, 'New user'), push_type.new_user_path, class: 'button radius success'
-
-- else
-  .large-8.columns
+  - else
     %section
       %ul.user-list.small-block-grid-1.medium-block-grid-2
         - for user in @users.all
           %li= render 'user', user: user
 
-  .large-4.columns
-    .side-panel{ :'side-panel' => true }
-      .padded
-        .pagination-centered
-          .pagination-stats #{ pluralize @users.total_count, 'user' } - Page #{ @users.current_page } of #{ @users.total_pages }
-          = paginate @users
-      .cta.text-center
-        = link_to ficon(:plus, 'New user'), push_type.new_user_path, class: 'button radius success'
+.large-4.columns
+  .side-panel{ :'side-panel' => true }
+    .padded
+      .pagination-centered
+        .pagination-stats #{ pluralize @users.total_count, 'user' } - Page #{ @users.current_page } of #{ @users.total_pages }
+        = paginate @users
+    .cta.text-center
+      = link_to ficon(:plus, 'New user'), push_type.new_user_path, class: 'button radius success'
