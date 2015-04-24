@@ -21,9 +21,9 @@
 #= require jquery.sticky
 #= require jquery.sortable
 #= require jquery.filedrop
+#= require selectize
 #= require moment
 #= require_self
-#= require bootstrap-tagsinput
 #= stub push_type/admin_assets
 #= require_tree .
 
@@ -61,7 +61,30 @@ $(document).on 'ready page:load', ->
 
   $(document).confirmWithReveal()
 
-  $('.tagsinput', '.tag_list').tagsinput
-    tagClass: 'label secondary radius'
+  $('select', '.select, .multi_select').selectize
+    plugins:      ['remove_button']
+    hideSelected: false
+
+  $('select', '.taxonomy').selectize
+    plugins:      ['remove_button']
+    hideSelected: false
+    onInitialize: ->
+      sel     = this
+      options = sel.$input.data('options')
+      items   = sel.$input.data('items')
+      $.each options, -> sel.addOption this
+      if $.isArray items
+        $.each items, -> sel.addItem this
+      else
+        sel.addItem items
+    render: 
+      option: (item, esc) ->
+        pre = if item.depth > 0 then '- '.repeat(item.depth) else ''
+        """<div class="option">#{ pre }#{ esc item.text }</div>"""
+
+  $('select', '.tag_list').selectize
+    plugins:  ['remove_button', 'drag_drop']
+    create:   true
+    persist:  false
     
 

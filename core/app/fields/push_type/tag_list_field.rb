@@ -8,7 +8,7 @@ module PushType
     end
 
     def html_options
-      { multiple: true, placeholder: 'Tags...' }.merge(super).merge(class: 'tagsinput')
+      { multiple: true, placeholder: 'Tags...' }.merge(super)
     end
 
     def to_json(val)
