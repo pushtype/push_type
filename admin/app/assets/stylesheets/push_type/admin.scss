@@ -12,6 +12,9 @@
  *
  *= require selectize
  *= require_self
+ *= require pickadate/classic
+ *= require pickadate/classic.date
+ *= require pickadate/classic.time
  */
 
 @import "foundation_and_overrides";
@@ -718,11 +721,11 @@ form .permalink {
 }
 
 form .publish-date {
-  font-size:            rem-calc(12);
   select {
     display:            inline;
     width:              auto;
     padding-right:      rem-calc(20);
+    font-size:            rem-calc(12);
   }
 }
 
@@ -767,6 +770,58 @@ form .asset-upload {
 .markdown textarea {
   height:               400px;
   font-family:          $font-family-monospace;
+}
+
+.date, .time {
+  input[readonly] {
+    background: white;
+    cursor: pointer;
+    &.picker__input--active {
+      background-color: $input-focus-bg-color;
+      border-color: $input-focus-border-color;
+    }
+  }
+  .picker {
+    margin-top: -#{ rem-calc(17) };
+  }
+  .picker__footer {
+    padding-bottom: 0.75em;
+    button {
+      margin-bottom: 0;
+      border-bottom: none;
+      &:before {
+        margin-right: rem-calc(8);
+      }
+    }
+  }
+  .picker__button--today {
+    color: $primary-color;
+    &:hover {
+      background-color: scale-color($primary-color, $lightness: 85%);
+    }
+  }
+  .picker__button--clear {
+    color: $alert-color;
+    &:hover {
+      background-color: scale-color($alert-color, $lightness: 85%);
+    }
+  }
+  .picker__button--close {
+    color: $monsoon;
+    &:hover {
+      background-color: scale-color($monsoon, $lightness: 85%);
+    }
+  }
+  .picker__list {
+    padding-bottom: 0.75em;
+  }
+  .picker__list-item {
+    small {
+      float: right;
+      line-height: 2.75em;
+      color: $aluminum;
+    }
+  }
 }
 
 .selectize-input {

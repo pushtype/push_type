@@ -23,6 +23,9 @@
 #= require jquery.filedrop
 #= require selectize
 #= require moment
+#= require pickadate/picker
+#= require pickadate/picker.date
+#= require pickadate/picker.time
 #= require_self
 #= stub push_type/admin_assets
 #= require_tree .
@@ -60,6 +63,17 @@ $(document).on 'ready page:load', ->
     $.post "/push_type/nodes/#{ ui.item.data('id') }/position", obj, 'json'
 
   $(document).confirmWithReveal()
+
+  $('input', '.date').pickadate
+    format: 'd mmmm yyyy'
+    formatSubmit: 'yyyy-mm-dd'
+    hiddenName: true
+
+  $('input', '.time').pickatime
+    format: 'h:i A'
+    formatSubmit: 'HH:i'
+    formatLabel: 'h:i A <sm!all>HH:i</sm!all>'
+    hiddenName: true
 
   $('select', '.select, .multi_select').selectize
     plugins:      ['remove_button']

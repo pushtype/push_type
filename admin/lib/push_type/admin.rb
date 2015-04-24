@@ -8,6 +8,7 @@ require 'foundation-icons-sass-rails'
 require 'jquery-rails'
 require 'angularjs-rails'
 require 'momentjs-rails'
+require 'pickadate-rails'
 require 'selectize-rails'
 require 'turbolinks'
 
