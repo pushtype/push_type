@@ -767,6 +767,20 @@ form .asset-upload {
   }
 }
 
+.asset-field {
+  padding:              rem-calc(8);
+  border:               1px solid $input-border-color;
+  box-shadow:           $input-box-shadow;
+
+  .preview {
+    border:             1px solid $table-border-color;
+  }
+  .button {
+    margin-top:         0;
+    margin-bottom:      0;
+  }
+}
+
 .markdown textarea {
   height:               400px;
   font-family:          $font-family-monospace;

@@ -1,0 +1,32 @@
+= f.label field.name, field.label
+
+.asset-field{ ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ asset_hash(f.object.send(field.name)).to_json }" } }
+  = f.hidden_field field.name, value: '{{ asset.id }}'
+
+  .row{ ng: { show: 'asset' } }
+    .small-4.medium-3.columns
+      %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
+    .small-8.medium-9.columns
+      %table
+        %tr
+          %th File name
+          %td {{ asset.file_name }}
+        %tr
+          %th File size
+          %td {{ asset.file_size }} kb
+        %tr
+          %th Content type
+          %td {{ asset.mime_type }}
+      %a.button.secondary.small.radius{ ng: { click: 'deselectAsset()' } } Remove media
+  %div{ ng: { hide: 'asset' } }
+    %a.button.success.radius{ data: { reveal: { id: field.id_attr } } } Pick media
+
+  .reveal-modal.asset-field-modal{ id: field.id_attr, data: { reveal: true } }
+    %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
+      %li{ ng: { repeat: 'asset in assets' } }
+        %article.asset-list-item
+          %a{ ng: { click: 'selectAsset(asset)' } }
+            .preview
+              %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
+            .title {{ asset.description_or_file_name }}
+

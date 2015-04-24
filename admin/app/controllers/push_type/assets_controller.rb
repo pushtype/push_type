@@ -8,6 +8,12 @@ module PushType
 
     def index
       @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: { assets: view_context.assets_array(@assets).as_json }
+        end
+      end
     end
 
     def trash

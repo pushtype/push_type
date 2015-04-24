@@ -81,7 +81,6 @@ module PushType
       it { field.template.must_equal 'tag_list' }
       it { field.html_options[:multiple].must_equal true }
       it { field.html_options[:placeholder].must_equal 'Tags...' }
-      it { field.html_options[:class].must_equal 'tagsinput' }
 
       describe 'dynamic methods' do
         before do

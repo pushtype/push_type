@@ -1,6 +1,10 @@
 module PushType
   class SelectField < PushType::FieldType
 
+    def param
+      multiple? ? { name.to_sym => [] } : super
+    end
+
     def template
       @opts[:template] || 'select'
     end
@@ -16,6 +20,24 @@ module PushType
 
     def field_options
       { include_blank: 'Please select...' }.merge(@opts[:field_options] || {})
+    end
+
+    def html_options
+      super.merge(multiple: multiple?)
+    end
+
+    def to_json(val)
+      return unless val
+      multiple? ? Array(val).reject(&:blank?) : super
+    end
+
+    def from_json(val)
+      return unless val
+      multiple? ? Array(val).reject(&:blank?) : super
+    end
+
+    def multiple?
+      @opts[:multiple] || false
     end
 
   end

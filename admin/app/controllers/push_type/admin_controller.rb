@@ -5,6 +5,9 @@ module PushType
     before_filter :initial_breadcrumb
     helper_method :push_type_user
 
+    # TODO - do I need to require all helpers
+    helper PushType::Admin::Engine.helpers
+
     def info
       render layout: false
     end

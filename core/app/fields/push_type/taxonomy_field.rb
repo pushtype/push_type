@@ -1,29 +1,12 @@
 module PushType
-  class TaxonomyField < PushType::FieldType
-
-    def param
-      multiple? ? { name.to_sym => [] } : super
-    end
+  class TaxonomyField < SelectField
 
     def template
       @opts[:template] || 'taxonomy'
     end
 
-    def taxonomy_class
-      (@opts[:taxonomy_class].to_s || name.singularize).classify.constantize
-    end
-
-    def field_options
-      { include_blank: 'Please select...' }.merge(@opts[:field_options] || {})
-    end
-
-    def html_options
-      super.merge(multiple: multiple?)
-    end
-
-    def to_json(val)
-      return unless val
-      multiple? ? Array(val).reject(&:blank?) : super
+    def choices
+      []
     end
 
     def from_json(val)
@@ -35,24 +18,28 @@ module PushType
     initialized_on_node do |object, field|
       object.class_eval do
 
-        define_method field.id_method_name do
+        define_method field.relation_id_method do
           field_store[field.name]
         end
 
       end
     end
 
-    def multiple?
-      @opts[:multiple] || false
+    def singular_name
+      multiple? ? name.singularize : name
+    end
+
+    def taxonomy_class
+      (@opts[:taxonomy_class] || singular_name).to_s.classify.constantize
     end
 
     def taxonomy_tree_to_json
       flatten_tree taxonomy_class.hash_tree
     end
 
-    def id_method_name
+    def relation_id_method
       suffix = multiple? ? '_ids' : '_id'
-      (name.singularize + suffix).to_sym
+      (singular_name + suffix).to_sym
     end
 
     private

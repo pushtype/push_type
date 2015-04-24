@@ -75,7 +75,7 @@ $(document).on 'ready page:load', ->
     formatLabel: 'h:i A <sm!all>HH:i</sm!all>'
     hiddenName: true
 
-  $('select', '.select, .multi_select').selectize
+  $('select', '.select').selectize
     plugins:      ['remove_button']
     hideSelected: false
 
