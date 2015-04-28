@@ -1,6 +1,6 @@
 = f.label field.name, field.label
 
-.asset-field{ ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ asset_hash(f.object.send(field.name)).to_json }" } }
+.asset-field{ class: ('error' if f.object.errors[field.name.to_sym].present?), ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ f.object.send(field.name) ? asset_hash(f.object.send(field.name)).to_json : 'null' }" } }
   = f.hidden_field field.name, value: '{{ asset.id }}'
 
   .row{ ng: { show: 'asset' } }
@@ -19,14 +19,34 @@
           %td {{ asset.mime_type }}
       %a.button.secondary.small.radius{ ng: { click: 'deselectAsset()' } } Remove media
   %div{ ng: { hide: 'asset' } }
-    %a.button.success.radius{ data: { reveal: { id: field.id_attr } } } Pick media
+    %a.button.success.small.radius{ data: { reveal: { id: field.id_attr } } } Pick media
 
   .reveal-modal.asset-field-modal{ id: field.id_attr, data: { reveal: true } }
-    %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
-      %li{ ng: { repeat: 'asset in assets' } }
-        %article.asset-list-item
-          %a{ ng: { click: 'selectAsset(asset)' } }
-            .preview
-              %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
-            .title {{ asset.description_or_file_name }}
+
+    %ul.tabs{ data: { tab: true } }
+      %li.tab-title.active= link_to ficon(:thumbnails, 'Media'), '#media', data: { success: true }
+      %li.tab-title= link_to ficon(:upload, 'Upload'), '#upload'
+
+    .tabs-content
+      #media.content.active
+        .empty-default{ ng: { hide: 'hasAssets()' } }
+          %h2 No uploads
+          %p No media has been uploaded yet.
+        %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4{ ng: { show: 'hasAssets()' } }
+          %li{ ng: { repeat: 'asset in assets' } }
+            %article.asset-list-item
+              %a{ ng: { click: 'selectAsset(asset)' } }
+                .preview
+                  %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
+                .title {{ asset.description_or_file_name }}
+        .pagination-centered{ paginate: { assets: true }, ng: { show: 'hasAssets()' } }
+
+      #upload.content
+        .asset-upload
+          .dropzone{ asset: { upload: push_type.upload_assets_path, maxfiles: 10 } }
+            .prompt Drag files to quickly upload them&hellip;
+            .icon= ficon(:upload_cloud)
+
+- if f.object.errors[field.name.to_sym].present?
+  %small.error= f.object.errors[field.name.to_sym].join(', ')
 

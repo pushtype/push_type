@@ -706,6 +706,10 @@ form .permalink {
   }
 }
 
+input[type="hidden"] + .error {
+  display: none;
+}
+
 .error-icon {
   display:              inline;
   font-size:            $form-label-font-size;
@@ -768,6 +772,7 @@ form .asset-upload {
 }
 
 .asset-field {
+  margin:               rem-calc(0 0 16);
   padding:              rem-calc(8);
   border:               1px solid $input-border-color;
   box-shadow:           $input-box-shadow;
@@ -777,6 +782,9 @@ form .asset-upload {
   }
   .button {
     margin-top:         0;
+    margin-bottom:      0;
+  }
+  &.error {
     margin-bottom:      0;
   }
 }
@@ -886,6 +894,11 @@ form .asset-upload {
       border-left-color:  $input-border-color !important;
     }
   }
+
+  .error & {
+    margin-bottom:      0;
+    line-height:        0.5em;
+  }
 }
 
 .selectize-dropdown {
@@ -902,6 +915,12 @@ form .asset-upload {
     color:              $base;
   }
 
+}
+
+.tabs {
+  border:               1px solid $silver;
+  border-bottom:        none;
+  background-color:     $silver;
 }
 
 @import "foundation-icons";

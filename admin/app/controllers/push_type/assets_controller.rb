@@ -7,11 +7,13 @@ module PushType
     before_filter :load_asset,  only: [:edit, :update, :destroy, :restore]
 
     def index
-      @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
       respond_to do |format|
-        format.html
+        format.html do
+          @assets = PushType::Asset.not_trash.page(params[:page]).per(20)
+        end
         format.json do
-          render json: { assets: view_context.assets_array(@assets).as_json }
+          @assets = PushType::Asset.not_trash.page(params[:page]).per(12)
+          render json: { assets: view_context.assets_array(@assets).as_json, meta: { current_page: @assets.current_page, total_pages: @assets.total_pages } }
         end
       end
     end

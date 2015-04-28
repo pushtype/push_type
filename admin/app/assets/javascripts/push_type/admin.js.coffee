@@ -21,6 +21,7 @@
 #= require jquery.sticky
 #= require jquery.sortable
 #= require jquery.filedrop
+#= require jquery.simplePagination
 #= require selectize
 #= require moment
 #= require pickadate/picker
