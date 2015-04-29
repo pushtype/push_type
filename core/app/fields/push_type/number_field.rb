@@ -5,12 +5,12 @@ module PushType
     end
 
     def to_json(val)
-      return unless val
+      return if val.blank?
       val.to_i
     end
 
     def from_json(val)
-      return unless val
+      return if val.blank?
       val.to_i
     end
   end

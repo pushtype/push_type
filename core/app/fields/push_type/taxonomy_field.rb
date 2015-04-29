@@ -10,7 +10,7 @@ module PushType
     end
 
     def from_json(val)
-      return unless val
+      return if val.blank?
       ids = multiple? ? Array(val).reject(&:blank?) : super
       taxonomy_class.find(ids)
     end

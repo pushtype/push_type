@@ -5,7 +5,6 @@ module PushType
     end
 
     def to_json(val)
-      return unless val
       Array(val)
     end
 

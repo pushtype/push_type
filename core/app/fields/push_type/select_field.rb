@@ -27,12 +27,12 @@ module PushType
     end
 
     def to_json(val)
-      return unless val
+      return if val.blank?
       multiple? ? Array(val).reject(&:blank?) : super
     end
 
     def from_json(val)
-      return unless val
+      return if val.blank?
       multiple? ? Array(val).reject(&:blank?) : super
     end
 

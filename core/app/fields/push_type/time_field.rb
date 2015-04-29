@@ -10,7 +10,7 @@ module PushType
     end
 
     def from_json(val)
-      return unless val
+      return if val.blank?
       val.to_time
     end
     
