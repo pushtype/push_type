@@ -1,6 +1,6 @@
 = f.label field.name, field.label
 
-.repeater-field{ ng: { controller: 'RepeaterFieldCtrl', init: "obj={}; initRows(#{ f.object.send(field.name).to_json })" } }
+.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ f.object.send(field.name).to_json })" } }
   %table
     %thead
       %tr

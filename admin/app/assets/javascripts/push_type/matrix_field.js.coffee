@@ -1,12 +1,12 @@
-@app.controller 'RepeaterFieldCtrl',  ['$scope', ($scope) ->
+@app.controller 'MatrixFieldCtrl',  ['$scope', ($scope) ->
 
-  $scope.rows = [null]
+  $scope.rows = [{}]
 
   $scope.initRows = (rows) ->
     $scope.rows = rows if rows?
 
   $scope.addRow = ->
-    $scope.rows.push null
+    $scope.rows.push {}
 
   $scope.removeRow = (i) ->
     console.log "Removeing #{i}" 
