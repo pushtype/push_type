@@ -3,7 +3,7 @@ module PushType
     module Relations
       
       def json_key
-        suffix = multiple? ? '_ids' : 'id'
+        suffix = multiple? ? '_ids' : '_id'
         (name.singularize + suffix).to_sym
       end
 
