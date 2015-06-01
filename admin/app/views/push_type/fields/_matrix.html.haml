@@ -1,6 +1,6 @@
-= f.label field.name, field.label
+= f.label field.json_key, field.label
 
-.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ f.object.send(field.name).to_json })" } }
+.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ f.object.send(field.json_key).to_json })" } }
   %table
     %thead
       %tr
@@ -10,7 +10,7 @@
     %tbody
       %tr{ ng: { repeat: 'row in rows track by $index' } }
         - field.mapping.each do |key, form_helper|
-          %td= f.send form_helper, nil, field.html_options.merge(name: "#{ f.object_name }[#{ field.name }][][#{ key }]", id: "#{ f.object_name }_#{ field.name }_{{ $index }}_#{ key }", value: nil, :'ng-model' => "row.#{ key }")
+          %td= f.send form_helper, nil, field.html_options.merge(name: "#{ f.object_name }[#{ field.json_key }][][#{ key }]", id: "#{ f.object_name }_#{ field.json_key }_{{ $index }}_#{ key }", value: nil, :'ng-model' => "row.#{ key }")
         %td.remove
           %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
   .plus

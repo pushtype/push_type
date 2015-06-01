@@ -26,15 +26,15 @@ module PushType
           else        [ :string, {} ]
         end
 
-        fields[name] = field_factory(kind).new(name, opts)
-        store_accessor :field_store, name
+        _field = fields[name] = field_factory(kind).new(name, opts)
+        store_accessor :field_store, _field.json_key
 
-        validates name, opts[:validates] if opts[:validates]
+        validates _field.json_key, opts[:validates] if opts[:validates]
 
-        override_accessor fields[name]
+        override_accessor _field
 
-        if block = field_factory(kind).initialized_blk
-          block.call(self, fields[name])
+        if block = _field.class.initialized_blk
+          block.call(self, _field)
         end
       end
 
@@ -49,10 +49,10 @@ module PushType
       end
 
       def override_accessor(f)
-        define_method "#{f.name}=".to_sym do |val|
+        define_method "#{ f.json_key }=".to_sym do |val|
           super f.to_json(val)
         end
-        define_method f.name do
+        define_method f.json_key do
           f.from_json super()
         end
       end

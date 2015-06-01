@@ -3,7 +3,7 @@ require 'redcarpet'
 module PushType
   class MarkdownField < PushType::FieldType
 
-    DEFAULT_EXTENSIONS = {
+    options form_helper: :text_area, renderer: Redcarpet::Render::HTML, render_options: {}, extensions: {
       autolink:             true,
       fenced_code_blocks:   true,
       no_intra_emphasis:    true,
@@ -18,26 +18,18 @@ module PushType
     end
 
     def markdown
-      @markdown ||= Redcarpet::Markdown.new(renderer, extensions)
+      @markdown ||= Redcarpet::Markdown.new(renderer, @opts[:extensions])
     end
 
     def renderer
-      ( @opts[:renderer] || Redcarpet::Render::HTML ).new render_options
-    end
-
-    def render_options
-      @opts[:render_options] || {}
-    end
-
-    def extensions
-      DEFAULT_EXTENSIONS.merge(@opts[:extensions] || {})
+      @opts[:renderer].new @opts[:render_options]
     end
 
     initialized_on_node do |object, field|
       object.presenter_class.class_eval do
 
         define_method field.name.to_sym do
-          fields[field.name.to_sym].markdown.render super()
+          fields[field.json_key].markdown.render super()
         end
 
       end

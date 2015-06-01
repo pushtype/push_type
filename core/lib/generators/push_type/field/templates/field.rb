@@ -1,4 +1,4 @@
-class <%= class_name %>Field < PushType::FieldType
+class <%= class_name %>Field < PushType::FieldType::Base
 
   # Override built-in methods to extend functionality
   # See PushType::FieldType Rdoc for methods to Override

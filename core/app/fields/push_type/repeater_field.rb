@@ -1,18 +1,16 @@
 module PushType
-  class RepeaterField < ArrayField
-    
-    def template
-      @opts[:template] || :repeater
-    end
+  class RepeaterField < FieldType
+
+    include PushType::Fields::Arrays
+
+    options template: :repeater
 
     def to_json(val)
-      return if val.blank?
-      super.reject(&:blank?)
+      super.reject(&:blank?) if val.present?
     end
 
     def from_json(val)
-      return if val.blank?
-      super.reject(&:blank?)
+      super.reject(&:blank?) if val.present?
     end
 
   end

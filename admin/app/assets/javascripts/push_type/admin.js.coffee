@@ -52,6 +52,7 @@ $(document).on 'ready page:load', ->
 
   # Bootstrap foundation
   $(document).foundation()
+  $(document).confirmWithReveal()
 
   # Bootstrap Angular
   angular.bootstrap $('[role="main"]'), ['push_type']
@@ -62,44 +63,4 @@ $(document).on 'ready page:load', ->
   .on 'sortupdate', (e, ui) ->
     obj = { prev: ui.item.prev().data('id'), next: ui.item.next().data('id') }
     $.post "/push_type/nodes/#{ ui.item.data('id') }/position", obj, 'json'
-
-  $(document).confirmWithReveal()
-
-  $('input', '.date').pickadate
-    format: 'd mmmm yyyy'
-    formatSubmit: 'yyyy-mm-dd'
-    hiddenName: true
-
-  $('input', '.time').pickatime
-    format: 'h:i A'
-    formatSubmit: 'HH:i'
-    formatLabel: 'h:i A <sm!all>HH:i</sm!all>'
-    hiddenName: true
-
-  $('select', '.select').selectize
-    plugins:      ['remove_button']
-    hideSelected: false
-
-  $('select', '.taxonomy').selectize
-    plugins:      ['remove_button']
-    hideSelected: false
-    onInitialize: ->
-      sel     = this
-      options = sel.$input.data('options')
-      items   = sel.$input.data('items')
-      $.each options, -> sel.addOption this
-      if $.isArray items
-        $.each items, -> sel.addItem this
-      else
-        sel.addItem items
-    render: 
-      option: (item, esc) ->
-        pre = if item.depth > 0 then '- '.repeat(item.depth) else ''
-        """<div class="option">#{ pre }#{ esc item.text }</div>"""
-
-  $('select', '.tag_list').selectize
-    plugins:  ['remove_button', 'drag_drop']
-    create:   true
-    persist:  false
-    
 

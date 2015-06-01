@@ -1,24 +1,18 @@
 require 'push_type/tag_list_query'
 
 module PushType
-  class TagListField < ArrayField
+  class TagListField < PushType::FieldType
 
-    def template
-      @opts[:template] || 'tag_list'
-    end
+    include PushType::Fields::Arrays
 
-    def html_options
-      { multiple: true, placeholder: 'Tags...' }.merge(super)
-    end
+    options template: 'tag_list', html_options: { multiple: true, placeholder: 'Tags...' }
 
     def to_json(val)
-      return if val.blank?
-      super.reject(&:blank?)
+      super.reject(&:blank?) if val.present?
     end
 
     def from_json(val)
-      return if val.blank?
-      super.reject(&:blank?)
+      super.reject(&:blank?) if val.present?
     end
 
     initialized_on_node do |object, field|

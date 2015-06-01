@@ -1,7 +1,7 @@
-= f.label field.name, field.label
+= f.label field.json_key, field.label
 
-.asset-field{ class: ('error' if f.object.errors[field.name.to_sym].present?), ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ f.object.send(field.name) ? asset_hash(f.object.send(field.name)).to_json : 'null' }" } }
-  = f.hidden_field field.name, value: '{{ asset.id }}'
+.asset-field{ class: ('error' if f.object.errors[field.json_key].present?), ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ f.object.send(field.name.to_sym) ? asset_hash(f.object.send(field.name.to_sym)).to_json : 'null' }" } }
+  = f.hidden_field field.json_key, value: '{{ asset.id }}'
 
   .row{ ng: { show: 'asset' } }
     .small-4.medium-3.columns
@@ -47,6 +47,6 @@
             .prompt Drag files to quickly upload them&hellip;
             .icon= ficon(:upload_cloud)
 
-- if f.object.errors[field.name.to_sym].present?
-  %small.error= f.object.errors[field.name.to_sym].join(', ')
+- if f.object.errors[field.json_key].present?
+  %small.error= f.object.errors[field.json_key].join(', ')
 

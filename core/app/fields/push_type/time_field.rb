@@ -1,17 +1,10 @@
 module PushType
   class TimeField < PushType::FieldType
 
-    def template
-      @opts[:template] || 'date'
-    end
-
-    def form_helper
-      @opts[:form_helper] || :time_field
-    end
+    options template: 'date', form_helper: :time_field
 
     def from_json(val)
-      return if val.blank?
-      val.to_time
+      val.to_time if val.present?
     end
     
   end

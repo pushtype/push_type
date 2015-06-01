@@ -1,31 +1,20 @@
 module PushType
   class AssetField < PushType::FieldType
 
-    def template
-      @opts[:template] || 'asset'
-    end
+    include PushType::Fields::Relations
+
+    options template: 'asset'
 
     def id_attr
       "#{ name }-asset-modal"
     end
 
-    def from_json(val)
-      return if val.blank?
-      PushType::Asset.find(val)
-    end
-
     initialized_on_node do |object, field|
       object.class_eval do
-
-        define_method field.relation_id_method do
-          field_store[field.name]
+        define_method field.name.to_sym do
+          PushType::Asset.find send(field.json_key) if send(field.json_key).present?
         end
-
       end
-    end
-
-    def relation_id_method
-      (name + '_id').to_sym
     end
 
   end

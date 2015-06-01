@@ -1,62 +1,21 @@
 module PushType
   class TaxonomyField < SelectField
 
-    def template
-      @opts[:template] || 'taxonomy'
-    end
+    include PushType::Fields::Relations 
 
-    def choices
-      []
-    end
+    options template: 'relation', field_options: {}
 
-    def from_json(val)
-      return if val.blank?
-      ids = multiple? ? Array(val).reject(&:blank?) : super
-      taxonomy_class.find(ids)
+    def relation_option
+      @opts[:taxonomy_class]
     end
 
     initialized_on_node do |object, field|
       object.class_eval do
-
-        define_method field.relation_id_method do
-          field_store[field.name]
+        define_method field.name.to_sym do
+          field.relation_class.find send(field.json_key) if send(field.json_key).present?
         end
-
       end
     end
-
-    def singular_name
-      multiple? ? name.singularize : name
-    end
-
-    def taxonomy_class
-      (@opts[:taxonomy_class] || singular_name).to_s.classify.constantize
-    end
-
-    def taxonomy_tree_to_json
-      flatten_tree taxonomy_class.hash_tree
-    end
-
-    def relation_id_method
-      suffix = multiple? ? '_ids' : '_id'
-      (singular_name + suffix).to_sym
-    end
-
-    private
-
-    def flatten_tree(hash_tree, d = 0)
-      hash_tree.flat_map do |parent, children|
-        [
-          {
-            value:  parent.id,
-            text:   parent.title,
-            depth:  d
-          },
-          flatten_tree(children, d+1)
-        ]
-      end.flatten
-    end
-
 
   end
 end
