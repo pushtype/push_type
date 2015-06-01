@@ -36,7 +36,7 @@ module PushType
         TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
         TestPage.field :foo
         TestPage.field :bar, :text
-        TestPage.field :baz, :array
+        TestPage.field :baz, :tag_list
       end
       after { TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
 

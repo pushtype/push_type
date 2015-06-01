@@ -43,7 +43,6 @@ module PushType
     describe NumberField do
       let(:field) { PushType::NumberField.new :foo }
       it { field.form_helper.must_equal :number_field }
-      it { field.from_json(val).must_equal 1 }
       it { field.to_json(val).must_equal 1 }
     end
 
@@ -67,13 +66,6 @@ module PushType
         let(:page) { Page.create FactoryGirl.attributes_for(:node, body: '**foo** *bar*') }
         it { page.present!.body.strip.must_equal '<p><strong>foo</strong> <em>bar</em></p>' }
       end
-    end
-
-    describe ArrayField do
-      let(:field) { PushType::ArrayField.new :foo }
-      it { field.param.must_equal foo: [] }
-      it { field.to_json(val).must_equal ['1'] }
-      it { field.from_json(val).must_equal ['1'] }
     end
 
     describe TagListField do
