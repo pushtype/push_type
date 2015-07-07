@@ -20,3 +20,13 @@ require 'push_type/testing/factories'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 DatabaseCleaner.strategy = :deletion
+
+class Minitest::Spec
+  before :each do
+    DatabaseCleaner.start
+  end
+
+  after :each do
+    DatabaseCleaner.clean
+  end
+end

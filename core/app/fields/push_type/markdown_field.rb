@@ -13,10 +13,6 @@ module PushType
       underline:            true
     }
 
-    def form_helper
-      @opts[:form_helper] || :text_area
-    end
-
     def markdown
       @markdown ||= Redcarpet::Markdown.new(renderer, @opts[:extensions])
     end
@@ -29,7 +25,8 @@ module PushType
       object.presenter_class.class_eval do
 
         define_method field.name.to_sym do
-          fields[field.json_key].markdown.render super()
+          raw = super()
+          fields[field.json_key].markdown.render raw unless raw.nil?
         end
 
       end

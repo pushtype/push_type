@@ -9,10 +9,14 @@ module PushType
       "#{ name }-asset-modal"
     end
 
+    def relation_class
+      PushType::Asset
+    end
+
     initialized_on_node do |object, field|
       object.class_eval do
         define_method field.name.to_sym do
-          PushType::Asset.find send(field.json_key) if send(field.json_key).present?
+          field.relation_class.not_trash.find send(field.json_key) if send(field.json_key).present?
         end
       end
     end

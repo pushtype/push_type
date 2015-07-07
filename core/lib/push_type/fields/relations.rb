@@ -7,12 +7,12 @@ module PushType
         (name.singularize + suffix).to_sym
       end
 
-      def relation_option
-        @opts[:relation_class]
+      def relation_class
+        (@opts[:class] || name).to_s.classify.constantize
       end
 
       def relation_root
-        (relation_option || name.singularize).to_s.classify.constantize
+        relation_class
       end
 
       def relation_tree

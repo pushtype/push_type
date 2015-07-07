@@ -5,8 +5,10 @@ module PushType
 
     options template: 'relation', field_options: {}
 
-    def relation_option
-      @opts[:taxonomy_class]
+    def relation_class
+      super
+    rescue NameError
+      PushType::Taxonomy
     end
 
     initialized_on_node do |object, field|

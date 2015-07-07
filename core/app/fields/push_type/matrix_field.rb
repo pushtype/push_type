@@ -3,7 +3,7 @@ module PushType
 
     include PushType::Fields::Arrays
 
-    options template: :matrix, mapping: [:key, :value]
+    options template: 'matrix', mapping: [:key, :value]
 
     def param
       { json_key => mapping.keys }
