@@ -3,7 +3,7 @@ module PushType
 
     include PushType::Fields::Arrays
 
-    options template: :repeater
+    options template: 'repeater'
 
     def to_json(val)
       super.reject(&:blank?) if val.present?

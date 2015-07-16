@@ -30,33 +30,5 @@ module PushType
       it { field.column_class.must_equal 'medium-6' }
     end
 
-    describe NumberField do
-      let(:field) { PushType::NumberField.new :foo }
-      it { field.form_helper.must_equal :number_field }
-      it { field.to_json(val).must_equal 1 }
-    end
-
-    describe TextField do
-      let(:field) { PushType::TextField.new :foo }
-      it { field.form_helper.must_equal :text_area }
-    end
-
-    describe TagListField do
-      let(:field) { PushType::TagListField.new :foo }
-      it { field.template.must_equal 'tag_list' }
-      it { field.html_options[:multiple].must_equal true }
-      it { field.html_options[:placeholder].must_equal 'Tags...' }
-
-      describe 'dynamic methods' do
-        before do
-          Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
-          Page.field :tags, :tag_list
-          Page.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar'])
-        end
-        after { Page.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
-        it { Page.all_tags.must_equal ['bar', 'foo'] }
-      end
-    end
-
   end
 end

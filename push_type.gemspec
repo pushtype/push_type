@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'push_type_wysiwyg', PushType::VERSION
   s.add_dependency 'push_type_auth',    PushType::VERSION
 
-  s.add_development_dependency 'minitest-rails',      '~> 2.1.1'
+  s.add_development_dependency 'minitest-rails',      '~> 2.2.0'
   s.add_development_dependency 'database_cleaner',    '~> 1.4.0'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end
