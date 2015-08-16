@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.name          = 'push_type_core'
   s.version       = PushType::VERSION
-  s.summary       = %q{The core engine for the PushType content management system.}
-  s.description   = %q{The core engine for the PushType content management system. Required by all other PushType engines.}
+  s.summary       = %q{The core engine for PushType CMS.}
+  s.description   = %q{The core engine for PushType CMS. Required by all other PushType engines. PushType is a modern, open source content management system for Ruby on Rails.}
 
   s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.authors       = ['Aaron Russell']
   s.email         = ['aaron@gc4.co.uk']
-  s.homepage      = 'http://type.pushcode.com'
+  s.homepage      = 'http://www.pushtype.org'
   s.license       = 'MIT'
 
   s.add_dependency 'rails',         '~> 4.2.3'

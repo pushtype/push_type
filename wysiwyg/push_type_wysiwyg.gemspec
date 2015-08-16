@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
   s.name          = 'push_type_wysiwyg'
   s.version       = PushType::VERSION
-  s.summary       = %q{Provides a WYSIWYG editor to the PushType content management system using Froala.}
-  s.description   = %q{Provides a WYSIWYG editor to the PushType content management system using Froala. Requires push_type_admin.}
+  s.summary       = %q{Provides a WYSIWYG editor to PushType CMS using Froala.}
+  s.description   = %q{Provides a WYSIWYG editor to PushType CMS using Froala. Requires push_type_admin. PushType is a modern, open source content management system for Ruby on Rails.}
 
   s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.authors       = ['Aaron Russell']
   s.email         = ['aaron@gc4.co.uk']
-  s.homepage      = 'http://type.pushcode.com'
+  s.homepage      = 'http://www.pushtype.org'
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',  PushType::VERSION
