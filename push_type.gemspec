@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name          = 'push_type'
   s.version       = PushType::VERSION
   s.summary       = %q{PushType is a modern, open source content management system for Ruby on Rails.}
-  s.description   = %q{PushType is a modern, flexible, open source content management system for Ruby on Rails, built around the idea that your job should be made easier by the tools you chose to work with.}
+  s.description   = %q{PushType is a modern, open source content management system for Ruby on Rails, built around the idea that your job should be made easier by the tools you chose to work with.}
 
   s.files         = Dir['lib/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
