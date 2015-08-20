@@ -1,0 +1,12 @@
+languages:
+  Ruby: true
+  JavaScript: true
+exclude_paths:
+  - 'admin/test/*'
+  - 'admin/vendor/*'
+  - 'auth/test/*'
+  - 'auth/vendor/*'
+  - 'core/test/*'
+  - 'core/vendor/*'
+  - 'wysiwyg/test/*'
+  - 'wysiwyg/vendor/*'
