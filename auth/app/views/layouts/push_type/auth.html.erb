@@ -12,18 +12,21 @@
 </head>
 <body>
 
-  <header class="header" role="banner">
-    <div class="row">
-      <div class="small-6 columns">
-        <%= image_tag('push_type/pushtype-logo.svg', size: '140x26', alt: 'PushType') %>
-      </div>
-      <nav class="small-6 columns">
-        <ul class="inline-list right">
+  <header class="header contain-to-grid" role="banner">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to image_tag('push_type/pushtype-logo.svg', size: '140x26', alt: 'PushType', class: 'logo'), push_type.root_path %></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
           <%= content_tag :li, link_to(ficon(:home, 'Back to site'), main_app.root_path), :'data-no-turbolink' => true %>
         </ul>
-      </nav>
-    </div>
-  </header>  
+      </section>
+    </nav>
+  </header>
 
   <section class="main" role="main">
     <div class="row">

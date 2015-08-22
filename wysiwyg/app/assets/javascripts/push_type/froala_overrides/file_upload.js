@@ -50,7 +50,7 @@ $.Editable.prototype.buildFileUpload = function () {
 
   this.addListener('hidePopups', $.proxy(function () {
     this.hideFileWrapper();
-  }), this);
+  }, this));
 
   // Init progress bar.
   this.$file_progress_bar = this.$file_wrapper.find('p#f-file-progress-' + this._id);

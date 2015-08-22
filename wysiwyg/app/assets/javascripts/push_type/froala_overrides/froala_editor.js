@@ -12,17 +12,18 @@ $.Editable.prototype.showByCoordinates = function (x, y) {
     y = y - $container.offset().top;
 
     if (!this.iPad()) {
-      y = y + $container.scrollTop();
       x = x + $container.scrollLeft();
+      y = y + $container.scrollTop();
     }
   }
 
-  var editor_width = Math.max(this.$popup_editor.outerWidth(), 250);
+  if (y > this.$box.offset().top + this.$box.outerHeight()) {
+    y = this.$box.offset().top + this.$box.outerHeight();
 
-  // PT BEGIN
-  var bottom = $container.offset().top + $container.outerHeight() + 8;
-  y = Math.min(y, bottom);
-  // PT END
+    if (this.options.inlineMode) y = y + 10;
+  }
+
+  var editor_width = Math.max(this.$popup_editor.outerWidth(), 250);
 
   if (x + editor_width >= $container.outerWidth() - 50 && (x + 44) - editor_width > 0) {
     this.$popup_editor.addClass('right-side');
@@ -48,30 +49,4 @@ $.Editable.prototype.showByCoordinates = function (x, y) {
   }
 
   this.$popup_editor.show();
-};
-
-/**
- * Override to fix IE9 bug
- */
-$.Editable.prototype.parseImageResponse = function (response) {
-  try {
-    var resp = $.parseJSON(response);
-
-    // PT BEGIN
-    // Is this IE9 being a wugger?
-    if (!resp) { return; }
-    // PT END
-      
-    if (resp.link) {
-      this.writeImage(resp.link);
-    } else if (resp.error) {
-      this.throwImageErrorWithMessage(resp.error);
-    } else {
-      // No link in upload request.
-      this.throwImageError(2);
-    }
-  } catch (ex) {
-    // Bad response.
-    this.throwImageError(4);
-  }
 };
