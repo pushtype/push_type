@@ -1361,11 +1361,11 @@ $side-nav-link-bg-hover: scale-color($panel-bg, $lightness: 75%);
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: transparent;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
-// $topbar-height: 45px;
+$topbar-height: rem-calc(59);
 // $topbar-margin-bottom: 0;
 
 // Controlling the styles for the title in the top bar
@@ -1373,27 +1373,29 @@ $side-nav-link-bg-hover: scale-color($panel-bg, $lightness: 75%);
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
-// $topbar-dropdown-link-color: $white;
-// $topbar-dropdown-link-bg: $oil;
+$topbar-dropdown-bg: $white;
+$topbar-dropdown-link-color: $primary-color;
+$topbar-dropdown-link-color-hover: scale-color($primary-color, $lightness: -14%);
+$topbar-dropdown-link-bg: $white;
+$topbar-dropdown-link-bg-hover: scale-color($primary-color, $lightness: 95%);
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: $white;
-// $topbar-dropdown-toggle-alpha: 0.4;
+$topbar-dropdown-toggle-color: $primary-color;
+$topbar-dropdown-toggle-alpha: 0.6;
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: $white;
-// $topbar-link-color-hover: $white;
-// $topbar-link-color-active: $white;
-// $topbar-link-color-active-hover: $white;
+$topbar-link-color: $primary-color;
+$topbar-link-color-hover: scale-color($primary-color, $lightness: -14%);
+$topbar-link-color-active: $topbar-link-color-hover;
+$topbar-link-color-active-hover: $topbar-link-color-hover;
 // $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
+$topbar-link-font-size: rem-calc(16);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
-// $topbar-link-bg-hover: #272727;
-// $topbar-link-bg-active: $primary-color;
-// $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
+$topbar-link-bg-hover: scale-color($primary-color, $lightness: 95%);
+$topbar-link-bg-active: $topbar-link-bg-hover;
+$topbar-link-bg-active-hover: scale-color($primary-color, $lightness: 90%);
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;
 // $topbar-link-padding: $topbar-height / 3;
@@ -1410,13 +1412,13 @@ $side-nav-link-bg-hover: scale-color($panel-bg, $lightness: 75%);
 // $topbar-dropdown-label-bg: $oil;
 
 // Top menu icon styles
-// $topbar-menu-link-transform: uppercase;
-// $topbar-menu-link-font-size: rem-calc(13);
-// $topbar-menu-link-weight: $font-weight-bold;
-// $topbar-menu-link-color: $white;
-// $topbar-menu-icon-color: $white;
-// $topbar-menu-link-color-toggled: $jumbo;
-// $topbar-menu-icon-color-toggled: $jumbo;
+$topbar-menu-link-transform: none;
+$topbar-menu-link-font-size: $topbar-link-font-size;
+$topbar-menu-link-weight: $font-weight-normal;
+$topbar-menu-link-color: $primary-color;
+$topbar-menu-icon-color: $topbar-menu-link-color;
+$topbar-menu-link-color-toggled: scale-color($primary-color, $lightness: -14%);
+$topbar-menu-icon-color-toggled: $topbar-menu-link-color-toggled;
 
 // Transitions and breakpoint styles
 // $topbar-transition-speed: 300ms;

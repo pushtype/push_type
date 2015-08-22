@@ -20,7 +20,7 @@ module PushType
       initializer 'push_type_admin.menus' do
         PushType.menu :main do
           element :ul
-          html_options class: 'inline-list'
+          html_options class: 'left'
 
           item :content do
             link    { push_type.nodes_path }
@@ -38,7 +38,7 @@ module PushType
 
         PushType.menu :utility do
           element :ul
-          html_options class: 'inline-list right'
+          html_options class: 'right'
 
           item :info do
             text    { ficon(:info) }

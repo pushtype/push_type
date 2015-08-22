@@ -12,19 +12,20 @@
 </head>
 <body>
   
-  <header class="header" role="banner">
-    <div class="row">
-      <div class="small-4 medium-3 large-2 columns">
-        <%= link_to image_tag('push_type/pushtype-logo.svg', size: '140x26', alt: 'PushType'), push_type.root_path %>
-      </div>
-      <nav class="small-4 medium-6 large-8 columns">
+  <header class="header contain-to-grid" role="banner">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to image_tag('push_type/pushtype-logo.svg', size: '140x26', alt: 'PushType', class: 'logo'), push_type.root_path %></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
         <%= render_menu(:main) %>
-      </nav>
-      <nav class="small-4 medium-3 large-2 columns">
         <%= render_menu(:utility) %>
-      </nav>
-    </div>
-  </header>  
+      </section>
+    </nav>
+  </header>
 
   <section class="main" role="main">
     <div class="row">

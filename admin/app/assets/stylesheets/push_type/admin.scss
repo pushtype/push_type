@@ -29,12 +29,24 @@ html.turbolinks-progress-bar::before {
 
 [class^="fi-"], [class~=" fi-"] {
   &:before {
-    font-size: 1.25em;
+    font-size:          1.25em;
   }
 }
 
-.inline-list .active {
-  font-weight:          400;
+.top-bar {
+  .logo {
+    margin-top:         -3px;
+  }
+  .active a {
+    font-weight:        $font-weight-bold;
+  }
+  .has-dropdown > a, .has-dropdown > a:hover {
+    background:         $white !important;
+  }
+  .dropdown {
+    border:             1px solid $silver;
+    border-top:         none;
+  }
 }
 
 .button i {
@@ -73,7 +85,6 @@ table {
   z-index:              5;
   width:                100%;
   height:               rem-calc(60);
-  padding-top:          rem-calc(16);
   background-color:     $white;
   border-bottom:        1px solid $silver;
 }
