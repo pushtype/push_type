@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Nestable do
+  class NestableTest < ActiveSupport::TestCase
 
     let(:page) { TestPage.new }
     let(:roots) { PushType.root_nodes }

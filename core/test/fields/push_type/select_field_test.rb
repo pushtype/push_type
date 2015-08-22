@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class SelectFieldTest < ActiveSupport::TestCase
 
-  describe SelectField do
     let(:field) { PushType::SelectField.new :foo, opts }
     let(:val)   { 'a' }
 
@@ -36,5 +36,4 @@ module PushType
     end
 
   end
-
 end

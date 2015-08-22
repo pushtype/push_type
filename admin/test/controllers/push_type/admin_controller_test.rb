@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe AdminController do
+  class AdminControllerTest < ActionController::TestCase
     
     describe 'GET #info' do
       before { get :info }

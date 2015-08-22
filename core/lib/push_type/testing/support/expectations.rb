@@ -1,3 +1,8 @@
+class Object
+  infect_an_assertion :assert_difference,     :must_change, :block
+  infect_an_assertion :assert_no_difference,  :wont_change, :block
+end
+
 class ActionController::TestResponse
   infect_an_assertion :assert_response,       :must_respond_with
   infect_an_assertion :assert_redirected_to,  :must_redirect_to

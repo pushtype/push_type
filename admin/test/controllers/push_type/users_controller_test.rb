@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe UsersController do
+  class UsersControllerTest < ActionController::TestCase
 
     let(:user_attrs) { FactoryGirl.attributes_for(:user) }
     let(:user) { FactoryGirl.create :user }

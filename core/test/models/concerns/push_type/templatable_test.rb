@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Templatable do
+  class TemplatableTest < ActiveSupport::TestCase
 
     let(:page) { TestPage.new }
 

@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe ProfilesController do
+  class ProfilesControllerTest < ActionController::TestCase
     
     let(:current_user) { FactoryGirl.create(:confirmed_user) }
     before { sign_in current_user }

@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe User do
+  class UserTest < ActiveSupport::TestCase
     let(:user) { User.new }
 
     it { user.wont_be :valid? }

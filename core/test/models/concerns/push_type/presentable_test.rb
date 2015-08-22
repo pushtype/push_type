@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Presentable do
+  class PresentableTest < ActiveSupport::TestCase
 
     describe 'class methods' do
       it { Page.presenter_class_name.must_equal 'PagePresenter' }

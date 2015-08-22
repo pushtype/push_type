@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Trashable do
+  class TrashableTest < ActiveSupport::TestCase
 
     describe 'query scopes' do
       it { PushType::Node.respond_to?(:trashed).must_equal true }

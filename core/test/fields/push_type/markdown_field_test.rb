@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class MarkdownFieldTest < ActiveSupport::TestCase
 
-  describe MarkdownField do
     let(:field) { PushType::MarkdownField.new :foo }
     
     it { field.form_helper.must_equal :text_area }
@@ -30,6 +30,6 @@ module PushType
         it { node.present!.foo.strip.must_equal '<p><strong>foo</strong> <em>bar</em></p>' }
       end
     end
-  end
 
+  end
 end

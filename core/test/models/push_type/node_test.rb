@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Node do
+  class NodeTest < ActiveSupport::TestCase
     let(:node) { Node.new }
 
     it { node.wont_be :valid? }

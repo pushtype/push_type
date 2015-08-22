@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Taxonomy do
+  class TaxonomyTest < ActiveSupport::TestCase
     let(:taxonomy) { Taxonomy.new }
 
     it { taxonomy.wont_be :valid? }

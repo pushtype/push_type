@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe AdminHelper do
+  class AdminHelperTest < ActionView::TestCase
 
     before { @view_flow = ActionView::OutputFlow.new }
 

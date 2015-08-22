@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe AssetsHelper do
+  class AssetsHelperTest < ActionView::TestCase
 
     describe '#assets_array' do
       let(:assets)  { 4.times.map { FactoryGirl.create :image_asset } }

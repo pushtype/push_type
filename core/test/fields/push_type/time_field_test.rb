@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class TimeFieldTest < ActiveSupport::TestCase
 
-  describe TimeField do
     let(:field) { PushType::TimeField.new :foo }
     let(:val)   { '15:00' }
     
@@ -10,6 +10,6 @@ module PushType
     it { field.form_helper.must_equal :time_field }
     it { field.from_json(val).must_be_instance_of Time }
     it { field.from_json(val).hour.must_equal 15 }
-  end
 
+  end
 end

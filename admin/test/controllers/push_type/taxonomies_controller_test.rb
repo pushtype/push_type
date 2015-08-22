@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe TaxonomiesController do
+  class TaxonomiesControllerTest < ActionController::TestCase
     
     describe 'GET #index' do
       before { get :index }

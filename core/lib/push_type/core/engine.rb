@@ -5,10 +5,10 @@ module PushType
       engine_name 'push_type'
 
       config.generators do |g|
-          g.assets false
-          g.helper false
-          g.test_framework  :minitest, spec: true, fixture: false
-        end
+        g.assets false
+        g.helper false
+        g.test_framework  :test_unit, fixture: false
+      end
 
       config.autoload_paths << config.root.join('app', 'fields')
       config.autoload_paths << config.root.join('app', 'presenters')

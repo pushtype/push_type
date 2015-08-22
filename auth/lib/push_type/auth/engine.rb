@@ -7,7 +7,7 @@ module PushType
       config.generators do |g|
         g.assets false
         g.helper false
-        g.test_framework  :minitest, spec: true, fixture: false
+        g.test_framework  :test_unit, fixture: false
       end
 
       config.to_prepare do

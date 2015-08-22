@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Customizable do
+  class CustomizableTest < ActiveSupport::TestCase
 
     let(:page) { TestPage.new }
     let(:fields) { page.fields }

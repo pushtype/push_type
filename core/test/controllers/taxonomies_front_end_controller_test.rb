@@ -1,6 +1,6 @@
-require "test_helper"
+require 'test_helper'
 
-describe TaxonomiesFrontEndController do
+class TaxonomiesFrontEndControllerTest < ActionController::TestCase
 
   before { @routes = Rails.application.routes }
   

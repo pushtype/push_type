@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class TagListFieldTest < ActiveSupport::TestCase
 
-  describe TagListField do
     let(:field) { PushType::TagListField.new :tags, opts }
     let(:val)   { ['foo', 'bar'] }
 
@@ -53,6 +53,6 @@ module PushType
         it { TestPage.all_tags { TestPage.published }.must_equal ['qux'] }
       end
     end
-  end
 
+  end
 end

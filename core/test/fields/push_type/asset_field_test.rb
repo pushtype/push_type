@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class AssetFieldTest < ActiveSupport::TestCase
 
-  describe AssetField do
     let(:field) { PushType::AssetField.new :foo }
     
     it { field.json_key.must_equal :foo_id }
@@ -32,6 +32,6 @@ module PushType
         it { node.foo.must_equal asset }
       end
     end
-  end
 
+  end
 end

@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class TaxonomyFieldTest < ActiveSupport::TestCase
 
-  describe TaxonomyField do
     let(:field) { PushType::TaxonomyField.new :foo, opts }
 
     before do
@@ -52,6 +52,6 @@ module PushType
         it { node.foo.must_equal taxonomy }
       end
     end
-  end
 
+  end
 end

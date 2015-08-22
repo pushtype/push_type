@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class MatrixFieldTest < ActiveSupport::TestCase
 
-  describe MatrixField do
     let(:field) { PushType::MatrixField.new :foo, opts }
     let(:val)   { [{ key: 1, value: 2 }, { key: 3, value: 4 }] }
 
@@ -30,6 +30,6 @@ module PushType
       it { field.from_json(val)[0].that.must_equal 'b' }
       it { field.from_json(val)[0].other.must_equal '99' }
     end
-  end
 
+  end
 end

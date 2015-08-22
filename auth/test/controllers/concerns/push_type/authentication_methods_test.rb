@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe AuthenticationMethods do
+  class AuthenticationMethodsTest < ActiveSupport::TestCase
 
     subject { PushType::AdminController.new }
     let :before_filters do

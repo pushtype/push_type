@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe NodesHelper do
+  class NodesHelperTest < ActionView::TestCase
 
     describe '#nodes_array' do
       let(:nodes)  { 4.times.map { FactoryGirl.create :node } }

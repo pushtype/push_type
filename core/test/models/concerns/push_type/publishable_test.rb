@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
   class PublishableTest < ActiveSupport::TestCase
@@ -9,23 +9,23 @@ module PushType
       let(:nodes)     { PushType::Node.published }
       let(:new_node!) { FactoryGirl.create :published_node, attributes }
       describe 'without published status' do
-        it { proc { FactoryGirl.create :node }.wont_change 'nodes.count' }
+        it { expect { FactoryGirl.create :node }.wont_change 'nodes.count' }
       end
       describe 'with published_at dates in the future' do
         let(:attributes)  { { published_at: 1.day.from_now } }
-        it { proc { new_node! }.wont_change 'nodes.count' }
+        it { expect { new_node! }.wont_change 'nodes.count' }
       end
       describe 'with published_at dates in the past' do
         let(:attributes)  { { published_at: 2.days.ago } }
-        it { proc { new_node! }.must_change 'nodes.count', 1 }
+        it { expect { new_node! }.must_change 'nodes.count', 1 }
       end
       describe 'with published_to dates in the future' do
         let(:attributes)  { { published_at: 2.days.ago, published_to: 1.day.from_now } }
-        it { proc { new_node! }.must_change 'nodes.count', 1 }
+        it { expect { new_node! }.must_change 'nodes.count', 1 }
       end
       describe 'with published_to dates in the past' do
         let(:attributes)  { { published_at: 2.days.ago, published_to: 1.day.ago } }
-        it { proc { new_node! }.wont_change 'nodes.count' }
+        it { expect { new_node! }.wont_change 'nodes.count' }
       end
     end
 

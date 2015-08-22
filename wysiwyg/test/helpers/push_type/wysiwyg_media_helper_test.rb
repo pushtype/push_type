@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe WysiwygMediaHelper do
+  class WysiwygMediaHelperTest < ActionView::TestCase
 
     describe '#wysiwyg_assets_hash' do
       let(:assets)  { PushType::Asset.page(1).per(2) }

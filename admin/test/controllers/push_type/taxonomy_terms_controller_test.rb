@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe TaxonomyTermsController do
+  class TaxonomyTermsControllerTest < ActionController::TestCase
 
     let(:json_response) { JSON.parse(response.body) }
   

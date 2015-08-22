@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 require "generators/push_type/node/node_generator"
 
 module PushType
-  describe NodeGenerator do
+  class NodeGeneratorTest < Rails::Generators::TestCase
     tests NodeGenerator
     destination Rails.root.join('tmp/generators')
 

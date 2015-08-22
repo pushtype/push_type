@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe ConfirmationsController do
+  class ConfirmationsControllerTest < ActionController::TestCase
 
     before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 

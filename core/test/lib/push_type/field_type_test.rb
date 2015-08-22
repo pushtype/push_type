@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe FieldType do
+  class FieldTypeTest < ActiveSupport::TestCase
 
     let(:field) { PushType::FieldType.new :foo, opts }
     let(:val)   { '1' }

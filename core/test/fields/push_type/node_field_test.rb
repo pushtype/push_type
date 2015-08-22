@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class NodeFieldTest < ActiveSupport::TestCase
 
-  describe NodeField do
     let(:field) { PushType::NodeField.new :foo, opts }
 
     before do
@@ -66,6 +66,6 @@ module PushType
         it { node.foo.must_equal rel }
       end
     end
-  end
 
+  end
 end

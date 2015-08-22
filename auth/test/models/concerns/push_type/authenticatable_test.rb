@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Authenticatable do
+  class AuthenticatableTest < ActiveSupport::TestCase
 
     let(:user) { PushType::User.new }
 

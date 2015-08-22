@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 require "generators/push_type/taxonomy/taxonomy_generator"
 
 module PushType
-  describe TaxonomyGenerator do
+  class TaxonomyGeneratorTest < Rails::Generators::TestCase
     tests TaxonomyGenerator
     destination Rails.root.join('tmp/generators')
 

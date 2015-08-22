@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
   module MenuBuilder
-    describe Menu do
+    class MenuTest < ActiveSupport::TestCase
 
       let(:menu) { MenuBuilder::Menu.new }
 

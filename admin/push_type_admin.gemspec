@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari',                    '~> 0.16.3'
   s.add_dependency 'premailer-rails',             '~> 1.8.2'
 
-  s.add_development_dependency 'minitest-rails',      '~> 2.2.0'
+  s.add_development_dependency 'minitest-spec-rails', '~> 5.2.2'
   s.add_development_dependency 'database_cleaner',    '~> 1.4.1'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end

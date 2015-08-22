@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
+  class RepeaterFieldTest < ActiveSupport::TestCase
 
-  describe RepeaterField do
     let(:field) { PushType::RepeaterField.new :foo }
     let(:val)   { ['a', 'b', 'c'] }
 
@@ -17,5 +17,4 @@ module PushType
     end
 
   end
-
 end

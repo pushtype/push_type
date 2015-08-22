@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe WysiwygMediaController do
+  class WysiwygMediaControllerTest < ActionController::TestCase
 
     let(:json_response) { JSON.parse(response.body) }
     let(:asset_attrs)   { FactoryGirl.attributes_for(:asset) }

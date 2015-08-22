@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Presenter do
+  class PresenterTest < ActiveSupport::TestCase
 
     let(:page) { Page.create FactoryGirl.attributes_for(:node) }
 

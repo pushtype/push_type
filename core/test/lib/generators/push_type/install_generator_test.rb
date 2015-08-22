@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 require "generators/push_type/install/install_generator"
 
 module PushType
-  describe InstallGenerator do
+  class InstallGeneratorTest < Rails::Generators::TestCase
     tests InstallGenerator
     destination Rails.root.join('tmp/generators')
 

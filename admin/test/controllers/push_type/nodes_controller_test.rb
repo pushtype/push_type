@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe NodesController do
+  class NodesControllerTest < ActionController::TestCase
 
     let(:node_attrs) { FactoryGirl.attributes_for(:node) }
     let(:node) { Page.create node_attrs }

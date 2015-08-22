@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 require "generators/push_type/presenter/presenter_generator"
 
 module PushType
-  describe PresenterGenerator do
+  class PresenterGeneratorTest < Rails::Generators::TestCase
     tests PresenterGenerator
     destination Rails.root.join('tmp/generators')
 

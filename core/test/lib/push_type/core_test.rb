@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe ::PushType do
+  class PushTypeTest < ActiveSupport::TestCase
 
     describe '.version' do
       subject { PushType.version }

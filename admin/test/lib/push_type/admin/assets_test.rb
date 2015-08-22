@@ -1,6 +1,6 @@
 module PushType
   module Admin
-    describe Assets do
+    class AssetsTest < ActiveSupport::TestCase
 
       let(:assets) { PushType::Admin::Assets.new }
       

@@ -1,8 +1,8 @@
-require "test_helper"
+require 'test_helper'
 require "generators/push_type/field/field_generator"
 
 module PushType
-  describe FieldGenerator do
+  class FieldGeneratorTest < Rails::Generators::TestCase
     tests FieldGenerator
     destination Rails.root.join('tmp/generators')
 

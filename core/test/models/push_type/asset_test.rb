@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe Asset do
+  class AssetTest < ActiveSupport::TestCase
     let(:asset) { Asset.new }
 
     it { asset.wont_be :valid? }

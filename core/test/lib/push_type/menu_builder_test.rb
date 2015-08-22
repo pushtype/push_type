@@ -1,7 +1,7 @@
-require "test_helper"
+require 'test_helper'
 
 module PushType
-  describe MenuBuilder do
+  class MenuBuilderTest < ActiveSupport::TestCase
 
     before  { MenuBuilder.class_variable_set :@@menus, {} }
     after   { MenuBuilder.class_variable_set :@@menus, {} }
