@@ -1,22 +1,39 @@
 PushType.setup do |config|
 
+  # By default all node types can be placed at the root of the
+  # content tree. Alternatively, set an array of node type symbols
+  # to whiltelist acceptable root nodes.
   config.root_nodes = :all
 
-  config.unexposed_nodes = []
-
+  # Set the slug of the node that the `NodesFrontEndContoller` will
+  # render when visting the root URL of the site (the homepage).
+  # This setting can be overridden in config/routes.rb.
   config.home_slug = 'home'
 
+  # Set an array of node type symbols which will not be exposed to
+  # the `NodesFrontEndContoller`. These nodes will not be accessible
+  # through their permalink.
+  config.unexposed_nodes = []
+
+  # Set an array of taxonomy type symbols which will not be exposed
+  # to the `TaxonomiesFrontEndController`. These taxonomies will not
+  # be accessible through their permalink.
   config.unexposed_taxonomies = []
 
+  # Media styles allow you to predefine a collection of geometry
+  # strings for resizing images on the fly with the `Asset#media`
+  # method. Example: `image.media(:large)`
   config.media_styles = {
     large:    '1024x1024>',
     medium:   '512x512>',
     small:    '256x256>'
   }
 
-  # Configure the default mailer "from" address
+  # Configure the email address to be used as the "from" address
+  # for PushType's build in mailers.
   config.mailer_sender = 'pushtype@example.com'
 
+  # PushType uses Dragonfly for managing uploaded images/assets.
   # Dragonfly datastore configuration
   config.dragonfly_datastore = :file
   config.dragonfly_datastore_options = {
