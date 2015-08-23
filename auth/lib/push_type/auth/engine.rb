@@ -11,17 +11,16 @@ module PushType
       end
 
       config.to_prepare do
-        PushType::User.send :include, PushType::Authenticatable
-        Devise::Mailer.layout 'push_type/email'
-      end
-
-      initializer 'push_type_auth.extend_controllers' do
-        PushType::AdminController.send :include, PushType::AuthenticationMethods
-        PushType::UsersController.send :include, PushType::InvitationMethods
-      end
-
-      initializer 'push_type_auth.extend_helpers' do
+        # Make User authenticatable
+        PushType::User.include PushType::Authenticatable
+        
+        # Extend controllers with auth/invitation methos
+        PushType::AdminController.include PushType::AuthenticationMethods
+        PushType::UsersController.include PushType::InvitationMethods
+        
+        # Configure devise with helpers and layout
         DeviseController.helper PushType::AdminHelper
+        Devise::Mailer.layout 'push_type/email'
       end
 
       initializer 'push_type_auth.devise_config' do
