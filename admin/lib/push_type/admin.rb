@@ -18,12 +18,14 @@ require 'premailer/rails'
 
 module PushType
 
-  module Admin
-  end
-
   def self.admin_assets
     @@admin_assets ||= PushType::Admin::Assets.new
   end
+
+  module Admin
+    ActiveSupport.run_load_hooks(:push_type_admin, PushType)
+  end
+  
 end
 
 require 'push_type/admin/assets'

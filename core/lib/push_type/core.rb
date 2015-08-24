@@ -57,7 +57,9 @@ module PushType
   end
 
   module Core
+    ActiveSupport.run_load_hooks(:push_type_core, PushType)
   end
+
 end
 
 require 'push_type/config'

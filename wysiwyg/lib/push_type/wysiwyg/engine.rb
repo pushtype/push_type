@@ -11,7 +11,9 @@ module PushType
       end
 
       initializer 'push_type.wysiwyg_assets' do
-        PushType.admin_assets.register 'push_type/wysiwyg'
+        ActiveSupport.on_load :push_type_admin do
+          admin_assets.register 'push_type/wysiwyg'
+        end
       end
     end
   end
