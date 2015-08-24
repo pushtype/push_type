@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'push_type_core',  PushType::VERSION
   s.add_dependency 'push_type_admin', PushType::VERSION
-  s.add_dependency 'devise',          '~> 3.4.1'
+  s.add_dependency 'devise',          '~> 3.5.2'
   s.add_dependency 'highline',        '~> 1.7.3'
 
   s.add_development_dependency 'minitest-spec-rails', '~> 5.2.2'

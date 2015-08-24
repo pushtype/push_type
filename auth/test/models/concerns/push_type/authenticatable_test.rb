@@ -11,7 +11,7 @@ module PushType
     end
 
     describe 'confirmable' do
-      it { user.methods.include?(:confirm!).must_equal true }
+      it { user.methods.include?(:confirm).must_equal true }
     end
 
     describe 'recoverable' do
