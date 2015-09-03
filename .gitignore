@@ -4,6 +4,7 @@
 .bundle
 .ruby-*
 .rvmrc
+.yardoc
 
 Gemfile.lock
 pkg

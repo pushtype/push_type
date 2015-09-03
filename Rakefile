@@ -4,8 +4,8 @@ rescue LoadError
   puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
 end
 
-require 'rdoc/task'
 require 'push_type/version'
+require 'rdoc/task'
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -32,7 +32,6 @@ task :test do
     end
   end
 end
-
 
 namespace :gems do
   desc "Build all PushType engine gems"
@@ -67,5 +66,3 @@ namespace :gems do
     end
   end
 end
-
-

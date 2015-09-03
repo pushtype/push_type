@@ -1,0 +1,9 @@
+--protected
+--no-private
+--embed-mixins
+--exclude core/lib/generators
+--exclude core/lib/push_type/testing
+--markup markdown
+{core,admin,auth,wysiwyg}/{app,lib}/**/*.rb
+-
+LICENSE.md

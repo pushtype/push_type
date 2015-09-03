@@ -1,3 +1,4 @@
+# @private
 class Breadcrumbs
   module Render
     class Foundation < List
