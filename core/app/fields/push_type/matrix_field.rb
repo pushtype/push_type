@@ -1,32 +1,43 @@
 module PushType
   class MatrixField < PushType::FieldType
 
-    include PushType::Fields::Arrays
+    options json_primitive: :array,
+            template:       'matrix'
 
-    options template: 'matrix', mapping: [:key, :value]
-
-    def param
-      { json_key => mapping.keys }
+    def initialize(*args, &block)
+      super
+      structure_class.class_eval(&block) if block
+      validate_field_types!
     end
 
-    def mapping
-      @mapping ||= @opts[:mapping].reduce({}) do |h, col|
-        col.is_a?(Hash) ? h.merge(col) : h.update(col => form_helper)
+    def value
+      return if json_value.blank?
+      json_value.map do |h|
+        structure_class.new(field_store: h)
       end
     end
 
-    def struct
-      @struct ||= Struct.new *mapping.keys
+    def fields
+      @fields ||= structure_class.new.fields
     end
 
-    def to_json(val)
-      return if val.blank?
-      super.reject { |v| v.blank? or v.values.all?(&:blank?) }
+    private
+
+    def structure_class
+      @structure_class ||= PushType::Structure.clone
     end
 
-    def from_json(val)
-      return if val.blank?
-      super.reject { |v| v.blank? or v.values.all?(&:blank?) }.map { |h| struct.new(*h.values) }
+    def validate_field_types!
+      fields.values.each do |f|
+        kind = f.class.name.demodulize.underscore.gsub(/_(field|type)$/, '')
+        unless field_type_whitelist.include?(kind.to_sym)
+          raise ArgumentError, "Invalid field type. `#{ kind }` cannot be used in #{ self.class.name }."
+        end
+      end
+    end
+
+    def field_type_whitelist
+      [:number, :string, :text]
     end
 
   end

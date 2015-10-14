@@ -1,7 +1,7 @@
 # jQuery init
 $(document).on 'ready page:load', ->
 
-  $('select', '.taxonomy, .node').selectize
+  $('select', '.relation, .node, .taxonomy').selectize
     plugins:      ['remove_button']
     hideSelected: false
     onInitialize: ->

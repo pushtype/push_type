@@ -1,11 +1,8 @@
 module PushType
   class NumberField < PushType::FieldType
 
-    options form_helper: :number_field
-
-    def to_json(val)
-      val.to_i if val.present?
-    end
+    options json_primitive: :number,
+            form_helper:    :number_field
 
   end
 end

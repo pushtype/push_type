@@ -717,10 +717,6 @@ form .permalink {
   }
 }
 
-input[type="hidden"] + .error {
-  display: none;
-}
-
 .error-icon {
   display:              inline;
   font-size:            $form-label-font-size;
@@ -782,10 +778,23 @@ form .asset-upload {
   }
 }
 
-.asset-field {
+%field-module {
   margin:               rem-calc(0 0 16);
-  padding:              rem-calc(8);
   border:               1px solid $input-border-color;
+  .error small.error, &.error {
+    margin-bottom:      0;
+  }
+  label {
+    color: $form-label-font-color;
+  }
+  .error label {
+    color: $alert-color;
+  }
+}
+
+.asset-field {
+  @extend %field-module;
+  padding:              rem-calc(8);
   box-shadow:           $input-box-shadow;
 
   .preview {
@@ -794,15 +803,11 @@ form .asset-upload {
   .button {
     margin-top:         0;
     margin-bottom:      0;
-  }
-  &.error {
-    margin-bottom:      0;
-  }
+  } 
 }
 
 .repeater-field {
-  margin:               rem-calc(0 0 16);
-  border:               1px solid $input-border-color;
+  @extend %field-module;
 
   table {
     margin:             0;
@@ -818,7 +823,7 @@ form .asset-upload {
   .plus {
     padding: 0.5625rem 0.625rem;
   }
-  .button, input, select, textarea {
+  .button, input, select, textarea, label, .selectize-control, %field-module {
     margin:             0;
   }
   textarea {
@@ -842,6 +847,9 @@ form .asset-upload {
   }
   .picker {
     margin-top: -#{ rem-calc(17) };
+  }
+  .error .picker, .repeater-field & .picker {
+    margin-top: 0;
   }
   .picker__footer {
     padding-bottom: 0.75em;

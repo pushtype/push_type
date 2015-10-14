@@ -2,12 +2,23 @@ module PushType
   module Customizable
     extend ActiveSupport::Concern
 
-    def fields
-      self.class.fields
+    included do
+      after_initialize :initialize_fields
     end
 
-    def field_params
-      fields.map { |k, field| field.param }
+    def fields
+      @fields ||= {}
+    end
+
+    private
+
+    def initialize_fields
+      self.class.fields.each do |key, (klass, opts, blk)|
+        f = fields[key] = klass.new(key, self, opts, &blk)
+        if block = f.class.init_block
+          block.call(self, f)
+        end
+      end
     end
 
     module ClassMethods
@@ -18,7 +29,7 @@ module PushType
         @fields ||= ActiveSupport::OrderedHash.new
       end
 
-      def field(name, *args)
+      def field(name, *args, &blk)
         raise ArgumentError if args.size > 2
         kind, opts = case args.size
           when 2 then args
@@ -26,34 +37,35 @@ module PushType
           else        [ :string, {} ]
         end
 
-        _field = fields[name] = field_factory(kind).new(name, opts)
-        store_accessor :field_store, _field.json_key
+        # Store field type and set accessor
+        fields[name] = [ field_type(kind), opts, blk ].compact
+        store_accessor :field_store, name
 
-        validates _field.json_key, opts[:validates] if opts[:validates]
+        # Set inline validates
+        validates name, opts[:validates] if opts[:validates]
 
-        override_accessor _field
+        # Override setter accessor
+        define_method "#{ name }=".to_sym do |val|
+          super self.fields[name].primitive.to_json(val)
+        end
 
-        if block = _field.class.initialized_blk
-          block.call(self, _field)
+        # Override getter accessor
+        define_method name do
+          self.fields[name].value
+        end
+
+        if block = fields[name][0].def_block
+          block.call(self, name, fields[name][0])
         end
       end
 
       protected
 
-      def field_factory(kind)
+      def field_type(kind)
         begin
           "push_type/#{ kind }_field".camelize.constantize
         rescue NameError
           "#{ kind }_field".camelize.constantize
-        end
-      end
-
-      def override_accessor(f)
-        define_method "#{ f.json_key }=".to_sym do |val|
-          super f.to_json(val)
-        end
-        define_method f.json_key do
-          f.from_json super()
         end
       end
 

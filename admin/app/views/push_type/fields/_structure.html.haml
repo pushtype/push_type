@@ -1,0 +1,11 @@
+.repeater-field{ class: ('error' if f.object.errors[field.name].present?) }
+  %table
+    %tbody
+      = f.fields_for field.name, field.value do |s|
+        - field.fields.each do |key, sub_field|
+          %tr
+            %th= s.label sub_field.name, sub_field.label
+            %td= render_field sub_field, s
+
+- if f.object.errors[field.name].present?
+  %small.error= f.object.errors[field.name].join(', ')

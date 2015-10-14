@@ -1,9 +1,7 @@
 module PushType
-  class TaxonomyField < SelectField
+  class TaxonomyField < RelationField
 
-    include PushType::Fields::Relations 
-
-    options template: 'relation', field_options: {}
+    options template: 'relation'
 
     def relation_class
       super
@@ -11,11 +9,11 @@ module PushType
       PushType::Taxonomy
     end
 
-    initialized_on_node do |object, field|
+    on_instance do |object, field|
       object.class_eval do
-        define_method field.name.to_sym do
-          field.relation_class.find send(field.json_key) if send(field.json_key).present?
-        end
+        define_method(field.relation_name.to_sym) do
+          field.relation_class.find field.json_value unless field.json_value.blank?
+        end unless method_defined?(field.relation_name.to_sym)
       end
     end
 

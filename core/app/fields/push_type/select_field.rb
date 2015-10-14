@@ -1,15 +1,11 @@
 module PushType
   class SelectField < PushType::FieldType
 
-    options template: 'select', choices: [], field_options: { include_blank: 'Please select...' }, multiple: false
-
-    def multiple?
-      @opts[:multiple]
-    end
-
-    def param
-      multiple? ? { json_key => [] } : super
-    end
+    options template:       'select',
+            form_helper:    :select,
+            choices:        [], 
+            field_options:  { include_blank: 'Please select...' },
+            multiple:       false
 
     def choices
       if @opts[:choices].respond_to? :call
@@ -19,22 +15,16 @@ module PushType
       end
     end
 
-    def field_options
-      @opts[:field_options]
+    def multiple?
+      @opts[:multiple]
+    end
+
+    def json_primitive
+       multiple? ? :array : super 
     end
 
     def html_options
-      super.merge(multiple: multiple?)
-    end
-
-    def to_json(val)
-      return if val.blank?
-      multiple? ? Array(val).reject(&:blank?) : super
-    end
-
-    def from_json(val)
-      return if val.blank?
-      multiple? ? Array(val).reject(&:blank?) : super
+      @opts[:html_options].merge(multiple: multiple?)
     end
 
   end

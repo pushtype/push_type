@@ -1,9 +1,7 @@
 module PushType
-  class NodeField < SelectField
+  class NodeField < RelationField
 
-    include PushType::Fields::Relations 
-
-    options template: 'relation', field_options: {}, root: '/'
+    options template: 'relation', root: '/'
 
     def relation_class
       super
@@ -15,13 +13,13 @@ module PushType
       root = relation_class.not_trash
       root = root.find_by_path(@opts[:root].split('/')) unless @opts[:root] == '/'
       root or raise "Cannot find root node at path '#{ @opts[:root] }'"
-    end   
+    end
 
-    initialized_on_node do |object, field|
+    on_instance do |object, field|
       object.class_eval do
-        define_method field.name.to_sym do
-          field.relation_class.not_trash.find send(field.json_key) if send(field.json_key).present?
-        end
+        define_method(field.relation_name.to_sym) do
+          field.relation_class.not_trash.find field.json_value unless field.json_value.blank?
+        end unless method_defined?(field.relation_name.to_sym)
       end
     end
 

@@ -1,17 +1,19 @@
-= f.label field.json_key, field.label
-
-.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ f.object.send(field.json_key).to_json })" } }
+.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ field.json_value.to_json })" } }
   %table
     %thead
       %tr
-        - field.mapping.keys.each do |key|
-          %th= key.to_s.humanize
+        - field.fields.keys.each do |name|
+          %th= name.to_s.humanize
         %th &nbsp;
     %tbody
       %tr{ ng: { repeat: 'row in rows track by $index' } }
-        - field.mapping.each do |key, form_helper|
-          %td= f.send form_helper, nil, field.html_options.merge(name: "#{ f.object_name }[#{ field.json_key }][][#{ key }]", id: "#{ f.object_name }_#{ field.json_key }_{{ $index }}_#{ key }", value: nil, :'ng-model' => "row.#{ key }")
-        %td.remove
-          %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
+        = fields_for :matrix do |m|
+          - field.fields.each do |name, sub_field|
+            - merge_matrix_html_options f.object_name, field, sub_field
+            %td
+              %div{ class: sub_field.class.name.demodulize.underscore.gsub(/_(field|type)$/, '') }
+                = render "push_type/fields/#{ sub_field.template }", f: m, field: sub_field
+          %td.remove
+            %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
   .plus
     %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }= ficon :plus, 'Add row'

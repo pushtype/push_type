@@ -39,7 +39,9 @@
 
         .row.custom-fields
           - @user.fields.each do |key, field|
-            = render_custom_field field, f
+            %div{ class: [field.kind, field.column_class, 'columns end'].compact.join(' ') }
+              = f.label key, field.label
+              = render "push_type/fields/#{ field.template }", f: f, field: field
 
         .row.submit.text-center
           %button.button.radius= ficon :check, 'Update profile'

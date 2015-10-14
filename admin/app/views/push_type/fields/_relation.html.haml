@@ -1,2 +1,1 @@
-= f.label field.json_key, field.label
-= f.select field.json_key, [], field.field_options, field.html_options.merge(data: { options: field.relation_tree.to_json, items: f.object.send(field.json_key) })
+= f.select field.name, [], field.field_options, field.html_options.merge(data: { options: field.choices.to_json, items: field.json_value })

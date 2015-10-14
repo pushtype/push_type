@@ -1,10 +1,11 @@
 module PushType
   class DateField < PushType::FieldType
 
-    options template: 'date', form_helper: :date_field
+    options template:     'date',
+            form_helper:  :date_field
 
-    def from_json(val)
-      val.to_date if val.present?
+    def value
+      json_value.to_date unless json_value.blank?
     end
 
   end

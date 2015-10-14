@@ -91,8 +91,9 @@ module PushType
     end
 
     def node_params
-      fields = [:title, :slug, :status, :published_at, :published_to] + @node.field_params
-      params.fetch(@node.type.underscore.to_sym, {}).permit(*fields)
+      params.fetch(@node.type.underscore.to_sym, {}).permit(:title, :slug, :status, :published_at, :published_to).tap do |whitelist|
+        @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym][k] if params[@node.type.underscore.to_sym].try(:[], k) }
+      end
     end
 
     def redirect_path(skip_trash = false)

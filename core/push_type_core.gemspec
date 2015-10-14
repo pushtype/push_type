@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'dragonfly',     '~> 1.0.10'
   s.add_dependency 'redcarpet',     '~> 3.3.2'
 
+  s.add_dependency 'active_attr', '0.8.5'
+
   s.add_development_dependency 'minitest-spec-rails', '~> 5.2.2'
   s.add_development_dependency 'database_cleaner',    '~> 1.4.1'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'

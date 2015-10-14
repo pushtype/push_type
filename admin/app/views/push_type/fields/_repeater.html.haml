@@ -1,11 +1,12 @@
-= f.label field.json_key, field.label
-
-.repeater-field{ ng: { controller: 'RepeaterFieldCtrl', init: "initRows(#{ f.object.send(field.json_key).to_json })" } }
+.repeater-field{ ng: { controller: 'RepeaterFieldCtrl', init: "initRows(#{ field.json_value.to_json })" } }
   %table
     %tbody
       %tr{ ng: { repeat: 'row in rows track by $index' } }
-        %td= f.send field.form_helper, nil, field.html_options.merge(name: "#{ f.object_name }[#{ field.json_key }][]", id: "#{ f.object_name }_#{ field.json_key }_{{ $index }}", value: nil, :'ng-model' => 'rows[$index]')
-        %td.remove
-          %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
+        = f.fields_for field.name do |m|
+          %td
+            - merge_repeater_html_options f.object_name, field, field.field
+            = render_field field.field, m
+          %td.remove
+            %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
   .plus
     %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }= ficon :plus, 'Add row'

@@ -6,6 +6,7 @@ module PushType
     end
 
     def asset_hash(asset)
+      return nil if asset.nil?
       hash = [ :id, :file_name, :file_size, :mime_type, :created_at, :new_record?, :image?, :description_or_file_name ].inject({}) do |h, att|
         h.update att => asset.send(att)
       end

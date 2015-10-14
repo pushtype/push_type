@@ -1,22 +1,33 @@
 module PushType
   class TagListField < PushType::FieldType
 
-    include PushType::Fields::Arrays
+    options json_primitive: :array,
+            template:       'select',
+            html_options:   { placeholder: 'Tags...' }
 
-    options template: 'tag_list', html_options: { multiple: true, placeholder: 'Tags...' }
-
-    def to_json(val)
-      super.reject(&:blank?) if val.present?
+    def choices
+      json_value || []
     end
 
-    initialized_on_node do |object, field|
+    def multiple?
+      true
+    end
 
-      object.class_eval do
+    def field_options
+      {}
+    end
+
+    def html_options
+      super.merge(multiple: multiple?)
+    end
+
+    on_class do |klass, field_name, field_class|
+      klass.class_eval do
 
         # Dynamically define standard scope .with_all_`field_name`
         # Returns ActiveRecord::Relation
         #
-        scope "with_all_#{ field.name }".to_sym, ->(*args) {
+        scope "with_all_#{ field_name }".to_sym, ->(*args) {
           raise ArgumentError, 'wrong number of arguments' unless args.present?
           tags = args[0].is_a?(Array) ? args[0] : args
 
@@ -27,13 +38,13 @@ module PushType
         # Dynamically define class method .with_any_`field_name`
         # Returns Array
         #
-        define_singleton_method "with_any_#{ field.name }".to_sym do |*args, &block|
+        define_singleton_method "with_any_#{ field_name }".to_sym do |*args, &block|
           raise ArgumentError, 'wrong number of arguments' unless args.present?
           tags = args[0].is_a?(Array) ? args[0] : args
 
           composed_scope = (
             block.respond_to?(:call) ? block.call : all
-          ).where(["field_store->'#{ field.name }' ?| ARRAY[:tags]", { tags: tags }])
+          ).where(["field_store->'#{ field_name }' ?| ARRAY[:tags]", { tags: tags }])
 
           t   = Arel::Table.new('t',  ActiveRecord::Base)
           ct  = Arel::Table.new('ct', ActiveRecord::Base)
@@ -43,7 +54,7 @@ module PushType
 
           lateral = ct
             .project(Arel.sql('e').count(true).as('ct'))
-            .from(Arel.sql "jsonb_array_elements_text(t.field_store->'#{ field.name }') e")
+            .from(Arel.sql "jsonb_array_elements_text(t.field_store->'#{ field_name }') e")
             .where(Arel::Nodes::Equality.new Arel.sql('e'), any_tags_func)
 
           query = t
@@ -59,12 +70,12 @@ module PushType
         # Dynamically define class method .all_`field_name`
         # Returns Array
         #
-        define_singleton_method "all_#{ field.name }".to_sym do |*args, &block|
+        define_singleton_method "all_#{ field_name }".to_sym do |*args, &block|
           composed_scope = block.respond_to?(:call) ? block.call : all
           composed_scope.projections = []
 
           query = composed_scope
-            .project(Arel.sql "jsonb_array_elements_text(field_store->'#{ field.name }') t")
+            .project(Arel.sql "jsonb_array_elements_text(field_store->'#{ field_name }') t")
             .distinct
             .order(Arel.sql 't')
           connection.select_all(query.to_sql).rows.flatten
