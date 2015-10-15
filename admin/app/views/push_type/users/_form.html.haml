@@ -16,9 +16,9 @@
 
         .row.custom-fields
           - @user.fields.each do |key, field|
-            %div{ class: [field.kind, field.column_class, 'columns end'].compact.join(' ') }
-              = f.label key, field.label
-              = render "push_type/fields/#{ field.template }", f: f, field: field
+            %div{ class: field_classes(field) }
+              = f.label field.name, field.label
+              = render_field field, f
 
   .large-4.columns
     .side-panel{ :'side-panel' => true }

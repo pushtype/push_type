@@ -10,9 +10,7 @@
         = fields_for :matrix do |m|
           - field.fields.each do |name, sub_field|
             - merge_matrix_html_options f.object_name, field, sub_field
-            %td
-              %div{ class: sub_field.class.name.demodulize.underscore.gsub(/_(field|type)$/, '') }
-                = render "push_type/fields/#{ sub_field.template }", f: m, field: sub_field
+            %td= render_field sub_field, m
           %td.remove
             %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
   .plus

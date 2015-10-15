@@ -10,6 +10,7 @@ module PushType
       let(:opts) { {} }
       it { field.name.must_equal :foo }
       it { field.model.must_equal node }
+      it { field.kind.must_equal :field }
       it { field.primitive.must_equal PushType::Primitives::StringType }
 
       it { field.json_primitive.must_equal :string }

@@ -29,8 +29,7 @@ module PushType
 
     def validate_field_types!
       fields.values.each do |f|
-        kind = f.class.name.demodulize.underscore.gsub(/_(field|type)$/, '')
-        unless field_type_whitelist.include?(kind.to_sym)
+        unless field_type_whitelist.include?(f.kind)
           raise ArgumentError, "Invalid field type. `#{ kind }` cannot be used in #{ self.class.name }."
         end
       end

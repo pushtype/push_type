@@ -31,15 +31,8 @@ module PushType
       @opts     = [defaults, self.class.options, opts].compact.inject(&:merge)
     end
 
-    # todo
-    # Have this method dynamically added by admin init
-    def column_class
-      case @opts[:colspan]
-        when 2 then 'medium-6'
-        when 3 then 'medium-4'
-        when 3 then 'medium-3'
-        else nil
-      end
+    def kind
+      self.class.name.demodulize.underscore.gsub(/_(field|type)$/, '').to_sym
     end
 
     def primitive
@@ -60,6 +53,10 @@ module PushType
 
     def json_primitive
       @opts[:json_primitive]
+    end
+
+    def css_class
+      @opts[:css_class]
     end
 
     def template

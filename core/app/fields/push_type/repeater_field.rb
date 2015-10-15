@@ -31,7 +31,7 @@ module PushType
     end
 
     def generate_field(json = {})
-      field_type.new :_f, PushType::Structure.new(field_store: json), @opts.merge(multiple: false)
+      field_type.new :_f, PushType::Structure.new(field_store: json), @opts.except(:css_class).merge(multiple: false)
     end
 
     def field_type
