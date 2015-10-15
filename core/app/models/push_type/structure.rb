@@ -6,6 +6,10 @@ module PushType
     include ActiveModel::Model
     include ActiveRecord::AttributeAssignment
     include ActiveRecord::Store
+    
+    extend ActiveModel::Callbacks
+    define_model_callbacks :initialize, only: :after
+
     include PushType::Customizable
 
     def self.name
@@ -13,8 +17,10 @@ module PushType
     end
 
     def initialize(*args)
-      @field_store ||= {}
-      super
+      run_callbacks :initialize do
+        @field_store ||= {}
+        super
+      end
     end
 
   end

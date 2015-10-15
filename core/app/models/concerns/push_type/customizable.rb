@@ -2,9 +2,8 @@ module PushType
   module Customizable
     extend ActiveSupport::Concern
 
-    def initialize(*args)
-      initialize_fields
-      super
+    included do
+      after_initialize :initialize_fields
     end
 
     def fields
@@ -14,11 +13,18 @@ module PushType
     private
 
     def initialize_fields
-      self.class.fields.each do |key, (klass, opts, blk)|
-        f = fields[key] = klass.new(key, self, opts, &blk)
+      self.class.fields.keys.each do |key|
+        f = initialized_field(key)
         if block = f.class.init_block
           block.call(self, f)
         end
+      end
+    end
+
+    def initialized_field(key)
+      fields[key] ||= begin
+        klass, opts, blk = self.class.fields[key]
+        klass.new(key, self, opts, &blk)
       end
     end
 
@@ -47,7 +53,8 @@ module PushType
 
         # Override setter accessor
         define_method "#{ name }=".to_sym do |val|
-          super self.fields[name].primitive.to_json(val)
+          f = initialized_field(name)
+          super f.primitive.to_json(val)
         end
 
         # Override getter accessor
