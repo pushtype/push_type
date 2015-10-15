@@ -13,7 +13,7 @@ module PushType
       end
 
       def to_json
-        value
+        value.as_json
       end
 
     end
