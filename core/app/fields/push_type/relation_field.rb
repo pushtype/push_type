@@ -20,18 +20,6 @@ module PushType
       super.merge(multiple: multiple?)
     end
 
-    def relation_name
-      @relation_name ||= (rel = name.to_s.gsub!(/_ids?$/, '')) && (rel && multiple? ? rel.pluralize : rel)
-    end
-
-    def relation_class
-      (@opts[:to] || name).to_s.classify.constantize
-    end
-
-    def relation_root
-      relation_class
-    end
-
     def choices
       if relation_root.respond_to?(:hash_tree)
         flatten_tree(relation_root.hash_tree)
@@ -40,12 +28,16 @@ module PushType
       end
     end
 
-    on_instance do |object, field|
-      object.class_eval do
-        define_method(field.relation_name.to_sym) do
-          field.relation_class.find field.json_value unless field.json_value.blank?
-        end unless method_defined?(field.relation_name.to_sym)
-      end
+    def relation_name
+      @relation_name ||= (rel = name.to_s.gsub!(/_ids?$/, '')) && (rel && multiple? ? rel.pluralize : rel)
+    end
+
+    def relation_class
+      (@opts[:to] || relation_name.singularize).classify.constantize
+    end
+
+    def relation_root
+      relation_class
     end
 
     private
@@ -72,6 +64,14 @@ module PushType
           flatten_tree(children, d+1)
         ]
       end.flatten
+    end
+
+    on_instance do |object, field|
+      object.class_eval do
+        define_method(field.relation_name.to_sym) do
+          field.relation_class.find field.json_value unless field.json_value.blank?
+        end unless method_defined?(field.relation_name.to_sym)
+      end
     end
 
   end

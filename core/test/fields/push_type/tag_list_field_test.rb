@@ -3,30 +3,31 @@ require 'test_helper'
 module PushType
   class TagListFieldTest < ActiveSupport::TestCase
 
-    let(:field) { PushType::TagListField.new :tags, opts }
-    let(:val)   { ['foo', 'bar'] }
-
-    describe 'default' do
-      let(:opts) { {} }
-      it { field.template.must_equal 'tag_list' }
-      it { field.multiple?.must_equal true }
-      it { field.param.must_equal tags: [] }
-      it { field.html_options.keys.must_include :multiple }
-      it { field.html_options.keys.must_include :placeholder }
-      it { field.to_json(val + ['']).must_equal val }
+    class TestPage < PushType::Node
+      field :tags, :tag_list
     end
+
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, tags: tags) }
+    let(:tags)  { ['a', 'b', 'c'] }
+    let(:field) { node.fields[:tags] }
+
+    it { field.json_primitive.must_equal :array }
+    it { field.template.must_equal 'select' }
+    it { field.html_options.keys.must_include :placeholder }
+    it { field.html_options.keys.must_include :multiple }
+    it { field.must_be :multiple? }
+    it { field.json_value.must_equal tags }
+    it { field.value.must_equal tags }
+    it { field.choices.must_equal tags }
 
     describe 'initialized on node' do
       before do
-        TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new
-        TestPage.field :tags, :tag_list
         TestPage.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar', 'foo'])
         TestPage.create FactoryGirl.attributes_for(:node, tags: ['baz', 'bar'])
         TestPage.create FactoryGirl.attributes_for(:published_node, tags: ['qux'])
         @first = TestPage.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar', 'qux'])
         TestPage.create FactoryGirl.attributes_for(:published_node)
       end
-      after { TestPage.instance_variable_set '@fields', ActiveSupport::OrderedHash.new }
 
       describe '#with_all_tags' do
         let(:tags) { ['foo', 'foo', 'bar', 'qux'] }

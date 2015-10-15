@@ -2,8 +2,9 @@ module PushType
   module Customizable
     extend ActiveSupport::Concern
 
-    included do
-      after_initialize :initialize_fields
+    def initialize(*args)
+      initialize_fields
+      super
     end
 
     def fields
@@ -26,7 +27,7 @@ module PushType
       attr_reader :fields
 
       def fields
-        @fields ||= ActiveSupport::OrderedHash.new
+        @fields ||= {}
       end
 
       def field(name, *args, &blk)

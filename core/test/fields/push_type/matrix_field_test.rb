@@ -3,33 +3,25 @@ require 'test_helper'
 module PushType
   class MatrixFieldTest < ActiveSupport::TestCase
 
-    let(:field) { PushType::MatrixField.new :foo, opts }
-    let(:val)   { [{ key: 1, value: 2 }, { key: 3, value: 4 }] }
-
-    describe 'default' do
-      let(:opts) { {} }
-      it { field.template.must_equal 'matrix' }
-      it { field.multiple?.must_equal true }
-      it { field.param.must_equal foo: [:key, :value] }
-      it { field.mapping.must_equal key: :text_field, value: :text_field }
-      it { field.struct.must_be_instance_of Class }
-      it { field.to_json(val).must_be_instance_of Array }
-      it { field.to_json(val)[0].must_be_instance_of Hash }
-      it { field.from_json(val).must_be_instance_of Array }
-      it { field.from_json(val)[0].must_be_kind_of Object }
-      it { field.from_json(val)[0].key.must_equal 1 }
-      it { field.from_json(val)[0].value.must_equal 2 }
+    class TestPage < PushType::Node
+      field :foo, :matrix do
+        field :key, :string
+        field :val, :text
+      end
     end
 
-    describe 'with options' do
-      let(:opts) { { mapping: [:this, :that, other: :number_field] } }
-      let(:val)   { [{ this: 'a', that: 'b', other: '99' }] }
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
+    let(:val)   { [{ key: 'a', val: 'b' }, { key: 'x', val: 'y' }] }
+    let(:field) { node.fields[:foo] }
 
-      it { field.mapping.must_equal this: :text_field, that: :text_field, other: :number_field }
-      it { field.from_json(val)[0].this.must_equal 'a' }
-      it { field.from_json(val)[0].that.must_equal 'b' }
-      it { field.from_json(val)[0].other.must_equal '99' }
-    end
+    it { field.template.must_equal 'matrix' }
+    it { field.fields.keys.must_include :key, :val }
+    it { field.fields.values.map { |v| v.class }.must_include PushType::StringField, PushType::TextField }
+    it { field.json_value.must_equal [{ 'key' => 'a', 'val' => 'b' }, { 'key' => 'x', 'val' => 'y' }] }
+    it { field.value.all? { |v| v.class.name == 'PushType::Structure' }.must_equal true }
+    it { field.value.first.fields.keys.must_include :key, :val }
+    it { field.value[0].key.must_equal 'a' }
+    it { field.value[1].val.must_equal 'y' }
 
   end
 end

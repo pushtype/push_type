@@ -13,7 +13,7 @@ module PushType
     module ClassMethods
 
       def template(name, opts = {})
-        @template_name = name
+        @template_name = name.to_s
         @template_opts = opts
       end
 

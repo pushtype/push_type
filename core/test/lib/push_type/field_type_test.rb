@@ -3,31 +3,32 @@ require 'test_helper'
 module PushType
   class FieldTypeTest < ActiveSupport::TestCase
 
-    let(:field) { PushType::FieldType.new :foo, opts }
-    let(:val)   { '1' }
+    let(:node)  { FactoryGirl.create :node }
+    let(:field) { PushType::FieldType.new :foo, node, opts }
     
     describe 'default' do
       let(:opts) { {} }
-      it { field.name.must_equal 'foo' }
-      it { field.param.must_equal :foo }
-      it { field.kind.must_equal 'field' }
-      it { field.json_key.must_equal :foo }
+      it { field.name.must_equal :foo }
+      it { field.model.must_equal node }
+      it { field.primitive.must_equal PushType::Primitives::StringType }
+
+      it { field.json_primitive.must_equal :string }
       it { field.template.must_equal 'default' }
       it { field.label.must_equal 'Foo' }
-      it { field.html_options.must_equal({}) }
       it { field.form_helper.must_equal :text_field }
-      it { field.column_class.must_equal nil }
-      it { field.to_json(val).must_equal '1' }
-      it { field.from_json(val).must_equal '1' }
+      it { field.html_options.must_equal({}) }
+      it { field.field_options.must_equal({}) }
+      it { field.multiple?.must_equal false  }
     end
 
     describe 'with options' do
-      let(:opts)  { { template: 'my_template', label: 'Bar', html_options: { some: 'opts' }, form_helper: :number_field, colspan: 2 } }
+      let(:opts)  { { json_primitive: :number, template: 'my_template', label: 'Bar', form_helper: :number_field, html_options: { some: 'opts' }, field_options: { more: 'opts'} } }
+      it { field.json_primitive.must_equal :number }
       it { field.template.must_equal opts[:template] }
       it { field.label.must_equal opts[:label] }
-      it { field.html_options.must_equal opts[:html_options] }
       it { field.form_helper.must_equal opts[:form_helper] }
-      it { field.column_class.must_equal 'medium-6' }
+      it { field.html_options.must_equal opts[:html_options] }
+      it { field.field_options.must_equal opts[:field_options] }
     end
 
   end

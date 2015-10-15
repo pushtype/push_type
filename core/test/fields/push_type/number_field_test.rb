@@ -3,11 +3,25 @@ require 'test_helper'
 module PushType
   class NumberFieldTest < ActiveSupport::TestCase
 
-    let(:field) { PushType::NumberField.new :foo }
+    class TestPage < PushType::Node
+      field :foo, :number
+      field :bar, :number
+    end
+
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: 1, bar: 1.234) }
+    let(:foo)   { node.fields[:foo] }
+    let(:bar)   { node.fields[:bar] }
+
     
-    it { field.form_helper.must_equal :number_field }
-    it { field.to_json(1).must_equal 1 }
-    it { field.to_json('1').must_equal 1 }
+    it { foo.json_primitive.must_equal :number }
+    it { foo.form_helper.must_equal :number_field }
+    it { foo.json_value.must_equal 1 }
+    it { foo.value.must_equal 1 }
+    it { bar.json_value.must_equal 1.234 }
+    it { bar.value.must_equal 1.234 }
+
+    it { node.foo.must_equal 1 }
+    it { node.bar.must_equal 1.234 }
 
   end
 end

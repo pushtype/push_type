@@ -16,12 +16,6 @@ module PushType
               underline:            true
             }
 
-    on_instance do |object, field|
-      object.presenter_class.class_eval do
-        define_method(field.name) { field.compiled_value } unless method_defined?(field.name)
-      end
-    end
-
     def compiled_value
       markdown.render value unless value.nil?
     end
@@ -34,6 +28,12 @@ module PushType
 
     def renderer
       @opts[:renderer].new @opts[:render_options]
+    end
+
+    on_instance do |object, field|
+      object.presenter_class.class_eval do
+        define_method(field.name) { field.compiled_value } unless method_defined?(field.name)
+      end
     end
 
   end

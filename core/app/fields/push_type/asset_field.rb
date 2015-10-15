@@ -3,10 +3,6 @@ module PushType
 
     options template: 'asset'
 
-    def multiple?
-      false
-    end
-
     def id_attr
       "#{ name }-asset-modal"
     end

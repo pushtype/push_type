@@ -3,34 +3,35 @@ require 'test_helper'
 module PushType
   class TemplatableTest < ActiveSupport::TestCase
 
-    let(:page) { TestPage.new }
+    class TestPage < PushType::Node
+    end
 
-    before do
-      TestPage.instance_variable_set '@template_name', nil
-      TestPage.instance_variable_set '@template_opts', nil
+    class TestPageTemplate < PushType::Node
+      template :foo
     end
-    after do
-      TestPage.instance_variable_set '@template_name', nil
-      TestPage.instance_variable_set '@template_opts', nil
+
+    class TestPageTemplateArgs < PushType::Node
+      template :foo, path: 'bar', layout: 'my_layout'
     end
-    
+
     describe '.template' do
       describe 'defaults' do
-        before { page.template.must_equal 'nodes/test_page' }
-        before { page.template_args.must_equal ['nodes/test_page', {}] }
+        let(:page) { TestPage.new }
+        it { page.template.must_equal 'nodes/push_type/templatable_test/test_page' }
+        it { page.template_args.must_equal ['nodes/push_type/templatable_test/test_page', {}] }
       end
 
       describe 'set template' do
-        before { TestPage.template :foo }
-        before { page.template.must_equal 'nodes/foo' }
+        let(:page) { TestPageTemplate.new }
+        it { page.template.must_equal 'nodes/foo' }
       end
 
       describe 'set template with args' do
-        before { TestPage.template :foo, path: 'bar', layout: 'my_layout' }
-        before { page.template.must_equal 'bar/foo' }
-        before { page.template_args.must_equal ['bar/foo', { layout: 'my_layout' }] }
+        let(:page) { TestPageTemplateArgs.new }
+        it { page.template.must_equal 'bar/foo' }
+        it { page.template_args.must_equal ['bar/foo', { layout: 'my_layout' }] }
       end
-      
+
     end
 
   end

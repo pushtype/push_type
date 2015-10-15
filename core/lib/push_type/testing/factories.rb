@@ -16,7 +16,7 @@ FactoryGirl.define do
 
     factory :published_node do
       status 'published'
-    end    
+    end
   end
 
   sequence :email do |n|

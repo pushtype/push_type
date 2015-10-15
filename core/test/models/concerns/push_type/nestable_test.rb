@@ -3,6 +3,9 @@ require 'test_helper'
 module PushType
   class NestableTest < ActiveSupport::TestCase
 
+    class TestPage < PushType::Node
+    end
+
     let(:page) { TestPage.new }
     let(:roots) { PushType.root_nodes }
 

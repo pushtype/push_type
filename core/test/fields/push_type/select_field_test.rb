@@ -3,37 +3,32 @@ require 'test_helper'
 module PushType
   class SelectFieldTest < ActiveSupport::TestCase
 
-    let(:field) { PushType::SelectField.new :foo, opts }
-    let(:val)   { 'a' }
-
-    describe 'default' do
-      let(:opts) { {} }
-      it { field.template.must_equal 'select' }
-      it { field.multiple?.must_equal false }
-      it { field.param.must_equal :foo }
-      it { field.choices.must_equal [] }
-      it { field.field_options.must_be_instance_of Hash }
-      it { field.field_options.keys.must_include :include_blank }
-      it { field.html_options.keys.must_include :multiple }
-      it { field.to_json(val).must_equal val }
-      it { field.from_json(val).must_equal val }
+    class TestPage < PushType::Node
+      field :foo, :select, choices: [['AAA', 'a'], ['BBB', 'b']]
+      field :bars, :select, multiple: true, choices: -> { [['XXX', 'x'], ['YYY', 'y']] }
     end
 
-    describe 'with options' do
-      let(:opts) { { choices: ['a', 'b'], multiple: true } }
-      let(:val)   { ['a', 'b'] }
-      it { field.multiple?.must_equal true }
-      it { field.choices.must_equal ['a', 'b'] }
-      it { field.to_json(val).must_be_instance_of Array }
-      it { field.to_json(val)[0].must_equal 'a' }
-      it { field.from_json(val).must_be_instance_of Array }
-      it { field.from_json(val)[0].must_equal 'a' }
-    end
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: 'b', bars: ['x', 'y']) }
+    let(:foo)   { node.fields[:foo] }
+    let(:bars)  { node.fields[:bars] }
 
-    describe 'with choices as proc' do
-      let(:opts) { { choices: -> { [1,2,3] } } }
-      it { field.choices.must_equal [1,2,3] }
-    end
+    it { foo.json_primitive.must_equal :string }
+    it { foo.template.must_equal 'select' }
+    it { foo.field_options.keys.must_include :include_blank }
+    it { foo.html_options.keys.must_include :multiple }
+    it { foo.wont_be :multiple? }
+    it { foo.json_value.must_equal 'b' }
+    it { foo.value.must_equal 'b' }
+    it { foo.choices.must_equal [['AAA', 'a'], ['BBB', 'b']] }
+
+    it { bars.json_primitive.must_equal :array }
+    it { bars.must_be :multiple? }
+    it { bars.json_value.must_equal ['x', 'y'] }
+    it { bars.value.must_equal ['x', 'y'] }
+    it { bars.choices.must_equal [['XXX', 'x'], ['YYY', 'y']] }
+
+    it { node.foo.must_equal 'b' }
+    it { node.bars.must_equal ['x', 'y'] }
 
   end
 end

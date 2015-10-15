@@ -2,10 +2,8 @@ module PushType
   class SelectField < PushType::FieldType
 
     options template:       'select',
-            form_helper:    :select,
             choices:        [], 
-            field_options:  { include_blank: 'Please select...' },
-            multiple:       false
+            field_options:  { include_blank: 'Please select...' }
 
     def choices
       if @opts[:choices].respond_to? :call
