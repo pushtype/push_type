@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name          = 'push_type_wysiwyg'
   s.version       = PushType::VERSION
   s.summary       = %q{Provides a WYSIWYG editor to PushType CMS using Froala.}
-  s.description   = %q{Provides a WYSIWYG editor to PushType CMS using Froala. Requires push_type_admin. PushType is a modern, open source content management system for Ruby on Rails.}
+  s.description   = %q{Provides a WYSIWYG editor to PushType CMS using Froala. Requires push_type_admin. PushType is a new generation of content management system for Ruby on Rails.}
 
   s.files         = Dir['{app,config,db,lib,vendor}/**/*', 'README.md', 'LICENSE.md']
   s.require_paths = %w(lib)
