@@ -1,0 +1,8 @@
+Description:
+    Generates a model that inherits from PushType::Structure
+
+Example:
+    rails generate push_type:structure location street_address:string postcode:string
+
+    This will create:
+        app/models/location.rb

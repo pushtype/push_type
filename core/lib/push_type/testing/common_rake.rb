@@ -2,6 +2,7 @@ require 'generators/push_type/dummy/dummy_generator'
 require 'generators/push_type/install/install_generator'
 require 'generators/push_type/node/node_generator'
 require 'generators/push_type/taxonomy/taxonomy_generator'
+require 'generators/push_type/structure/structure_generator'
 
 namespace :common do
 
@@ -18,6 +19,7 @@ namespace :common do
       PushType::InstallGenerator.start ['--quiet']
       PushType::NodeGenerator.start ['page', '--quiet']
       PushType::TaxonomyGenerator.start ['category', '--quiet']
+      PushType::StructureGenerator.start ['location', '--quiet']
     end
   end
 

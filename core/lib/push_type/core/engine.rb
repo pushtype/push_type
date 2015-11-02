@@ -8,6 +8,7 @@ module PushType
         g.assets false
         g.helper false
         g.test_framework  :test_unit, fixture: false
+        g.hidden_namespaces << 'push_type:dummy' << 'push_type:field'
       end
 
       config.autoload_paths << config.root.join('app', 'fields')

@@ -11,10 +11,7 @@ module PushType
     define_model_callbacks :initialize, only: :after
 
     include PushType::Customizable
-
-    def self.name
-      'PushType::Structure'
-    end
+    include PushType::Presentable
 
     def initialize(*args)
       run_callbacks :initialize do

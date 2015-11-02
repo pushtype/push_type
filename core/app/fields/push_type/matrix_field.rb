@@ -31,7 +31,9 @@ module PushType
     private
 
     def structure_class
-      @structure_class ||= PushType::Structure.clone
+      @structure_class ||= Class.new PushType::Structure do
+        define_singleton_method(:name) { "PushType::Structure" }
+      end
     end
 
   end

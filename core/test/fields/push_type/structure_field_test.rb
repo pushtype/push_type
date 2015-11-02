@@ -8,6 +8,8 @@ module PushType
         field :key, :string
         field :val, :text
       end
+      field :location, :structure
+      field :bar, :structure, class: :location
     end
 
     let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
@@ -22,6 +24,12 @@ module PushType
     it { field.value.fields.keys.must_include :key, :val }
     it { field.value.key.must_equal 'a' }
     it { field.value.val.must_equal 'b' }
+
+    it { node.foo.class.ancestors.must_include PushType::Structure }
+    it { node.location.must_be_instance_of Location }
+    it { node.bar.must_be_instance_of Location }
+    it { node.location.class.ancestors.must_include PushType::Structure }
+    it { node.bar.class.ancestors.must_include PushType::Structure }
 
   end
 end
