@@ -1,5 +1,5 @@
 .asset-field{ class: ('error' if f.object.errors[field.name].present?), ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ asset_hash(f.object.send(field.relation_name.to_sym)).to_json }" } }
-  = f.hidden_field field.name, value: '{{ asset.id }}'
+  = f.hidden_field field.name, field.html_options.merge(value: '{{ asset.id }}')
 
   .row{ ng: { show: 'asset' } }
     .small-4.medium-3.columns
@@ -17,9 +17,9 @@
           %td {{ asset.mime_type }}
       %a.button.secondary.small.radius{ ng: { click: 'deselectAsset()' } } Remove media
   %div{ ng: { hide: 'asset' } }
-    %a.button.success.small.radius{ data: { reveal: { id: field.id_attr } } } Pick media
+    %a.button.success.small.radius{ data: { reveal: { id: '{{ uid }}' } } } Pick media
 
-  .reveal-modal.asset-field-modal{ id: field.id_attr, data: { reveal: true } }
+  .reveal-modal.asset-field-modal{ id: '{{ uid }}', data: { reveal: true } }
 
     %ul.tabs{ data: { tab: true } }
       %li.tab-title.active= link_to ficon(:thumbnails, 'Media'), '#media', data: { success: true }

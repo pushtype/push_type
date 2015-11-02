@@ -24,6 +24,9 @@ module PushType
     on_class do |klass, field_name, field_class|
       klass.class_eval do
 
+        # Break unless we are working on an ActiveRecord klass
+        break unless respond_to?(:scope)
+
         # Dynamically define standard scope .with_all_`field_name`
         # Returns ActiveRecord::Relation
         #

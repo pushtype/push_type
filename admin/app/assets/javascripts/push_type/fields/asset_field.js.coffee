@@ -3,6 +3,7 @@
   $scope.$modal = null
   $scope.assets = []
   $scope.meta   = {}
+  $scope.uid    = 'asset-' + Math.uid()
   
   $scope.loadAssets = (page) ->
     config = if page? then { params: { page: page } } else null
@@ -47,7 +48,7 @@
 $(document).on 'ready page:load', ->
 
   $(document).on 'open.fndtn.reveal', '.asset-field-modal', ->
-    $scope  = angular.element($(this)).scope()
+    $scope = angular.element($(this)).scope()
     $scope.$modal = $(this)
     $scope.loadAssets()
     $scope.$apply()

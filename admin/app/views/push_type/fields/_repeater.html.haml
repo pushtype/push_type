@@ -1,12 +1,20 @@
-.repeater-field{ ng: { controller: 'RepeaterFieldCtrl', init: "initRows(#{ field.json_value.to_json })" } }
+.repeater-field.rep{ repeater: { field: true } }
   %table
-    %tbody
-      %tr{ ng: { repeat: 'row in rows track by $index' } }
-        = f.fields_for field.name do |m|
-          %td
-            - merge_repeater_html_options f.object_name, field, field.field
-            = render_field field.field, m
-          %td.remove
-            %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
+    %tbody.rows
+      - field.rows.each do |row|
+        = f.fields_for field.name, row do |r|
+          %tr{ repeater: { row: true } }
+            %td= render_field row.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
+            %td.remove
+              %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+
   .plus
-    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }= ficon :plus, 'Add row'
+    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }
+      = ficon :plus, 'Add row'
+
+  %script{:type => 'html/template', :class => 'template' }
+    = f.fields_for field.name, field.structure do |r|
+      %tr{ repeater: { row: true } }
+        %td= render_field field.structure.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
+        %td.remove
+          %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)

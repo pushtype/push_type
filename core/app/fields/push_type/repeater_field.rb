@@ -6,22 +6,31 @@ module PushType
 
     def initialize(*args)
       super
-      validate_field_type!
+      raise ArgumentError, "Invalid field type. `#{ @opts[:repeats] }` cannot be used in #{ self.class.name }." if [:tag_list].include?(@opts[:repeats])
+      _key, _opts = structure_json_key, @opts
+      structure_class.class_eval do
+        field _key, _opts[:repeats], _opts.except(:css_class, :repeats).merge(multiple: false)
+        define_method(:f) { fields[_key] }
+      end
     end
 
     def value
       return if json_value.blank?
-      json_value.map do |j|
-        generate_field('_f' => j).value
-      end
+      rows.map(&:_f)
     end
 
     def template
       'repeater'
     end
 
-    def field
-      @field ||= generate_field
+    def rows
+      Array(json_value).map do |j|
+        structure_class.new(field_store: { structure_json_key => j }.as_json)
+      end
+    end
+
+    def structure
+      @structure ||= structure_class.new
     end
 
     private
@@ -30,26 +39,15 @@ module PushType
       super.except(:template, :form_helper)
     end
 
-    def generate_field(json = {})
-      field_type.new :_f, PushType::Structure.new(field_store: json), @opts.except(:css_class).merge(multiple: false)
+    def structure_class
+      @structure_class ||= PushType::Structure.clone
     end
 
-    def field_type
-      begin
-        "push_type/#{ @opts[:repeats] }_field".camelize.constantize
-      rescue NameError
-        "#{ @opts[:repeats] }_field".camelize.constantize
+    def structure_json_key
+      case @opts[:repeats]
+        when :relation, :node, :taxonomy, :asset then :_f_id
+        else :_f
       end
-    end
-
-    def validate_field_type!
-      unless field_type_whitelist.include?(@opts[:repeats])
-        raise ArgumentError, "Invalid field type. `#{ @opts[:repeats] }` cannot be used in #{ self.class.name }."
-      end
-    end
-
-    def field_type_whitelist
-      [:number, :string, :text]
     end
 
   end

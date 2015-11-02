@@ -1,17 +1,27 @@
-.repeater-field{ ng: { controller: 'MatrixFieldCtrl', init: "initRows(#{ field.json_value.to_json })" } }
+.repeater-field.mat{ repeater: { field: true } }
   %table
     %thead
       %tr
         - field.fields.keys.each do |name|
           %th= name.to_s.humanize
         %th &nbsp;
-    %tbody
-      %tr{ ng: { repeat: 'row in rows track by $index' } }
-        = fields_for :matrix do |m|
-          - field.fields.each do |name, sub_field|
-            - merge_matrix_html_options f.object_name, field, sub_field
-            %td= render_field sub_field, m
-          %td.remove
-            %a.alert{ ng: { click: 'removeRow($index)' } }= ficon(:x)
+    %tbody.rows
+      - field.rows.each do |row|
+        = f.fields_for "#{ field.name }[]", row do |r|
+          %tr{ repeater: { row: true } }
+            - row.fields.each do |name, sub_field|
+              %td= render_field sub_field, r, id: nil
+            %td.remove
+              %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+
   .plus
-    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }= ficon :plus, 'Add row'
+    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }
+      = ficon :plus, 'Add row'
+
+  %script{:type => 'html/template', :class => 'template' }
+    = f.fields_for "#{ field.name }[]", field.structure do |r|
+      %tr{ repeater: { row: true } }
+        - field.fields.each do |name, sub_field|
+          %td= render_field sub_field, r, id: nil
+        %td.remove
+          %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)

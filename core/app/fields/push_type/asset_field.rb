@@ -3,10 +3,6 @@ module PushType
 
     options template: 'asset'
 
-    def id_attr
-      "#{ name }-asset-modal"
-    end
-
     def relation_class
       PushType::Asset
     end

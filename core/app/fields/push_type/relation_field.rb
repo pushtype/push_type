@@ -5,7 +5,7 @@ module PushType
 
     def initialize(*args)
       super
-      raise ArgumentError, "Relation field names must end with suffix `_id` or `ids`." unless relation_name
+      raise ArgumentError, "Relation field names must end with suffix `_id` or `_ids`." unless relation_name
     end
 
     def json_primitive
@@ -33,7 +33,7 @@ module PushType
     end
 
     def relation_class
-      (@opts[:to] || relation_name.singularize).classify.constantize
+      (@opts[:to] || relation_name.singularize).to_s.classify.constantize
     end
 
     def relation_root

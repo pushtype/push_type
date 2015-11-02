@@ -33,6 +33,8 @@
 
 Turbolinks.enableProgressBar()
 
+Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
+
 @app = angular.module 'push_type', ['ui.tree']
 
 @app.run ['$http', ($http) ->
@@ -50,12 +52,13 @@ Turbolinks.enableProgressBar()
 # jQuery init
 $(document).on 'ready page:load', ->
 
-  # Bootstrap foundation
-  $(document).foundation()
-  $(document).confirmWithReveal()
+  $(document).on 'init.fndtn', (a,b,c) ->
+    $(a.target).foundation()
+    $(a.target).confirmWithReveal()
 
-  # Bootstrap Angular
+  # Bootstrap Angular and Foundation
   angular.bootstrap $('[role="main"]'), ['push_type']
+  $(document).trigger 'init.fndtn'
 
   $('.node-list.sortable').sortable
     handle: '.handle'

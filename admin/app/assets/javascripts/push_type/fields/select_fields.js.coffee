@@ -1,7 +1,14 @@
-# jQuery init
-$(document).on 'ready page:load', ->
+opts =
+  select:
+    plugins:      ['remove_button']
+    hideSelected: false
 
-  $('select', '.relation, .node, .taxonomy').selectize
+  tag_list:
+    plugins:  ['remove_button', 'drag_drop']
+    create:   true
+    persist:  false
+
+  relation:
     plugins:      ['remove_button']
     hideSelected: false
     onInitialize: ->
@@ -17,3 +24,11 @@ $(document).on 'ready page:load', ->
       option: (item, esc) ->
         pre = if item.depth > 0 then '- '.repeat(item.depth) else ''
         """<div class="option">#{ pre }#{ esc item.text }</div>"""
+
+
+@app.directive 'selectize', ->
+  ($scope, $el, $attrs) ->
+    switch $attrs['selectize']
+      when 'select'                       then $($el).selectize opts.select
+      when 'tag_list'                     then $($el).selectize opts.tag_list
+      when 'relation', 'node', 'taxonomy' then $($el).selectize opts.relation

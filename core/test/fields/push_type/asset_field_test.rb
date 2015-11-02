@@ -12,7 +12,6 @@ module PushType
     let(:field) { node.fields[:foo_id] }
     
     it { field.template.must_equal 'asset' }
-    it { field.id_attr.must_equal 'foo_id-asset-modal' }
     it { field.relation_class.must_equal PushType::Asset }
     it { field.json_value.must_equal asset.id }
     it { field.value.must_equal asset.id }

@@ -28,7 +28,7 @@ module PushType
     def initialize(name, model, opts = {})
       @name     = name
       @model    = model
-      @opts     = [defaults, self.class.options, opts].compact.inject(&:merge)
+      @opts     = [defaults, self.class.options, opts].compact.inject(&:deep_merge)
     end
 
     def kind
