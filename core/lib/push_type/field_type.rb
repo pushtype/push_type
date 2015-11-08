@@ -44,7 +44,7 @@ module PushType
     end
 
     def json_value
-      model.field_store[name.to_s]
+      model.field_store.try(:[], name.to_s)
     end
 
     def value
