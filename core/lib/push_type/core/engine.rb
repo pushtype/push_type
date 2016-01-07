@@ -14,6 +14,10 @@ module PushType
       config.autoload_paths << config.root.join('app', 'fields')
       config.autoload_paths << config.root.join('app', 'presenters')
 
+      config.assets.precompile += %w(
+        *.gif *.jpg *.png *.svg *.eot *.ttf *.woff *.woff2
+      )
+
       config.to_prepare do
         Rails.application.eager_load! unless Rails.application.config.cache_classes
       end
