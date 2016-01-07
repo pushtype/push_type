@@ -21,10 +21,10 @@ module PushType
     end
 
     def choices
-      if relation_root.respond_to?(:hash_tree)
-        flatten_tree(relation_root.hash_tree)
+      if relation_items.is_a? Hash
+        flatten_tree(relation_items)
       else
-        relation_root.all.map { |item| item_hash(item) }
+        relation_items.map { |item| item_hash(item) }
       end
     end
 
@@ -33,11 +33,17 @@ module PushType
     end
 
     def relation_class
-      (@opts[:to] || relation_name.singularize).to_s.classify.constantize
+      @relation_class ||= (@opts[:to] || relation_name.singularize).to_s.classify.constantize
     end
 
-    def relation_root
-      relation_class
+    def relation_items
+      @relation_items ||= begin
+        if @opts[:scope].respond_to? :call
+          relation_class.instance_exec(&@opts[:scope])
+        else
+          relation_class.all
+        end
+      end
     end
 
     private

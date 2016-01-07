@@ -7,7 +7,7 @@ module PushType
 
     def choices
       if @opts[:choices].respond_to? :call
-        @opts[:choices].call
+        model.instance_exec(&@opts[:choices])
       else
         @opts[:choices]
       end

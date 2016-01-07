@@ -6,6 +6,8 @@ module PushType
     class TestPage < PushType::Node
       field :page_id, :relation
       field :bar_ids, :relation, to: 'push_type/node', multiple: true
+      field :baz_ids, :relation, to: :page, scope: -> { order(created_at: :desc).all }
+      field :qux_ids, :relation, to: :page, scope: -> { all.hash_tree }
     end
 
     before do
@@ -17,6 +19,8 @@ module PushType
     let(:rel)   { @pages.first }
     let(:foo)   { node.fields[:page_id] }
     let(:bar)   { node.fields[:bar_ids] }
+    let(:baz)   { node.fields[:baz_ids] }
+    let(:qux)   { node.fields[:qux_ids] }
 
     it { foo.json_primitive.must_equal :string }
     it { foo.template.must_equal 'relation' }
@@ -29,6 +33,7 @@ module PushType
     it { foo.choices.map { |c| c[:value] }.must_include rel.id }
     it { foo.relation_name.must_equal 'page' }
     it { foo.relation_class.must_equal Page }
+    it { foo.relation_items.must_be_kind_of ActiveRecord::Relation }
 
     it { bar.json_primitive.must_equal :array }
     it { bar.must_be :multiple? }
@@ -38,6 +43,13 @@ module PushType
     it { bar.json_value.must_equal @bars.map(&:id) }
     it { bar.value.must_equal @bars.map(&:id) }
     it { bar.choices.size.must_equal 7 }
+    it { bar.relation_items.must_be_kind_of ActiveRecord::Relation }
+
+    it { baz.relation_class.must_equal Page }
+    it { baz.choices.size.must_equal 4 }
+    it { baz.relation_items.must_be_kind_of ActiveRecord::Relation }
+    it { qux.choices.size.must_equal 4 }
+    it { qux.relation_items.must_be_kind_of Hash }
 
     it { node.page_id.must_equal rel.id }
     it { node.page.must_equal rel }
