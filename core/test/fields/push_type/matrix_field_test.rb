@@ -4,13 +4,14 @@ module PushType
   class MatrixFieldTest < ActiveSupport::TestCase
 
     class TestPage < PushType::Node
-      field :foo, :matrix do
+      field :foo, :matrix, grid: false do
         field :key, :string
         field :val, :text
       end
+      field :bar, :matrix, class: :location
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val, bar: [1]) }
     let(:val)   { [{ key: 'a', val: 'b' }, { key: 'x', val: 'y' }] }
     let(:field) { node.fields[:foo] }
 
@@ -22,6 +23,11 @@ module PushType
     it { field.value.first.fields.keys.must_include :key, :val }
     it { field.value[0].key.must_equal 'a' }
     it { field.value[1].val.must_equal 'y' }
+
+    it { node.bar.first.must_be_instance_of Location }
+    it { node.bar.first.class.ancestors.must_include PushType::Structure }
+    it { node.fields[:bar].grid?.must_equal true }
+    it { node.fields[:foo].grid?.must_equal false }
 
   end
 end

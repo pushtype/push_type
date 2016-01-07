@@ -1,16 +1,28 @@
-.repeater-field.mat{ repeater: { field: true } }
+.repeater-field{ repeater: { field: true } }
   %table
-    %thead
-      %tr
-        - field.fields.keys.each do |name|
-          %th= name.to_s.humanize
-        %th &nbsp;
+    - if field.grid?
+      %thead
+        %tr
+          - field.fields.each do |(_, fd)|
+            %th= label_tag fd.label
+          %th &nbsp;
+
     %tbody.rows
       - field.rows.each do |row|
         = f.fields_for "#{ field.name }[]", row do |r|
           %tr{ repeater: { row: true } }
-            - row.fields.each do |name, sub_field|
-              %td= render_field sub_field, r, id: nil
+            - if field.grid?
+              - row.fields.each do |name, sub_field|
+                %td= render_field sub_field, r, id: nil
+            - else
+              %td
+                .repeater-field
+                  %table
+                    %tbody
+                      - row.fields.each do |key, sub_field|
+                        %tr
+                          %th= r.label sub_field.name, sub_field.label
+                          %td= render_field sub_field, r
             %td.remove
               %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
 
@@ -21,7 +33,17 @@
   %script{:type => 'html/template', :class => 'template' }
     = f.fields_for "#{ field.name }[]", field.structure do |r|
       %tr{ repeater: { row: true } }
-        - field.fields.each do |name, sub_field|
-          %td= render_field sub_field, r, id: nil
+        - if field.grid?
+          - field.fields.each do |name, sub_field|
+            %td= render_field sub_field, r, id: nil
+        - else
+          %td
+            .repeater-field
+              %table
+                %tbody
+                  - field.fields.each do |key, sub_field|
+                    %tr
+                      %th= r.label sub_field.name, sub_field.label
+                      %td= render_field sub_field, r, id: nil
         %td.remove
           %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
