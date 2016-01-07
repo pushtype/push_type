@@ -11,7 +11,7 @@
           %td {{ asset.file_name }}
         %tr
           %th File size
-          %td {{ asset.file_size }} kb
+          %td {{ asset.file_size | kb }}
         %tr
           %th Content type
           %td {{ asset.mime_type }}

@@ -22,8 +22,9 @@
 #= require jquery.sortable
 #= require jquery.filedrop
 #= require jquery.simplePagination
-#= require selectize
 #= require moment
+#= require numeral
+#= require selectize
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require pickadate/picker.time
@@ -41,6 +42,10 @@ Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
   $http.defaults.headers.common['Accept'] = 'application/json'
   $http.defaults.headers.common['Content-Type'] = 'application/json'
 ]
+
+@app.filter 'kb', ->
+   (input) ->
+      numeral(input).format('0 b')
 
 @app.directive 'sidePanel', ->
   (scope, $el, attrs) ->
