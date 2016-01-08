@@ -1,6 +1,8 @@
 require 'closure_tree'
 require 'dragonfly'
 
+require 'push_type/core_ext/to_bool'
+
 module PushType
 
   class << self

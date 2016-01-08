@@ -18,6 +18,19 @@ module PushType
       it { primitive.to_json(val).must_equal ['a', 'b', 'c'] }
     end
 
+    describe 'BooleanType' do
+      let(:primitive) { PushType::Primitives::BooleanType }
+
+      it { primitive.to_json(nil).must_equal nil }
+      it { primitive.to_json(false).must_equal false }
+      it { primitive.to_json(0).must_equal false }
+      it { primitive.to_json('').must_equal false }
+      it { primitive.to_json('false').must_equal false }
+      it { primitive.to_json(true).must_equal true }
+      it { primitive.to_json(1).must_equal true }
+      it { primitive.to_json('true').must_equal true }
+    end
+
     describe 'NumberType' do
       let(:primitive) { PushType::Primitives::NumberType }
       let(:val)       { '123.45' }

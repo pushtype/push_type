@@ -3,6 +3,7 @@ require 'push_type/primitives/string_type'
 require 'push_type/primitives/number_type'
 require 'push_type/primitives/array_type'
 require 'push_type/primitives/object_type'
+require 'push_type/primitives/boolean_type'
 
 module PushType
   class FieldType
