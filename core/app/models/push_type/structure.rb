@@ -20,5 +20,9 @@ module PushType
       end
     end
 
+    def blank?
+      fields.map { |k, f| f.value }.all?(&:blank?)
+    end
+
   end
 end

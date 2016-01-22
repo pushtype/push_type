@@ -16,7 +16,7 @@ module PushType
 
     def value
       return if json_value.blank?
-      rows.map(&:_f)
+      rows.reject(&:blank?).map(&:_f)
     end
 
     def template
@@ -45,7 +45,7 @@ module PushType
 
     def structure_json_key
       case @opts[:repeats]
-        when :relation, :node, :taxonomy, :asset then :_f_id
+        when :relation, :asset then :_f_id
         else :_f
       end
     end

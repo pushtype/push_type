@@ -12,7 +12,7 @@ module PushType
 
     def value
       return if json_value.blank?
-      rows
+      rows.reject(&:blank?)
     end
 
     def fields
