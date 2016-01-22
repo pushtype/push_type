@@ -15,11 +15,6 @@ PushType.setup do |config|
   # through their permalink.
   config.unexposed_nodes = []
 
-  # Set an array of taxonomy type symbols which will not be exposed
-  # to the `TaxonomiesFrontEndController`. These taxonomies will not
-  # be accessible through their permalink.
-  config.unexposed_taxonomies = []
-
   # Media styles allow you to predefine a collection of geometry
   # strings for resizing images on the fly with the `Asset#media`
   # method. Example: `image.media(:large)`

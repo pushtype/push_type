@@ -8,6 +8,6 @@ module PushType
     end
 
     hook_for :test_framework, as: :model
-
+    hide!
   end
 end
