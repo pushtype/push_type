@@ -3,15 +3,19 @@ require 'test_helper'
 module PushType
   class MatrixFieldTest < ActiveSupport::TestCase
 
+    class TestLocation < PushType::Structure
+      field :key
+    end
+
     class TestPage < PushType::Node
       field :foo, :matrix, grid: false do
         field :key, :string
         field :val, :text
       end
-      field :bar, :matrix, class: :location
+      field :bar, :matrix, class: 'push_type/matrix_field_test/test_location'
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val, bar: [1]) }
+    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val, bar: [{key: '123'}]) }
     let(:val)   { [{ key: 'a', val: 'b' }, { key: 'x', val: 'y' }] }
     let(:field) { node.fields[:foo] }
 
@@ -24,7 +28,7 @@ module PushType
     it { field.value[0].key.must_equal 'a' }
     it { field.value[1].val.must_equal 'y' }
 
-    it { node.bar.first.must_be_instance_of Location }
+    it { node.bar.first.must_be_instance_of TestLocation }
     it { node.bar.first.class.ancestors.must_include PushType::Structure }
     it { node.fields[:bar].grid?.must_equal true }
     it { node.fields[:foo].grid?.must_equal false }
