@@ -1,49 +1,51 @@
-.repeater-field{ repeater: { field: true } }
-  %table
-    - if field.grid?
-      %thead
-        %tr
-          - field.fields.each do |(_, fd)|
-            %th= label_tag fd.label
-          %th &nbsp;
+%repeater-field{ :':row-count' => field.rows.size, :'inline-template' => true }
+  .repeater-field
+    %table
+      - if field.grid?
+        %thead
+          %tr
+            - field.fields.each do |(_, fd)|
+              %th= label_tag fd.label
+            %th &nbsp;
 
-    %tbody.rows
-      - field.rows.each do |row|
-        = f.fields_for "#{ field.name }[]", row do |r|
-          %tr{ repeater: { row: true } }
+      %tbody.rows
+        // Static existing rows
+        - field.rows.each do |row|
+          = f.fields_for "#{ field.name }[]", row do |r|
+            %tr
+              - if field.grid?
+                - row.fields.each do |name, sub_field|
+                  %td= render_field sub_field, r, id: nil
+              - else
+                %td
+                  .repeater-field
+                    %table
+                      %tbody
+                        - row.fields.each do |key, sub_field|
+                          %tr
+                            %th= r.label sub_field.name, sub_field.label
+                            %td= render_field sub_field, r
+              %td.remove
+                %a.alert{ :'v-remove-row' => true }= ficon(:x)
+
+        // Dynamic rows
+        = f.fields_for "#{ field.name }[]", field.structure do |r|
+          %tr{ :'v-for' => 'row in rows', :'track-by' => 'id' }
             - if field.grid?
-              - row.fields.each do |name, sub_field|
+              - field.fields.each do |name, sub_field|
                 %td= render_field sub_field, r, id: nil
             - else
               %td
                 .repeater-field
                   %table
                     %tbody
-                      - row.fields.each do |key, sub_field|
+                      - field.fields.each do |key, sub_field|
                         %tr
                           %th= r.label sub_field.name, sub_field.label
-                          %td= render_field sub_field, r
+                          %td= render_field sub_field, r, id: nil
             %td.remove
-              %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+              %a.alert{ :'v-on:click.prevent' => 'removeRow(row)' }= ficon(:x)
 
-  .plus
-    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }
-      = ficon :plus, 'Add row'
-
-  %script{:type => 'html/template', :class => 'template' }
-    = f.fields_for "#{ field.name }[]", field.structure do |r|
-      %tr{ repeater: { row: true } }
-        - if field.grid?
-          - field.fields.each do |name, sub_field|
-            %td= render_field sub_field, r, id: nil
-        - else
-          %td
-            .repeater-field
-              %table
-                %tbody
-                  - field.fields.each do |key, sub_field|
-                    %tr
-                      %th= r.label sub_field.name, sub_field.label
-                      %td= render_field sub_field, r, id: nil
-        %td.remove
-          %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+    .plus
+      %a.button.success.tiny.radius{ :'v-on:click.prevent' => 'addRow()' }
+        = ficon :plus, 'Add row'

@@ -1,6 +1,6 @@
 - unless @asset.trashed?
-  %button.button.radius{ ng: { class: 'saveButtonClass()' } }
-    = ficon :check, '{{ saveButtonText() }}'
+  %button.button.radius{ :'v-bind:class' => "{primary: !asset['new_record?'], success: asset['new_record?']}" }
+    = ficon :check, '{{ saveButtonText }}'
   - unless @asset.new_record?
     .text-button.alert
       = link_to 'Delete media', push_type.asset_path(@asset), method: 'delete', data: { confirm: { body: 'Deleted media will be moved to the trash. You can restore trashed media later.' } }

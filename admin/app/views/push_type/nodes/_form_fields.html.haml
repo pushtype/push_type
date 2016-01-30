@@ -1,5 +1,5 @@
-= form_for @node, url: url do |f|
-  %div{ ng: { controller: 'NodeFormCtrl', init: "node=#{ node_hash(@node).to_json }" } }
+%node-form{ node: node_hash(@node).to_json, :'inline-template' => true }
+  = form_for @node, url: url do |f|
     .large-8.columns
       .container
         .head
@@ -9,9 +9,9 @@
           .row.title
             .columns
               = f.label :title
-              = f.text_field :title, :'ng-model' => 'node.title', :'ng-keyup' => 'setSlug()'
+              = f.text_field :title, :'v-model' => 'node.title', :'v-on:keyup' => 'setSlug'
           .row.permalink
-            .columns{ ng: { class: 'permalinkVisibility()' } }
+            .columns{ :'v-bind:class' => '{visible: node.slug}' }
               %span.key Permalink
               %span.value
                 %span.show-for-medium-up http://#{ request.host_with_port }/
@@ -20,7 +20,7 @@
               %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' } } Edit
               #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
                 = f.label :slug
-                = f.text_field :slug, :'ng-model' => 'node.slug'
+                = f.text_field :slug, :'v-model' => 'node.slug'
               - if @node.errors.include? :slug
                 .error-icon= ficon :info, 'Error'
 
@@ -31,7 +31,7 @@
                 = render_field field, f
 
     .large-4.columns
-      .side-panel{ :'side-panel' => true }
+      .side-panel{ :'v-side-panel' => true }
         .padded
           = render 'meta_table', f: f
         .submit.text-center

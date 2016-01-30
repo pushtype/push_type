@@ -1,1 +1,1 @@
-= f.select field.name, [], field.field_options, field.html_options.merge(data: { options: field.choices.to_json, items: field.json_value }, selectize: field.kind)
+= f.select field.name, [], field.field_options, field.html_options.merge(data: { options: field.choices.to_json, items: field.json_value }, :'v-selectize' => true, :'selectize-kind' => field.kind)

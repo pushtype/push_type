@@ -1,20 +1,24 @@
-.repeater-field{ repeater: { field: true } }
-  %table
-    %tbody.rows
-      - field.rows.each do |row|
-        = f.fields_for field.name, row do |r|
-          %tr{ repeater: { row: true } }
-            %td= render_field row.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
+%repeater-field{ :':row-count' => field.rows.size, :'inline-template' => true }
+  .repeater-field
+    %table
+      %tbody.rows
+        // Static existing rows
+        - field.rows.each do |row|
+          = f.fields_for field.name, row do |r|
+            %tr
+              %td= render_field row.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
+              %td.remove
+                %a.alert{ :'v-remove-row' => true }= ficon(:x)
+        
+        // Dynamic rows
+        = f.fields_for field.name, field.structure do |r|
+          %tr{ :'v-for' => 'row in rows', :'track-by' => 'id' }
+            %td= render_field field.structure.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
             %td.remove
-              %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+              %a.alert{ :'v-on:click.prevent' => 'removeRow(row)' }= ficon(:x)
 
-  .plus
-    %a.button.success.tiny.radius{ ng: { click: 'addRow()' } }
-      = ficon :plus, 'Add row'
+    .plus
+      %a.button.success.tiny.radius{ :'v-on:click.prevent' => 'addRow()' }
+        = ficon :plus, 'Add row'
 
-  %script{:type => 'html/template', :class => 'template' }
-    = f.fields_for field.name, field.structure do |r|
-      %tr{ repeater: { row: true } }
-        %td= render_field field.structure.f, r, name: "#{ f.object_name }[#{ field.name }][]", id: nil
-        %td.remove
-          %a.alert{ ng: { click: 'removeRow()' } }= ficon(:x)
+

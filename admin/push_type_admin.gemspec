@@ -19,13 +19,10 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core', PushType::VERSION
-
   s.add_dependency 'haml-rails',                  '~> 0.9.0'
   s.add_dependency 'jquery-rails',                '~> 4.0.4'
-  s.add_dependency 'angularjs-rails',             '~> 1.4.4'
-  s.add_dependency 'foundation-rails',            '~> 5.5.2.1'
+  s.add_dependency 'foundation-rails',            '~> 5.5.3.2'
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'
-  s.add_dependency 'momentjs-rails',              '~> 2.10.3'
   s.add_dependency 'pickadate-rails',             '~> 3.5.6.0'
   s.add_dependency 'selectize-rails',             '~> 0.12.1'
   s.add_dependency 'turbolinks',                  '~> 2.5.3'

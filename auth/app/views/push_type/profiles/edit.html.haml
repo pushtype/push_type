@@ -22,11 +22,11 @@
             = f.label :email
             = f.email_field :email
 
-        %div{ ng: { init: "showPasswordFields=#{ !@user.errors.select { |a, e| !e.empty? }.empty? }" } }
-          .row{ ng: { hide: 'showPasswordFields' } }
+        %password-fields{ :'reveal-fields' => [:current_password, :password, :password_confirmation].any? { |k| @user.errors.keys.include? k }, :'inline-template' => true }
+          .row{ :'v-show' => '!revealFields' }
             .columns
-              %a.button.secondary.tiny.radius{ ng: { click: 'showPasswordFields=true' } }= ficon :lock, 'Change password'
-          .row.password{ ng: { show: 'showPasswordFields' } }
+              %a.button.secondary.tiny.radius{ :'v-on:click' => 'revealFields=true' }= ficon :lock, 'Change password'
+          .row.password{ :'v-show' => 'revealFields' }
             .small-4.columns
               = f.label :current_password
               = f.password_field :current_password

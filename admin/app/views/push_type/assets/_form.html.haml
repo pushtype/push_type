@@ -1,6 +1,6 @@
-%div{ ng: { controller: 'AssetUploadCtrl', init: "asset=#{ asset_hash(@asset).to_json }; createUrl='#{ push_type.assets_path }'; updateUrl='#{ push_type.asset_path('~id') }'" } }
-  = form_for @asset, url: '{{ saveUrl() }}', method: 'post' do |f|
-    = hidden_field_tag :_method, '{{ method() }}'
+%asset-form{ asset: asset_hash(@asset).to_json, :'create-path' => push_type.assets_path, :'update-path' => push_type.asset_path('~id'), :'inline-template' => true }
+  = form_for @asset, url: '{{ saveUrl }}', method: 'post' do |f|
+    = hidden_field_tag :_method, nil, :'v-bind:value' => 'saveMethod'
     .large-8.columns
       .container
         .head
@@ -8,17 +8,17 @@
           .title= yield :title
         .body.padded
           .row.asset-upload
-            %div{ ng: { show: "asset['new_record?']" } }
+            %div{ :'v-show' => "asset['new_record?']" }
               .columns
-                .dropzone{ asset: { upload: push_type.upload_assets_path, fallback: 'asset_file' } }
+                .dropzone{ :'v-asset-upload' => true, :'upload-path' => push_type.upload_assets_path, :'fallback-id' => 'asset_file' }
                   .prompt Drag a file to quickly upload it&hellip; (or click)
                   .icon= ficon(:upload_cloud)
-              .columns{ ng: { hide: "hideFileField && #{ !@asset.errors.include?(:file) }" } }
+              .columns{ :'v-show' => "!hideFileField || #{ @asset.errors.include?(:file) }" }
                 = f.label :file
                 = f.file_field :file
-            %div{ ng: { show: "!asset['new_record?']" } }
+            %div{ :'v-show' => "!asset['new_record?']" }
               .small-4.medium-3.columns
-                %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
+                %img.preview{ :'v-bind:alt' => 'asset.file_name', :'v-bind:src' =>  'asset.preview_thumb_url' }
               .small-8.medium-9.columns
                 %table
                   %tr

@@ -1,49 +1,27 @@
-.asset-field{ class: ('error' if f.object.errors[field.name].present?), ng: { controller: 'AssetFieldCtrl', init: "assetsPath='#{ push_type.assets_path }'; asset=#{ asset_hash(f.object.send(field.relation_name.to_sym)).to_json }" } }
-  = f.hidden_field field.name, field.html_options.merge(value: '{{ asset.id }}')
+%asset-field{ asset: asset_hash(f.object.send(field.relation_name.to_sym)).to_json, :'inline-template' => true }
+  .asset-field{ class: ('error' if f.object.errors[field.name].present?) }
+    = f.hidden_field field.name, field.html_options.merge(value: '{{ assetId }}')
 
-  .row{ ng: { show: 'asset' } }
-    .small-4.medium-3.columns
-      %img.preview{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
-    .small-8.medium-9.columns
-      %table
-        %tr
-          %th File name
-          %td {{ asset.file_name }}
-        %tr
-          %th File size
-          %td {{ asset.file_size | kb }}
-        %tr
-          %th Content type
-          %td {{ asset.mime_type }}
-      %a.button.secondary.small.radius{ ng: { click: 'deselectAsset()' } } Remove media
-  %div{ ng: { hide: 'asset' } }
-    %a.button.success.small.radius{ data: { reveal: { id: '{{ uid }}' } } } Pick media
+    .row{ :'v-if' => 'asset' }
+      .small-4.medium-3.columns
+        %img.preview{ :'v-bind:alt' => 'asset.file_name', :'v-bind:src' => 'asset.preview_thumb_url' }
+      .small-8.medium-9.columns
+        %table
+          %tr
+            %th File name
+            %td {{ asset.file_name }}
+          %tr
+            %th File size
+            %td {{ asset.file_size | kb }}
+          %tr
+            %th Content type
+            %td {{ asset.mime_type }}
+        %a.button.secondary.small.radius{ :'v-on:click.prevent' => 'deselectAsset()' } Remove media
+    %div{ :'v-if' => '!asset' }
+      %a.button.success.small.radius{ :'v-bind:data-reveal-id' => 'uid' } Pick media
 
-  .reveal-modal.asset-field-modal{ id: '{{ uid }}', data: { reveal: true } }
-
-    %ul.tabs{ data: { tab: true } }
-      %li.tab-title.active= link_to ficon(:thumbnails, 'Media'), '#media', data: { success: true }
-      %li.tab-title= link_to ficon(:upload, 'Upload'), '#upload'
-
-    .tabs-content
-      #media.content.active
-        .empty-default{ ng: { hide: 'hasAssets()' } }
-          %h2 No uploads
-          %p No media has been uploaded yet.
-        %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4{ ng: { show: 'hasAssets()' } }
-          %li{ ng: { repeat: 'asset in assets' } }
-            %article.asset-list-item
-              %a{ ng: { click: 'selectAsset(asset)' } }
-                .preview
-                  %img{ alt: '{{ asset.file_name }}', ng: { src: '{{ asset.preview_thumb_url }}' } }
-                .title {{ asset.description_or_file_name }}
-        .pagination-centered{ paginate: { assets: true }, ng: { show: 'hasAssets()' } }
-
-      #upload.content
-        .asset-upload
-          .dropzone{ asset: { upload: push_type.upload_assets_path, maxfiles: 10 } }
-            .prompt Drag files to quickly upload them&hellip;
-            .icon= ficon(:upload_cloud)
+    .reveal-modal{ :'v-bind:id' => 'uid', data: { reveal: true } }
+      %asset-modal{ :'index-path' => push_type.assets_path, :'upload-path' => push_type.upload_assets_path, :':reveal-id' => 'uid' }
 
 - if f.object.errors[field.name].present?
   %small.error= f.object.errors[field.name].join(', ')

@@ -1,13 +1,13 @@
 .meta-table
   - unless @node.trashed?
-    .meta-row{ ng: { class: 'publishDatesVisibility()' } }
+    .meta-row
       .key= ficon :calendar, 'Publish'
-      .value.editable{ data: { dropdown: 'publish-date-fields' }} {{ publishedDates() }}
+      .value.editable{ data: { dropdown: 'publish-date-fields' }} {{ publishedDates }}
       #publish-date-fields.f-dropdown.content{ data: { dropdown: { content: true } } }
         .row.publish-date
           .columns
             = f.label :published_at
-            = f.datetime_select :published_at, {}, :'node-datetime' => 'published_at'
+            = f.datetime_select :published_at, {}, :'v-node-datetime' => 'node.published_at'
         .row.publish-date
           .columns
             = f.label :published_to

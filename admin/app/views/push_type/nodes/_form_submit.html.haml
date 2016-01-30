@@ -1,13 +1,13 @@
 - unless @node.trashed?
   = f.hidden_field :status, value: '{{ node.status }}'
-  %a.button.radius.split{ ng: { class: 'saveButtonClass()' }, node: { submit: true } }
-    = ficon :check, "{{ saveButtonText() }}"
+  %a.button.radius.split{ :'v-bind:class' => '{primary: !isPublished, success: isPublished}', :'v-node-submit' => true }
+    = ficon :check, "{{ saveButtonText }}"
     %span{ data: { dropdown: 'publish-toggle', options: 'align:bottom' } }
   %ul#publish-toggle.f-dropdown.tiny{ data: { dropdown: { content: true } } }
     %li
-      %a{ href: '#', node: { status: 'draft' } } Save as draft
+      %a{ href: '#', :'v-on:click.prevent' => 'node.status = "draft"' } Save as draft
     %li
-      %a{ href: '#', node: { status: 'published' } } Save and publish
+      %a{ href: '#', :'v-on:click.prevent' => 'node.status = "published"' } Save and publish
 
   - unless @node.new_record?
     .text-button.alert

@@ -10,65 +10,25 @@
 # Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 # about supported directives.
 #
-#= require jquery
+#= require ./webpack/admin.bundle
 #= require jquery_ujs
 #= require turbolinks
 #= require foundation/foundation
 #= require foundation
 #= require confirm_with_reveal
-#= require angular
-#= require angular-ui-tree
-#= require jquery.sticky
-#= require jquery.sortable
 #= require jquery.filedrop
 #= require jquery.simplePagination
-#= require moment
-#= require numeral
 #= require selectize
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require pickadate/picker.time
+#= require ./vue_config
 #= require_self
-#= stub push_type/admin_assets
-#= require_tree .
 
 Turbolinks.enableProgressBar()
 
 Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 
-@app = angular.module 'push_type', ['ui.tree']
-
-@app.run ['$http', ($http) ->
-  $http.defaults.headers.common['Accept'] = 'application/json'
-  $http.defaults.headers.common['Content-Type'] = 'application/json'
-]
-
-@app.filter 'kb', ->
-   (input) ->
-      numeral(input).format('0 b')
-
-@app.directive 'sidePanel', ->
-  (scope, $el, attrs) ->
-    $el.sticky
-      topSpacing:       80
-      getWidthFrom:     '.sticky-wrapper'
-      responsiveWidth:  true
-
-# jQuery init
-$(document).on 'ready page:load', ->
-
-  $(document).on 'init.fndtn', (a,b,c) ->
-    $(a.target).foundation()
-    $(a.target).confirmWithReveal()
-
-  # Bootstrap Angular and Foundation
-  angular.bootstrap $('[role="main"]'), ['push_type']
-  $(document).trigger 'init.fndtn'
-
-  $('.node-list.sortable').sortable
-    handle: '.handle'
-    forcePlaceholderSize: true
-  .on 'sortupdate', (e, ui) ->
-    obj = { prev: ui.item.prev().data('id'), next: ui.item.next().data('id') }
-    $.post "/push_type/nodes/#{ ui.item.data('id') }/position", obj, 'json'
-
+$(document).on 'init.fndtn', (a,b,c) ->
+  $(a.target).foundation()
+  $(a.target).confirmWithReveal()

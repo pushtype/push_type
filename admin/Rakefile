@@ -29,3 +29,12 @@ task :test_app do
   ENV['RAILS_ENV'] = 'test'
   Rake::Task['common:test_app'].invoke 'push_type_admin', File.dirname(__FILE__)
 end
+
+desc "Build webpack assets"
+task :webpack do
+  system './node_modules/.bin/webpack --config config/webpack.config.js'
+end
+
+# Hook webpack on to build and test tasks
+task build: :webpack
+task test: :webpack
