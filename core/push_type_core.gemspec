@@ -19,14 +19,12 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'rails',         '~> 4.2.0'
-  s.add_dependency 'pg',            '~> 0.18.2'
+  s.add_dependency 'pg',            '~> 0.18.4'
   s.add_dependency 'closure_tree',  '~> 6.0.0'
-  s.add_dependency 'dragonfly',     '~> 1.0.10'
-  s.add_dependency 'redcarpet',     '~> 3.3.2'
+  s.add_dependency 'dragonfly',     '~> 1.0.12'
+  s.add_dependency 'redcarpet',     '~> 3.3.4'
 
-  s.add_dependency 'active_attr', '0.8.5'
-
-  s.add_development_dependency 'minitest-spec-rails', '~> 5.2.2'
-  s.add_development_dependency 'database_cleaner',    '~> 1.4.1'
+  s.add_development_dependency 'minitest-spec-rails', '~> 5.3.0'
+  s.add_development_dependency 'database_cleaner',    '~> 1.5.1'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.5.0'
 end
