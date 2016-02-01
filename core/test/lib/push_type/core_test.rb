@@ -13,7 +13,6 @@ module PushType
       it { subject.must_respond_to :root_nodes }
       it { subject.must_respond_to :home_slug }
       it { subject.must_respond_to :unexposed_nodes }
-      it { subject.must_respond_to :unexposed_taxonomies }
       it { subject.must_respond_to :media_styles }
       it { subject.must_respond_to :mailer_sender }
       it { subject.must_respond_to :home_slug }
@@ -44,17 +43,6 @@ module PushType
       end
     end
 
-    describe '.unexposed_taxonomies' do
-      let(:config) { MiniTest::Mock.new }
-      it 'should return empty array by default' do
-        config.expect :unexposed_taxonomies, []
-        PushType.stub :config, config do
-          PushType.unexposed_taxonomies.must_be_empty
-        end
-        assert config.verify
-      end
-    end
-
     describe '.subclasses_from_list' do
       subject { PushType.subclasses_from_list scope, list }
       describe 'scoped by :node' do
@@ -70,21 +58,6 @@ module PushType
         describe 'searching for array with nonexisting types' do
           let(:list) { [:page, :test_page, :foo, :bar] }
           it { subject.must_equal ['page', 'test_page'] }
-        end
-      end
-      describe 'scoped by :taxonomy' do
-        let(:scope) { :taxonomy }
-        describe 'searching for :all' do
-          let(:list) { :all }
-          it { subject.size.must_be :>=, 1 }
-        end
-        describe 'searching for single type' do
-          let(:list) { :category }
-          it { subject.must_equal ['category'] }
-        end
-        describe 'searching for array with nonexisting types' do
-          let(:list) { [:category, :foo, :bar] }
-          it { subject.must_equal ['category'] }
         end
       end
     end

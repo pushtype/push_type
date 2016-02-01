@@ -27,10 +27,6 @@ module PushType
       subclasses_from_list(:node, config.unexposed_nodes)
     end
 
-    def unexposed_taxonomies
-      subclasses_from_list(:taxonomy, config.unexposed_taxonomies)
-    end
-
     def subclasses_from_list(scope, types = nil)
       return [] unless types
       descendants = "push_type/#{ scope }".camelcase.constantize.descendants.map { |c| c.name.underscore }

@@ -4,6 +4,7 @@
 --exclude core/lib/generators
 --exclude core/lib/push_type/testing
 --markup markdown
+--output-dir rdoc
 {core,admin,auth,wysiwyg}/{app,lib}/**/*.rb
 -
 LICENSE.md

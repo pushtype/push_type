@@ -14,7 +14,7 @@ Dragonfly.app.use_datastore :memory
 
 class ActiveSupport::TestCase
   # Due to test weirdness / dodgy code need to reference some classes
-  Page && Category && Location
+  Page && Location
 
   before :each do
     DatabaseCleaner.start

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NodesFrontEndControllerTest < ActionController::TestCase
+class FrontEndControllerTest < ActionController::TestCase
   
   before { @routes = Rails.application.routes }
   

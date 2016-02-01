@@ -42,10 +42,5 @@ FactoryGirl.define do
       file  { Rack::Test::UploadedFile.new(PushType::Core::Engine.root.join('test', 'files/document.pdf')) }
     end
   end
-
-  factory :taxonomy, class: 'PushType::Taxonomy' do
-    title   { generate :title }
-    slug    { generate :slug }
-  end
   
 end

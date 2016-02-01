@@ -3,8 +3,7 @@ module PushType
     extend ActiveSupport::Concern
 
     FILTERS = [
-      :before_node_load_filters, :before_node_action_filters, :after_node_action_filters,
-      :before_taxonomy_load_filters, :before_taxonomy_action_filters, :after_taxonomy_action_filters
+      :before_node_load_filters, :before_node_action_filters, :after_node_action_filters
     ]
 
     included do

@@ -2,6 +2,13 @@ class FrontEndController < ApplicationController
 
   include PushType::Filterable
 
+  before_action :load_node, only: :show
+  hooks_for :node, only: :show
+
+  def show
+    render *@node.template_args
+  end
+
   private
 
   def root_path?
@@ -13,6 +20,15 @@ class FrontEndController < ApplicationController
       render template: 'push_type/setup', layout: false, status: 404
     else
       raise ActiveRecord::RecordNotFound
+    end
+  end
+
+  def load_node
+    @node = PushType::Node.exposed.published.find_by_path permalink_path
+    if @node
+      instance_variable_set "@#{ @node.type.underscore }", @node.present!(view_context)
+    else
+      raise_404
     end
   end
 

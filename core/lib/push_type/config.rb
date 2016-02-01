@@ -18,10 +18,6 @@ module PushType
     mattr_accessor :unexposed_nodes
     @@unexposed_nodes = []
 
-    # Taxonomy types that are not exposed to the front end
-    mattr_accessor :unexposed_taxonomies
-    @@unexposed_taxonomies = []
-
     # Hash of geometry strings used for resizing images
     mattr_accessor :media_styles
     @@media_styles = {

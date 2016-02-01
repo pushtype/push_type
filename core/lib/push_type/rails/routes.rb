@@ -6,8 +6,7 @@ module ActionDispatch::Routing
         path:   '/push_type',
         home:   PushType.config.home_slug,
         actions: {
-          node:     'nodes_front_end#show',
-          taxonomy: 'taxonomies_front_end#show',
+          node: 'front_end#show'
         }
       }.deep_merge!(options)
 
@@ -20,11 +19,6 @@ module ActionDispatch::Routing
         asset = PushType::Asset.find_by_file_uid! file_name
         asset.media params[:style]
       }, as: 'media'
-
-      # Taxonomies
-      get ":taxonomy/*permalink" => opts[:actions][:taxonomy], as: 'taxonomy', constraints: ->(params, req) {
-        PushType::Taxonomy.descendants(exposed: true).map(&:base_slug).include? params[:taxonomy]
-      }
 
       # A catch-all root for the nodes
       get '*permalink' => opts[:actions][:node], as: 'node'

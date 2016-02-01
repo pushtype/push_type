@@ -28,8 +28,7 @@ module PushType
 
       def unexposure_method
         case _ct.base_class.name.demodulize
-          when 'Node'     then :unexposed_nodes
-          when 'Taxonomy' then :unexposed_taxonomies
+          when 'Node' then :unexposed_nodes
         end
       end
 
