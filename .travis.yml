@@ -6,7 +6,7 @@ addons:
 install:
   - 'gem install bundler'
   - 'bundle install --jobs=3 --retry=3'
-  - 'cd admin && npm install'
+  - 'cd admin && npm install && cd ..'
 before_script:
   - cp database.yml.travis core/config/database.yml
   - cp database.yml.travis admin/config/database.yml
