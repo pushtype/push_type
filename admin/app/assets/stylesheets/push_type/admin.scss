@@ -11,10 +11,21 @@
  * file per style scope.
  *
  *= require selectize
- *= require_self
  *= require pickadate/classic
  *= require pickadate/classic.date
  *= require pickadate/classic.time
+ *= require froala_editor.min
+ *= require froala_style.min
+ *= require plugins/code_view.min
+ *= require plugins/file.min
+ *= require plugins/fullscreen.min
+ *= require plugins/image.min
+ *= require plugins/image_manager.min
+ *= require plugins/table.min
+ *= require plugins/video.min
+ *= require themes/gray.min
+ *= require font-awesome
+ *= require_self
  */
 
 @import "foundation_and_overrides";

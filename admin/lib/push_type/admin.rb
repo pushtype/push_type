@@ -8,6 +8,8 @@ require 'foundation-icons-sass-rails'
 require 'jquery-rails'
 require 'pickadate-rails'
 require 'selectize-rails'
+require 'wysiwyg-rails'
+require 'font-awesome-rails'
 require 'turbolinks'
 
 require 'breadcrumbs'

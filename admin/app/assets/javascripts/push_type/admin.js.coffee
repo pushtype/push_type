@@ -22,7 +22,9 @@
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require pickadate/picker.time
-#= require ./vue_config
+#= require froala_editor.min
+#= require ./wysiwyg_setup
+#= require ./vue_setup
 #= require_self
 
 Turbolinks.enableProgressBar()

@@ -1,6 +1,7 @@
 // ./node_modules/.bin/webpack --config config/webpack.config.js
 
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   entry: {

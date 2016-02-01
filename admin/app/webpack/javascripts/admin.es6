@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import $ from 'jquery';
-import Vue from 'vue';
+import _ from 'expose?_!lodash';
+import $ from 'expose?$!expose?jQuery!jquery';
+import Vue from 'expose?Vue!vue';
 import vr from 'vue-resource';
 Vue.use(vr);
 
@@ -10,6 +10,7 @@ import './components/asset-index.es6';
 import './components/asset-form.es6';
 import './components/asset-field.es6';
 import './components/repeater-field.es6';
+import './components/wysiwyg-field.es6';
 
 // Directives
 import './directives/side-panel.es6';
@@ -18,6 +19,7 @@ import './directives/node-submit.es6';
 import './directives/asset-upload.es6';
 import './directives/pickadate.es6';
 import './directives/selectize.es6';
+import './directives/froala.es6';
 import './directives/simple-pagination.es6';
 
 // Filters
@@ -26,14 +28,6 @@ import './filters/kb.es6';
 // jQuery dependencies
 import 'html5sortable';
 import 'jquery-sticky';
-
-// Expose modules on Window for Rails' javascripts
-_.extend(window, {
-  _: _,
-  $: $,
-  jQuery: $,
-  Vue: Vue
-})
 
 const app = {
   el: '[role="main"]',

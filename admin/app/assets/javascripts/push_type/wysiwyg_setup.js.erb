@@ -1,0 +1,26 @@
+//= require plugins/align.min
+//= require plugins/code_view.min
+//= require plugins/file.min
+//= require plugins/fullscreen.min
+//= require plugins/image.min
+//= require plugins/image_manager.min
+//= require plugins/lists.min
+//= require plugins/paragraph_format.min
+//= require plugins/table.min
+//= require plugins/video.min
+
+$.FroalaEditor.COMMANDS['insertImage'].title = 'Insert media';
+$.FroalaEditor.COMMANDS['imageUpload'].title = 'Upload media';
+$.FroalaEditor.COMMANDS['imageManager'].title = 'Browse media';
+$.FroalaEditor.COMMANDS['imageManager'].callback = function(a,b,c) {
+  this.$current_image = this.image.get();
+  this.$box.siblings('.reveal-modal').foundation('reveal', 'open');
+}
+
+$.extend($.FroalaEditor.DEFAULTS, {
+  defaultImageWidth: 0,
+  imageStyle: true,
+  mediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
+  fileLink: true
+})
+  
