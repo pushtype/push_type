@@ -10,7 +10,6 @@ install:
 before_script:
   - cp database.yml.travis core/config/database.yml
   - cp database.yml.travis admin/config/database.yml
-  - cp database.yml.travis wysiwyg/config/database.yml
   - cp database.yml.travis auth/config/database.yml
 script: bundle exec rake test
 notifications:
