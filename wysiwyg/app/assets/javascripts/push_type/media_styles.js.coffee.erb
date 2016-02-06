@@ -1,5 +1,0 @@
-$.Editable.DEFAULTS = $.extend $.Editable.DEFAULTS,
-  defaultImageWidth:  0
-  imageStyle:         true
-  mediaStyles:        [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ]
-  fileLink:           true

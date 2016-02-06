@@ -13,7 +13,11 @@ export default Vue.component('wysiwyg-field', {
   methods: {
     selectAsset: function(asset) {
       let $current_image = this.$editor.$current_image;
-      this.$editor.image.insert(asset.preview_thumb_url, false, {}, $current_image);
+      if (asset['image?']) {
+        this.$editor.image.insert(asset.url, false, {}, $current_image);
+      } else {
+        this.$editor.file.insert(asset.url, asset.description_or_file_name);
+      }
     },
   },
 

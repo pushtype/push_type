@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'push_type_core',    PushType::VERSION
   s.add_dependency 'push_type_admin',   PushType::VERSION
-  s.add_dependency 'push_type_wysiwyg', PushType::VERSION
   s.add_dependency 'push_type_auth',    PushType::VERSION
 
   s.add_development_dependency 'minitest-spec-rails', '~> 5.2.2'

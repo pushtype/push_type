@@ -10,11 +10,11 @@ module PushType
       hash = [ :id, :file_name, :file_size, :mime_type, :created_at, :new_record?, :image?, :description_or_file_name ].inject({}) do |h, att|
         h.update att => asset.send(att)
       end
-      hash.update preview_thumb_url: asset_preview_thumb_url(asset)
+      hash.update url: main_app.media_path(file_uid: asset.file_uid), preview_thumb_url: asset_preview_thumb_url(asset) if asset.persisted?
+      hash
     end
 
     def asset_preview_thumb_url(asset)
-      return nil unless asset.persisted?
       if asset.image?
         main_app.media_path(file_uid: asset.file_uid, style: :push_type_thumb)
       else

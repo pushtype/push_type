@@ -38,9 +38,11 @@ module PushType
       respond_to do |format|
         format.json do
           if @asset.save
-            render json: { asset: view_context.asset_hash(@asset).as_json }, status: :created
+            hash = params[:froala] ? { link: main_app.media_path(file_uid: @asset.file_uid) } : { asset: view_context.asset_hash(@asset).as_json }
+            render json: hash, status: :created
           else
-            render json: { errors: @asset.errors.as_json }, status: :unprocessable_entity
+            hash = params[:froala] ? { error: @asset.errors.full_messages.first } : { errors: @asset.errors.as_json }
+            render json: hash, status: :unprocessable_entity
           end
         end
       end

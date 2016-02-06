@@ -12,7 +12,6 @@ gemspec
 
 gem 'push_type_core',     path: 'core',     require: false
 gem 'push_type_admin',    path: 'admin',    require: false
-gem 'push_type_wysiwyg',  path: 'wysiwyg',  require: false
 gem 'push_type_auth',     path: 'auth',     require: false
 
 # To use debugger

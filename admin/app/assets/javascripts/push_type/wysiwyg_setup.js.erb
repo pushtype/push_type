@@ -4,23 +4,29 @@
 //= require plugins/fullscreen.min
 //= require plugins/image.min
 //= require plugins/image_manager.min
+//= require plugins/link.min
 //= require plugins/lists.min
 //= require plugins/paragraph_format.min
 //= require plugins/table.min
 //= require plugins/video.min
 
-$.FroalaEditor.COMMANDS['insertImage'].title = 'Insert media';
-$.FroalaEditor.COMMANDS['imageUpload'].title = 'Upload media';
+$.extend($.FroalaEditor.DEFAULTS, {
+  imageDefaultWidth: 0,
+  imageMediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
+  imageUploadParam: 'asset[file]',
+  imageUploadParams: { froala: true },
+  linkEditButtons: ['linkOpen', 'linkStyle', 'linkEdit', 'linkRemove'],
+});
+
+_.remove($.FroalaEditor.DEFAULTS['imageEditButtons'],   function(b) { return b === 'imageStyle' });
+_.remove($.FroalaEditor.DEFAULTS['linkEditButtons'],    function(b) { return b === 'linkStyle' });
+_.remove($.FroalaEditor.DEFAULTS['linkInsertButtons'],  function(b) { return b === 'linkList' });
+
 $.FroalaEditor.COMMANDS['imageManager'].title = 'Browse media';
-$.FroalaEditor.COMMANDS['imageManager'].callback = function(a,b,c) {
+$.FroalaEditor.COMMANDS['imageManager'].callback = function() {
+  this.selection.save();
   this.$current_image = this.image.get();
   this.$box.siblings('.reveal-modal').foundation('reveal', 'open');
 }
 
-$.extend($.FroalaEditor.DEFAULTS, {
-  defaultImageWidth: 0,
-  imageStyle: true,
-  mediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
-  fileLink: true
-})
-  
+$.FroalaEditor.DEFAULTS['fileInsertButtons'].push('imageManager');

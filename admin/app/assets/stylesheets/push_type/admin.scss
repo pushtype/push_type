@@ -970,13 +970,40 @@ form .asset-upload {
   .option.selected {
     color:              $base;
   }
-
 }
 
 .tabs {
   border:               1px solid $silver;
   border-bottom:        none;
   background-color:     $silver;
+}
+
+.fr-toolbar {
+  border-radius:        0 !important;
+}
+
+.fr-wrapper {
+  border:               none !important;
+  border-radius:        0 !important;
+  box-shadow:           none !important;
+}
+
+.fr-element {
+  border:               1px solid $input-border-color;
+  box-shadow:           $input-box-shadow;
+  .focus & {
+    border-color:       $input-focus-border-color;
+  }
+}
+
+.fr-view .fr-file:after {
+  display: none;
+}
+.fr-view .fr-file:before {
+  position: relative;
+  content: "\1F4CE";
+  padding-right: 6px;
+  font-weight: 400;
 }
 
 @import "foundation-icons";

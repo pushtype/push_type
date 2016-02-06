@@ -25,6 +25,7 @@
 #= require froala_editor.min
 #= require ./wysiwyg_setup
 #= require ./vue_setup
+#= require_tree ./wysiwyg
 #= require_self
 
 Turbolinks.enableProgressBar()
