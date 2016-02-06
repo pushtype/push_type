@@ -32,6 +32,14 @@ Turbolinks.enableProgressBar()
 
 Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 
-$(document).on 'init.fndtn', (a,b,c) ->
-  $(a.target).foundation()
-  $(a.target).confirmWithReveal()
+# By default doc is not binded
+docBinded = false
+# Document should by bound first and only then should
+# dynamically added dom nodes be bound
+$(document).on 'init.fndtn', (e) ->
+  if e.target == document
+    $(document).foundation()
+    $(document).confirmWithReveal()
+    docBinded = true 
+  else if docBinded
+    $(e.target).foundation()

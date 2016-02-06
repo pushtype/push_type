@@ -10,6 +10,10 @@ export default Vue.component('wysiwyg-field', {
     }
   },
 
+  ready: function() {
+    setTimeout(() => $(this.$el).trigger('init.fndtn'), 100);
+  },
+
   methods: {
     selectAsset: function(asset) {
       let $current_image = this.$editor.$current_image;
