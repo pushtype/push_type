@@ -29,6 +29,8 @@
                 .title= node.title
                 .meta
                   %span.label.secondary.radius= node.type.to_s.underscore.humanize
+                  - unless node.exposed?
+                    %span.label.warning.radius Unexposed
                   %span.label.radius{ class: node.published? ? 'success' : 'warning' }= node.status.titlecase
                   - if node.published?
                     %time Published #{ l node.published_at.to_date, format: :short }
