@@ -13,7 +13,7 @@ module PushType
     
     it { field.form_helper.must_equal :text_area }
     it { field.toolbar.must_equal 'text' }
-    it { field.html_options[:'froal-toobar'].must_equal 'text' }
+    it { field.html_options[:'froala-toolbar'].must_equal 'text' }
     it { field.json_value.must_equal val }
     it { field.value.must_equal val }
 
