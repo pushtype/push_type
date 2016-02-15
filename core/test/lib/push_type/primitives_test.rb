@@ -43,6 +43,7 @@ module PushType
       let(:val)       { { foo: 'bar', baz: ['a', 'b'] } }
 
       it { primitive.to_json(val).must_equal({ 'foo' => 'bar', 'baz' => ['a', 'b'] }) }
+      it { primitive.to_json({}).must_equal({}) }
     end
 
     describe 'StringType' do
