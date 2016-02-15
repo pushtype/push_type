@@ -10,6 +10,16 @@ module PushType
       @fields ||= {}
     end
 
+    # Overrides ActiveRecord::Base#attribute_for_inspect
+    # Minimises field_store value for more readable inspect
+    def attribute_for_inspect(attr_name)
+      if attr_name.to_s == 'field_store'
+        fields.keys.inspect
+      else
+        super
+      end
+    end
+
     private
 
     def initialize_fields

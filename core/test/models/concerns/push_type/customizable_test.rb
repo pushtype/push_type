@@ -25,5 +25,9 @@ module PushType
       it { TestPage.validators_on(:qux).map(&:class).must_include ActiveRecord::Validations::PresenceValidator }
     end
 
+    describe '#attribute_for_inspect' do
+      it { page.attribute_for_inspect(:field_store).must_equal "[:foo, :bar, :baz, :qux]" }
+    end
+
   end
 end

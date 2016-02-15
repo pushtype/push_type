@@ -2,6 +2,13 @@ require 'test_helper'
 
 module PushType
   class NodeTest < ActiveSupport::TestCase
+
+    class TestPage < PushType::Node
+      field :foo
+      field :bar
+      field :baz
+    end
+
     let(:node) { Node.new }
 
     it { node.wont_be :valid? }
