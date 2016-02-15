@@ -1,3 +1,3 @@
 module PushType
-  VERSION = '0.8.0.beta.1'
+  VERSION = '0.8.0.beta.2'
 end
