@@ -11,9 +11,6 @@ module PushType
         g.hidden_namespaces << 'push_type:dummy' << 'push_type:field'
       end
 
-      config.autoload_paths << config.root.join('app', 'fields')
-      config.autoload_paths << config.root.join('app', 'presenters')
-
       config.assets.precompile += %w(
         *.gif *.jpg *.png *.svg *.eot *.ttf *.woff *.woff2
       )
