@@ -56,5 +56,15 @@ module PushType
     it { node.bar_ids.must_equal @bars.map(&:id) }
     it { node.bars.sort.must_equal @bars.sort }
 
+    describe 'with missing relations' do
+      before do
+        @pages.first.destroy
+        @bars.first.destroy
+      end
+
+      it { proc { node.page }.must_raise ActiveRecord::RecordNotFound }
+      it { node.bars.size.must_equal 1 }
+    end
+
   end
 end

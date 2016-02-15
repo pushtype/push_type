@@ -75,7 +75,12 @@ module PushType
     on_instance do |object, field|
       object.class_eval do
         define_method(field.relation_name.to_sym) do
-          field.relation_class.find field.json_value unless field.json_value.blank?
+          return nil if field.json_value.blank?
+          if field.multiple?
+            field.relation_class.where id: field.json_value
+          else
+            field.relation_class.find field.json_value
+          end
         end unless method_defined?(field.relation_name.to_sym)
       end
     end
