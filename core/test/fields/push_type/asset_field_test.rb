@@ -19,5 +19,13 @@ module PushType
     it { node.foo_id.must_equal asset.id }
     it { node.foo.must_equal asset }
 
+    describe 'with missing relations' do
+      before do
+        asset.destroy
+      end
+
+      it { node.foo.must_equal nil }
+    end
+
   end
 end

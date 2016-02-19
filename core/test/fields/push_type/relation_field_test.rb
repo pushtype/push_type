@@ -62,7 +62,7 @@ module PushType
         @bars.first.destroy
       end
 
-      it { proc { node.page }.must_raise ActiveRecord::RecordNotFound }
+      it { node.page.must_equal nil }
       it { node.bars.size.must_equal 1 }
     end
 
