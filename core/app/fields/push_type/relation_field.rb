@@ -79,7 +79,7 @@ module PushType
           if field.multiple?
             field.relation_class.where id: field.json_value
           else
-            field.relation_class.find field.json_value
+            field.relation_class.find_by_id field.json_value
           end
         end unless method_defined?(field.relation_name.to_sym)
       end
