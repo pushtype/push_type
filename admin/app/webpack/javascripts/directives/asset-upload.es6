@@ -16,6 +16,7 @@ export default Vue.directive('asset-upload', {
         url:          self.params.uploadPath,
         paramname:    'asset[file]',
         maxfiles:     ( self.params.maxfiles || 1 ),
+        maxfilesize:  10,
         dragOver:     function() { $(this).addClass('hover') },
         dragLeave:    function() { $(this).removeClass('hover') },
         drop:         function() { $(this).removeClass('hover') },
