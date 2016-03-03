@@ -46,8 +46,7 @@ export default Vue.directive('froala', {
     $el.on('froalaEditor.blur',         (e, editor) => editor.$box.removeClass('focus') );
     $el.on('froalaEditor.image.error',  (e, editor, error) => alert(error.message) );
 
-    let options = defaults;
-    $.extend(options, opts[this.params.froalaToolbar], {
+    let options = $.extend(true, options, defaults, opts[this.params.froalaToolbar], {
       imageUploadURL: this.params.uploadPath
     })
 

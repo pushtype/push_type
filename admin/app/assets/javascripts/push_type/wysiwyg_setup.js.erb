@@ -11,6 +11,7 @@
 //= require plugins/video.min
 
 $.extend($.FroalaEditor.DEFAULTS, {
+  key: '<%= PushType::WysiwygField::FROALA_KEY %>',
   imageDefaultWidth: 0,
   imageMediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
   imageUploadParam: 'asset[file]',

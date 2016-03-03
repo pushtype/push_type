@@ -978,21 +978,21 @@ form .asset-upload {
   background-color:     $silver;
 }
 
+.fr-box {
+  margin-bottom:        rem-calc(16);
+}
+
 .fr-toolbar {
   border-radius:        0 !important;
 }
 
 .fr-wrapper {
-  border:               none !important;
+  border:               1px solid $input-border-color !important;
   border-radius:        0 !important;
-  box-shadow:           none !important;
-}
+  box-shadow:           $input-box-shadow !important;
 
-.fr-element {
-  border:               1px solid $input-border-color;
-  box-shadow:           $input-box-shadow;
   .focus & {
-    border-color:       $input-focus-border-color;
+    border-color:       $input-focus-border-color !important;
   }
 }
 

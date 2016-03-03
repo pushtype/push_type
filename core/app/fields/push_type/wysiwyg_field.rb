@@ -1,6 +1,8 @@
 module PushType
   class WysiwygField < PushType::FieldType
 
+    FROALA_KEY = 'pFOFSAGLUd1AVKg1SN=='
+
     options template: 'wysiwyg', toolbar: 'full'
 
     def form_helper
