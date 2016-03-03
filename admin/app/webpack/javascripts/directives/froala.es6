@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import $ from 'jquery';
+import _ from 'lodash';
 
 const defaults = {
   toolbarButtons: ['bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertTable', '|', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', '|', 'undo', 'redo', 'clearFormatting', 'fullscreen', '|', 'html'],
@@ -46,7 +47,8 @@ export default Vue.directive('froala', {
     $el.on('froalaEditor.blur',         (e, editor) => editor.$box.removeClass('focus') );
     $el.on('froalaEditor.image.error',  (e, editor, error) => alert(error.message) );
 
-    let options = $.extend(true, options, defaults, opts[this.params.froalaToolbar], {
+    let options = _.cloneDeep(defaults);
+    _.extend(options, defaults, opts[this.params.froalaToolbar], {
       imageUploadURL: this.params.uploadPath
     })
 
