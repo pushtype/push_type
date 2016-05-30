@@ -3,8 +3,8 @@ require_dependency "push_type/admin_controller"
 module PushType
   class NodesController < AdminController
 
-    before_filter :build_node,  only: [:new, :create]
-    before_filter :load_node,   only: [:edit, :update, :destroy, :restore, :position]
+    before_action :build_node,  only: [:new, :create]
+    before_action :load_node,   only: [:edit, :update, :destroy, :restore, :position]
 
     def index
       @nodes = node_scope.not_trash.page(params[:page]).per(30)

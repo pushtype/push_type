@@ -3,8 +3,8 @@ require_dependency "push_type/admin_controller"
 module PushType
   class AssetsController < AdminController
 
-    before_filter :build_asset, only: [:new, :create, :upload]
-    before_filter :load_asset,  only: [:edit, :update, :destroy, :restore]
+    before_action :build_asset, only: [:new, :create, :upload]
+    before_action :load_asset,  only: [:edit, :update, :destroy, :restore]
 
     def index
       respond_to do |format|

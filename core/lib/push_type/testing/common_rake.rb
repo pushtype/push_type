@@ -14,7 +14,8 @@ namespace :common do
     PushType::DummyGenerator.start opts
 
     Dir.chdir File.join(args[:base_path], args[:dummy_path]) do
-      system 'bundle exec rake db:drop db:create'
+      system 'bin/rails db:environment:set RAILS_ENV=test'
+      system 'bin/rails db:drop db:create'
       PushType::InstallGenerator.start ['--quiet']
       PushType::NodeGenerator.start ['page', '--quiet']
       PushType::StructureGenerator.start ['location', '--quiet']

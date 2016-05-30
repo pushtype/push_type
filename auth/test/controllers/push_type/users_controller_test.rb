@@ -13,7 +13,7 @@ module PushType
       let(:referer) { '/push_type/users' }
       before do
         @request.env["HTTP_REFERER"] = referer
-        put :invite, id: user.id
+        put :invite, params: { id: user.id }
       end
       it { response.must_redirect_to referer }
       it { last_email.to.must_include user.email }

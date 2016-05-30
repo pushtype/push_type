@@ -2,7 +2,7 @@ module PushType
   class AdminController < ActionController::Base
 
     layout 'push_type/admin'
-    before_filter :initial_breadcrumb
+    before_action :initial_breadcrumb
     helper_method :push_type_user
 
     # TODO - do I need to require all helpers

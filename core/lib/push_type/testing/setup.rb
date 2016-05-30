@@ -2,6 +2,7 @@ require 'minitest-spec-rails'
 require 'minitest/mock'
 require 'minitest/pride'
 require 'database_cleaner'
+require 'rails-controller-testing'
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
@@ -25,6 +26,7 @@ class ActiveSupport::TestCase
   after :each do
     DatabaseCleaner.clean
   end
+
   # Add more helper methods to be used by all tests here...
 end
 
@@ -32,4 +34,8 @@ class ActionController::TestCase
   before :each do
     @routes = PushType::Core::Engine.routes
   end
+
+  include ::Rails::Controller::Testing::TestProcess
+  include ::Rails::Controller::Testing::TemplateAssertions
+  include ::Rails::Controller::Testing::Integration
 end

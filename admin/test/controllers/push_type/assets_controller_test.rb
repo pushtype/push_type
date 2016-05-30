@@ -33,7 +33,7 @@ module PushType
     end
 
     describe 'POST #create' do
-      let(:action!) { post :create, asset: asset_attrs }
+      let(:action!) { post :create, params: { asset: asset_attrs } }
       describe 'with valid asset' do
         before { action! }
         it { response.must_respond_with :redirect }
@@ -52,7 +52,7 @@ module PushType
 
     describe 'POST #upload' do
       let(:json_response) { JSON.parse(response.body) }
-      let(:action!) { post :upload, format: :json, asset: asset_attrs }
+      let(:action!) { post :upload, format: :json, params: { asset: asset_attrs } }
       describe 'with valid asset' do
         before { action! }
         it { response.must_respond_with :success }
@@ -72,13 +72,13 @@ module PushType
     end
 
     describe 'GET #edit' do
-      before { get :edit, id: asset.id }
+      before { get :edit, params: { id: asset.id } }
       it { response.must_render_template 'edit' }
       it { assigns[:asset].must_equal asset }
     end
 
     describe 'PUT #update' do
-      before { put :update, id: asset.id, asset: { description: new_description } }
+      before { put :update, params: { id: asset.id, asset: { description: new_description } } }
       describe 'with valid asset' do
         let(:new_description) { 'Foo bar baz' }
         it { response.must_respond_with :redirect }
@@ -88,7 +88,7 @@ module PushType
     end
 
     describe 'DELETE #destroy' do
-      before { delete :destroy, id: asset.id }
+      before { delete :destroy, params: { id: asset.id } }
       it { response.must_respond_with :redirect }
       it { flash[:notice].must_be :present? }
       it { asset.reload.must_be :trashed? }
@@ -97,7 +97,7 @@ module PushType
     describe 'PUT #restore' do
       before do
         asset.trash!
-        put :restore, id: asset.id
+        put :restore, params: { id: asset.id }
       end
       it { response.must_respond_with :redirect }
       it { flash[:notice].must_be :present? }

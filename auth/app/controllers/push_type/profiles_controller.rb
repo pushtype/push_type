@@ -3,7 +3,7 @@ require_dependency "push_type/admin_controller"
 module PushType
   class ProfilesController < AdminController
 
-    before_filter :load_user
+    before_action :load_user
 
     def edit
     end

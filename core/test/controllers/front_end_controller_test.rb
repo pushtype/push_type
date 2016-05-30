@@ -7,7 +7,7 @@ class FrontEndControllerTest < ActionController::TestCase
   describe 'GET #show' do
     let(:page)      { Page.create attributes }
     let(:permalink) { page.permalink }
-    let(:action!)   { get :show, permalink: permalink }
+    let(:action!)   { get :show, params: { permalink: permalink } }
 
     describe 'when node does not exist' do
       let(:permalink) { 'does/not/exist' }
@@ -45,7 +45,7 @@ class FrontEndControllerTest < ActionController::TestCase
       end
     end
     let(:page) { FactoryGirl.create :published_node, type: 'Page' }
-    before { get :show, permalink: page.permalink }
+    before { get :show, params: { permalink: page.permalink } }
     it { assigns[:foo].must_be_instance_of Hash }
     it { assigns[:foo][:node_action].must_equal true }
     it { assigns[:foo][:page_action].must_equal true }

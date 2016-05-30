@@ -6,7 +6,7 @@ module PushType
       load_user
       @user.resend_confirmation_instructions
       flash[:notice] = 'Sign up instructions have been resent to the user.'
-      redirect_to :back
+      redirect_back fallback_location: push_type.user_path(@user)
     end
 
   end

@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'minitest-spec-rails', '~> 5.3.0'
   s.add_development_dependency 'database_cleaner',    '~> 1.5.3'
   s.add_development_dependency 'factory_girl_rails',  '~> 4.7.0'
+  s.add_development_dependency 'rails-controller-testing', '~> 0.1.0'
 end

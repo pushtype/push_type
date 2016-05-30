@@ -9,7 +9,7 @@ module PushType
     let(:token) { user.confirmation_token }
     
     describe 'GET #show' do
-      before { get :show, confirmation_token: token }
+      before { get :show, params: { confirmation_token: token } }
       describe 'with invalid confirmation token' do
         let(:token) { 'invalid' }
         it { response.must_render_template 'new' }
@@ -22,7 +22,7 @@ module PushType
     end
 
     describe 'PUT #update' do
-      before { put :update, user: { confirmation_token: token, password: password, password_confirmation: password } }
+      before { put :update, params: { user: { confirmation_token: token, password: password, password_confirmation: password } } }
       describe 'with invalid user' do
         let(:password) { '' }
         it { assigns[:user].errors.wont_be_empty }

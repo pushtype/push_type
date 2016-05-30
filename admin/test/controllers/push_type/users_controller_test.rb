@@ -23,7 +23,7 @@ module PushType
     end
 
     describe 'POST #create' do
-      let(:action!) { post :create, user: user_attrs }
+      let(:action!) { post :create, params: { user: user_attrs } }
       describe 'with valid user' do
         before { action! }
         it { response.must_respond_with :redirect }
@@ -41,13 +41,13 @@ module PushType
     end
 
     describe 'GET #edit' do
-      before { get :edit, id: user.id }
+      before { get :edit, params: { id: user.id } }
       it { response.must_render_template 'edit' }
       it { assigns[:user].must_equal user }
     end
 
     describe 'PUT #update' do
-      before { put :update, id: user.id, user: { name: new_name } }
+      before { put :update, params: { id: user.id, user: { name: new_name } } }
       describe 'with valid user' do
         let(:new_name) { 'Foo bar baz' }
         it { response.must_respond_with :redirect }
@@ -62,7 +62,7 @@ module PushType
     end
 
     describe 'DELETE #destroy' do
-      before { delete :destroy, id: user.id }
+      before { delete :destroy, params: { id: user.id } }
       it { response.must_respond_with :redirect }
       it { flash[:notice].must_be :present? }
       it { proc { user.reload }.must_raise ActiveRecord::RecordNotFound }

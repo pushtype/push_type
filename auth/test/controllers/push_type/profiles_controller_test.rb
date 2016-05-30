@@ -13,7 +13,7 @@ module PushType
     end
 
     describe 'PUT #update' do
-      before { put :update, user: { name: new_name } }
+      before { put :update, params: { user: { name: new_name } } }
 
       describe 'with invalid user' do
         let(:new_name) { '' }

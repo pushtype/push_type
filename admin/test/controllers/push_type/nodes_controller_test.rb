@@ -26,14 +26,14 @@ module PushType
     end
 
     describe 'GET #new' do
-      before { get :new, kind: 'page' }
+      before { get :new, params: { kind: 'page' } }
       it { response.must_render_template 'new' }
       it { assigns[:node].must_be :new_record? }
       it { assigns[:node].must_be_instance_of Page }
     end
 
     describe 'POST #create' do
-      let(:action!) { post :create, kind: 'page', page: node_attrs }
+      let(:action!) { post :create, params: { kind: 'page', page: node_attrs } }
       describe 'with valid node' do
         before { action! }
         it { response.must_respond_with :redirect }
@@ -51,13 +51,13 @@ module PushType
     end
 
     describe 'GET #edit' do
-      before { get :edit, id: node.id }
+      before { get :edit, params: { id: node.id } }
       it { response.must_render_template 'edit' }
       it { assigns[:node].must_equal node }
     end
 
     describe 'PUT #update' do
-      before { put :update, id: node.id, page: { title: new_title } }
+      before { put :update, params: { id: node.id, page: { title: new_title } } }
       describe 'with valid node' do
         let(:new_title) { 'Foo bar baz' }
         it { response.must_respond_with :redirect }
@@ -73,7 +73,7 @@ module PushType
 
     describe 'DELETE #destroy' do
       describe 'with untrashed node' do
-        before { delete :destroy, id: node.id }
+        before { delete :destroy, params: { id: node.id } }
         it { response.must_respond_with :redirect }
         it { flash[:notice].must_be :present? }
         it { node.reload.must_be :trashed? }
@@ -81,7 +81,7 @@ module PushType
       describe 'with trashed node' do
         before do
           node.trash!
-          delete :destroy, id: node.id
+          delete :destroy, params: { id: node.id }
         end
         it { response.must_respond_with :redirect }
         it { flash[:notice].must_be :present? }
@@ -102,7 +102,7 @@ module PushType
       end
       describe 'append node' do
         before do
-          post :position, id: @last_node.id, prev: @first_node.id
+          post :position, params: { id: @last_node.id, prev: @first_node.id }
           get :index
         end
         it { assigns[:nodes].first.must_equal @first_node }
@@ -110,7 +110,7 @@ module PushType
       end
       describe 'prepend node' do
         before do
-          post :position, id: @last_node.id, next: @first_node.id
+          post :position, params: { id: @last_node.id, next: @first_node.id }
           get :index
         end
         it { assigns[:nodes][1].must_equal @first_node }
@@ -121,7 +121,7 @@ module PushType
     describe 'PUT #restore' do
       before do
         node.trash!
-        put :restore, id: node.id
+        put :restore, params: { id: node.id }
       end
       it { response.must_respond_with :redirect }
       it { flash[:notice].must_be :present? }

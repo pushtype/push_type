@@ -3,8 +3,8 @@ require_dependency "push_type/admin_controller"
 module PushType
   class UsersController < AdminController
 
-    before_filter :build_user,  only: [:new, :create]
-    before_filter :load_user,   only: [:edit, :update, :destroy]
+    before_action :build_user,  only: [:new, :create]
+    before_action :load_user,   only: [:edit, :update, :destroy]
 
     def index
       @users = user_scope.page(params[:page]).per(30)
@@ -41,7 +41,7 @@ module PushType
         redirect_to push_type.users_path
       else
         flash[:alert] = 'Trying to delete yourself is the thirty seventh sign of madness.'
-        redirect_to :back
+        redirect_back fallback_location: push_type.user_path(@user)
       end
     end
 

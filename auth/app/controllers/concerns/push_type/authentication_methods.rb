@@ -3,7 +3,7 @@ module PushType
     extend ActiveSupport::Concern
 
     included do
-      before_filter :authenticate_user!
+      before_action :authenticate_user!
     end
 
     protected
