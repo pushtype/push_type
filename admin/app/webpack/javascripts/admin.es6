@@ -29,14 +29,22 @@ import './filters/kb.es6';
 import 'html5sortable';
 import 'jquery-sticky';
 
+// Set this variable on the window object
+// use it to tell if foundation has been init
+window.fndtnInit = false;
+
 const app = {
   el: '[role="main"]',
   ready: function() {
-    setTimeout(() => $(document).trigger('init.fndtn'), 100);
+    setTimeout(() => {
+      $(document).trigger('init.fndtn');
+      window.fndtnInit = true;
+    }, 250);
   }
 }
 
 $(document).on('ready page:load', function() {
+  window.fndtnInit = false;
   new Vue(app);
 
   $('.node-list.sortable').sortable({

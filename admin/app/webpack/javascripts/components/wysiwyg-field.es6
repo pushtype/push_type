@@ -11,7 +11,9 @@ export default Vue.component('wysiwyg-field', {
   },
 
   ready: function() {
-    setTimeout(() => $(this.$el).trigger('init.fndtn'), 100);
+    if (window.fndtnInit) {
+      setTimeout(() => $(this.$el).trigger('init.fndtn'), 100);
+    }
   },
 
   methods: {
