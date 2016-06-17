@@ -4,7 +4,7 @@ module PushType
 
     included do
       scope :exposed, -> {
-        unexposed_classes.present? ? where.not(type: unexposed_classes) : all
+        unexposed_classes.present? ? where.not(type: unexposed_classes.map(&:name)) : all
       }
     end
 
