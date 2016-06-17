@@ -49,8 +49,8 @@ module PushType
             block.respond_to?(:call) ? block.call : all
           ).where(["field_store->'#{ field_name }' ?| ARRAY[:tags]", { tags: tags }])
 
-          t   = Arel::Table.new('t',  ActiveRecord::Base)
-          ct  = Arel::Table.new('ct', ActiveRecord::Base)
+          t   = Arel::Table.new('t')
+          ct  = Arel::Table.new('ct')
 
           arr_sql = Arel.sql "ARRAY[#{ tags.map { |t| Arel::Nodes::Quoted.new(t).to_sql }.join(', ') }]"
           any_tags_func = Arel::Nodes::NamedFunction.new('ANY', [arr_sql])
