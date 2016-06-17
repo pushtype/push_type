@@ -13,5 +13,7 @@ gemspec
 gem 'push_type_core',   path: '../core'
 gem 'push_type_admin',  path: '../admin'
 
+gem 'closure_tree', git: 'https://github.com/mceachen/closure_tree.git'
+
 # To use debugger
 # gem 'debugger'
