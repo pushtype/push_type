@@ -57,7 +57,7 @@ module PushType
 
     def build_user
       @user = user_scope.new
-      @user.attributes = @user.attributes.merge(user_params)
+      @user.attributes = @user.attributes.merge(user_params.to_h)
     end
 
     def load_user

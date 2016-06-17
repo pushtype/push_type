@@ -11,6 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'push_type_core', path: '../core'
+gem 'closure_tree', git: 'https://github.com/mceachen/closure_tree.git'
 
 # To use debugger
 # gem 'debugger'

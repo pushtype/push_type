@@ -83,7 +83,7 @@ module PushType
 
     def build_node
       @node = node_scope.new type: params[:kind].camelcase, creator: push_type_user, updater: push_type_user
-      @node.attributes = @node.attributes.merge(node_params)
+      @node.attributes = @node.attributes.merge(node_params.to_h)
     end
 
     def load_node
