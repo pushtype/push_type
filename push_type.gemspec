@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',    PushType::VERSION
+  s.add_dependency 'push_type_api',     PushType::VERSION
   s.add_dependency 'push_type_admin',   PushType::VERSION
   s.add_dependency 'push_type_auth',    PushType::VERSION
 
