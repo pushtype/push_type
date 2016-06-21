@@ -1,8 +1,8 @@
 module PushType
   module Api
     class Engine < ::Rails::Engine
-    isolate_namespace PushType
-      engine_name 'push_type_admin'
+      isolate_namespace PushType
+      engine_name 'push_type_api'
 
       config.generators do |g|
         g.assets false

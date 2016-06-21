@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://www.pushtype.org'
   s.license       = 'MIT'
 
-  s.add_dependency 'push_type_core', PushType::VERSION
+  s.add_dependency 'push_type_core',              PushType::VERSION
+  s.add_dependency 'jbuilder',                    '~> 2.5.0'
+  s.add_dependency 'kaminari',                    '~> 0.16.3'
 
   s.add_development_dependency 'minitest-spec-rails', '~> 5.3.0'
   s.add_development_dependency 'database_cleaner',    '~> 1.5.1'

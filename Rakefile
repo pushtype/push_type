@@ -20,7 +20,7 @@ Bundler::GemHelper.install_tasks
 task default: :test
 
 
-PUSH_TYPE_LIBS = %w(core admin auth)
+PUSH_TYPE_LIBS = %w(core api admin auth)
 
 desc "Runs all tests in all PushType engines"
 task :test do

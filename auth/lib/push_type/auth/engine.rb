@@ -28,7 +28,7 @@ module PushType
         Devise.router_name = :push_type
       end
 
-      initializer 'push_type.auth_assets' do
+      initializer 'push_type_auth.admin_assets' do
         ActiveSupport.on_load :push_type_admin do
           admin_assets.javascripts << 'push_type/auth'
         end
