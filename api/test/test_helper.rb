@@ -9,3 +9,10 @@ require 'push_type/testing/factories'
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+class ActionController::TestCase
+  before :all do
+    @request.headers['Accept']        = 'application/json'
+    @request.headers['Content-Type']  = 'application/json'
+  end
+end

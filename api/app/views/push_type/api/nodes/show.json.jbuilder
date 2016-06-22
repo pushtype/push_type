@@ -6,7 +6,17 @@ json.node do
   end
 end
 
-json.fields @node.fields do |key, field|
-  json.name field.name
-  json.kind field.kind
+json.meta do
+  json.links do
+    json.self push_type.api_node_url(@node)
+    json.permalink main_app.node_url(@node.permalink)
+  end
+
+  if params[:action] == 'show'
+    json.fields @node.fields do |key, field|
+      json.name field.name
+      json.kind field.kind
+    end
+    json.child_nodes @node.child_nodes
+  end
 end
