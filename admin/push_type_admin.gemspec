@@ -25,10 +25,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'
   s.add_dependency 'pickadate-rails',             '~> 3.5.6.0'
   s.add_dependency 'selectize-rails',             '~> 0.12.1'
-  s.add_dependency 'wysiwyg-rails',               '~> 2.1.0'
+  s.add_dependency 'wysiwyg-rails',               '~> 2.3.2'
   s.add_dependency 'turbolinks',                  ['>= 2.5.3', '< 5.1']
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'
-  s.add_dependency 'kaminari',                    '~> 0.16.3'
+  s.add_dependency 'kaminari',                    '~> 0.17.0'
   s.add_dependency 'premailer-rails',             '~> 1.9.2'
 
   s.add_development_dependency 'minitest-spec-rails', '~> 5.3.0'
