@@ -27,7 +27,7 @@ module PushType
     end
 
     def update
-      if @node.update_attributes node_params.merge(updater: push_type_user)
+      if @node.update_attributes node_params_with_fields.merge(updater: push_type_user)
         render :show
       else
         render json: { errors: @node.errors }, status: :unprocessable_entity
@@ -92,7 +92,7 @@ module PushType
 
     def node_params_with_fields
       node_params.tap do |whitelist|
-        @node.fields.keys.each { |k| whitelist[k] = params[:node][k] if params[@node.type.underscore.to_sym].try(:[], k) }
+        @node.fields.keys.each { |k| whitelist[k] = params[:node][k] if params[:node][k].present? }
       end
     end
 

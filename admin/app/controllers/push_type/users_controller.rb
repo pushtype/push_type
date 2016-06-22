@@ -52,7 +52,7 @@ module PushType
     end
 
     def user_scope
-      @user_scope ||= PushType::User
+      PushType::User
     end
 
     def build_user

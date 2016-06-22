@@ -15,4 +15,8 @@ class ActionController::TestCase
     @request.headers['Accept']        = 'application/json'
     @request.headers['Content-Type']  = 'application/json'
   end
+
+  def json_response
+    JSON.parse(response.body)
+  end
 end

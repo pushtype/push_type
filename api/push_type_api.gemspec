@@ -4,7 +4,7 @@ require File.expand_path('../../core/lib/push_type/version', __FILE__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.platform      = Gem::Platform::RUBY
-  s.name          = 'push_type_admin'
+  s.name          = 'push_type_api'
   s.version       = PushType::VERSION
   s.summary       = %q{Restful API for PushType CMS.}
   s.description   = %q{Restful API for PushType CMS. PushType is a new generation of content management system for Ruby on Rails.}

@@ -5,8 +5,6 @@ module PushType
 
     let(:node_attrs) { FactoryGirl.attributes_for(:node, type: 'Page') }
     let(:node) { Page.create node_attrs }
-
-    let(:json_response) { JSON.parse(response.body) }
     
     describe 'GET #index' do
       before :all do

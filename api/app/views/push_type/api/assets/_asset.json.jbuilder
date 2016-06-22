@@ -1,0 +1,9 @@
+json.id           asset.id
+json.file_name    asset.file_name
+json.file_size    asset.file_size
+json.mime_type    asset.mime_type
+json.description  asset.description
+json.created_at   asset.created_at
+json.updated_at   asset.updated_at
+json.is_image     asset.image?
+json.is_trashed   asset.trashed?
