@@ -2,6 +2,10 @@ module PushType
   module Nestable
     extend ActiveSupport::Concern
 
+    included do
+      validate :parent_accepts_child
+    end
+
     def child_nodes
       self.class.child_nodes
     end
@@ -21,6 +25,16 @@ module PushType
     def children
       return super() unless custom_child_order?
       super.reorder(self.class.child_order)
+    end
+
+    private
+
+    def parent_accepts_child
+      if parent_id.present?
+        unless parent.child_nodes.include?(self.class.name.underscore)
+          errors.add :parent_id, 'does not accept this child'
+        end
+      end
     end
 
     module ClassMethods

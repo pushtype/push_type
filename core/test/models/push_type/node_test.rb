@@ -20,14 +20,14 @@ module PushType
 
     describe '#permalink' do
       before do
-        %w(one two three).each { |slug| @node = FactoryGirl.create :node, slug: slug, parent: @node }
+        %w(one two three).each { |slug| @node = FactoryGirl.build(:node, slug: slug, parent: @node); @node.save(validate: false); @node }
       end
       it { @node.permalink.must_equal 'one/two/three' }
     end
 
     describe '#orphan?' do
       let(:parent)  { FactoryGirl.create :node }
-      let(:child)   { FactoryGirl.create :node, parent: parent }
+      let(:child)   { n = FactoryGirl.build(:node, parent: parent); n.save(validate: false); n }
       before { child && parent.trash! }
       it { parent.wont_be :orphan? }
       it { child.must_be :orphan? }
@@ -35,10 +35,10 @@ module PushType
 
     describe '#trash!' do
       let(:parent)  { FactoryGirl.create :node }
-      let(:child)   { FactoryGirl.create :node, parent: parent }
+      let(:child)   { n = FactoryGirl.build(:node, parent: parent); n.save(validate: false); n }
       before { child && parent.trash! }
       it { parent.must_be :trashed? }
-      it { parent.reload.must_be :trashed? }
+      it { child.reload.must_be :trashed? }
     end
 
   end

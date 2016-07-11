@@ -76,7 +76,27 @@ module PushType
         it { page.wont_be :sortable? }
         it { page.children.order_values.must_equal ['published_at DESC', 'created_at DESC'] }
       end
+    end
 
+    describe 'parent validation' do
+      let(:parent)  { TestPage.create title: 'parent', slug: 'parent' }
+      subject       { Page.new title: 'child', slug: 'child', parent: parent }
+
+      describe 'with invalid child' do
+        before { TestPage.has_child_nodes false }
+        it 'should not be valid' do
+          subject.wont_be :valid?
+          subject.errors.keys.must_include :parent_id
+        end
+      end
+
+      describe 'with valid child' do
+        before { TestPage.has_child_nodes :page }
+        it 'should be valid' do
+          subject.must_be :valid?
+          subject.errors.keys.wont_include :parent_id
+        end
+      end
     end
 
   end
