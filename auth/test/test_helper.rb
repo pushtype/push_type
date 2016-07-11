@@ -13,3 +13,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 class ActionController::TestCase
   include Devise::TestHelpers
 end
+
+class ActionDispatch::IntegrationTest
+  include PushType::Core::Engine.routes.url_helpers
+end

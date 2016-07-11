@@ -18,8 +18,10 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://www.pushtype.org'
   s.license       = 'MIT'
 
-  s.add_dependency 'push_type_core', PushType::VERSION
+  s.add_dependency 'push_type_core',              PushType::VERSION
+  s.add_dependency 'push_type_api',               PushType::VERSION
   s.add_dependency 'haml-rails',                  '~> 0.9'
+  s.add_dependency 'coffee-rails',                '~> 4.1.1'
   s.add_dependency 'jquery-rails',                '~> 4.1.0'
   s.add_dependency 'foundation-rails',            '~> 5.5.3.2'
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'

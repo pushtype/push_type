@@ -1,6 +1,9 @@
 require 'push_type_core'
+require 'push_type_api'
 require 'push_type_admin'
+
 require 'devise'
+require 'simple_token_authentication'
 
 module PushType
 

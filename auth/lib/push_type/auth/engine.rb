@@ -16,6 +16,7 @@ module PushType
         
         # Extend controllers with auth/invitation methos
         PushType::AdminController.include PushType::AuthenticationMethods
+        PushType::ApiController.include PushType::ApiAuthenticationMethods
         PushType::UsersController.include PushType::InvitationMethods
         
         # Configure devise with helpers and layout

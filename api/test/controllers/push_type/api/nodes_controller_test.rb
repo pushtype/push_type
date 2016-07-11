@@ -3,13 +3,16 @@ require 'test_helper'
 module PushType
   class Api::NodesControllerTest < ActionController::TestCase
 
-    let(:node_attrs) { FactoryGirl.attributes_for(:node, type: 'Page') }
+    def node_attrs
+      FactoryGirl.attributes_for :node, type: 'Page'
+    end
+
     let(:node) { Page.create node_attrs }
     
     describe 'GET #index' do
       before :all do
-        @parent = FactoryGirl.create :node
-        5.times { FactoryGirl.create :node, parent_id: @parent.id }
+        @parent = Page.create node_attrs
+        5.times { Page.create node_attrs.merge(parent_id: @parent.id) }
       end
       describe 'with no scope' do
         before { get :index }

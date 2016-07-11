@@ -11,6 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'push_type_core', path: '../core'
+gem 'push_type_api',  path: '../api'
 
 gem 'closure_tree', git: 'https://github.com/aaronrussell/closure_tree.git', branch: 'rails-5'
 

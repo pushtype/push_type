@@ -1,4 +1,5 @@
 require 'push_type_core'
+
 require 'jbuilder'
 require 'kaminari'
 

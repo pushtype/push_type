@@ -19,8 +19,10 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',  PushType::VERSION
+  s.add_dependency 'push_type_api',   PushType::VERSION
   s.add_dependency 'push_type_admin', PushType::VERSION
   s.add_dependency 'devise',          '~> 4.1.1'
+  s.add_dependency 'simple_token_authentication', '~> 1.14.0'
   s.add_dependency 'highline',        '~> 1.7.8'
 
   s.add_development_dependency 'minitest-spec-rails', '~> 5.3.0'
