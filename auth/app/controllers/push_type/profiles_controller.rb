@@ -11,7 +11,7 @@ module PushType
     def update
       if update_user profile_params
         flash[:notice] = 'Profile successfully updated.'
-        sign_in @user, bypass: true
+        bypass_sign_in @user
         redirect_to push_type.edit_profile_path
       else
         render 'edit'

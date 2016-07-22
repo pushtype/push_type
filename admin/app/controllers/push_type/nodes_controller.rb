@@ -92,7 +92,7 @@ module PushType
 
     def node_params
       params.fetch(@node.type.underscore.to_sym, {}).permit(:title, :slug, :status, :published_at, :published_to).tap do |whitelist|
-        @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym][k] if params[@node.type.underscore.to_sym].try(:[], k) }
+        @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym].to_unsafe_h[k] if params[@node.type.underscore.to_sym].try(:[], k) }
       end
     end
 

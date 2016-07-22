@@ -11,7 +11,7 @@
       %tbody.rows
         // Static existing rows
         - field.rows.each do |row|
-          = f.fields_for "#{ field.name }[]", row do |r|
+          = f.fields_for field.name, row, index: nil do |r|
             %tr
               - if field.grid?
                 - row.fields.each do |name, sub_field|
@@ -29,7 +29,7 @@
                 %a.alert{ :'v-remove-row' => true }= ficon(:x)
 
         // Dynamic rows
-        = f.fields_for "#{ field.name }[]", field.structure do |r|
+        = f.fields_for field.name, field.structure, index: nil do |r|
           %tr{ :'v-for' => 'row in rows', :'track-by' => 'id' }
             - if field.grid?
               - field.fields.each do |name, sub_field|

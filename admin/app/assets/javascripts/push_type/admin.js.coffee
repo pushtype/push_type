@@ -28,8 +28,6 @@
 #= require_tree ./wysiwyg
 #= require_self
 
-Turbolinks.enableProgressBar()
-
 Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 
 # Document should by bound first and only then should
