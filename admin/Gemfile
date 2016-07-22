@@ -12,7 +12,5 @@ gemspec
 
 gem 'push_type_core', path: '../core'
 
-gem 'closure_tree', git: 'https://github.com/aaronrussell/closure_tree.git', branch: 'rails-5'
-
 # To use debugger
 # gem 'debugger'

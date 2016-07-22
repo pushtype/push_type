@@ -14,7 +14,5 @@ gem 'push_type_core',     path: 'core',     require: false
 gem 'push_type_admin',    path: 'admin',    require: false
 gem 'push_type_auth',     path: 'auth',     require: false
 
-gem 'closure_tree', git: 'https://github.com/aaronrussell/closure_tree.git', branch: 'rails-5'
-
 # To use debugger
 # gem 'debugger'
