@@ -43,7 +43,7 @@ const app = {
   }
 }
 
-$(document).on('ready turbolinks:load', function() {
+$(document).on('ready page:load turbolinks:load', function() {
   window.fndtnInit = false;
   new Vue(app);
 
