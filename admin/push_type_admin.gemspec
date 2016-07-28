@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'foundation-icons-sass-rails', '~> 3.0.0'
   s.add_dependency 'pickadate-rails',             '~> 3.5.6.0'
   s.add_dependency 'selectize-rails',             '~> 0.12.2'
+  s.add_dependency 'codemirror-rails',            '~> 5.16.0'
   s.add_dependency 'wysiwyg-rails',               '~> 2.3.4'
   s.add_dependency 'turbolinks',                  ['>= 2.5.3', '< 5.1']
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'

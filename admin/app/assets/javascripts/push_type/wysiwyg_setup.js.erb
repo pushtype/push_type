@@ -19,6 +19,8 @@ $.extend($.FroalaEditor.DEFAULTS, {
   linkEditButtons: ['linkOpen', 'linkStyle', 'linkEdit', 'linkRemove'],
 });
 
+$.FroalaEditor.DEFAULTS['codeMirrorOptions']['theme'] = 'material';
+
 _.remove($.FroalaEditor.DEFAULTS['imageEditButtons'],   function(b) { return b === 'imageStyle' });
 _.remove($.FroalaEditor.DEFAULTS['linkEditButtons'],    function(b) { return b === 'linkStyle' });
 _.remove($.FroalaEditor.DEFAULTS['linkInsertButtons'],  function(b) { return b === 'linkList' });

@@ -15,7 +15,6 @@ const defaults = {
     blockquote: 'Quote',
     pre: 'Code'
   },
-  codeBeautifier: true,
   codeMirror: true,
   height: 400,
   theme: 'gray'
@@ -47,7 +46,7 @@ export default Vue.directive('froala', {
     $el.on('froalaEditor.blur',         (e, editor) => editor.$box.removeClass('focus') );
     $el.on('froalaEditor.image.error',  (e, editor, error) => alert(error.message) );
 
-    let options = _.cloneDeep(defaults);
+    let options = {};
     _.extend(options, defaults, opts[this.params.froalaToolbar], {
       imageUploadURL: this.params.uploadPath
     })

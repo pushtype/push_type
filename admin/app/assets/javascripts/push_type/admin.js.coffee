@@ -22,6 +22,8 @@
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require pickadate/picker.time
+#= require codemirror
+#= require codemirror/modes/xml
 #= require froala_editor.min
 #= require ./wysiwyg_setup
 #= require ./vue_setup
