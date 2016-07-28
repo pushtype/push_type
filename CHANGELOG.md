@@ -80,13 +80,13 @@
 * Use pickadate for cross-browser date and time picker fields
 * Use selectize for better select fields
 * New or improved field types:
-* * Time fields
-* * Select fields (with multiple option)
-* * Improved tag list field
-* * Asset picker field type
-* * ~~Node field type~~ (*since deprecated*)
-* * Repeater field type (oh yes!)
-* * Matrix field type (oh damn, yes!)
+  * Time fields
+  * Select fields (with multiple option)
+  * Improved tag list field
+  * Asset picker field type
+  * ~~Node field type~~ (*since deprecated*)
+  * Repeater field type (oh yes!)
+  * Matrix field type (oh damn, yes!)
 * Fixed issue where tag list was not returning correct default value
 
 [Compare all changes](https://github.com/pushtype/push_type/compare/v0.4.0...v0.5.0)
