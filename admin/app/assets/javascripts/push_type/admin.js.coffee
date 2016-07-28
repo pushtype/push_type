@@ -36,3 +36,4 @@ Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 # dynamically added dom nodes be bound
 $(document).on 'init.fndtn', (e) ->
   $(e.target).foundation()
+  $(e.target).confirmWithReveal() if $(e.target).find('[data-confirm]').length
