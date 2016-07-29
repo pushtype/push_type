@@ -1,5 +1,6 @@
 module PushType
   module NodesHelper
+    include FieldsHelper
 
     def nodes_array(nodes)
       nodes.map { |n| node_hash(n) }
