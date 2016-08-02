@@ -22,10 +22,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'push_type_admin', PushType::VERSION
   s.add_dependency 'devise',          '~> 4.2.0'
   s.add_dependency 'highline',        '~> 1.7.8'
-
-  s.add_development_dependency 'minitest-spec-rails', '~> 5.4.0'
-  s.add_development_dependency 'database_cleaner',    '~> 1.5.3'
-  s.add_development_dependency 'factory_girl_rails',  '~> 4.7.0'
-  s.add_development_dependency 'rails-controller-testing', '~> 0.1.1'
-  s.add_development_dependency 'listen',              '~> 3.1.5'
 end

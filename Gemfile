@@ -14,5 +14,7 @@ gem 'push_type_core',     path: 'core',     require: false
 gem 'push_type_admin',    path: 'admin',    require: false
 gem 'push_type_auth',     path: 'auth',     require: false
 
+eval File.read(File.expand_path('../dev_dependencies.rb', __FILE__))
+
 # To use debugger
 # gem 'debugger'
