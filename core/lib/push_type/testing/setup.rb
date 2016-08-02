@@ -2,12 +2,11 @@ require 'minitest-spec-rails'
 require 'minitest/mock'
 require 'minitest/pride'
 require 'database_cleaner'
-require 'rails-controller-testing'
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-Rails.backtrace_cleaner.remove_silencers!
+#Rails.backtrace_cleaner.remove_silencers!
 
 DatabaseCleaner.strategy = :transaction
 DatabaseCleaner.clean_with :truncation
@@ -35,7 +34,10 @@ class ActionController::TestCase
     @routes = PushType::Core::Engine.routes
   end
 
-  include ::Rails::Controller::Testing::TestProcess
-  include ::Rails::Controller::Testing::TemplateAssertions
-  include ::Rails::Controller::Testing::Integration
+  if Rails.version.to_f >= 5
+    require 'rails-controller-testing'
+    include ::Rails::Controller::Testing::TestProcess
+    include ::Rails::Controller::Testing::TemplateAssertions
+    include ::Rails::Controller::Testing::Integration
+  end
 end

@@ -32,7 +32,7 @@
 
 @import "foundation_and_overrides";
 
-html.turbolinks-progress-bar::before {
+.turbolinks-progress-bar {
   background-color: $primary-color !important;
   height: 3px !important;
   z-index: 9;

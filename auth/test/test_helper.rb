@@ -6,6 +6,7 @@ require 'rails/test_help'
 # Require PushType testing setup
 require 'push_type/testing/setup'
 require 'push_type/testing/factories'
+require File.expand_path('../factories.rb', __FILE__)
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
