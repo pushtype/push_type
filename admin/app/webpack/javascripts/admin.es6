@@ -20,6 +20,7 @@ import './directives/asset-upload.es6';
 import './directives/pickadate.es6';
 import './directives/selectize.es6';
 import './directives/froala.es6';
+import './directives/code-mirror.es6';
 import './directives/simple-pagination.es6';
 
 // Filters

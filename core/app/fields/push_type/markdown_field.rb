@@ -4,6 +4,7 @@ module PushType
   class MarkdownField < PushType::FieldType
 
     options form_helper:    :text_area,
+            html_options:   { :'v-code-mirror' => true, :'code-mirror-mode' => 'markdown' },
             renderer:       Redcarpet::Render::HTML,
             render_options: {},
             extensions: {
