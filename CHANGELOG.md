@@ -1,5 +1,19 @@
 # PushType changelog
 
+## Vesrion 0.9.2 / 8 Aug 2016
+
+* The markdown field is now a markdown editor powered by Codemirror
+* Fixed bug causing markdown field on presenter to return static content
+* Fixed issue with HAML causing whitespace to be inserted in markdown field
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.1...v0.9.2)
+
+## Vesrion 0.9.1 / 2 Aug 2016
+
+* Fixed strong params bug, preventing nodes from being updated in Rails 4.2.x.
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.0...v0.9.1)
+
 ## Version 0.9.0 / 28 Jul 2016
 
 * Version 0.9.0 is [Rails 5 compatible](https://discuss.pushtype.org/t/rails-5/47) (and still 4.2+).
