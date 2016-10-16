@@ -1,6 +1,12 @@
 # PushType changelog
 
-## Vesrion 0.9.2 / 8 Aug 2016
+## Version 0.9.3 / 16 Oct 2016
+
+* Fixed bug causing wysiwyg file uploads to post to wrong URL
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.2...v0.9.3)
+
+## Version 0.9.2 / 8 Aug 2016
 
 * The markdown field is now a markdown editor powered by Codemirror
 * Fixed bug causing markdown field on presenter to return static content
@@ -8,7 +14,7 @@
 
 [Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.1...v0.9.2)
 
-## Vesrion 0.9.1 / 2 Aug 2016
+## Version 0.9.1 / 2 Aug 2016
 
 * Fixed strong params bug, preventing nodes from being updated in Rails 4.2.x.
 
