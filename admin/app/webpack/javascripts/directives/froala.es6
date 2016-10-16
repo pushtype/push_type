@@ -49,6 +49,7 @@ export default Vue.directive('froala', {
 
     let options = {};
     _.extend(options, defaults, opts[this.params.froalaToolbar], {
+      fileUploadURL: this.params.uploadPath,
       imageUploadURL: this.params.uploadPath
     })
 

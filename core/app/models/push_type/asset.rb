@@ -20,6 +20,8 @@ module PushType
     def kind
       return nil unless file_stored?
       case mime_type
+        when /\/vnd\.adobe/               then :file
+
         when /\Aaudio\/.*\z/              then :audio
         when /\Aimage\/.*\z/              then :image
         when /\Avideo\/.*\z/              then :video

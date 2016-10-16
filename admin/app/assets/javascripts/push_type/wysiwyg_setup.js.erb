@@ -13,6 +13,8 @@
 
 $.extend($.FroalaEditor.DEFAULTS, {
   key: '<%= PushType::WysiwygField::FROALA_KEY %>',
+  fileUploadParam: 'asset[file]',
+  fileUploadParams: { froala: true },
   imageDefaultWidth: 0,
   imageMediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
   imageUploadParam: 'asset[file]',
