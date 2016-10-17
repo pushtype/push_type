@@ -56,9 +56,29 @@ export default Vue.component('node-form', {
   methods: {
     setSlug: function() {
       if (this.node['new_record?']) {
-        this.node.slug = this.node.title.toLowerCase().replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '');
+        this.node.slug = this.node.title.toLowerCase();
+        this.node.slug = this.node.slug.replace(/[ÀÁÂÃÄÅ]/g,"A");
+        this.node.slug = this.node.slug.replace(/[àáâãäå]/g,"a");
+        this.node.slug = this.node.slug.replace(/[ÉÈÊËĘĖĒ]/g,"E");
+        this.node.slug = this.node.slug.replace(/[éèêëęėē]/g,"e");
+        this.node.slug = this.node.slug.replace(/[ÝŸ]/g,"Y");
+        this.node.slug = this.node.slug.replace(/[ýÿ]/g,"y");
+        this.node.slug = this.node.slug.replace(/[ÚÛÜÙŪ]/g,"U");
+        this.node.slug = this.node.slug.replace(/[úûüùū]/g,"u");
+        this.node.slug = this.node.slug.replace(/[ÍÎÏÌĮĪ]/g,"I");
+        this.node.slug = this.node.slug.replace(/[íîïìįī]/g,"i");
+        this.node.slug = this.node.slug.replace(/[ÓÖÔÒÕØŌ]/g,"O");
+        this.node.slug = this.node.slug.replace(/[óöôòõøō]/g,"o");
+        this.node.slug = this.node.slug.replace(/[Ð]/g,"D");
+        this.node.slug = this.node.slug.replace(/[ð]/g,"d");
+        this.node.slug = this.node.slug.replace(/[Æ]/g,"AE");
+        this.node.slug = this.node.slug.replace(/[æ]/g,"ae");
+        this.node.slug = this.node.slug.replace(/[Þ]/g,"TH");
+        this.node.slug = this.node.slug.replace(/[þ]/g,"th");
+
+        this.node.slug = this.node.slug.replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '');
       }
     }
   }
-  
+
 })
