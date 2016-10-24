@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'rails',         ['>= 4.2', '< 5.1']
-  s.add_dependency 'pg',            '~> 0.18'
-  s.add_dependency 'closure_tree',  '~> 6.1.0'
+  s.add_dependency 'pg',            ['>= 0.18', '< 0.20']
+  s.add_dependency 'closure_tree',  '~> 6.2.0'
   s.add_dependency 'dragonfly',     '~> 1.0.12'
   s.add_dependency 'redcarpet',     '~> 3.3.4'
 end
