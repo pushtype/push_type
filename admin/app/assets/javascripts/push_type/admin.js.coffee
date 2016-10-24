@@ -22,13 +22,17 @@
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require pickadate/picker.time
+#= require codemirror
+#= require codemirror/addons/mode/overlay.js
+#= require codemirror/addons/edit/continuelist.js
+#= require codemirror/modes/xml
+#= require codemirror/modes/markdown
+#= require codemirror/modes/gfm
 #= require froala_editor.min
 #= require ./wysiwyg_setup
 #= require ./vue_setup
 #= require_tree ./wysiwyg
 #= require_self
-
-Turbolinks.enableProgressBar()
 
 Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 
@@ -36,3 +40,5 @@ Math.uid = -> Math.floor(Math.random()*16777215).toString(16)
 # dynamically added dom nodes be bound
 $(document).on 'init.fndtn', (e) ->
   $(e.target).foundation()
+  $(e.target).confirmWithReveal() if $(e.target).find('[data-confirm]').length
+

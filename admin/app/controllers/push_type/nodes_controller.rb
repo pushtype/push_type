@@ -8,6 +8,7 @@ module PushType
 
     def index
       @nodes = node_scope.not_trash.page(params[:page]).per(30)
+      sleep 2
     end
 
     def trash
@@ -92,7 +93,11 @@ module PushType
 
     def node_params
       params.fetch(@node.type.underscore.to_sym, {}).permit(:title, :slug, :status, :published_at, :published_to).tap do |whitelist|
-        @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym][k] if params[@node.type.underscore.to_sym].try(:[], k) }
+        if Rails.version.to_f >= 5
+          @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym].to_unsafe_h[k] if params[@node.type.underscore.to_sym].try(:[], k) }
+        else
+          @node.fields.keys.each { |k| whitelist[k] = params[@node.type.underscore.to_sym][k] if params[@node.type.underscore.to_sym].try(:[], k) }
+        end
       end
     end
 

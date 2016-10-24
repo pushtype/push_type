@@ -1,4 +1,5 @@
 //= require plugins/align.min
+//= require plugins/code_beautifier.min
 //= require plugins/code_view.min
 //= require plugins/file.min
 //= require plugins/fullscreen.min
@@ -12,12 +13,16 @@
 
 $.extend($.FroalaEditor.DEFAULTS, {
   key: '<%= PushType::WysiwygField::FROALA_KEY %>',
+  fileUploadParam: 'asset[file]',
+  fileUploadParams: { froala: true },
   imageDefaultWidth: 0,
   imageMediaStyles: [ 'original', <%= PushType.config.media_styles.map { |style, _| "'#{ style }'" }.join(', ') %> ],
   imageUploadParam: 'asset[file]',
   imageUploadParams: { froala: true },
   linkEditButtons: ['linkOpen', 'linkStyle', 'linkEdit', 'linkRemove'],
 });
+
+$.FroalaEditor.DEFAULTS['codeMirrorOptions']['theme'] = 'material';
 
 _.remove($.FroalaEditor.DEFAULTS['imageEditButtons'],   function(b) { return b === 'imageStyle' });
 _.remove($.FroalaEditor.DEFAULTS['linkEditButtons'],    function(b) { return b === 'linkStyle' });

@@ -56,9 +56,19 @@ export default Vue.component('node-form', {
   methods: {
     setSlug: function() {
       if (this.node['new_record?']) {
-        this.node.slug = this.node.title.toLowerCase().replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '');
+        this.node.slug = this.node.title.toLowerCase()
+                          .replace(/[àáâãäå]/g,"a")
+                          .replace(/[éèêëęėē]/g,"e")
+                          .replace(/[ýÿ]/g,"y")
+                          .replace(/[úûüùū]/g,"u")
+                          .replace(/[íîïìįī]/g,"i")
+                          .replace(/[óöôòõøō]/g,"o")
+                          .replace(/[ð]/g,"d")
+                          .replace(/[æ]/g,"ae")
+                          .replace(/[þ]/g,"th")
+                          .replace(/[\s\_]/g, '-').replace(/[^\w\-]/g, '');
       }
     }
   }
-  
+
 })

@@ -14,6 +14,9 @@
  *= require pickadate/classic
  *= require pickadate/classic.date
  *= require pickadate/classic.time
+ *= require codemirror
+ *= require codemirror/themes/base16-light
+ *= require codemirror/themes/material
  *= require froala_editor.min
  *= require froala_style.min
  *= require plugins/code_view.min
@@ -30,7 +33,7 @@
 
 @import "foundation_and_overrides";
 
-html.turbolinks-progress-bar::before {
+.turbolinks-progress-bar {
   background-color: $primary-color !important;
   height: 3px !important;
   z-index: 9;
@@ -992,6 +995,7 @@ form .asset-upload {
   box-shadow:           $input-box-shadow !important;
 
   .focus & {
+    background:         $input-focus-bg-color !important;
     border-color:       $input-focus-border-color !important;
   }
 }
@@ -1004,6 +1008,20 @@ form .asset-upload {
   content: "\1F4CE";
   padding-right: 6px;
   font-weight: 400;
+}
+
+.CodeMirror {
+  margin-bottom: rem-calc(16);
+  height: 400px;
+  font-family: $font-family-monospace;
+  background: $input-bg-color !important;
+  border: 1px solid $input-border-color;
+  box-shadow: $input-box-shadow;
+
+  &.CodeMirror-focused {
+    background: $input-focus-bg-color !important;
+    border-color: $input-focus-border-color;
+  }
 }
 
 @import "foundation-icons";

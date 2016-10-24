@@ -15,7 +15,6 @@ const defaults = {
     blockquote: 'Quote',
     pre: 'Code'
   },
-  codeBeautifier: true,
   codeMirror: true,
   height: 400,
   theme: 'gray'
@@ -23,7 +22,8 @@ const defaults = {
 
 const opts = {
   full: {
-    // default
+    toolbarButtons: ['bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertTable', '|', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', '|', 'undo', 'redo', 'clearFormatting', 'fullscreen', '|', 'html'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertTable', '|', 'insertLink', '|', 'undo', 'redo', 'clearFormatting', '|', 'html'],
   },
   text: {
     toolbarButtons: ['bold', 'italic', 'underline', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'insertTable', '|', 'insertLink', '|', 'undo', 'redo', 'clearFormatting', '|', 'html'],
@@ -47,8 +47,9 @@ export default Vue.directive('froala', {
     $el.on('froalaEditor.blur',         (e, editor) => editor.$box.removeClass('focus') );
     $el.on('froalaEditor.image.error',  (e, editor, error) => alert(error.message) );
 
-    let options = _.cloneDeep(defaults);
+    let options = {};
     _.extend(options, defaults, opts[this.params.froalaToolbar], {
+      fileUploadURL: this.params.uploadPath,
       imageUploadURL: this.params.uploadPath
     })
 

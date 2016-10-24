@@ -15,7 +15,7 @@ gem 'push_type_api',      path: 'api',      require: false
 gem 'push_type_admin',    path: 'admin',    require: false
 gem 'push_type_auth',     path: 'auth',     require: false
 
-gem 'closure_tree', git: 'https://github.com/aaronrussell/closure_tree.git', branch: 'rails-5'
+eval File.read(File.expand_path('../dev_dependencies.rb', __FILE__))
 
 # To use debugger
 # gem 'debugger'

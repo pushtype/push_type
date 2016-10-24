@@ -15,7 +15,7 @@ module PushType
     end
 
     describe 'recoverable' do
-      it { user.methods.include?(:reset_password!).must_equal true }
+      it { user.methods.include?(:reset_password).must_equal true }
     end
 
     describe 'rememberable' do

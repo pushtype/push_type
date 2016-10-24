@@ -10,18 +10,30 @@ module PushType
         g.test_framework  :test_unit, fixture: false
       end
 
-      config.to_prepare do
-        # Make User authenticatable
-        PushType::User.include PushType::Authenticatable
-        
-        # Extend controllers with auth/invitation methos
-        PushType::AdminController.include PushType::AuthenticationMethods
-        PushType::ApiController.include PushType::ApiAuthenticationMethods
-        PushType::UsersController.include PushType::InvitationMethods
-        
-        # Configure devise with helpers and layout
-        DeviseController.helper PushType::AdminHelper
-        Devise::Mailer.layout 'push_type/email'
+      initializer 'push_type_auth.reloader' do |app|
+        reload_block = -> {
+          # Make User authenticatable
+          PushType::User.include PushType::Authenticatable
+          
+          # Extend controllers with auth/invitation methos
+          PushType::AdminController.include PushType::AuthenticationMethods
+          PushType::UsersController.include PushType::InvitationMethods
+          
+          # Configure devise with helpers and layout
+          DeviseController.helper PushType::AdminHelper
+          Devise::Mailer.layout 'push_type/email'
+
+          # Reload routes
+          app.reload_routes!
+        }
+
+        # Use ActiveSupport::Reloader if available in Rails 5
+        # Fall back to ActionDispatch::Reloader for earlier Rails
+        if defined? ActiveSupport::Reloader
+          app.reloader.to_prepare &reload_block
+        else
+          ActionDispatch::Reloader.to_prepare &reload_block
+        end
       end
 
       initializer 'push_type_auth.devise_config' do

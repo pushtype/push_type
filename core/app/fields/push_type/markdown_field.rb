@@ -4,6 +4,7 @@ module PushType
   class MarkdownField < PushType::FieldType
 
     options form_helper:    :text_area,
+            html_options:   { :'v-code-mirror' => true, :'code-mirror-mode' => 'markdown' },
             renderer:       Redcarpet::Render::HTML,
             render_options: {},
             extensions: {
@@ -32,7 +33,7 @@ module PushType
 
     on_instance do |object, field|
       object.presenter_class.class_eval do
-        define_method(field.name) { field.compiled_value } unless method_defined?(field.name)
+        define_method(field.name) { fields[field.name].compiled_value } unless method_defined?(field.name)
       end
     end
 
