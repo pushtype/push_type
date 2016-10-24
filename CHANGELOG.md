@@ -1,5 +1,12 @@
 # PushType changelog
 
+## Version 0.9.4 / 24 Oct 2016
+
+* Added diacritic support to slug generator #9 - thanks @erlingur
+* Refined gem dependencies for better cross-gem compatibility
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.3...v0.9.4)
+
 ## Version 0.9.3 / 16 Oct 2016
 
 * Fixed bug causing wysiwyg file uploads to post to wrong URL
