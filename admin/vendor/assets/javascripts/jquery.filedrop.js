@@ -85,7 +85,8 @@
       $('#' + opts.fallback_id).trigger(e);
     });
 
-    $('#' + opts.fallback_id).change(function(e) {
+    // Hacked event handler to handle dynamically attached elements
+    $('body').on('change', '#' + opts.fallback_id, function(e) {
       opts.drop(e);
       files = e.target.files;
       files_count = files.length;
