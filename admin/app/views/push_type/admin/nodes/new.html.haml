@@ -1,0 +1,10 @@
+- title "New #{ @node.type.underscore.humanize.downcase }"
+
+- if @parent
+  - for node in @parent.self_and_ancestors.reverse
+    - breadcrumbs.add node.title, push_type_admin.node_nodes_path(node)
+  - breadcrumbs.add yield(:title), push_type_admin.new_node_node_path(@parent, kind: @node.type.underscore)
+- else
+  - breadcrumbs.add yield(:title), push_type_admin.new_node_path(kind: @node.type.underscore)
+
+= render 'form_fields', url: @parent ? push_type_admin.node_nodes_path(@parent, kind: @node.type.underscore) : push_type_admin.nodes_path(kind: @node.type.underscore)

@@ -28,9 +28,9 @@ module PushType
 
     def asset_back_link(asset)
       if asset.trashed?
-        push_type.trash_assets_path
+        push_type_admin.trash_assets_path
       else
-        push_type.assets_path
+        push_type_admin.assets_path
       end
     end
 

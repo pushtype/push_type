@@ -1,7 +1,7 @@
 require_dependency "push_type/admin_controller"
 
 module PushType
-  class AssetsController < AdminController
+  class Admin::AssetsController < AdminController
 
     before_action :build_asset, only: [:new, :create, :upload]
     before_action :load_asset,  only: [:edit, :update, :destroy, :restore]
@@ -28,7 +28,7 @@ module PushType
     def create
       if @asset.save
         flash[:notice] = 'File successfully uploaded.'
-        redirect_to push_type.assets_path
+        redirect_to push_type_admin.assets_path
       else
         render 'new'
       end
@@ -54,7 +54,7 @@ module PushType
     def update
       if @asset.update_attributes asset_params
         flash[:notice] = 'Media successfully updated.'
-        redirect_to push_type.assets_path
+        redirect_to push_type_admin.assets_path
       else
         render 'edit'
       end
@@ -64,30 +64,30 @@ module PushType
       if @asset.trashed?
         @asset.destroy
         flash[:notice] = 'Media permanently deleted.'
-        redirect_to push_type.trash_assets_path
+        redirect_to push_type_admin.trash_assets_path
       else
         @asset.trash!
         flash[:notice] = 'Media trashed.'
-        redirect_to push_type.assets_path
+        redirect_to push_type_admin.assets_path
       end
     end
 
     def restore
       @asset.restore!
       flash[:notice] = 'Media successfully restored.'
-      redirect_to push_type.assets_path
+      redirect_to push_type_admin.assets_path
     end
 
     def empty
       PushType::Asset.trashed.destroy_all
       flash[:notice] = 'Trash successfully emptied.'
-      redirect_to push_type.assets_path
+      redirect_to push_type_admin.assets_path
     end
 
     private
 
     def initial_breadcrumb
-      breadcrumbs.add 'Media', push_type.assets_path
+      breadcrumbs.add 'Media', push_type_admin.assets_path
     end
 
     def build_asset

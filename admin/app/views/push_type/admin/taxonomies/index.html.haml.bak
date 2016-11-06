@@ -6,7 +6,7 @@
       - for taxonomy in @taxonomies
         %li
           %article.taxonomies-list-item
-            = link_to push_type.taxonomy_path(taxonomy.name.underscore) do
+            = link_to push_type_admin.taxonomy_path(taxonomy.name.underscore) do
               .title= taxonomy.title
               .meta
                 - if taxonomy.exposed?

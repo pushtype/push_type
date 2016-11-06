@@ -1,6 +1,6 @@
 - title 'Media'
 
-%asset-index{ assets: assets_array(@assets).to_json, :'edit-path' => push_type.edit_asset_path('~id'), :'inline-template' => true }
+%asset-index{ assets: assets_array(@assets).to_json, :'edit-path' => push_type_admin.edit_asset_path('~id'), :'inline-template' => true }
   %div
     .large-8.columns
       - if @assets.empty?
@@ -24,11 +24,11 @@
             .pagination-stats {{ assets.length }} items - Page #{ @assets.current_page } of #{ [@assets.total_pages, 1].max }
             = paginate @assets
         .cta.text-center
-          = link_to ficon(:plus, 'New upload'), push_type.new_asset_path, class: 'button radius success'
+          = link_to ficon(:plus, 'New upload'), push_type_admin.new_asset_path, class: 'button radius success'
           - if @assets.current_page == 1
             .asset-upload
-              .dropzone{ :'v-asset-upload' => true, :'upload-path' => push_type.upload_assets_path, :maxfiles => 10 }
+              .dropzone{ :'v-asset-upload' => true, :'upload-path' => push_type_admin.upload_assets_path, :maxfiles => 10 }
                 .prompt Drag files to quickly upload them&hellip;
                 .icon= ficon(:upload_cloud)
             .text-button
-              = link_to ficon(:trash, 'Trash bin'), push_type.trash_assets_path
+              = link_to ficon(:trash, 'Trash bin'), push_type_admin.trash_assets_path

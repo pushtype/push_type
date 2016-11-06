@@ -1,11 +1,11 @@
 - title "Manage #{ @taxonomy.title.downcase }"
-- breadcrumbs.add @taxonomy.title, push_type.taxonomy_path(@taxonomy.name.underscore)
+- breadcrumbs.add @taxonomy.title, push_type_admin.taxonomy_path(@taxonomy.name.underscore)
 
 %div{ ng: { controller: 'TaxonomyTermsCtrl', init: "param='#{ @taxonomy.name.underscore }'; baseSlug='#{ @taxonomy.base_slug }'; terms=#{ @terms.to_json }" } }
   .large-8.columns
     .container
       .head
-        .left.btn= link_to ficon(:previous), push_type.taxonomies_path
+        .left.btn= link_to ficon(:previous), push_type_admin.taxonomies_path
         .title= yield :title
       .body{ :'ui-tree' => 'treeFuncs' }
         .empty-default{ ng: { hide: 'termCount() > 0' } }

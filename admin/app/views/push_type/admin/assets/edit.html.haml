@@ -1,0 +1,7 @@
+- title 'Edit media'
+
+- if @asset.trashed?
+  - breadcrumbs.add 'Trash', push_type_admin.trash_assets_path
+- breadcrumbs.add @asset.description_or_file_name, push_type_admin.edit_asset_path(@asset)
+
+= render 'form'

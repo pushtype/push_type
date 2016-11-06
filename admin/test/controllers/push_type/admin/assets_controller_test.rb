@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module PushType
-  class AssetsControllerTest < ActionController::TestCase
+  class Admin::AssetsControllerTest < ActionController::TestCase
 
     let(:asset_attrs) { FactoryGirl.attributes_for(:asset) }
     let(:asset) { FactoryGirl.create :asset }

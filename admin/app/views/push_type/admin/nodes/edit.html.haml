@@ -1,0 +1,10 @@
+- title "Edit #{ @node.type.underscore.humanize.downcase }"
+
+- if @node.trashed?
+  - breadcrumbs.add 'Trash', push_type_admin.trash_nodes_path
+-else
+  - for node in @node.ancestors.reverse
+    - breadcrumbs.add node.title, push_type_admin.node_nodes_path(node)
+- breadcrumbs.add @node.title, push_type_admin.edit_node_path(@node)
+
+= render 'form_fields', url: push_type_admin.node_path(@node)

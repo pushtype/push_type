@@ -23,16 +23,16 @@ module PushType
           html_options class: 'left'
 
           item :content do
-            link    { push_type.nodes_path }
-            active  { request.fullpath.match %r{^#{ push_type.nodes_path }} }
+            link    { push_type_admin.nodes_path }
+            active  { request.fullpath.match %r{^#{ push_type_admin.nodes_path }} }
           end
           item :media do
-            link    { push_type.assets_path }
-            active  { request.fullpath.match %r{^#{ push_type.assets_path }} }
+            link    { push_type_admin.assets_path }
+            active  { request.fullpath.match %r{^#{ push_type_admin.assets_path }} }
           end
           item :users do
-            link    { push_type.users_path }
-            active  { request.fullpath.match %r{^#{ push_type.users_path }} }
+            link    { push_type_admin.users_path }
+            active  { request.fullpath.match %r{^#{ push_type_admin.users_path }} }
           end
         end
 
@@ -42,7 +42,7 @@ module PushType
 
           item :info do
             text    { ficon(:info) }
-            link    { push_type.info_path }
+            link    { push_type_admin.info_path }
             link_options data: { :'reveal-id' => 'reveal-ajax', :'reveal-ajax' => true }
           end
         end

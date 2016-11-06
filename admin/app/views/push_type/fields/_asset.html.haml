@@ -21,7 +21,7 @@
       %a.button.success.small.radius{ :'v-bind:data-reveal-id' => 'uid' } Pick media
 
     .reveal-modal{ :'v-bind:id' => 'uid', data: { reveal: true } }
-      %asset-modal{ :'index-path' => push_type.assets_path, :'upload-path' => push_type.upload_assets_path, :':reveal-id' => 'uid' }
+      %asset-modal{ :'index-path' => push_type_admin.assets_path, :'upload-path' => push_type_admin.upload_assets_path, :':reveal-id' => 'uid' }
 
 - if f.object.errors[field.name].present?
   %small.error= f.object.errors[field.name].join(', ')

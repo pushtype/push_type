@@ -1,0 +1,4 @@
+- title 'Edit user'
+- breadcrumbs.add @user.name, push_type_admin.edit_user_path(@user)
+
+= render 'form', url: push_type_admin.user_path(@user)

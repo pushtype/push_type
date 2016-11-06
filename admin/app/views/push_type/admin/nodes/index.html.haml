@@ -2,13 +2,13 @@
 
 - if @parent
   - for node in @parent.self_and_ancestors.reverse
-    - breadcrumbs.add node.title, push_type.node_nodes_path(node)
+    - breadcrumbs.add node.title, push_type_admin.node_nodes_path(node)
 
 .large-8.columns
   %section.container
     .head
       - if @parent
-        .left.btn= link_to ficon(:previous), @parent.root? ? push_type.nodes_path : push_type.node_nodes_path(@parent.parent)
+        .left.btn= link_to ficon(:previous), @parent.root? ? push_type_admin.nodes_path : push_type_admin.node_nodes_path(@parent.parent)
         .title= @parent.title
       - else
         .title Content
@@ -25,7 +25,7 @@
         %ul.node-list{ class: ('sortable' if sortable?(@parent)) }
           - for node in @nodes.all
             %li.node-list-item{ class: ('descendable' if node.descendable?), data: { id: node.id } }
-              = link_to push_type.edit_node_path(node) do
+              = link_to push_type_admin.edit_node_path(node) do
                 .title= node.title
                 .meta
                   %span.label.secondary.radius= node.type.to_s.underscore.humanize
@@ -38,7 +38,7 @@
                   %time Updated #{ time_ago_in_words node.updated_at } ago
               - if node.descendable?
                 .descendants
-                  = link_to push_type.node_nodes_path(node) do
+                  = link_to push_type_admin.node_nodes_path(node) do
                     .icon= ficon(:folder)
                     .meta= pluralize node.children.not_trash.count, 'child'
               - if sortable? @parent
@@ -57,4 +57,4 @@
       = render 'new_node_button'
       - if @nodes.current_page == 1
         .text-button
-          = link_to ficon(:trash, 'Trash bin'), push_type.trash_nodes_path
+          = link_to ficon(:trash, 'Trash bin'), push_type_admin.trash_nodes_path

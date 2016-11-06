@@ -18,4 +18,4 @@
         .pagination-stats #{ pluralize @users.total_count, 'user' } - Page #{ @users.current_page } of #{ @users.total_pages }
         = paginate @users
     .cta.text-center
-      = link_to ficon(:plus, 'New user'), push_type.new_user_path, class: 'button radius success'
+      = link_to ficon(:plus, 'New user'), push_type_admin.new_user_path, class: 'button radius success'

@@ -1,4 +1,4 @@
-%asset-form{ asset: asset_hash(@asset).to_json, :'create-path' => push_type.assets_path, :'update-path' => push_type.asset_path('~id'), :'inline-template' => true }
+%asset-form{ asset: asset_hash(@asset).to_json, :'create-path' => push_type_admin.assets_path, :'update-path' => push_type_admin.asset_path('~id'), :'inline-template' => true }
   = form_for @asset, url: '{{ saveUrl }}', method: 'post' do |f|
     = hidden_field_tag :_method, nil, :'v-bind:value' => 'saveMethod'
     .large-8.columns
@@ -10,7 +10,7 @@
           .row.asset-upload
             %div{ :'v-show' => "asset['new_record?']" }
               .columns
-                .dropzone{ :'v-asset-upload' => true, :'upload-path' => push_type.upload_assets_path, :'fallback-id' => 'asset_file' }
+                .dropzone{ :'v-asset-upload' => true, :'upload-path' => push_type_admin.upload_assets_path, :'fallback-id' => 'asset_file' }
                   .prompt Drag a file to quickly upload it&hellip; (or click)
                   .icon= ficon(:upload_cloud)
               .columns{ :'v-show' => "!hideFileField || #{ @asset.errors.include?(:file) }" }

@@ -1,7 +1,7 @@
 require_dependency "push_type/admin_controller"
 
 module PushType
-  class NodesController < AdminController
+  class Admin::NodesController < AdminController
 
     before_action :build_node,  only: [:new, :create]
     before_action :load_node,   only: [:edit, :update, :destroy, :restore, :position]
@@ -68,7 +68,7 @@ module PushType
     def empty
       PushType::Node.trashed.destroy_all
       flash[:notice] = 'Trash successfully emptied.'
-      redirect_to push_type.nodes_path
+      redirect_to push_type_admin.nodes_path
     end
 
     private
@@ -103,16 +103,16 @@ module PushType
 
     def redirect_path(skip_trash = false)
       if @node.trashed? && !skip_trash
-        push_type.trash_nodes_path
+        push_type_admin.trash_nodes_path
       elsif @node.root?
-        push_type.nodes_path
+        push_type_admin.nodes_path
       else
-        push_type.node_nodes_path(@node.parent_id)
+        push_type_admin.node_nodes_path(@node.parent_id)
       end
     end
 
     def initial_breadcrumb
-      breadcrumbs.add 'Content', push_type.nodes_path
+      breadcrumbs.add 'Content', push_type_admin.nodes_path
     end
 
     def reorder_node

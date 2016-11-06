@@ -1,7 +1,7 @@
 require_dependency "push_type/admin_controller"
 
 module PushType
-  class UsersController < AdminController
+  class Admin::UsersController < AdminController
 
     before_action :build_user,  only: [:new, :create]
     before_action :load_user,   only: [:edit, :update, :destroy]
@@ -16,7 +16,7 @@ module PushType
     def create
       if @user.save
         flash[:notice] = 'User successfully created.'
-        redirect_to push_type.users_path
+        redirect_to push_type_admin.users_path
       else
         render 'new'
       end
@@ -28,7 +28,7 @@ module PushType
     def update
       if @user.update_attributes user_params
         flash[:notice] = 'User successfully updated.'
-        redirect_to push_type.users_path
+        redirect_to push_type_admin.users_path
       else
         render 'edit'
       end
@@ -38,17 +38,17 @@ module PushType
       if @user != push_type_user
         @user.destroy
         flash[:notice] = 'User deleted.'
-        redirect_to push_type.users_path
+        redirect_to push_type_admin.users_path
       else
         flash[:alert] = 'Trying to delete yourself is the thirty seventh sign of madness.'
-        redirect_back fallback_location: push_type.user_path(@user)
+        redirect_back fallback_location: push_type_admin.user_path(@user)
       end
     end
 
     private
 
     def initial_breadcrumb
-      breadcrumbs.add 'Users', push_type.users_path
+      breadcrumbs.add 'Users', push_type_admin.users_path
     end
 
     def user_scope

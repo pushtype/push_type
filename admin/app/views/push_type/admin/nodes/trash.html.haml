@@ -1,24 +1,24 @@
 - title 'Trash'
 
-- breadcrumbs.add 'Trash', push_type.trash_nodes_path
+- breadcrumbs.add 'Trash', push_type_admin.trash_nodes_path
 
 - if @nodes.empty?
   .columns
     .empty-default
       %h2 No trash
-      = link_to ficon(:arrow_left, 'Back to content'), push_type.nodes_path, class: 'button radius secondary'
+      = link_to ficon(:arrow_left, 'Back to content'), push_type_admin.nodes_path, class: 'button radius secondary'
 
 - else
   .large-8.columns
     %section.container
       .head
-        .left.btn= link_to ficon(:previous), push_type.nodes_path
+        .left.btn= link_to ficon(:previous), push_type_admin.nodes_path
         .title Trash
       .body
         %ul.node-list
           - for node in @nodes.all
             %li.node-list-item.actionable{ data: { id: node.id } }
-              = link_to push_type.edit_node_path(node) do
+              = link_to push_type_admin.edit_node_path(node) do
                 .title= node.title
                 .meta
                   %span.label.secondary.radius= node.type.to_s.underscore.humanize
@@ -32,8 +32,8 @@
                 - if node.orphan?
                   %span= ficon(:loop)
                 - else
-                  = link_to ficon(:loop), push_type.restore_node_path(node), method: 'put', class: 'success'
-                = link_to ficon(:x), push_type.node_path(node), method: 'delete', class: 'alert', data: { confirm: { body: 'This action cannot be undone. All child content will also be permanently deleted.' } }
+                  = link_to ficon(:loop), push_type_admin.restore_node_path(node), method: 'put', class: 'success'
+                = link_to ficon(:x), push_type_admin.node_path(node), method: 'delete', class: 'alert', data: { confirm: { body: 'This action cannot be undone. All child content will also be permanently deleted.' } }
 
   .large-4.columns
     .side-panel{ :'side-panel' => true }
@@ -45,4 +45,4 @@
               \- Page #{ @nodes.current_page } of #{ @nodes.total_pages }
           = paginate @nodes
       .cta.text-center
-        = link_to ficon(:trash, 'Empty trash'), push_type.trash_nodes_path, method: 'delete', class: 'button radius alert', data: { confirm: true }
+        = link_to ficon(:trash, 'Empty trash'), push_type_admin.trash_nodes_path, method: 'delete', class: 'button radius alert', data: { confirm: true }

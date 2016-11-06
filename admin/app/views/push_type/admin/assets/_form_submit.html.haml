@@ -1,0 +1,13 @@
+- unless @asset.trashed?
+  %button.button.radius{ :'v-bind:class' => "{primary: !asset['new_record?'], success: asset['new_record?']}" }
+    = ficon :check, '{{ saveButtonText }}'
+  - unless @asset.new_record?
+    .text-button.alert
+      = link_to 'Delete media', push_type_admin.asset_path(@asset), method: 'delete', data: { confirm: { body: 'Deleted media will be moved to the trash. You can restore trashed media later.' } }
+
+- else
+  %button.button.radius.secondary= ficon :check, 'Save as trash'
+  .text-button.success
+    = link_to 'Restore media', push_type_admin.restore_asset_path(@asset), method: 'put'
+  .text-button.alert
+    = link_to 'Permanently delete media', push_type_admin.asset_path(@asset), method: 'delete', data: { confirm: true }
