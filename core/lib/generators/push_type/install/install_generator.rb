@@ -11,7 +11,7 @@ module PushType
     end
 
     def inject_push_type_routes
-      inject_into_file 'config/routes.rb', "\n\n  mount_push_type\n", after: 'Rails.application.routes.draw do', verbose: true
+      inject_into_file 'config/routes.rb', "\n\n#{ mount_heredoc }", after: 'Rails.application.routes.draw do', verbose: true
     end
 
     def install_migrations
@@ -24,6 +24,24 @@ module PushType
         say '- Running migrations'
         rake 'db:migrate'
       end
+    end
+
+    private
+
+    def mount_heredoc
+      <<-EOF.gsub /^\s+/, '  '
+        # Mount all the registered PushType Rails Engines. This should be placed
+        # at the end of your routes.rb file to ensure your application routes are
+        # not overidden by PushType.
+        #
+        # Overide the default mount points by passing a hash of options.
+        # Example:
+        #
+        #   mount_push_type admin: 'cms', front_end: 'blog'
+        #
+        mount_push_type
+
+      EOF
     end
 
   end

@@ -52,10 +52,28 @@ module PushType
       PushType::MenuBuilder.select(key, &block)
     end
 
+    def register_engine(mod, opts = {})
+      opts[:load_hook] ||= mod.to_s.underscore.gsub(/\//, '_').to_sym
+
+      if opts[:mount]
+        @rails_engines ||= {}
+        @rails_engines[opts[:load_hook]] = [mod, opts[:mount]]
+      end
+      
+      ActiveSupport.run_load_hooks(opts[:load_hook], PushType)
+    end
+
+    def rails_engines
+      @rails_engines ||= {}
+      # Always ensure core is last
+      @rails_engines[:push_type_core] = @rails_engines.delete(:push_type_core)
+      @rails_engines
+    end
+
   end
 
   module Core
-    ActiveSupport.run_load_hooks(:push_type_core, PushType)
+    PushType.register_engine self, mount: '/'
   end
 
 end

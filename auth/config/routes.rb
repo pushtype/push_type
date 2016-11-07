@@ -1,13 +1,9 @@
-PushType::Auth::Engine.routes.draw do
+PushType::Admin::Engine.routes.draw do
 
   devise_for :users, class_name: "PushType::User", path: ''
   devise_scope :user do
     patch 'confirmation' => 'confirmations#update', as: :user_confirm
   end
-
-end
-
-PushType::Admin::Engine.routes.draw do
 
   scope module: 'admin' do
     resources :users, only: [] do

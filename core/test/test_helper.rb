@@ -9,3 +9,9 @@ require 'push_type/testing/factories'
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+class ActionController::TestCase
+  before :all do
+    @routes = PushType::Core::Engine.routes
+  end
+end

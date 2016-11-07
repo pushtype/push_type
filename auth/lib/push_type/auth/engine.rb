@@ -55,7 +55,7 @@ module PushType
           end
           item :sign_out do
             text  { ficon(:power) }
-            link  { push_type_auth.destroy_user_session_path }
+            link  { push_type_admin.destroy_user_session_path }
             link_options method: 'delete'
           end
         end

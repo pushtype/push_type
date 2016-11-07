@@ -3,10 +3,6 @@ require 'test_helper'
 module PushType
   class ConfirmationsControllerTest < ActionController::TestCase
 
-    before :all do
-      @routes = PushType::Auth::Engine.routes
-    end
-
     before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 
     let(:user)  { FactoryGirl.create(:user) }

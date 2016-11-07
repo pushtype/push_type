@@ -1,6 +1,6 @@
 - title 'Change your password'
 
-= form_for @user, url: push_type_auth.user_password_path, html: { method: :put } do |f|
+= form_for @user, url: push_type_admin.user_password_path, html: { method: :put } do |f|
   = f.hidden_field :reset_password_token
   .row.text
     .columns

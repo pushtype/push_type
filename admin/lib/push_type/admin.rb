@@ -25,7 +25,7 @@ module PushType
   end
 
   module Admin
-    ActiveSupport.run_load_hooks(:push_type_admin, PushType)
+    PushType.register_engine self, mount: 'admin'
   end
   
 end

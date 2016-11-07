@@ -4,32 +4,20 @@ module PushType
 
     private
 
-    def filter_scope
-      self.class.filter_scope
-    end
-
-    def filter_obj
-      instance_variable_get "@#{ filter_scope }"
-    end
-
-    def filter_obj_type
-      filter_obj.type.underscore.to_sym
-    end
-
     def before_load_filters
-      filters = self.send("before_#{ filter_scope }_load_filters")
-      filters.each { |f| run_node_hook(*f) } unless filters.blank?
+      filters = self.send("before_node_load_filters")
+      filters.each { |f| run_node_filter(*f) } unless filters.blank?
     end
 
     def around_action_filters
-      before_filters = self.send("before_#{ filter_scope }_action_filters")
-      before_filters.each { |f| run_node_hook(*f) } unless before_filters.blank?
+      before_filters = self.send("before_node_action_filters")
+      before_filters.each { |f| run_node_filter(*f) } unless before_filters.blank?
       yield
-      after_filters = self.send("after_#{ filter_scope }_action_filters")
-      after_filters.each { |f| run_node_hook(*f) } unless after_filters.blank?
+      after_filters = self.send("after_node_action_filters")
+      after_filters.each { |f| run_node_filter(*f) } unless after_filters.blank?
     end
 
-    def run_node_hook(*args)
+    def run_node_filter(*args)
       methods_or_proc, opts = case args.last
         when Proc then args.first.is_a?(Hash) ? [ args.last, args.first ] : [ args.last, {} ]
         when Hash then [ args[0..-2], args.last ]
@@ -46,21 +34,18 @@ module PushType
     end
 
     def filter_obj_in(types)
-      types && filter_obj && Array(types).include?(filter_obj_type)
+      types && @node && Array(types).include?(@node.type.underscore.to_sym)
     end
 
     def filter_obj_not_in(types)
-      types && filter_obj && !Array(types).include?(filter_obj_type)
+      types && @node && !Array(types).include?(@node.type.underscore.to_sym)
     end
 
     module ClassMethods
 
-      attr_reader :filter_scope
-
-      def hooks_for(sym, opts)
-        @filter_scope = sym
-        prepend_before_action :before_load_filters, opts
-        around_action :around_action_filters, opts
+      def node_filters
+        prepend_before_action :before_load_filters
+        around_action :around_action_filters
       end
 
     end

@@ -30,10 +30,6 @@ class ActiveSupport::TestCase
 end
 
 class ActionController::TestCase
-  before :each do
-    @routes = PushType::Core::Engine.routes
-  end
-
   if Rails.version.to_f >= 5
     require 'rails-controller-testing'
     include ::Rails::Controller::Testing::TestProcess

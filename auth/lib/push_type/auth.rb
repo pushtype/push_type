@@ -8,7 +8,7 @@ require 'simple_token_authentication'
 module PushType
 
   module Auth
-    ActiveSupport.run_load_hooks(:push_type_auth, PushType)
+    PushType.register_engine self
   end
   
 end

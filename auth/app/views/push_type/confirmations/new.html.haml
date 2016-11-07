@@ -1,6 +1,6 @@
 - title 'Resend confirmation instructions'
 
-= form_for @user, url: push_type_auth.user_confirmation_path, html: { method: :post } do |f|
+= form_for @user, url: push_type_admin.user_confirmation_path, html: { method: :post } do |f|
   .row.text
     .columns
       = f.label :email

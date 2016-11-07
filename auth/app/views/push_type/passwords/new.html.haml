@@ -1,6 +1,6 @@
 - title 'Forgot your password?'
 
-= form_for @user, url: push_type_auth.user_password_path, html: { method: :post } do |f|
+= form_for @user, url: push_type_admin.user_password_path, html: { method: :post } do |f|
   .row.text
     .columns
       = f.label :email
