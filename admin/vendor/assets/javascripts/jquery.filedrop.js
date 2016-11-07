@@ -86,12 +86,14 @@
     });
 
     // Hacked event handler to handle dynamically attached elements
-    $('body').on('change', '#' + opts.fallback_id, function(e) {
-      opts.drop(e);
-      files = e.target.files;
-      files_count = files.length;
-      upload();
-    });
+    if (opts.fallback_id !== '') {
+      $('body').on('change', '#' + opts.fallback_id, function(e) {
+        opts.drop(e);
+        files = e.target.files;
+        files_count = files.length;
+        upload();
+      });
+    }
 
     function drop(e) {
       if( opts.drop.call(this, e) === false ) return false;

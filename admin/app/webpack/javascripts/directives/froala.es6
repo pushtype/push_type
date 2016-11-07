@@ -38,7 +38,7 @@ const opts = {
 }
 
 export default Vue.directive('froala', {
-  params: ['upload-path', 'froala-toolbar'],
+  params: ['froala-toolbar'],
 
   bind: function() {
     let $el = $(this.el);
@@ -47,10 +47,12 @@ export default Vue.directive('froala', {
     $el.on('froalaEditor.blur',         (e, editor) => editor.$box.removeClass('focus') );
     $el.on('froalaEditor.image.error',  (e, editor, error) => alert(error.message) );
 
+    let uploadPath = `${ PushType.Routes.adminPath }/media/upload`;
+
     let options = {};
     _.extend(options, defaults, opts[this.params.froalaToolbar], {
-      fileUploadURL: this.params.uploadPath,
-      imageUploadURL: this.params.uploadPath
+      fileUploadURL:  uploadPath,
+      imageUploadURL: uploadPath
     })
 
     setTimeout(() => { $el.froalaEditor(options) }, 200);

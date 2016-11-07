@@ -14,7 +14,7 @@ PushType::Api::Engine.routes.draw do
       resources :nodes, only: [:index]
     end
 
-    resources :assets do
+    resources :assets, path: 'media' do
       collection do
         get 'trash'
         delete 'trash' => 'assets#empty'

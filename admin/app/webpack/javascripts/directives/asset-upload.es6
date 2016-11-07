@@ -2,7 +2,7 @@ import Vue from 'vue';
 import $ from 'jquery';
 
 export default Vue.directive('asset-upload', {
-  params: ['upload-path', 'fallback-id', 'maxfiles'],
+  params: ['fallback-id', 'maxfiles'],
   bind: function() {
     let self = this,
         $el = $(self.el);
@@ -13,7 +13,7 @@ export default Vue.directive('asset-upload', {
       }
       $el.filedrop({
         fallback_id:  self.params.fallbackId,
-        url:          self.params.uploadPath,
+        url:          `${ PushType.Routes.adminPath }/media/upload`,
         paramname:    'asset[file]',
         maxfiles:     ( self.params.maxfiles || 1 ),
         maxfilesize:  10,

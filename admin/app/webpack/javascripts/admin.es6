@@ -52,7 +52,7 @@ $(document).on('ready page:load turbolinks:load', function() {
     handle: '.handle',
     forcePlaceholderSize: true
   }).on('sortupdate', function(e, ui) {
-    $.post(`/push_type/nodes/${ ui.item.data('id') }/position`, {
+    $.post(`${ PushType.Routes.adminPath }/nodes/${ ui.item.data('id') }/position`, {
       prev: ui.item.prev().data('id'),
       next: ui.item.next().data('id')
     }, 'json');

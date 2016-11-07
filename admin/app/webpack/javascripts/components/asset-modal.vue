@@ -26,7 +26,7 @@
       </div>
       <div id="upload" class="content">
         <div class="asset-upload">
-          <div class="dropzone" v-asset-upload v-bind:upload-path="uploadPath" maxfiles="10">
+          <div class="dropzone" v-asset-upload maxfiles="10">
             <div class="prompt">Drag files to quickly upload them&hellip;</div>
             <div class="icon"><i class="fi-upload-cloud"></i></div>
           </div>
@@ -40,7 +40,7 @@
 import $ from 'jquery';
 
 export default {
-  props: ['indexPath', 'uploadPath', 'revealId'],
+  props: ['revealId'],
 
   data: function() {
     return {
@@ -54,6 +54,10 @@ export default {
   },
 
   computed: {
+    indexPath: function() {
+      return `${ PushType.Routes.adminPath }/media`;
+    },
+
     $modal: function() {
       return $(`#${ this.revealId }`);
     }

@@ -23,5 +23,9 @@ module.exports = {
       { test: /\.es6$/, loader: 'babel', query: { presets: ['es2015'] } },
       { test: /\.vue$/, loader: 'vue' }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.IgnorePlugin(/unicode\/category\/So$/)
+  ]
 };

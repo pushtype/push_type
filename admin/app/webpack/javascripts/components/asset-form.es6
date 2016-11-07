@@ -5,18 +5,24 @@ export default Vue.component('asset-form', {
   props: {
     asset: {
       coerce: (val) => JSON.parse(val)
-    },
-    createPath: true,
-    updatePath: true
+    }
   },
 
   computed: {
+    createPath: function() {
+      return `${ PushType.Routes.adminPath }/media`;
+    },
+
+    updatePath: function() {
+      return `${ PushType.Routes.adminPath }/media/${ this.asset.id }`;
+    },
+
     saveMethod: function() {
       return this.asset['new_record?'] ? 'post' : 'patch';
     },
 
     saveUrl: function() {
-      return this.asset['new_record?'] ? this.createPath : this.updatePath.replace(/~id$/, this.asset.id);
+      return this.asset['new_record?'] ? this.createPath : this.updatePath;
     },
 
     saveButtonText: function() {

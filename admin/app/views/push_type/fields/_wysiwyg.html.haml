@@ -1,7 +1,7 @@
 %wysiwyg-field{ :'inline-template' => true }
   .wysiwyg-field
-    = f.text_area field.name, field.html_options.merge(:'upload-path' => push_type_admin.upload_assets_path)
+    = f.text_area field.name, field.html_options
 
     .reveal-modal{ :'v-bind:id' => 'uid', data: { reveal: true } }
-      %asset-modal{ :'index-path' => push_type_admin.assets_path, :'upload-path' => push_type_admin.upload_assets_path, :':reveal-id' => 'uid' }
+      %asset-modal{ :':reveal-id' => 'uid' }
 

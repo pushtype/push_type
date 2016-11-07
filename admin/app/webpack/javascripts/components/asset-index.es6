@@ -5,13 +5,12 @@ export default Vue.component('asset-index', {
   props: {
     assets: {
       coerce: (val) => JSON.parse(val)
-    },
-    editPath: true
+    }
   },
 
   methods: {
     editUrl: function(asset) {
-      return this.editPath.replace(/~id/, asset.id);
+      return `${ PushType.Routes.adminPath }/media/${ asset.id }/edit`;
     },
     afterUpload: function(asset) {
       this.assets.unshift(asset);
