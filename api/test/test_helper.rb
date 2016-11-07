@@ -12,6 +12,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 class ActionController::TestCase
   before :all do
+    @routes = PushType::Api::Engine.routes
     @request.headers['Accept']        = 'application/json'
     @request.headers['Content-Type']  = 'application/json'
   end

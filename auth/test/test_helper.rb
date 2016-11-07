@@ -12,9 +12,9 @@ require File.expand_path('../factories.rb', __FILE__)
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 class ActionController::TestCase
-  include Devise::TestHelpers
-end
+  include Devise::Test::ControllerHelpers
 
-class ActionDispatch::IntegrationTest
-  include PushType::Core::Engine.routes.url_helpers
+  before :all do
+    @routes = PushType::Admin::Engine.routes
+  end
 end

@@ -12,7 +12,7 @@ gemspec
 
 gem 'push_type_core', path: '../core'
 
-gem 'closure_tree', git: 'https://github.com/aaronrussell/closure_tree.git', branch: 'rails-5'
+eval File.read(File.expand_path('../../dev_dependencies.rb', __FILE__))
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]

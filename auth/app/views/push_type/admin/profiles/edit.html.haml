@@ -4,11 +4,11 @@
   .side-panel{ :'side-panel' => true }
     %ul.side-nav
       %li.heading Settings
-      %li= link_to 'Profile', push_type.edit_profile_path
+      %li= link_to 'Profile', push_type_admin.edit_profile_path
 
 
 .medium-8.columns
-  = form_for @user, url: push_type.profile_path do |f|
+  = form_for @user, url: push_type_admin.profile_path do |f|
     .container
       .head
         .title= yield :title

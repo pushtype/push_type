@@ -18,7 +18,7 @@ module PushType
           # Extend controllers with auth/invitation methos
           PushType::AdminController.include PushType::AuthenticationMethods
           PushType::ApiController.include PushType::ApiAuthenticationMethods
-          PushType::UsersController.include PushType::InvitationMethods
+          PushType::Admin::UsersController.include PushType::InvitationMethods
           
           # Configure devise with helpers and layout
           DeviseController.helper PushType::AdminHelper
@@ -39,7 +39,6 @@ module PushType
 
       initializer 'push_type_auth.devise_config' do
         Devise.mailer_sender = PushType.config.mailer_sender
-        Devise.router_name = :push_type
       end
 
       initializer 'push_type_auth.admin_assets' do
@@ -52,11 +51,11 @@ module PushType
         PushType.menu :utility do
           item :settings do
             text  { ficon(:widget) }
-            link  { push_type.edit_profile_path }
+            link  { push_type_admin.edit_profile_path }
           end
           item :sign_out do
             text  { ficon(:power) }
-            link  { push_type.destroy_user_session_path }
+            link  { push_type_auth.destroy_user_session_path }
             link_options method: 'delete'
           end
         end

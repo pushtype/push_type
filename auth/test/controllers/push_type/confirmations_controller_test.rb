@@ -3,6 +3,10 @@ require 'test_helper'
 module PushType
   class ConfirmationsControllerTest < ActionController::TestCase
 
+    before :all do
+      @routes = PushType::Auth::Engine.routes
+    end
+
     before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 
     let(:user)  { FactoryGirl.create(:user) }
@@ -32,7 +36,7 @@ module PushType
       describe 'with valid user' do
         let(:password) { 'pa$$word' }
         it { user.reload.must_be :confirmed? }
-        it { response.must_redirect_to root_path }
+        it { response.must_respond_with :redirect }
       end
     end
 

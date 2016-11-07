@@ -1,6 +1,6 @@
-PushType::Core::Engine.routes.draw do
+PushType::Api::Engine.routes.draw do
 
-  namespace :api, except: [:new, :edit], defaults: { format: :json } do
+  scope module: 'api', except: [:new, :edit], defaults: { format: :json } do
 
     resources :nodes do
       collection do

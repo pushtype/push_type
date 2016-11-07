@@ -1,7 +1,7 @@
 require_dependency "push_type/admin_controller"
 
 module PushType
-  class ProfilesController < AdminController
+  class Admin::ProfilesController < AdminController
 
     before_action :load_user
 
@@ -12,7 +12,7 @@ module PushType
       if update_user profile_params
         flash[:notice] = 'Profile successfully updated.'
         bypass_sign_in @user
-        redirect_to push_type.edit_profile_path
+        redirect_to push_type_admin.edit_profile_path
       else
         render 'edit'
       end
@@ -21,7 +21,7 @@ module PushType
     private
 
     def initial_breadcrumb
-      breadcrumbs.add 'Profile', push_type.edit_profile_path
+      breadcrumbs.add 'Profile', push_type_admin.edit_profile_path
     end
 
     def load_user

@@ -12,7 +12,7 @@ module PushType
       if user_signed_in?
         super
       else
-        redirect_to push_type.new_user_session_path, alert: t('devise.failure.unauthenticated')
+        redirect_to push_type_auth.new_user_session_path, alert: t('devise.failure.unauthenticated')
       end
     end
 

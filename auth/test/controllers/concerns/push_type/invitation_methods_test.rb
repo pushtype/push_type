@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class InvitationMethodsTest < ActiveSupport::TestCase
 
-    subject { PushType::UsersController.new }
+    subject { PushType::Admin::UsersController.new }
 
     it { subject.methods.include?(:invite).must_equal true }
 

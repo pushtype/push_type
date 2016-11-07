@@ -1,6 +1,6 @@
 - title 'Create a password'
 
-= form_for @user, url: push_type.user_confirm_path do |f|
+= form_for @user, url: push_type_auth.user_confirm_path do |f|
   = f.hidden_field :confirmation_token
   .row.text
     .columns

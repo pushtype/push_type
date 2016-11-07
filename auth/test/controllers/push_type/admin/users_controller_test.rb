@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module PushType
-  class UsersControllerTest < ActionController::TestCase
+  class Admin::UsersControllerTest < ActionController::TestCase
 
     let(:current_user) { FactoryGirl.create(:confirmed_user) }
     let(:user) { FactoryGirl.create :user }

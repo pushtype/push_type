@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module PushType
-  class ProfilesControllerTest < ActionController::TestCase
+  class Admin::ProfilesControllerTest < ActionController::TestCase
     
     let(:current_user) { FactoryGirl.create(:confirmed_user) }
     before { sign_in current_user }
@@ -25,7 +25,7 @@ module PushType
         let(:new_name) { 'Test user ABC' }
         it { current_user.reload.name.must_equal new_name }
         it { flash[:notice].must_be :present? }
-        it { response.must_redirect_to edit_profile_path }
+        it { response.must_respond_with :redirect }
       end
     end
 
