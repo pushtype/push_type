@@ -47,24 +47,6 @@ module PushType
         it { subject.must_equal true }
       end
     end
-
-    describe '#after_database_authentication' do
-      let(:user) { FactoryGirl.create :user }
-      before do
-        @token = user.authentication_token
-        user.after_database_authentication
-      end
-      it { user.reload.authentication_token.wont_equal @token }
-    end
-
-    describe '#reset_authentication_token' do
-      let(:user) { FactoryGirl.create :user }
-      before do
-        @token = user.authentication_token
-        user.reset_authentication_token
-      end
-      it { user.reload.authentication_token.wont_equal @token }
-    end
     
   end
 end
