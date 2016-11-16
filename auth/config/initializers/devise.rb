@@ -253,6 +253,9 @@ Devise.setup do |config|
   # The router that invoked `devise_for`, in the example above, would be:
   config.router_name = :push_type_admin
   
+  # Ensure Devise's controllers inherit from the engine's controller
+  config.parent_controller = 'PushType::AuthController'
+  
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
