@@ -56,8 +56,7 @@ module PushType
       opts[:load_hook] ||= mod.to_s.underscore.gsub(/\//, '_').to_sym
 
       if opts[:mount]
-        @rails_engines ||= {}
-        @rails_engines[opts[:load_hook]] = [mod, opts[:mount]]
+        rails_engines[opts[:load_hook]] = [mod, opts[:mount]]
       end
       
       ActiveSupport.run_load_hooks(opts[:load_hook], PushType)
@@ -65,15 +64,12 @@ module PushType
 
     def rails_engines
       @rails_engines ||= {}
-      # Always ensure core is last
-      @rails_engines[:push_type_core] = @rails_engines.delete(:push_type_core)
-      @rails_engines
     end
 
   end
 
   module Core
-    PushType.register_engine self, mount: '/'
+    PushType.register_engine self
   end
 
 end

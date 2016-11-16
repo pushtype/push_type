@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module PushType
-  class PushTypeTest < ActiveSupport::TestCase
+  class CoreTest < ActiveSupport::TestCase
 
     describe '.version' do
       subject { PushType.version }
@@ -19,12 +19,6 @@ module PushType
       it { subject.must_respond_to :dragonfly_datastore }
       it { subject.must_respond_to :dragonfly_datastore_options }
       it { subject.must_respond_to :dragonfly_secret }
-    end
-
-    describe '.register_engine' do
-      it 'should have registered the core engine' do
-        PushType.rails_engines.keys.must_include :push_type_core
-      end
     end
 
     describe '.root_nodes' do

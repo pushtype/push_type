@@ -38,7 +38,7 @@ module PushType
       respond_to do |format|
         format.json do
           if @asset.save
-            hash = params[:froala] ? { link: push_type.media_path(file_uid: @asset.file_uid) } : { asset: view_context.asset_hash(@asset).as_json }
+            hash = params[:froala] ? { link: media_path(@asset) } : { asset: view_context.asset_hash(@asset).as_json }
             render json: hash, status: :created
           else
             hash = params[:froala] ? { error: @asset.errors.full_messages.first } : { errors: @asset.errors.as_json }
