@@ -69,7 +69,9 @@ export default {
     },
 
     loadAssets: function(page) {
-      let config = page ? { page: page } : null;
+      let config = {
+        params: { page: page || 1 }
+      };
       this.$http.get(this.indexPath, config).then(function(r) {
         this.assets = r.data.assets;
         this.meta = r.data.meta;
