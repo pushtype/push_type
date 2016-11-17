@@ -2,11 +2,18 @@ class FrontEndController < ApplicationController
 
   include PushType::Filterable
 
-  before_action :load_node, only: :show
+  before_action :load_node, :build_presenter, only: :show
   node_filters
 
   def show
     render *@node.template_args
+  end
+
+  def preview
+    @node = PushType::Node.exposed.find_by_base64_id params[:id]
+    build_presenter
+    response.headers['X-Robots-Tag'] = 'none'
+    show
   end
 
   private
@@ -25,6 +32,9 @@ class FrontEndController < ApplicationController
 
   def load_node
     @node = PushType::Node.exposed.published.find_by_path permalink_path
+  end
+
+  def build_presenter
     if @node
       instance_variable_set "@#{ @node.type.underscore }", @node.present!(view_context)
     else

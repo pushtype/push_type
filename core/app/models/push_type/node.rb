@@ -17,9 +17,19 @@ module PushType
     validates :title, presence: true
     validates :slug,  presence: true, uniqueness: { scope: :parent_id }
 
+    def self.find_by_base64_id(secret)
+      find Base64.urlsafe_decode64(secret)
+    rescue ArgumentError
+      raise ActiveRecord::RecordNotFound
+    end
+
+    def base64_id
+      Base64.urlsafe_encode64 id.to_s
+    end
+
     def permalink
       @permalink ||= self_and_ancestors.map(&:slug).reverse.join('/')
-    end
+    end    
 
     def orphan?
       parent && parent.trashed?

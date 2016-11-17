@@ -27,6 +27,23 @@ class FrontEndControllerTest < ActionController::TestCase
     end
   end
 
+  describe 'GET #preview' do
+    let(:page)      { Page.create FactoryGirl.attributes_for(:node, type: 'Page') }
+    let(:id)        { page.base64_id }
+    let(:action!)   { get :preview, params: { id: id } }
+
+    describe 'when node does not exist' do
+      let(:id) { 'abcefg12345' }
+      it { proc { action! }.must_raise ActiveRecord::RecordNotFound }
+    end
+    describe 'when node not published' do
+      before { action! }
+      it { response.must_render_template 'nodes/page' }
+      it { assigns[:node].must_equal page }
+      it { assigns[:page].must_equal page }
+    end
+  end
+
   describe 'node filters' do
     
     ApplicationController.module_eval do

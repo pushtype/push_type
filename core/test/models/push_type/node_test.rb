@@ -18,6 +18,17 @@ module PushType
       node.must_be :valid?
     end
 
+    describe '.find_by_base64_id' do
+      let(:node)  { n = FactoryGirl.build(:node); n.save(validate: false); n }
+      let(:id)    { node.base64_id }
+      it { PushType::Node.find_by_base64_id(id).must_equal node }
+    end
+
+    describe '#base64_id' do
+      let(:node) { n = FactoryGirl.build(:node); n.save(validate: false); n }
+      it { Base64.urlsafe_decode64(node.base64_id).must_equal node.id }
+    end
+
     describe '#permalink' do
       before do
         %w(one two three).each { |slug| @node = FactoryGirl.build(:node, slug: slug, parent: @node); @node.save(validate: false); @node }

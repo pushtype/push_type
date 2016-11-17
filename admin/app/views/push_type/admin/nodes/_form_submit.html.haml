@@ -10,6 +10,8 @@
       %a{ href: '#', :'v-on:click.prevent' => 'node.status = "published"' } Save and publish
 
   - unless @node.new_record?
+    .text-button.secondary
+      = link_to "Preview #{@node.type.underscore.humanize.downcase}", main_app.preview_node_path(@node.base64_id), target: '_blank'
     .text-button.alert
       = link_to "Delete #{@node.type.underscore.humanize.downcase}", push_type_admin.node_path(@node), method: 'delete', data: { confirm: { body: 'Deleted content, and all its child content, will be moved to the trash. You can restore trashed content later.' } }
 

@@ -17,9 +17,9 @@ module ActionDispatch::Routing
           asset.media params[:style]
         }, as: 'media'
 
-        # A catch-all root for the nodes
-        get '*permalink' => 'front_end#show', as: 'node'
-        get '/' => 'front_end#show', as: 'home', permalink: PushType.config.home_slug if PushType.config.home_slug.present?
+        get '/node/preview/:id' => 'front_end#preview', as: 'preview_node'
+        get '*permalink'    => 'front_end#show',    as: 'node'
+        get '/' => 'front_end#show', as: 'home_node', permalink: PushType.config.home_slug if PushType.config.home_slug.present?
       end
     end
 
