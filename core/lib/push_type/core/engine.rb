@@ -30,17 +30,6 @@ module PushType
         end
       end
 
-      initializer 'push_type.url_helpers' do
-        ActiveSupport.on_load :action_controller do
-          helper PushType::MediaUrlHelper
-          helper PushType::NodeUrlHelper
-        end
-        ActiveSupport.on_load :action_view do
-          include PushType::MediaUrlHelper
-          include PushType::NodeUrlHelper
-        end
-      end
-
       initializer 'push_type.menu_helpers' do
         ActiveSupport.on_load :action_view do
           include PushType::MenuBuilder::Helpers

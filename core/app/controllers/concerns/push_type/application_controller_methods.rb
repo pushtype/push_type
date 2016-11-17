@@ -8,6 +8,8 @@ module PushType
 
     included do
       class_attribute *FILTERS
+      helper PushType::MediaUrlHelper
+      helper PushType::NodeUrlHelper
     end
 
     protected

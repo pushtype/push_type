@@ -39,6 +39,8 @@ class FrontEndControllerTest < ActionController::TestCase
     describe 'when node not published' do
       before { action! }
       it { response.must_render_template 'nodes/page' }
+      it { response.headers.must_include 'X-Robots-Tag' }
+      it { response.headers['X-Robots-Tag'].must_equal 'none' }
       it { assigns[:node].must_equal page }
       it { assigns[:page].must_equal page }
     end
