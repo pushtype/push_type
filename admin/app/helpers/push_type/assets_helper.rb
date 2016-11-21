@@ -15,7 +15,7 @@ module PushType
     end
 
     def asset_preview_thumb_url(asset)
-      if asset.image?
+      if asset.image? && !asset.svg?
         media_path(asset, style: :push_type_thumb)
       else
         image_path(asset_icon(asset))

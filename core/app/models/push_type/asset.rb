@@ -47,12 +47,16 @@ module PushType
       define_method("#{k}?".to_sym) { kind == k }
     end
 
+    def svg?
+      mime_type =~ /\Aimage\/svg/
+    end
+
     def description_or_file_name
       description? ? description : file_name
     end
 
     def media(style = nil)
-      return file if !image? || style.blank?
+      return file if !image? || svg? || style.blank?
 
       case style.to_sym
         when :original        then file
