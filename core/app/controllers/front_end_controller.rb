@@ -34,16 +34,16 @@ class FrontEndController < ApplicationController
     end
   end
 
-  def root_path?
-    request.fullpath == main_app.home_node_path
-  end
-
   def raise_404
-    if root_path?
+    if home_path?
       render template: 'push_type/setup', layout: nil, status: 404
     else
       raise ActiveRecord::RecordNotFound
     end
+  end
+
+  def home_path?
+    request.fullpath == ( main_app.respond_to?(:home_node_path) ? main_app.home_node_path : '/' )
   end
 
 end
