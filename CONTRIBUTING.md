@@ -17,7 +17,7 @@ This project adheres to the Contributor Covenant [code of conduct](https://githu
 * Describe the exact steps necessary to reproduce the problem.
 * Explain the behaviour you expected to see following the steps, and describe the behaviour you observed instead and why this is a problem.
 * Copy and paste any errors from the application log or the web browser console in to the issue report.
-* Please format any errors or code snippets using [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
+* Please format any errors or code snippets using [Markdown code blocks](https://help.github.com/articles/basic-writing-and-formatting-syntax/#quoting-code).
 * Include relevant details about your configuration and environment such as Ruby, Rails and PushType versions, and if necessary your browser and operating system.
 
 ## Suggesting improvements

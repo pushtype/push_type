@@ -1,5 +1,25 @@
 # PushType changelog
 
+## Version 0.10.0 / 21 Nov 2016
+
+* New API engine for managing content and enabling external integrations
+* Auth engine authenticates the API engine using JWT
+* New feature to allow administrators to preview draft nodes
+* Improved namespacing of PushType engines and rewrite of `mount_push_type` routing method
+* Rewrite of `media_path` and `node_path` URL helpers with simplified use. `asset_host` URLs used where appropriate.
+* Improved validation on parent-child node relationships
+* Fixed pagination bug on asset modal
+* Fixed thumbnail bug on SVG asset uploads
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.5...v0.10.0)
+
+## Version 0.9.5 / 2 Nov 2016
+
+* Fixed bug with turbolinks caching and Vue.js initilization
+* Revert jquery to version 2 as v3 introduces problems with older libraries
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.9.4...v0.9.5)
+
 ## Version 0.9.4 / 24 Oct 2016
 
 * Added diacritic support to slug generator #9 - thanks @erlingur

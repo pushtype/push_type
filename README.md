@@ -29,7 +29,11 @@ PushType takes advantage of modern features of PostgreSQL, which in turn require
 [![Build Status](https://travis-ci.org/pushtype/push_type.png?branch=master)](https://travis-ci.org/pushtype/push_type)
 [![Code Climate](https://codeclimate.com/github/pushtype/push_type.png)](https://codeclimate.com/github/pushtype/push_type)
 
-PushType is 100% free and open source. We want to establish an active and healthy community of developers who can build upon what we've started and help give the Rails world the CMS it's been waiting for. Find out more about [contributing to PushType](https://discuss.pushtype.org/t/pushtype-development-contribution-guidelines/30).
+PushType is 100% free and open source, and we're working hard to establish an active and healthy community of individuals contributing to it's development. If you'd like to help give the Rails world the CMS it's been waiting for, find out more:
+
+* [Contribution guidelines](https://github.com/pushtype/push_type/blob/master/CONTRIBUTING.md)
+* [Code of conduct](https://github.com/pushtype/push_type/blob/master/.github/CODE_OF_CONDUCT.md)
+* [Join the PushType community](https://discuss.pushtype.org/)
 
 ## Copyright / License
 
