@@ -11,7 +11,6 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'push_type_core', path: '../core'
-gem 'push_type_api',  path: '../api'
 
 eval File.read(File.expand_path('../../dev_dependencies.rb', __FILE__))
 

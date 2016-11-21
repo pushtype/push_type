@@ -1,5 +1,4 @@
 require 'push_type_core'
-require 'push_type_api'
 
 require 'coffee-rails'
 require 'sass-rails'

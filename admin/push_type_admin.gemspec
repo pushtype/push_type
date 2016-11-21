@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',              PushType::VERSION
-  s.add_dependency 'push_type_api',               PushType::VERSION
   s.add_dependency 'haml-rails',                  '~> 0.9'
   s.add_dependency 'coffee-rails',                '~> 4.2.1'
   s.add_dependency 'jquery-rails',                '~> 4.2.1'
