@@ -25,7 +25,7 @@ PushType.setup do |config|
   }
 
   # Configure the email address to be used as the "from" address
-  # for PushType's build in mailers.
+  # for PushType's built in mailers.
   config.mailer_sender = 'pushtype@example.com'
 
   # PushType uses Dragonfly for managing uploaded images/assets.
@@ -35,7 +35,7 @@ PushType.setup do |config|
     root_path:    Rails.root.join('public/system/dragonfly', Rails.env),
     server_root:  Rails.root.join('public')
   }
-  
+
   # For S3 storage, remember to add to Gemfile:
   # gem 'dragonfly-s3_data_store'
   # config.dragonfly_datastore = :s3
