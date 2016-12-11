@@ -8,7 +8,6 @@ module PushType
 
     def index
       @nodes = node_scope.not_trash.page(params[:page]).per(30)
-      sleep 2
     end
 
     def trash
