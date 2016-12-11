@@ -1,5 +1,11 @@
 # PushType changelog
 
+## Version 0.10.1 / 11 Dec 2016
+
+* Fixed bug caused by use of view_context in controllers #23
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.10.0...v0.10.1)
+
 ## Version 0.10.0 / 21 Nov 2016
 
 * New API engine for managing content and enabling external integrations
