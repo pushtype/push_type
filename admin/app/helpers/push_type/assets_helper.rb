@@ -1,6 +1,8 @@
 module PushType
   module AssetsHelper
 
+    include PushType::MediaUrlHelper
+
     def assets_array(assets)
       assets.map { |a| asset_hash(a) }
     end

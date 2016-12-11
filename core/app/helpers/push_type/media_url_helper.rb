@@ -1,6 +1,8 @@
 module PushType
   module MediaUrlHelper
 
+    include ActionView::Helpers::AssetUrlHelper
+
     URI_REGEXP = %r{^https?://}i
 
     def media_path(source, options = {})

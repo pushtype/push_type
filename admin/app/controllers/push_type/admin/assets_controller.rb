@@ -3,6 +3,8 @@ require_dependency "push_type/admin_controller"
 module PushType
   class Admin::AssetsController < AdminController
 
+    include PushType::AssetsHelper
+
     before_action :build_asset, only: [:new, :create, :upload]
     before_action :load_asset,  only: [:edit, :update, :destroy, :restore]
 
@@ -13,7 +15,7 @@ module PushType
         end
         format.json do
           @assets = PushType::Asset.not_trash.page(params[:page]).per(12)
-          render json: { assets: view_context.assets_array(@assets).as_json, meta: { current_page: @assets.current_page, total_pages: @assets.total_pages } }
+          render json: { assets: assets_array(@assets).as_json, meta: { current_page: @assets.current_page, total_pages: @assets.total_pages } }
         end
       end
     end
@@ -38,7 +40,7 @@ module PushType
       respond_to do |format|
         format.json do
           if @asset.save
-            hash = params[:froala] ? { link: media_path(@asset) } : { asset: view_context.asset_hash(@asset).as_json }
+            hash = params[:froala] ? { link: media_path(@asset) } : { asset: asset_hash(@asset).as_json }
             render json: hash, status: :created
           else
             hash = params[:froala] ? { error: @asset.errors.full_messages.first } : { errors: @asset.errors.as_json }
