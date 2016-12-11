@@ -8,12 +8,12 @@ module PushType
 
       it { item.key.must_equal :foo }
       it { item.text.must_equal 'Foo' }
-      it { item.link.must_equal nil }
+      it { item.link.must_be_nil }
       it { item.active.must_equal false }
       it { item.element.must_equal :li }
       it { item.item_options.must_be_instance_of Hash }
       it { item.link_options.must_be_instance_of Hash }
-      it { item.active_class.must_equal nil }
+      it { item.active_class.must_be_nil }
 
       describe '#submenu' do
         it 'should create a new menu' do

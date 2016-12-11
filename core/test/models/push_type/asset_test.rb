@@ -5,9 +5,9 @@ module PushType
     let(:asset) { Asset.new }
 
     it { asset.wont_be :valid? }
-    it { asset.kind.must_equal nil }
-    it { asset.description_or_file_name.must_equal nil }
-    it { asset.preview_thumb.must_equal nil }
+    it { asset.kind.must_be_nil }
+    it { asset.description_or_file_name.must_be_nil }
+    it { asset.preview_thumb.must_be_nil }
 
     it 'should be valid with required attributes' do
       asset.attributes = FactoryGirl.attributes_for :asset

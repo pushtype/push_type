@@ -24,7 +24,7 @@ module PushType
         asset.destroy
       end
 
-      it { node.foo.must_equal nil }
+      it { node.foo.must_be_nil }
     end
 
   end

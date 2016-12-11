@@ -21,7 +21,7 @@ module PushType
     describe 'BooleanType' do
       let(:primitive) { PushType::Primitives::BooleanType }
 
-      it { primitive.to_json(nil).must_equal nil }
+      it { primitive.to_json(nil).must_be_nil }
       it { primitive.to_json(false).must_equal false }
       it { primitive.to_json(0).must_equal false }
       it { primitive.to_json('').must_equal false }

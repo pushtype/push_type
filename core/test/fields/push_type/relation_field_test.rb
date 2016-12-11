@@ -62,7 +62,7 @@ module PushType
         @bars.first.destroy
       end
 
-      it { node.page.must_equal nil }
+      it { node.page.must_be_nil }
       it { node.bars.size.must_equal 1 }
     end
 
