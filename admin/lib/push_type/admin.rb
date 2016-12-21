@@ -15,6 +15,9 @@ require 'turbolinks'
 
 require 'breadcrumbs'
 require 'kaminari'
+# todo - remove this patch when possible
+# ref https://github.com/amatsuda/kaminari/pull/322
+require 'push_type/kaminari_patch'
 require 'premailer/rails'
 
 module PushType
