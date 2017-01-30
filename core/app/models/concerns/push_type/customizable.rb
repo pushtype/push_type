@@ -1,6 +1,7 @@
 module PushType
   module Customizable
     extend ActiveSupport::Concern
+    include ActiveModel::Dirty
 
     included do
       after_initialize :initialize_fields
@@ -58,12 +59,17 @@ module PushType
         fields[name] = [ field_type(kind), opts, blk ].compact
         store_accessor :field_store, name
 
+        # set up ActiveModel::Dirty for methods
+        define_attribute_method name.to_s
+
         # Set inline validates
         validates name, opts[:validates] if opts[:validates]
 
         # Override setter accessor
         define_method "#{ name }=".to_sym do |val|
           f = initialized_field(name)
+
+          send(:"#{name}_will_change!") unless val == f.value
           super f.primitive.to_json(val)
         end
 

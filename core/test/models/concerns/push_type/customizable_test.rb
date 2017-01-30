@@ -29,5 +29,19 @@ module PushType
       it { page.attribute_for_inspect(:field_store).must_equal "[:foo, :bar, :baz, :qux]" }
     end
 
+    describe '#attribute_changed?' do
+      it { page.foo_changed?.must_equal false }
+      it { page.changes.key?(:foo).must_equal false }
+
+      it 'returns true when attribute is changed' do
+        page.foo = 'value'
+        page.foo_changed?.must_equal true
+      end
+
+      it 'returns true when attribute is changed' do
+        page.foo = 'value'
+        page.changes.key?(:foo).must_equal true
+      end
+    end
   end
 end
