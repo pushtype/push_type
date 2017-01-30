@@ -1,5 +1,12 @@
 # PushType changelog
 
+## Version 0.10.3 / 30 Jan 2017
+
+* `ActiveRecord::Dirty` methods enabled for nodes and structures #30 - thanks @kirillian
+* Fix bug preventing compatibility with Ruby prior to version 2.3 - thanks @danobot
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.10.2...v0.10.3)
+
 ## Version 0.10.2 / 21 Dec 2016
 
 * Fixed Kaminari bug with patch.

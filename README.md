@@ -37,6 +37,6 @@ PushType is 100% free and open source, and we're working hard to establish an ac
 
 ## Copyright / License
 
-&copy; 2014-2016 Push Code Limited.
+&copy; 2014-2017 Push Code Limited.
 
 PushType is free software, lovingly developed by Push Code, and released under the [MIT license](http://opensource.org/licenses/MIT).
