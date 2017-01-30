@@ -23,7 +23,7 @@ module PushType
     end
 
     def auth_token
-      params[:token] || request.headers['Authorization']&.split&.last
+      params[:token] || request.headers['Authorization'].try(:split).try(:last)
     end
 
   end
