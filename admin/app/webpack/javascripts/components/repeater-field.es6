@@ -35,7 +35,7 @@ export default Vue.component('repeater-field', {
       bind: function() {
         $(this.el).on('click', function(e) {
           e.preventDefault();
-          $(this).parents('tr').remove();
+          $(this).closest('tr').remove();
         })
       }
     }
