@@ -1,5 +1,11 @@
 # PushType changelog
 
+## Version 0.10.4 / 14 Feb 2017
+
+* Fix bug with repeater/matrix field that removed incorrect dom elements #31
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.10.2...v0.10.3)
+
 ## Version 0.10.3 / 30 Jan 2017
 
 * `ActiveRecord::Dirty` methods enabled for nodes and structures #30 - thanks @kirillian

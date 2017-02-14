@@ -8,6 +8,14 @@ PushType is a modern content management system for Ruby on Rails. It takes advan
 ![Edit content](https://pushtype-disc.s3-eu-west-1.amazonaws.com/original/1X/d9ab21acc86a5c64ba3a3c8df391338e21e589f6.png)
 ![Media browser](https://pushtype-disc.s3-eu-west-1.amazonaws.com/original/1X/7f9aaa0949ad873943c5a47f396b1319bd57c98d.png)
 
+## Try PushType on Heroku
+
+A demo PushType app can be deployed to Heroku for free.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/pushtype/push_type_demo)
+
+Refer to the [demo repository](https://github.com/pushtype/push_type_demo) for details of how to log in and how the demo site is structured.
+
 ## Documentation and community
 
 PushType can be used in production projects now (we’ve been using it on client sites since the beginning of 2015). So give it a go - get started by finding out [how to install PushType](http://www.pushtype.org/docs/installation) and understanding the [key concepts](http://www.pushtype.org/docs/key-concepts).
