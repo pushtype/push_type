@@ -21,5 +21,27 @@ module PushType
       it { page.location.present!.class.ancestors.must_include PushType::Presenter }
     end
 
+    it "autoloads the presenter" do
+      begin
+        ::PresentableNode = Class.new(PushType::Node)
+
+        file = "#{Rails.root}/app/presenters/presentable_node_presenter.rb"
+        File.write(file, <<-RUBY)
+        class PresentableNodePresenter < PushType::Presenter
+          def self.static?
+            true
+          end
+        end
+        RUBY
+
+        PresentableNode.presenter_class_name.must_equal "PresentableNodePresenter"
+        PresentableNode.presenter_class.static?.must_equal true
+      ensure
+        Object.send(:remove_const, :PresentableNode)
+        Object.send(:remove_const, :PresentableNodePresenter) if defined?(::PresentableNodePresenter)
+        FileUtils.rm_f(file)
+      end
+    end
+
   end
 end

@@ -17,10 +17,9 @@ module PushType
       end
 
       def presenter_class
-        unless Object.const_defined?(presenter_class_name)
-          Object.const_set presenter_class_name, Class.new(PushType::Presenter)
-        end
         Object.const_get presenter_class_name
+      rescue NameError
+        Object.const_set presenter_class_name, Class.new(PushType::Presenter)
       end
 
     end
