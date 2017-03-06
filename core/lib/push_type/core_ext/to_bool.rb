@@ -4,7 +4,7 @@ class String
   end
 end
 
-class Fixnum
+(defined?(Integer) ? Integer : Fixnum).class_eval do
   def to_bool
     !self.zero?
   end
