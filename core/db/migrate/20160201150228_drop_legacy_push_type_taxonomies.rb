@@ -1,4 +1,4 @@
-class DropLegacyPushTypeTaxonomies < ActiveRecord::Migration
+class DropLegacyPushTypeTaxonomies < ActiveRecord::Migration[4.2]
   def up
     if ActiveRecord::Base.connection.table_exists? :push_type_taxonomies
       drop_table :push_type_taxonomies

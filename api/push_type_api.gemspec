@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',  PushType::VERSION
-  s.add_dependency 'jbuilder',        '~> 2.6.0'
-  s.add_dependency 'kaminari',        '~> 0.17.0'
+  s.add_dependency 'jbuilder',        '~> 2.6.3'
+  s.add_dependency 'kaminari',        '~> 1.0.1'
 end

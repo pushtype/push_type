@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'push_type_core',  PushType::VERSION
   s.add_dependency 'push_type_api',   PushType::VERSION
   s.add_dependency 'push_type_admin', PushType::VERSION
-  s.add_dependency 'devise',          '~> 4.2.0'
-  s.add_dependency 'knock',           '~> 2.0'
+  s.add_dependency 'devise',          '~> 4.2.1'
+  s.add_dependency 'knock',           '~> 2.1.1'
 
   s.add_dependency 'highline',        ['>= 1.6', '< 1.8']
 end

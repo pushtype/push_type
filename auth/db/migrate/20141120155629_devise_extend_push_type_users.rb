@@ -1,4 +1,4 @@
-class DeviseExtendPushTypeUsers < ActiveRecord::Migration
+class DeviseExtendPushTypeUsers < ActiveRecord::Migration[4.2]
   def change
     ## Database authenticatable
     add_column :push_type_users, :encrypted_password,     :string, null: false, default: ""

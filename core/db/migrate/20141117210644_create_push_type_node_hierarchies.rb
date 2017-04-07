@@ -1,4 +1,4 @@
-class CreatePushTypeNodeHierarchies < ActiveRecord::Migration
+class CreatePushTypeNodeHierarchies < ActiveRecord::Migration[4.2]
   def change
     create_table :push_type_node_hierarchies, id: false do |t|
       t.uuid      :ancestor_id,     null: false

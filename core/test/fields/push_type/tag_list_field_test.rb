@@ -32,7 +32,7 @@ module PushType
       describe '#with_all_tags' do
         let(:tags) { ['foo', 'foo', 'bar', 'qux'] }
         it { TestPage.must_respond_to :with_all_tags }
-        it { TestPage.with_all_tags(tags).must_be_instance_of TestPage::ActiveRecord_Relation }
+        it { TestPage.with_all_tags(tags).must_be_kind_of ActiveRecord::Relation }
         it { TestPage.with_all_tags(tags).count.must_equal 1 }
         it { TestPage.published.with_all_tags(tags).count.must_equal 0 }
         it { TestPage.published.with_all_tags('qux').count.must_equal 1 }
