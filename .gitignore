@@ -12,6 +12,7 @@ rdoc
 
 */.sass-cache
 */app/assets/**/webpack
+*/public/packs
 */node_modules
 */test/dummy
 */tmp

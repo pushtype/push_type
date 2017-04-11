@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+$stdout.sync = true
+
+require "shellwords"
+require "yaml"
+
+ENV["RAILS_ENV"] ||= "development"
+RAILS_ENV = ENV["RAILS_ENV"]
+
+ENV["NODE_ENV"] ||= RAILS_ENV
+NODE_ENV = ENV["NODE_ENV"]
+
+APP_PATH    = File.expand_path("../", __dir__)
+CONFIG_PATH = File.join(APP_PATH, "config/webpack/config.yml")
+
+begin
+  config = YAML.load(File.read(CONFIG_PATH))[NODE_ENV]
+
+  NODE_MODULES_PATH   = File.join(APP_PATH.shellescape, config["node_modules"])
+  WEBPACK_CONFIG_PATH = File.join(APP_PATH.shellescape, config["config"])
+
+  if NODE_ENV == "development" && config["dev_server"]["enabled"]
+    puts "Warning: webpack-dev-server is currently enabled in #{CONFIG_PATH}. " \
+      "Disable to serve assets directly from public/packs directory"
+  end
+rescue Errno::ENOENT, NoMethodError
+  puts "Configuration not found in config/webpack/config.yml."
+  exit!
+end
+
+WEBPACK_BIN    = "#{NODE_MODULES_PATH}/.bin/webpack"
+WEBPACK_CONFIG = "#{WEBPACK_CONFIG_PATH}/#{NODE_ENV}.js"
+
+Dir.chdir(APP_PATH) do
+  exec "NODE_PATH=#{NODE_MODULES_PATH} #{WEBPACK_BIN} --config #{WEBPACK_CONFIG}" \
+    " #{ARGV.join(" ")}"
+end

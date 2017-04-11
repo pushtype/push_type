@@ -1,0 +1,44 @@
+# Restart webpack-watcher or webpack-dev-server if you make changes here
+dev_server: &dev_server
+  enabled: false
+  host: localhost
+  port: 8088
+
+default: &default
+  config: config/webpack
+  source: app
+  output: public
+  entry: packs
+  manifest: manifest.json
+  node_modules: node_modules
+  extensions:
+    - .coffee
+    - .js
+    - .jsx
+    - .ts
+    - .vue
+    - .sass
+    - .scss
+    - .css
+    - .png
+    - .svg
+    - .gif
+    - .jpg
+    - .jpeg
+
+test:
+  <<: *default
+  manifest: manifest-test.json
+  dev_server:
+    <<: *dev_server
+
+development:
+  <<: *default
+  dev_server:
+    <<: *dev_server
+    enabled: true
+
+production:
+  <<: *default
+  dev_server:
+    <<: *dev_server

@@ -1,0 +1,49 @@
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
+
+#APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
+#load 'rails/tasks/engine.rake'
+#load 'rails/tasks/statistics.rake'
+
+Bundler::GemHelper.install_tasks
+
+require 'rake/testtask'
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = false
+  t.warning = false
+end
+
+
+task default: :test
+
+require 'push_type/testing/common_rake'
+
+desc "Generates a dummy app for testing"
+task :test_app do
+  ENV['RAILS_ENV'] = 'test'
+  Rake::Task['common:test_app'].invoke 'push_type_admin', File.dirname(__FILE__)
+end
+
+require 'json'
+namespace :webpacker do
+  desc "Compile javascript packs using webpack for production with digests"
+  task :compile do
+    puts "Compiling webpacker assets 🎉"
+    result = `NODE_ENV=#{ 'development' } ./bin/webpack --json`
+
+    unless $?.success?
+      puts JSON.parse(result)["errors"]
+      exit! $?.exitstatus
+    end
+
+    puts "Compiled digests for all packs in #{Webpacker::Configuration.output_path}: "
+    puts JSON.parse(File.read('public/packs/manifest.json'))
+  end
+end

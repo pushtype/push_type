@@ -1,0 +1,1 @@
+require 'push_type/admin'

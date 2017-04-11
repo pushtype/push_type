@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Foo bar</title>
+  <%#= stylesheet_link_tag    "foo_bar/application", media: "all" %>
+  <%= javascript_pack_tag "admin" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= yield %>
+</body>
+</html>
