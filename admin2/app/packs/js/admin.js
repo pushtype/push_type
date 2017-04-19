@@ -5,12 +5,28 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue/dist/vue.esm'
-import App from './app.vue'
+import VueRouter from 'vue-router'
+import axios from 'axios'
+
+Vue.use(VueRouter);
+Vue.prototype.$http = axios;
+
+import PushType from './push_type.js'
+Vue.prototype.PushType = PushType;
+
+import routes from './routes.js'
+import App from './components/app.vue'
+
+const router = new VueRouter({
+  mode: 'history',
+  base: 'admin',
+  routes
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#app',
-    template: '<App/>',
-    components: { App }
+    components: { App },
+    router
   })
 })
