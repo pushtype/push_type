@@ -1,13 +1,31 @@
 <template>
-  <div id="new-asset">
-    <p>New asset</p>
+  <div>
+    <top-bar :title="title" :backTo="{ name: 'assets' }" />
+
+    <div class="pa4">
+      <p>FORM</p>
+    </div>
+
+    <debug :object="{asset}" />
   </div>
 </template>
 
 <script>
-import ApiClient from './../../mixins/api_client.js'
+import Controller from './../../mixins/controller.js'
 
 export default {
-  mixins: [ApiClient]
+  mixins: [Controller],
+
+  data() {
+    return {
+      asset: {}
+    }
+  },
+
+  computed: {
+    title() {
+      return 'New media';
+    }
+  }
 }
 </script>

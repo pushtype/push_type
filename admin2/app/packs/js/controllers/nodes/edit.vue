@@ -1,21 +1,20 @@
 <template>
-  <div id="node">
-    <p>Edit node</p>
+  <div>
+    <top-bar :title="title" :backTo="backToLinkOpts" />
+    
+    <div class="pa4">
+      <p>FORM</p>
+    </div>
 
-    <pre style="white-space: pre-line;">
-      META:
-      {{ meta }}
-      NODE:
-      {{ node }}
-    </pre>
+    <debug :object="{meta, node}" />
   </div>
 </template>
 
 <script>
-import ApiClient from './../../mixins/api_client.js'
+import Controller from './../../mixins/controller.js'
 
 export default {
-  mixins: [ApiClient],
+  mixins: [Controller],
   props: ['id'],
 
   data() {
@@ -25,12 +24,13 @@ export default {
     }
   },
 
-  created() {
-    this.loadData();
-  },
-
-  watch: {
-    '$route': 'loadData'
+  computed: {
+    title() {
+      return 'Edit node';
+    },
+    backToLinkOpts() {
+      return this.node && this.node.parent_id ? { name: 'node_nodes', params: { node_id: this.node.parent_id } } : { name: 'nodes' };
+    }
   },
   
   methods: {

@@ -1,13 +1,14 @@
 <template>
-  <div id="app">
-    <side-panel></side-panel>
-    <hr>
-    <router-view></router-view>
+  <div class="relative vh-100 base-black">
+    <side-bar></side-bar>
+    <div class="pl7">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import SidePanel from './side-panel.vue'
+import SideBar from './side-bar.vue'
 
 export default {
   props: ['apiPath'],
@@ -17,7 +18,7 @@ export default {
   },
   
   components: {
-    SidePanel
+    SideBar
   }
 }
 </script>

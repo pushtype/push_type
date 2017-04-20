@@ -1,15 +1,32 @@
 <template>
-  <div id="new-user">
-    <p>New user</p>
+  <div>
+    <top-bar :title="title" :backTo="{ name: 'users' }" />
+
+    <div class="pa4">
+      <p>FORM</p>
+    </div>
+
+    <debug :object="{user}" />
   </div>
 </template>
 
 <script>
-import ApiClient from './../../mixins/api_client.js'
+import Controller from './../../mixins/controller.js'
 
 export default {
-  mixins: [ApiClient],
-  props: ['node_id'],
+  mixins: [Controller],
+  
+  data() {
+    return {
+      user: {}
+    }
+  },
+
+  computed: {
+    title() {
+      return 'New user';
+    }
+  }
 
 }
 </script>

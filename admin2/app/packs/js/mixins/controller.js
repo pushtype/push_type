@@ -1,10 +1,23 @@
 import _ from 'lodash'
+import TopBar from '../components/top-bar.vue'
+import Debug from '../components/debug.vue'
 
 export default {
   data() {
     return {
-      apiLoading: false,
-      apiError:   null
+      httpLoading:  false,
+      httpError:    null
+    }
+  },
+
+  created() {
+    this.loadData();
+  },
+
+  watch: {
+    '$route': function() {
+      this.resetData();
+      this.loadData();
     }
   },
 
@@ -36,16 +49,16 @@ export default {
     },
 
     apiRequest(config, callback) {
-      this.apiLoading = true;
-      this.apiError   = null;
+      this.httpLoading  = true;
+      this.httpError    = null;
       this.$http(config).then(r => {
         if ( _.isFunction(callback) ) {
           callback(r.data);
         }
-        this.apiLoading = false;
+        this.httpLoading = false;
       }).catch(err => {
-        this.apiError = err.response;
-        this.apiLoading = false;
+        this.httpError = err.response;
+        this.httpLoading = false;
       })
     },
 
@@ -57,6 +70,14 @@ export default {
         url = url.replace(key, this[k])
       })
       return this.PushType.apiBasePath + url;
-    }
+    },
+
+    loadData() {},
+    resetData() {},
+  },
+
+  components: {
+    TopBar,
+    Debug
   }
 }
