@@ -21,6 +21,12 @@
 
 <script>
 export default {
-  props: ['backTo', 'title']
+  props: {
+    backTo: null,
+    title: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>

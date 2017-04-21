@@ -47,3 +47,13 @@ namespace :webpacker do
     puts JSON.parse(File.read('public/packs/manifest.json'))
   end
 end
+
+namespace :karma do
+  desc "Run karma test suite"
+  task :test do
+    ENV['RAILS_ENV'] = 'test'
+    system 'bin/karma --single-run'
+  end
+end
+
+Rake::Task['test'].enhance(['karma:test'])

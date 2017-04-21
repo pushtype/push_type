@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+ENV['RAILS_ENV'] ||= 'test'
+ENV['NODE_ENV'] ||= ENV['RAILS_ENV']
+
+APP_PATH    = File.expand_path("../", __dir__)
+CONFIG_PATH = File.join(APP_PATH, "config/karma.js")
+
+exec "./node_modules/karma/bin/karma start #{ CONFIG_PATH } #{ ARGV.join(' ') }"
