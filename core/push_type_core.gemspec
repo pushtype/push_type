@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails',         ['>= 5.0', '< 5.2']
   s.add_dependency 'pg',            ['>= 0.18', '< 0.20']
   s.add_dependency 'closure_tree',  '~> 6.5.0'
-  s.add_dependency 'dragonfly',     '~> 1.1.1'
+  s.add_dependency 'dragonfly',     '~> 1.1.2'
   s.add_dependency 'redcarpet',     '~> 3.4.0'
 end

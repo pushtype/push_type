@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_dependency 'push_type_core',              PushType::VERSION
-  s.add_dependency 'haml-rails',                  '~> 0.9.0'
+  s.add_dependency 'haml-rails',                  '~> 1.0.0'
   s.add_dependency 'coffee-rails',                '~> 4.2.1'
   s.add_dependency 'jquery-rails',                '~> 4.3.1'
   s.add_dependency 'foundation-rails',            '~> 5.5.3.2'
@@ -27,10 +27,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'pickadate-rails',             '~> 3.5.6.0'
   s.add_dependency 'selectize-rails',             '~> 0.12.4'
   s.add_dependency 'codemirror-rails',            '~> 5.16.0'
-  s.add_dependency 'wysiwyg-rails',               '~> 2.5.1'
-  s.add_dependency 'font-awesome-rails',          '~> 4.7.0.1'
+  s.add_dependency 'wysiwyg-rails',               '~> 2.6.0'
+  s.add_dependency 'font-awesome-rails',          '~> 4.7.0.2'
   s.add_dependency 'turbolinks',                  '~> 5.0.1'
   s.add_dependency 'breadcrumbs',                 '~> 0.1.7'
   s.add_dependency 'kaminari',                    '~> 1.0.1'
-  s.add_dependency 'premailer-rails',             '~> 1.9.5'
+  s.add_dependency 'premailer-rails',             '~> 1.9.6'
 end
