@@ -1,5 +1,13 @@
 # PushType changelog
 
+## Version 0.11.1 / 18 May 2017
+
+* Rails 5.1 ready
+* Drops compaitibility with Rails 4.2.*
+* Compatibility with Ruby 2.4 #37 - thanks @jonleighton
+
+[Compare all changes](https://github.com/pushtype/push_type/compare/v0.10.3...v0.11.1)
+
 ## Version 0.10.4 / 14 Feb 2017
 
 * Fix bug with repeater/matrix field that removed incorrect dom elements #31
