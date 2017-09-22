@@ -9,7 +9,7 @@
     %li
       %a{ href: '#', :'v-on:click.prevent' => 'node.status = "published"' } Save and publish
 
-  - unless @node.new_record? || @node.unexposed?
+  - if @node.persisted? && @node.exposed?
     .text-button.secondary
       = link_to "Preview #{@node.type.underscore.humanize.downcase}", main_app.preview_node_path(@node.base64_id), target: '_blank'
   - unless @node.new_record?

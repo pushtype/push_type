@@ -20,7 +20,7 @@
               %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' } } Edit
               #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
                 = f.label :slug
-                = f.text_field :slug, :'v-model' => 'node.slug'
+                = f.text_field :slug, :'v-model' => 'node.slug', :'v-on:keyup' => 'cleanSlug'
               - if @node.errors.include? :slug
                 .error-icon= ficon :info, 'Error'
 

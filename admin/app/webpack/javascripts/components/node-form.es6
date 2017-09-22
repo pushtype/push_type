@@ -59,6 +59,9 @@ export default Vue.component('node-form', {
       if (this.node['new_record?']) {
         this.node.slug = slug(this.node.title, { lower: true });
       }
+    },
+    cleanSlug: function() {
+      this.node.slug = slug(this.node.slug, { lower: true });
     }
   }
 
