@@ -7,7 +7,7 @@ module PushType
       field :foo, :date
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: date.to_s) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: date.to_s) }
     let(:date)  { Date.today }
     let(:field) { node.fields[:foo] }
     

@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class MediaUrlHelperTest < ActionView::TestCase
 
-    let(:asset) { FactoryGirl.create :asset }
+    let(:asset) { FactoryBot.create :asset }
 
     describe '#media_path' do
       it { media_path(asset).must_equal "/media/#{ asset.file_uid }" }

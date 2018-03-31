@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class PresenterTest < ActiveSupport::TestCase
 
-    let(:page) { Page.create FactoryGirl.attributes_for(:node) }
+    let(:page) { Page.create FactoryBot.attributes_for(:node) }
 
     describe 'without view context' do
       let(:presenter) { PushType::Presenter.new page }

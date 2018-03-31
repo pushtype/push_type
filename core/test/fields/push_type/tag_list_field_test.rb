@@ -7,7 +7,7 @@ module PushType
       field :tags, :tag_list
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, tags: tags) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, tags: tags) }
     let(:tags)  { ['a', 'b', 'c'] }
     let(:field) { node.fields[:tags] }
 
@@ -22,11 +22,11 @@ module PushType
 
     describe 'initialized on node' do
       before do
-        TestPage.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar', 'foo'])
-        TestPage.create FactoryGirl.attributes_for(:node, tags: ['baz', 'bar'])
-        TestPage.create FactoryGirl.attributes_for(:published_node, tags: ['qux'])
-        @first = TestPage.create FactoryGirl.attributes_for(:node, tags: ['foo', 'bar', 'qux'])
-        TestPage.create FactoryGirl.attributes_for(:published_node)
+        TestPage.create FactoryBot.attributes_for(:node, tags: ['foo', 'bar', 'foo'])
+        TestPage.create FactoryBot.attributes_for(:node, tags: ['baz', 'bar'])
+        TestPage.create FactoryBot.attributes_for(:published_node, tags: ['qux'])
+        @first = TestPage.create FactoryBot.attributes_for(:node, tags: ['foo', 'bar', 'qux'])
+        TestPage.create FactoryBot.attributes_for(:published_node)
       end
 
       describe '#with_all_tags' do

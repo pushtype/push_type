@@ -4,7 +4,7 @@ module PushType
   class UnexposableTest < ActiveSupport::TestCase
 
     describe '.exposed' do
-      let(:new_node!) { TestPage.create! FactoryGirl.attributes_for(:node) }
+      let(:new_node!) { TestPage.create! FactoryBot.attributes_for(:node) }
       it 'should scope all exposed nodes' do
         PushType.stub :unexposed_nodes, [] do
           proc { new_node! }.must_change 'PushType::Node.exposed.count', 1

@@ -38,11 +38,11 @@ module PushType
         it { subject.must_equal false }
       end
       describe 'with existing user and clean password' do
-        let(:user) { FactoryGirl.create :user }
+        let(:user) { FactoryBot.create :user }
         it { subject.must_equal false }
       end
       describe 'with existing user and dirty password' do
-        let(:user) { FactoryGirl.create :user }
+        let(:user) { FactoryBot.create :user }
         before { user.password = 'newpassword' }
         it { subject.must_equal true }
       end

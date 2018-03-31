@@ -10,7 +10,7 @@ module PushType
 
     describe '#trashed?' do
       describe 'when not trash' do
-        let(:page) { FactoryGirl.create :node }
+        let(:page) { FactoryBot.create :node }
         it { page.trashed?.must_equal false }
         describe '#trash!' do
           before { page.trash! }
@@ -19,7 +19,7 @@ module PushType
       end
 
       describe 'when trash' do
-        let(:page) { FactoryGirl.create :node, deleted_at: Time.zone.now }
+        let(:page) { FactoryBot.create :node, deleted_at: Time.zone.now }
         it { page.trashed?.must_equal true }
         describe '#restore!' do
           before { page.restore! }

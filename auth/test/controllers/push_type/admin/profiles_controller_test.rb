@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class Admin::ProfilesControllerTest < ActionController::TestCase
     
-    let(:current_user) { FactoryGirl.create(:confirmed_user) }
+    let(:current_user) { FactoryBot.create(:confirmed_user) }
     before { sign_in current_user }
 
     describe 'GET #edit' do

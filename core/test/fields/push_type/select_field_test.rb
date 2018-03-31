@@ -8,7 +8,7 @@ module PushType
       field :bars, :select, multiple: true, choices: -> { [['XXX', 'x'], ['YYY', 'y']] }
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: 'b', bars: ['x', 'y']) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: 'b', bars: ['x', 'y']) }
     let(:foo)   { node.fields[:foo] }
     let(:bars)  { node.fields[:bars] }
 

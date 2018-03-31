@@ -7,7 +7,7 @@ module PushType
     it { user.wont_be :valid? }
 
     it 'should be valid with required attributes' do
-      user.attributes = FactoryGirl.attributes_for :user
+      user.attributes = FactoryBot.attributes_for :user
       user.must_be :valid?
     end
 

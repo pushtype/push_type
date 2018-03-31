@@ -7,9 +7,9 @@ module PushType
 
     describe '.published' do
       let(:nodes)     { PushType::Node.published }
-      let(:new_node!) { FactoryGirl.create :published_node, attributes }
+      let(:new_node!) { FactoryBot.create :published_node, attributes }
       describe 'without published status' do
-        it { expect { FactoryGirl.create :node }.wont_change 'nodes.count' }
+        it { expect { FactoryBot.create :node }.wont_change 'nodes.count' }
       end
       describe 'with published_at dates in the future' do
         let(:attributes)  { { published_at: 1.day.from_now } }
@@ -34,10 +34,10 @@ module PushType
     end
 
     describe '#status' do
-      let(:draft)     { FactoryGirl.create :node }
-      let(:published) { FactoryGirl.create :published_node }
-      let(:scheduled) { FactoryGirl.create :published_node, published_at: 1.day.from_now }
-      let(:expired)   { FactoryGirl.create :published_node, published_at: 2.days.ago, published_to: 1.day.ago }
+      let(:draft)     { FactoryBot.create :node }
+      let(:published) { FactoryBot.create :published_node }
+      let(:scheduled) { FactoryBot.create :published_node, published_at: 1.day.from_now }
+      let(:expired)   { FactoryBot.create :published_node, published_at: 2.days.ago, published_to: 1.day.ago }
       it { draft.must_be :draft? }
       it { draft.wont_be :published? }
       it { draft.wont_be :scheduled? }
@@ -58,12 +58,12 @@ module PushType
 
     describe '#set_published_at' do
       describe 'when publishing' do
-        let(:node) { FactoryGirl.create :node }
+        let(:node) { FactoryBot.create :node }
         before { node.update_attribute :status, Node.statuses[:published] }
         it { node.published_at.wont_be_nil }
       end
       describe 'when publishing' do
-        let(:node) { FactoryGirl.create :published_node }
+        let(:node) { FactoryBot.create :published_node }
         before { node.update_attribute :status, Node.statuses[:draft] }
         it { node.published_at.must_be_nil }
       end

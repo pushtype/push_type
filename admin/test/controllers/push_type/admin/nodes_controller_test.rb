@@ -3,12 +3,12 @@ require 'test_helper'
 module PushType
   class Admin::NodesControllerTest < ActionController::TestCase
 
-    let(:node_attrs) { FactoryGirl.attributes_for(:node) }
+    let(:node_attrs) { FactoryBot.attributes_for(:node) }
     let(:node) { Page.create node_attrs }
     
     describe 'GET #index' do
       before do
-        5.times { FactoryGirl.create :node }
+        5.times { FactoryBot.create :node }
         get :index
       end
       it { response.must_render_template 'index' }
@@ -17,8 +17,8 @@ module PushType
 
     describe 'GET #trash' do
       before do
-        2.times { FactoryGirl.create :node }
-        3.times { FactoryGirl.create :node, deleted_at: Time.zone.now }
+        2.times { FactoryBot.create :node }
+        3.times { FactoryBot.create :node, deleted_at: Time.zone.now }
         get :trash
       end
       it { response.must_render_template 'trash' }
@@ -91,9 +91,9 @@ module PushType
 
     describe 'POST #position' do
       before do
-        @first_node = FactoryGirl.create :node
-        3.times { FactoryGirl.create :node }
-        @last_node = FactoryGirl.create :node
+        @first_node = FactoryBot.create :node
+        3.times { FactoryBot.create :node }
+        @last_node = FactoryBot.create :node
       end
       describe 'without reponsitioning' do
         before { get :index }
@@ -130,7 +130,7 @@ module PushType
 
     describe 'DELETE #empty' do
       before do
-        3.times { FactoryGirl.create :node, deleted_at: Time.zone.now }
+        3.times { FactoryBot.create :node, deleted_at: Time.zone.now }
         delete :empty
       end
       it { response.must_respond_with :redirect }

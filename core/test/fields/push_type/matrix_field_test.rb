@@ -15,7 +15,7 @@ module PushType
       field :bar, :matrix, class: 'push_type/matrix_field_test/test_location'
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val, bar: [{key: '123'}]) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: val, bar: [{key: '123'}]) }
     let(:val)   { [{ key: 'a', val: 'b' }, { key: 'x', val: 'y' }] }
     let(:field) { node.fields[:foo] }
 

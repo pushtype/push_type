@@ -8,7 +8,7 @@ module PushType
       field :bar, :number
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: 1, bar: 1.234) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: 1, bar: 1.234) }
     let(:foo)   { node.fields[:foo] }
     let(:bar)   { node.fields[:bar] }
 

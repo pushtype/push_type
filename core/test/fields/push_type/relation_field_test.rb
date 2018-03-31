@@ -11,11 +11,11 @@ module PushType
     end
 
     before do
-      @pages  = 4.times.map { Page.create FactoryGirl.attributes_for(:node) }
-      @bars   = 2.times.map { TestPage.create FactoryGirl.attributes_for(:node) }
+      @pages  = 4.times.map { Page.create FactoryBot.attributes_for(:node) }
+      @bars   = 2.times.map { TestPage.create FactoryBot.attributes_for(:node) }
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, page_id: rel.id, bar_ids: @bars.map(&:id)) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, page_id: rel.id, bar_ids: @bars.map(&:id)) }
     let(:rel)   { @pages.first }
     let(:foo)   { node.fields[:page_id] }
     let(:bar)   { node.fields[:bar_ids] }

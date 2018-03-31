@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :confirmed_user, parent: :user do
     confirmation_sent_at  { Time.zone.now }
     confirmed_at          { Time.zone.now }

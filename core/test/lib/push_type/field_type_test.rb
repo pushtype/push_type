@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class FieldTypeTest < ActiveSupport::TestCase
 
-    let(:node)  { FactoryGirl.create :node }
+    let(:node)  { FactoryBot.create :node }
     let(:field) { PushType::FieldType.new :foo, node, opts }
     
     describe 'default' do

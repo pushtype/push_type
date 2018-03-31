@@ -5,7 +5,7 @@ module PushType
 
     before { @request.env["devise.mapping"] = Devise.mappings[:user] }
 
-    let(:user)  { FactoryGirl.create(:user) }
+    let(:user)  { FactoryBot.create(:user) }
     let(:token) { user.confirmation_token }
     
     describe 'GET #show' do

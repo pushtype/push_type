@@ -3,8 +3,8 @@ require 'test_helper'
 module PushType
   class Admin::UsersControllerTest < ActionController::TestCase
 
-    let(:current_user) { FactoryGirl.create(:confirmed_user) }
-    let(:user) { FactoryGirl.create :user }
+    let(:current_user) { FactoryBot.create(:confirmed_user) }
+    let(:user) { FactoryBot.create :user }
     before { sign_in current_user }
 
     let(:last_email) { ActionMailer::Base.deliveries.last }

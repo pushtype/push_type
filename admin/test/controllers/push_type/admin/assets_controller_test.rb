@@ -3,12 +3,12 @@ require 'test_helper'
 module PushType
   class Admin::AssetsControllerTest < ActionController::TestCase
 
-    let(:asset_attrs) { FactoryGirl.attributes_for(:asset) }
-    let(:asset) { FactoryGirl.create :asset }
+    let(:asset_attrs) { FactoryBot.attributes_for(:asset) }
+    let(:asset) { FactoryBot.create :asset }
     
     describe 'GET #index' do
       before do
-        5.times { FactoryGirl.create :asset }
+        5.times { FactoryBot.create :asset }
         get :index
       end
       it { response.must_render_template 'index' }
@@ -17,8 +17,8 @@ module PushType
 
     describe 'GET #trash' do
       before do
-        2.times { FactoryGirl.create :asset }
-        3.times { FactoryGirl.create :asset, deleted_at: Time.zone.now }
+        2.times { FactoryBot.create :asset }
+        3.times { FactoryBot.create :asset, deleted_at: Time.zone.now }
         get :trash
       end
       it { response.must_render_template 'trash' }
@@ -106,7 +106,7 @@ module PushType
 
     describe 'DELETE #empty' do
       before do
-        3.times { FactoryGirl.create :asset, deleted_at: Time.zone.now }
+        3.times { FactoryBot.create :asset, deleted_at: Time.zone.now }
         delete :empty
       end
       it { response.must_respond_with :redirect }

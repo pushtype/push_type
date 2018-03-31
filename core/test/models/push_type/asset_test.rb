@@ -10,15 +10,15 @@ module PushType
     it { asset.preview_thumb.must_be_nil }
 
     it 'should be valid with required attributes' do
-      asset.attributes = FactoryGirl.attributes_for :asset
+      asset.attributes = FactoryBot.attributes_for :asset
       asset.must_be :valid?
     end
 
     describe '#kind' do
-      let(:image) { FactoryGirl.create :image_asset }
-      let(:audio) { FactoryGirl.create :audio_asset }
-      let(:video) { FactoryGirl.create :video_asset }
-      let(:doc)   { FactoryGirl.create :document_asset }
+      let(:image) { FactoryBot.create :image_asset }
+      let(:audio) { FactoryBot.create :audio_asset }
+      let(:video) { FactoryBot.create :video_asset }
+      let(:doc)   { FactoryBot.create :document_asset }
       it { image.kind.must_equal :image }
       it { image.must_be :image? }
       it { image.wont_be :audio? }
@@ -98,7 +98,7 @@ module PushType
     end
 
     describe '#description_or_file_name' do
-      let(:asset) { FactoryGirl.create :asset }
+      let(:asset) { FactoryBot.create :asset }
       it { asset.description_or_file_name.must_equal 'image.png' }
       it 'should return description when present' do
         asset.description = 'Foo bar'
@@ -107,8 +107,8 @@ module PushType
     end
 
     describe '#media' do
-      let(:image) { FactoryGirl.create :image_asset }
-      let(:doc)   { FactoryGirl.create :document_asset }
+      let(:image) { FactoryBot.create :image_asset }
+      let(:doc)   { FactoryBot.create :document_asset }
 
       describe 'with no args' do
         it { image.media.must_equal image.file }
@@ -133,14 +133,14 @@ module PushType
     end
 
     describe '#preview_thumb' do
-      let(:image) { FactoryGirl.create :image_asset }
-      let(:doc)   { FactoryGirl.create :document_asset }
+      let(:image) { FactoryBot.create :image_asset }
+      let(:doc)   { FactoryBot.create :document_asset }
       it { image.preview_thumb.must_be_kind_of Dragonfly::Job }
       it { doc.preview_thumb.must_be_nil }
     end
 
     describe '#set_mime_type' do
-      let(:asset) { FactoryGirl.create :asset }
+      let(:asset) { FactoryBot.create :asset }
       it { asset.file_ext.must_equal 'png' }
       it { asset.mime_type.must_equal 'image/png' }
     end

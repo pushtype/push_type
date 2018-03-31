@@ -3,12 +3,12 @@ require 'test_helper'
 module PushType
   class Admin::UsersControllerTest < ActionController::TestCase
 
-    let(:user_attrs) { FactoryGirl.attributes_for(:user) }
-    let(:user) { FactoryGirl.create :user }
+    let(:user_attrs) { FactoryBot.attributes_for(:user) }
+    let(:user) { FactoryBot.create :user }
     
     describe 'GET #index' do
       before do
-        5.times { FactoryGirl.create :user }
+        5.times { FactoryBot.create :user }
         get :index
       end
       it { response.must_render_template 'index' }

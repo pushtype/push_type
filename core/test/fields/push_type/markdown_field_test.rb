@@ -7,7 +7,7 @@ module PushType
       field :foo, :markdown
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: md) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: md) }
     let(:md)    { '**foo** *bar*' }
     let(:field) { node.fields[:foo] }
     

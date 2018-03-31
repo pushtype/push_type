@@ -12,7 +12,7 @@ module PushType
       field :bar, :structure, class: :location
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: val) }
     let(:val)   { { key: 'a', val: 'b' } }
     let(:field) { node.fields[:foo] }
 

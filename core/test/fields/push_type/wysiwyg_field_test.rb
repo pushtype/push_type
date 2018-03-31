@@ -7,7 +7,7 @@ module PushType
       field :foo, :wysiwyg, toolbar: 'text'
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: val) }
     let(:val)   { 'abc' }
     let(:field) { node.fields[:foo] }
     

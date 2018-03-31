@@ -7,8 +7,8 @@ module PushType
       field :foo_id, :asset
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo_id: asset.id) }
-    let(:asset) { FactoryGirl.create :asset }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo_id: asset.id) }
+    let(:asset) { FactoryBot.create :asset }
     let(:field) { node.fields[:foo_id] }
     
     it { field.template.must_equal 'asset' }

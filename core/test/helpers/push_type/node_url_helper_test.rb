@@ -3,7 +3,7 @@ require 'test_helper'
 module PushType
   class NodeUrlHelperTest < ActionView::TestCase
 
-    let(:node) { FactoryGirl.create :node, slug: 'test1' }
+    let(:node) { FactoryBot.create :node, slug: 'test1' }
 
     describe '#node_path' do
       it { node_path(node).must_equal '/test1' }

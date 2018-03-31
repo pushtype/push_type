@@ -14,11 +14,11 @@ class FrontEndControllerTest < ActionController::TestCase
       it { proc { action! }.must_raise ActiveRecord::RecordNotFound }
     end
     describe 'when node not published' do
-      let(:attributes) { FactoryGirl.attributes_for :node, type: 'Page' }
+      let(:attributes) { FactoryBot.attributes_for :node, type: 'Page' }
       it { proc { action! }.must_raise ActiveRecord::RecordNotFound }
     end
     describe 'when node is published' do
-      let(:attributes) { FactoryGirl.attributes_for :published_node, type: 'Page' }
+      let(:attributes) { FactoryBot.attributes_for :published_node, type: 'Page' }
       before { action! }
       it { response.must_render_template 'nodes/page' }
       it { assigns[:node].must_equal page }
@@ -28,7 +28,7 @@ class FrontEndControllerTest < ActionController::TestCase
   end
 
   describe 'GET #preview' do
-    let(:page)      { Page.create FactoryGirl.attributes_for(:node, type: 'Page') }
+    let(:page)      { Page.create FactoryBot.attributes_for(:node, type: 'Page') }
     let(:id)        { page.base64_id }
     let(:action!)   { get :preview, params: { id: id } }
 
@@ -65,7 +65,7 @@ class FrontEndControllerTest < ActionController::TestCase
       end
     end
 
-    let(:page) { FactoryGirl.create :published_node, type: 'Page' }
+    let(:page) { FactoryBot.create :published_node, type: 'Page' }
     before { get :show, params: { permalink: page.permalink } }
     it { assigns[:foo].must_be_instance_of Hash }
     it { assigns[:foo][:node_action].must_equal true }

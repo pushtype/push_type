@@ -4,7 +4,7 @@ module PushType
   class NodesHelperTest < ActionView::TestCase
 
     describe '#nodes_array' do
-      let(:nodes)  { 4.times.map { FactoryGirl.create :node } }
+      let(:nodes)  { 4.times.map { FactoryBot.create :node } }
       subject { nodes_array(nodes) }
       it { subject.must_be_instance_of Array }
       it { subject.first.must_be_instance_of Hash }
@@ -12,7 +12,7 @@ module PushType
     end
 
     describe '#node_hash' do
-      let(:node) { FactoryGirl.create :node }
+      let(:node) { FactoryBot.create :node }
       subject { node_hash(node) }
       it { subject.must_be_instance_of Hash }
       it { subject.key?(:type).must_equal true }

@@ -14,7 +14,7 @@ module PushType
     end
 
     describe 'instance methods' do
-      let(:page) { TestPage.new FactoryGirl.attributes_for(:node) }
+      let(:page) { TestPage.new FactoryBot.attributes_for(:node) }
       it { page.presenter_class.must_be_instance_of Class }
       it { page.location.presenter_class.must_be_instance_of Class }
       it { page.present!.class.ancestors.must_include PushType::Presenter }

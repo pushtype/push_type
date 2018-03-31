@@ -9,7 +9,7 @@ module PushType
       field :baz, :repeater, form_helper: :telephone_field
     end
 
-    let(:node)  { TestPage.create FactoryGirl.attributes_for(:node, foo: val) }
+    let(:node)  { TestPage.create FactoryBot.attributes_for(:node, foo: val) }
     let(:val)   { ['abc', 'xyz', '123'] }
     let(:field) { node.fields[:foo] }
 
