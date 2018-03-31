@@ -5,7 +5,7 @@ module PushType
 
     dragonfly_accessor :file
 
-    belongs_to :uploader, class_name: 'PushType::User'
+    belongs_to :uploader, class_name: 'PushType::User', optional: true
 
     validates :file, presence: true
 

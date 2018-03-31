@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'push_type_core',  PushType::VERSION
   s.add_dependency 'jbuilder',        '~> 2.7'
-  s.add_dependency 'kaminari',        '~> 1.0'
+  s.add_dependency 'kaminari',        '~> 1.1'
 end

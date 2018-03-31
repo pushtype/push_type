@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://www.pushtype.org'
   s.license       = 'MIT'
 
-  s.add_dependency 'rails',         ['>= 5.0', '< 5.2']
+  s.add_dependency 'rails',         ['>= 5.0', '< 6']
   s.add_dependency 'pg',            ['>= 0.18']
   s.add_dependency 'closure_tree',  '~> 6.6'
   s.add_dependency 'dragonfly',     '~> 1.1'
