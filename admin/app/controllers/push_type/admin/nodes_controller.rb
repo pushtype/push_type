@@ -7,11 +7,11 @@ module PushType
     before_action :load_node,   only: [:edit, :update, :destroy, :restore, :position]
 
     def index
-      @nodes = node_scope.not_trash.page(params[:page]).per(30)
+      @nodes = node_scope.not_trash.page(params[:page]).per(per_page_param)
     end
 
     def trash
-      @nodes = PushType::Node.all.trashed.page(params[:page]).per(30).reorder(deleted_at: :desc)
+      @nodes = PushType::Node.all.trashed.page(params[:page]).per(per_page_param).reorder(deleted_at: :desc)
     end
 
     def new
@@ -120,6 +120,10 @@ module PushType
       elsif params[:next]
         PushType::Node.find(params[:next]).prepend_sibling(@node)
       end
+    end
+
+    def per_page_param
+      params[:per_page] || 30
     end
     
   end
