@@ -23,18 +23,14 @@
                 %table
                   %tr
                     %th File name
-                    %td {{ asset.file_name }}
+                    %td
+                      %a{ :'v-bind:href' => 'asset.url', target: '_blank' } {{ asset.file_name }}
                   %tr
                     %th File size
                     %td {{ asset.file_size | kb }}
                   %tr
                     %th Content type
                     %td {{ asset.mime_type }}
-                  - if @asset.persisted?
-                    %tr
-                      %th URL
-                      %td
-                        = link_to media_url(@asset), media_url(@asset)
           .row.string
             .columns
               = f.label :description
