@@ -1,7 +1,7 @@
 module PushType
   class WysiwygField < PushType::FieldType
 
-    FROALA_KEY = 'pFOFSAGLUd1AVKg1SN=='
+    FROALA_KEY = 'MC1A1E1sB4E4B3A11B3A7E7F2E4B3fTYPASIBGMWC1YLMP=='
 
     options template: 'wysiwyg', toolbar: 'full'
 
