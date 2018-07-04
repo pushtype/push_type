@@ -30,6 +30,11 @@
                   %tr
                     %th Content type
                     %td {{ asset.mime_type }}
+                  - if @asset.persisted?
+                    %tr
+                      %th URL
+                      %td
+                        = link_to media_url(@asset), media_url(@asset)
           .row.string
             .columns
               = f.label :description
@@ -41,4 +46,4 @@
           = render 'meta_table'
         .submit.text-center
           = render 'form_submit'
-              
+
