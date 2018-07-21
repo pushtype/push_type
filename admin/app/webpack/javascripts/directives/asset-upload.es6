@@ -22,6 +22,9 @@ export default Vue.directive('asset-upload', {
         drop:         function() { $(this).removeClass('hover') },
         uploadFinished: function(i, file, response, time) {
           self.vm.afterUpload(response.asset);
+        },
+        data: {
+          authenticity_token: $('meta[name=csrf-token]').attr('content')
         }
       })
     } else {
