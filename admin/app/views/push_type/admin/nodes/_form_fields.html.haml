@@ -15,10 +15,10 @@
               %span.key Permalink
               %span.value
                 %span.show-for-medium-up
-                  = "http://#{request.host_with_port}/#{@node.parent.permalink + '/' if @node.parent}#{@node.slug}"
+                  = node_url(@node)
               %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' } } Edit
               - if @node.published?
-                %a.button.tiny.radius{class: "primary", href: "http://#{request.host_with_port}/#{@node.parent.permalink + '/' if @node.parent}#{@node.slug}"}
+                %a.button.tiny.radius{class: "primary", href: node_url(@node)}
                   Live page
               #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
                 = f.label :slug
