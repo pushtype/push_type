@@ -14,10 +14,12 @@
             .columns{ :'v-bind:class' => '{visible: node.slug}' }
               %span.key Permalink
               %span.value
-                %span.show-for-medium-up http://#{ request.host_with_port }/
-                = content_tag :span, @node.parent.permalink+'/' if @node.parent
-                %span {{ node.slug }}
+                %span.show-for-medium-up
+                  = node_url(@node)
               %button.button.tiny.radius.secondary{ data: { dropdown: 'slug-field' } } Edit
+              - if @node.published?
+                %a.button.tiny.radius{class: "primary", href: node_url(@node)}
+                  Live page
               #slug-field.f-dropdown.content{ data: { dropdown: { content: true } } }
                 = f.label :slug
                 = f.text_field :slug, :'v-model' => 'node.slug', :'v-on:keyup' => 'cleanSlug'
